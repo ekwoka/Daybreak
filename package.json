@@ -1,0 +1,13 @@
+{
+  "name": "kwoka-theme-2",
+  "version": "0.0.1",
+  "description": "Testing Platform for Kwoka Theme built on top of Dawn and Online Store 2",
+  "scripts": {
+    "test": "npx lighthouse https://kwoka-theme-2.myshopify.com --view --extra-headers=\"{\\\"Cookie\\\":\\\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\\\"}\"",
+    "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
+    "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
+    "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n"
+  },
+  "author": "Eric Kwoka",
+  "license": "ISC"
+}
