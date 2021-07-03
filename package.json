@@ -6,7 +6,17 @@
     "test": "npx lighthouse https://kwoka-theme-2.myshopify.com --view --extra-headers=\"{\\\"Cookie\\\":\\\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\\\"}\"",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
-    "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n"
+    "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
+    "css:build": "NODE_ENV=production TAILWIND_MODE=build postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose",
+    "css:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss assets/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose",
+    "css:fulldev": "NODE_ENV=development TAILWIND_MODE=build postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose",
+    "css:watch": "NODE_ENV=development TAILWIND_MODE=watch postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose -w",
+    "minify:all": "run-p minify:alpine minify:css minify:lazysizes && run-s minify:js sizes:assets",
+    "minify:alpine": "minify assets/alpinescript.js node_modules/alpinejs/dist/cdn.js > assets/alpine.min.js",
+    "minify:css": "minify assets/base.css > assets/base.min.css",
+    "minify:lazysizes": "minify assets/lazysizes.config.js node_modules/lazysizes/plugins/rias/ls.rias.min.js node_modules/lazysizes/plugins/aspectratio/ls.aspectratio.min.js node_modules/lazysizes/plugins/attrchange/ls.attrchange.min.js node_modules/lazysizes/lazysizes.min.js > assets/lazysizes.min.js",
+    "minify:js": "minify assets/lazysizes.min.js assets/alpine.min.js > assets/timber.min.js",
+    "sizes:assets": "ls -lh assets/alpine.min.js assets/lazysizes.min.js assets/timber.min.js assets/base.min.css assets/tailwind.css"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
