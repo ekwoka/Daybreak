@@ -1,8 +1,7 @@
-
 function getFocusableElements(container) {
   return Array.from(
     container.querySelectorAll(
-      "summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object"
+      "summary, a[href], button:enabled, [tabindex]:not([tabindex^='-']), [draggable], area, input:not([type=hidden]):enabled, select:enabled, textarea:enabled, object, iframe"
     )
   );
 }
@@ -290,7 +289,7 @@ class MenuDrawer extends HTMLElement {
     });
     summaryElement.setAttribute('aria-expanded', true);
     trapFocus(this.mainDetailsToggle, summaryElement);
-    document.body.classList.add('overflow-hidden-mobile');
+    document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 
   closeMenuDrawer(event, elementToFocus = false) {
@@ -301,7 +300,7 @@ class MenuDrawer extends HTMLElement {
         details.classList.remove('menu-opening');
       });
       this.mainDetailsToggle.querySelector('summary').setAttribute('aria-expanded', false);
-      document.body.classList.remove('overflow-hidden-mobile');
+      document.body.classList.remove(`overflow-hidden-${this.dataset.breakpoint}`);
       removeTrapFocus(elementToFocus);
       this.closeAnimation(this.mainDetailsToggle);
     }
@@ -366,8 +365,72 @@ class HeaderDrawer extends MenuDrawer {
 
     summaryElement.setAttribute('aria-expanded', true);
     trapFocus(this.mainDetailsToggle, summaryElement);
-    document.body.classList.add('overflow-hidden-mobile');
+    document.body.classList.add(`overflow-hidden-${this.dataset.breakpoint}`);
   }
 }
 
 customElements.define('header-drawer', HeaderDrawer);
+
+class ModalDialog extends HTMLElement {
+  constructor() {
+    super();
+    this.querySelector('[id^="ModalClose-"]').addEventListener(
+      'click',
+      this.hide.bind(this)
+    );
+    this.addEventListener('click', (event) => {
+      if (event.target.nodeName === 'MODAL-DIALOG') this.hide();
+    });
+    this.addEventListener('keyup', () => {
+      if (event.code.toUpperCase() === 'ESCAPE') this.hide();
+    });
+  }
+
+  show(opener) {
+    this.openedBy = opener;
+    document.body.classList.add('overflow-hidden');
+    this.setAttribute('open', '');
+    this.querySelector('.template-popup')?.loadContent();
+    trapFocus(this, this.querySelector('[role="dialog"]'));
+  }
+
+  hide() {
+    document.body.classList.remove('overflow-hidden');
+    this.removeAttribute('open');
+    removeTrapFocus(this.openedBy);
+    window.pauseAllMedia();
+  }
+}
+customElements.define('modal-dialog', ModalDialog);
+
+class ModalOpener extends HTMLElement {
+  constructor() {
+    super();
+
+    const button = this.querySelector('button');
+    button?.addEventListener('click', () => {
+      document.querySelector(this.getAttribute('data-modal'))?.show(button);
+    });
+  }
+}
+customElements.define('modal-opener', ModalOpener);
+
+class DeferredMedia extends HTMLElement {
+  constructor() {
+    super();
+    this.querySelector('[id^="Deferred-Poster-"]')?.addEventListener('click', this.loadContent.bind(this));
+  }
+
+  loadContent() {
+    if (!this.getAttribute('loaded')) {
+      const content = document.createElement('div');
+      content.appendChild(this.querySelector('template').content.firstElementChild.cloneNode(true));
+
+      this.setAttribute('loaded', true);
+      window.pauseAllMedia();
+      this.appendChild(content.querySelector('video, model-viewer, iframe')).focus();
+    }
+  }
+}
+
+customElements.define('deferred-media', DeferredMedia);

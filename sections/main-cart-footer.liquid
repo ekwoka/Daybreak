@@ -13,11 +13,13 @@
         </cart-note>
       {%- endif -%}
 
-      <div>
+      <div class="cart__blocks">
         {% for block in section.blocks %}
           {%- case block.type -%}
+            {%- when '@app' -%}
+              {% render block %}
             {%- when 'subtotal' -%}
-              <div class="js-contents">
+              <div class="js-contents" {{ block.shopify_attributes }}>
                 <div class="totals">
                   <h3 class="totals__subtotal">{{ 'sections.cart.subtotal' | t }}</h3>
                   <p class="totals__subtotal-value">{{ cart.total_price | money_with_currency }}</p>
@@ -50,7 +52,7 @@
                 </small>
               </div>
             {%- else -%}
-              <div class="cart__ctas">
+              <div class="cart__ctas" {{ block.shopify_attributes }}>
                 <noscript>
                   <button type="submit" class="cart__update-button button button--secondary" form="cart">
                     {{ 'sections.cart.update' | t }}
@@ -99,8 +101,8 @@
     {
       "type": "checkbox",
       "id": "show_cart_note",
-      "label": "t:sections.main-cart-footer.settings.show_cart_note.label",
-      "default": false
+      "default": false,
+      "label": "t:sections.main-cart-footer.settings.show_cart_note.label"
     }
   ],
   "blocks": [
@@ -113,9 +115,10 @@
       "type": "buttons",
       "name": "t:sections.main-cart-footer.blocks.buttons.name",
       "limit": 1
+    },
+    {
+      "type": "@app"
     }
   ]
 }
 {% endschema %}
-
-

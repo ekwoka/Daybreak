@@ -8,7 +8,7 @@
       "login_form_error": "Wrong password!",
       "login_form_submit": "Enter",
       "modal": "Password modal",
-      "admin_link_html": "Are you the store owner? <a href=\"\/admin\" class=\"link underlined-link\">Log in here<\/a>",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\" class=\"link underlined-link\">Log in here</a>",
       "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
     },
     "social": {
@@ -49,6 +49,9 @@
       "share_url": "Link",
       "success_message": "Link copied to clipboard!"
     }
+  },
+  "date_formats": {
+    "month_year": "%B %Y"
   },
   "newsletter": {
     "label": "Your email",
@@ -104,9 +107,10 @@
       "on_sale": "Sale",
       "product_variants": "Product variants",
       "media": {
-        "media_alt": "Load media in gallery viewer, {{ mediaAlt }}",
-        "video_alt": "Load video in gallery viewer, {{ mediaAlt }}",
-        "model_alt": "Load 3D model in gallery viewer, {{ mediaAlt }}"
+        "open_featured_media": "Open featured media in gallery view",
+        "open_media": "Open media {{ index }} in gallery view",
+        "play_model": "Play 3D Viewer",
+        "play_video": "Play video"
       },
       "quantity": {
         "label": "Quantity",
@@ -118,8 +122,8 @@
         "view_store_info": "View store information",
         "check_other_stores": "Check availability at other stores",
         "pick_up_available": "Pickup available",
-        "pick_up_available_at_html": "Pickup available at <span class=\"color-foreground\">{{ location_name }}<\/span>",
-        "pick_up_unavailable_at_html": "Pickup currently unavailable at <span class=\"color-foreground\">{{ location_name }}<\/span>",
+        "pick_up_available_at_html": "Pickup available at <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "Pickup currently unavailable at <span class=\"color-foreground\">{{ location_name }}</span>",
         "unavailable": "Couldn't load pickup availability",
         "refresh": "Refresh"
       },
@@ -190,9 +194,9 @@
       "empty": "Your cart is empty",
       "cart_error": "There was an error while updating your cart. Please try again.",
       "cart_quantity_error_html": "You can only add [quantity] of this item to your cart.",
-      "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping<\/a> calculated at checkout",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping</a> calculated at checkout",
       "taxes_included_but_shipping_at_checkout": "Tax included and shipping calculated at checkout",
-      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping<\/a> calculated at checkout.",
+      "taxes_included_and_shipping_policy_html": "Tax included. <a href=\"{{ link }}\">Shipping</a> calculated at checkout.",
       "taxes_and_shipping_at_checkout": "Taxes and shipping calculated at checkout",
       "headings": {
         "product": "Product",
@@ -219,7 +223,6 @@
       "view_all": "View all"
     },
     "collection_template": {
-      "all_tags": "All products",
       "apply": "Apply",
       "clear": "Clear",
       "clear_all": "Clear all",
@@ -228,25 +231,28 @@
       "filter_and_sort": "Filter and sort",
       "filter_by_label": "Filter by",
       "filter_button": "Filter",
-      "filters_selected": "{{ count }} selected",
+      "filters_selected": {
+        "one": "{{ count }} selected",
+        "other": "{{ count }} selected"
+      },
       "max_price": "The highest price is {{ price }}",
-      "product_count": "Showing {{ count }} of {{ total }} products",
+      "product_count": {
+        "one": "Showing {{ product_count }} of {{ count }} product",
+        "other": "Showing {{ product_count }} of {{ count }} products"
+      },
       "reset": "Reset",
       "sort_button": "Sort",
       "sort_by_label": "Sort by",
       "title": "Collection",
       "to": "To",
-      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">clear all<\/a>"
-    },
-    "collection_list_template": {
-      "product_count": "{{ count }} products"
+      "use_fewer_filters_html": "Use fewer filters or <a class=\"{{ class }}\" href=\"{{ link }}\">clear all</a>"
     }
   },
   "localization": {
-    "country_label": "Country\/region",
+    "country_label": "Country/region",
     "language_label": "Language",
     "update_language": "Update language",
-    "update_country": "Update country\/region"
+    "update_country": "Update country/region"
   },
   "customer": {
     "account": {
@@ -275,9 +281,9 @@
       "address1": "Address 1",
       "address2": "Address 2",
       "city": "City",
-      "country": "Country\/region",
+      "country": "Country/region",
       "province": "Province",
-      "zip": "Postal\/ZIP code",
+      "zip": "Postal/ZIP code",
       "phone": "Phone",
       "set_default": "Set as default address",
       "add": "Add address",
