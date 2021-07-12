@@ -163,8 +163,8 @@
     "announcement-bar": {
       "name": "Announcement bar",
       "blocks": {
-        "announcement": {
-          "name": "Announcement",
+        "message": {
+          "name": "Message",
           "settings": {
             "text": {
               "label": "Text"
@@ -191,6 +191,9 @@
               "label": "Link"
             }
           }
+        },
+        "shipping": {
+          "name": "Shipping Threshold"
         }
       }
     },

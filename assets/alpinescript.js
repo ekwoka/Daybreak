@@ -108,6 +108,9 @@ document.addEventListener('alpine:init', () => {
 
     /* Alpine Stores */
     console.log('Registering Stores');
+    Alpine.persistedStore('cart', {
+        value: 0
+    })
     Alpine.persistedStore('subscribed', false);
 
     /* Alpine.data */
