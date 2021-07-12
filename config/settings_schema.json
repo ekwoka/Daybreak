@@ -2,10 +2,10 @@
   {
     "name": "theme_info",
     "theme_name": "Daybreak",
-    "theme_version": "0.0.1",
+    "theme_version": "0.0.2-alpha",
     "theme_author": "Eric Kwoka",
-    "theme_documentation_url": "https://shopify.dev/themes/tools/dawn",
-    "theme_support_url": "https://support.shopify.com/"
+    "theme_documentation_url": "https://github.com/ekwoka/Daybreak",
+    "theme_support_url": "https://github.com/ekwoka/Daybreak"
   },
   {
     "name": "t:settings_schema.colors.name",
@@ -258,7 +258,8 @@
         "type": "text",
         "id": "free_shipping_threshold",
         "label": "t:settings_schema.free-shipping.settings.free_shipping_threshold.label",
-        "info": "t:settings_schema.free-shipping.settings.free_shipping_threshold.info"
+        "info": "t:settings_schema.free-shipping.settings.free_shipping_threshold.info",
+        "default": 0
       }
     ]
   },

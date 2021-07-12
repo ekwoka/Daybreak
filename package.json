@@ -1,6 +1,6 @@
 {
   "name": "Daybreak",
-  "version": "0.0.1",
+  "version": "0.0.2-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "test": "npx lighthouse https://kwoka-theme-2.myshopify.com --view --extra-headers=\"{\\\"Cookie\\\":\\\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\\\"}\"",
@@ -29,7 +29,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.2.6",
+    "autoprefixer": "^10.3.0",
     "cssnano": "^5.0.6",
     "minify": "^7.0.2",
     "npm-run-all": "^4.1.5",
