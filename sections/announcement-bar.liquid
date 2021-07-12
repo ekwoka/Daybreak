@@ -27,7 +27,7 @@
                         },
                         default: '{{ block.settings.default }}',
                         congrats: '{{ block.settings.congrats }}',
-                        threshold: 3500,
+                        threshold: {{ settings.free_shipping_threshold }},
                         init() {
                           console.log('Free Shipping Initialized')
                         }
@@ -56,7 +56,7 @@
         }, {
             "type": "checkbox",
             "id": "showAnnouncement",
-            "label": "Show Annoucement Bar",
+            "label": "Show Announcement Bar",
             "default": true
         }, {
             "type": "select",
@@ -105,6 +105,10 @@
             "name": "t:sections.announcement-bar.blocks.shipping.name",
             "limit": 1,
             "settings": [
+              {
+                "type": "paragraph",
+                "content": "Free Shipping Threshold settings can be found in the Theme Settings > Free Shipping Threshold"
+              },
               {
                 "type": "text",
                 "id": "default",

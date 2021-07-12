@@ -157,6 +157,15 @@
           "info": "https:\/\/vimeo.com\/shopify"
         }
       }
+    },
+    "free-shipping" : {
+      "name": "Free Shipping Threshold",
+      "settings": {
+        "free_shipping_threshold": {
+          "label": "Free Shipping Threshold",
+          "info": "Non-delineated amount above which users have the option of free shipping. (write $30 as 3000)"
+        }
+      }
     }
   },
   "sections": {
