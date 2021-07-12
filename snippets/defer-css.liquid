@@ -1,0 +1,9 @@
+{%- comment -%}Usage: {%- render 'defer-css', css: 'tailwind.css' -%}{%- endcomment -%}
+
+{%- if preload -%}
+    <link rel="preload" href="{{ css | asset_url }}" as="style">
+{%- endif -%}
+<link rel="stylesheet" href="{{ css | asset_url }}" media="print" onload="this.media = 'all'">
+<noscript>
+    {{ css | asset_url | stylesheet_tag }}
+</noscript>

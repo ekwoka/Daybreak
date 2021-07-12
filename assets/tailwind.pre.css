@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* Custom Elements */
+    announcement-bar, announcement-message {
+        @apply block
+    }
+}

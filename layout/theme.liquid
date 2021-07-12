@@ -20,6 +20,7 @@
 
     {% render 'meta-tags' %}
 
+    <script src="{{ 'timber.min.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     {{ content_for_header }}
 
@@ -99,9 +100,14 @@
           font-size: 1.6rem;
         }
       }
+
+      {%- render 'critical-css' -%}
+
     {% endstyle %}
 
-    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    {%- render 'defer-css', css: 'base.css', preload: true -%}
+    {%- render 'defer-css', css: 'tailwind.css', preload: true -%}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>

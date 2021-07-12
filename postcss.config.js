@@ -5,9 +5,9 @@ module.exports = {
       ? [
         require(`tailwindcss`)(`./tailwind.config.js`),
         require(`autoprefixer`),
-        /* require(`cssnano`)({
+        require(`cssnano`)({
           preset: "default",
-        }), */
+        }),
       ]
       : []),
       ...(process.env.NODE_ENV === "development"
