@@ -9,6 +9,21 @@
 <noscript>{{ 'component-cart-notification.css' | asset_url | stylesheet_tag }}</noscript>
 
 <style>
+
+{%- if section.settings.logoType == 'img' and section.settings.logoimg -%}
+{%- assign img_w = section.settings.logo_width | append: 'px' -%}
+{%- assign img_h = section.settings.logo_width | divided_by: section.settings.logoimg.aspect_ratio | append: 'px' -%}
+{%- assign img_max_w = '50' -%}
+{%- assign img_max_h = img_max_w | divided_by: section.settings.logoimg.aspect_ratio | append: 'vw' -%}
+
+.headerLogo-image {
+  width: {{ img_w }};
+  height: {{ img_h }};
+  max-width: {{ img_max_w }}vw;
+  max-height: {{ img_max_h }};
+}
+{% endif -%}
+
   header-drawer {
     justify-self: start;
     margin-left: -1.2rem;
@@ -277,21 +292,35 @@
     {%- if request.page_type == 'index' -%}
       <h1 class="header__heading">
     {%- endif -%}
-        <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
-          {%- if section.settings.logo != blank -%}
-            {%- assign image_size = section.settings.logo_width | append: 'x' -%}
-            <img srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
-              src="{{ section.settings.logo | img_url: image_size }}"
-              loading="lazy"
-              class="header__heading-logo"
-              width="{{ section.settings.logo.width }}"
-              height="{{ section.settings.logo.height }}"
-              alt="{{ section.settings.logo.alt | default: shop.name | escape }}"
-            >
-          {%- else -%}
-            <span class="h2">{{ shop.name }}</span>
-          {%- endif -%}
-        </a>
+
+    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-8 text-xl font-semibold tracking-widest text-center break-word md:order-first">
+      {%- case section.settings.logoType -%}
+        {%- when 'none' -%}
+          <h1 class="">
+            {{ shop.name }}
+          </h1>
+        {%- when 'img' -%}
+          {%- assign img_url = section.settings.logoimg | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img class="mx-auto headerLogo-image lazyload js"
+               src="{{ section.settings.logoimg | img_url: '100x' }}"
+               data-src="{{ img_url }}"
+               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               data-sizes="auto"
+               alt="{{ section.settings.logo.alt | default: shop.name }}"
+               data-aspectratio="{{ section.settings.logoimg.aspect_ratio }}">
+          <noscript>
+            {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+            <img class="mx-auto headerLogo-image"
+                 src="{{ section.settings.logoimg | img_url: image_size }}"
+                 srcset="{{ section.settings.logoimg | img_url: image_size }} 1x, {{ section.settings.logoimg | img_url: image_size, scale: 2 }} 2x"
+                 alt="{{ section.settings.logo.alt | default: shop.name }}">
+          </noscript>
+        {%- when 'svg' -%}
+          <div id="logo-svg" class="mx-auto" style="max-width: {{ section.settings.logo_width }}px;">
+            {{ section.settings.logosvg }}
+          </div>
+        {%- endcase -%}
+    </a>
     {%- if request.page_type == 'index' -%}
       </h1>
     {%- endif -%}
@@ -505,9 +534,9 @@
     "@context": "http://schema.org",
     "@type": "Organization",
     "name": {{ shop.name | json }},
-    {% if section.settings.logo %}
-      {% assign image_size = section.settings.logo.width | append: 'x' %}
-      "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+    {% if section.settings.logoimg %}
+      {% assign image_size = section.settings.logoimg.width | append: 'x' %}
+      "logo": {{ section.settings.logoimg | img_url: image_size | prepend: "https:" | json }},
     {% endif %}
     "sameAs": [
       {{ settings.social_twitter_link | json }},
@@ -547,9 +576,37 @@
   "name": "t:sections.header.name",
   "settings": [
     {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "select",
+      "id": "logoType",
+      "label": "Logo Type",
+      "options": [
+        {
+          "value": "svg",
+          "label": "SVG"
+        },
+        {
+          "value": "img",
+          "label": "Image"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
       "type": "image_picker",
-      "id": "logo",
+      "id": "logoimg",
       "label": "t:sections.header.settings.logo.label"
+    },
+    {
+      "type": "html",
+      "id": "logosvg",
+      "label": "Logo SVG Code"
     },
     {
       "type": "range",
@@ -580,6 +637,10 @@
       ],
       "default": "middle-left",
       "label": "t:sections.header.settings.logo_position.label"
+    },
+    {
+      "type": "header",
+      "content": "Main Navigation"
     },
     {
       "type": "link_list",

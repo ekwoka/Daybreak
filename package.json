@@ -1,6 +1,6 @@
 {
   "name": "Daybreak",
-  "version": "0.0.2-alpha",
+  "version": "0.0.3-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "test": "npx lighthouse https://kwoka-theme-2.myshopify.com --view --extra-headers=\"{\\\"Cookie\\\":\\\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\\\"}\"",
