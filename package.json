@@ -23,13 +23,13 @@
   "license": "ISC",
   "dependencies": {
     "@ryangjchandler/fern": "^0.1.0",
-    "alpinejs": "^3.2.1",
+    "alpinejs": "^3.2.2",
     "lazysizes": "^5.3.2"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.0",
+    "autoprefixer": "^10.3.1",
     "cssnano": "^5.0.6",
     "minify": "^7.0.2",
     "npm-run-all": "^4.1.5",
