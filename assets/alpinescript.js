@@ -1,9 +1,9 @@
 console.log('Registering Alpine Init Listener');
 document.addEventListener('alpine:init', () => {  
     console.log('Registering persistedStore');
-    window.__ferns = {}
+    window.__daybreaks = {}
     Alpine.persistedStore = function (name, value) {
-        let stored = localStorage.getItem(`__fern_${name}`)
+        let stored = localStorage.getItem(`__daybreak_${name}`)
         
         if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
@@ -19,12 +19,12 @@ document.addEventListener('alpine:init', () => {
 
         Alpine.store(name, value)
 
-        window.__ferns[name] = Alpine.effect(() => {
+        window.__daybreaks[name] = Alpine.effect(() => {
             const json = JSON.stringify(
                 Alpine.store(name)
             )
 
-            localStorage.setItem(`__fern_${name}`, json)
+            localStorage.setItem(`__daybreak_${name}`, json)
         })
     };
 
