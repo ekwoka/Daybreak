@@ -17,8 +17,8 @@
     "minify:alpine": "minify assets/alpinescript.js node_modules/alpinejs/dist/cdn.js > assets/alpine.min.js",
     "minify:css": "minify assets/base.css > assets/base.min.css",
     "minify:lazysizes": "minify assets/lazysizes.config.js node_modules/lazysizes/plugins/rias/ls.rias.min.js node_modules/lazysizes/plugins/aspectratio/ls.aspectratio.min.js node_modules/lazysizes/plugins/attrchange/ls.attrchange.min.js node_modules/lazysizes/lazysizes.min.js > assets/lazysizes.min.js",
-    "minify:js": "minify assets/lazysizes.min.js assets/alpine.min.js > assets/timber.min.js",
-    "sizes:assets": "ls -lh assets/alpine.min.js assets/lazysizes.min.js assets/timber.min.js assets/base.min.css assets/tailwind.css",
+    "minify:js": "minify assets/alpine.min.js assets/lazysizes.min.js > assets/daybreak.min.js",
+    "sizes:assets": "ls -lh assets/alpinescript.js assets/alpine.min.js assets/lazysizes.min.js assets/daybreak.min.js assets/base.min.css assets/tailwind.css",
     "watch": "run-p serve css:watch"
   },
   "author": "Eric Kwoka",
