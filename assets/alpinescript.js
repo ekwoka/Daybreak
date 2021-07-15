@@ -1,83 +1,5 @@
 console.log('Registering Alpine Init Listener');
-document.addEventListener('alpine:init', () => {
-
-    /* Alpine Plugins */
-    /* console.log('Registering $persist');
-    Alpine.magic("persist", (el, { interceptor }) => {
-        return interceptor((initialValue, getter, setter, path, key) => {
-            let initial = localStorage.getItem(path) ? localStorage.getItem(path) : initialValue;
-            setter(initialValue);
-            Alpine.effect(() => {
-                let value = getter();
-                localStorage.setItem(path, value);
-                setter(value);
-            });
-            return initial;
-        });
-    }); */
-    
-    /* console.log('Registering x-intersect');
-    let pauseReactions = false
-    Alpine.directive('intersect', (el, { value, modifiers, expression }, { evaluateLater }) => {
-        let evaluate = evaluateLater(expression)
-        
-        if (['out', 'leave'].includes(value)) {
-            el._x_intersectLeave(evaluate, modifiers)
-        } else {
-            el._x_intersectEnter(evaluate, modifiers)
-        }
-    })
-    
-    window.Element.prototype._x_intersectEnter = function (callback, modifiers) {
-        this._x_intersect((entry, observer) => {
-            if (pauseReactions) return
-            
-            pauseReactions = true
-            if (entry.intersectionRatio > 0) {
-                
-                callback()
-                
-                modifiers.includes('once') && observer.unobserve(this)
-                
-                
-            }
-            setTimeout(() => {
-                pauseReactions = false
-            }, 100);
-        })
-    }
-    
-    window.Element.prototype._x_intersectLeave = function (callback, modifiers) {
-        this._x_intersect((entry, observer) => {
-            if (pauseReactions) return
-            
-            pauseReactions = true
-            if (!entry.intersectionRatio > 0) {
-                
-                callback()
-                
-                modifiers.includes('once') && observer.unobserve(this)
-                
-                
-            }
-            setTimeout(() => {
-                pauseReactions = false
-            }, 100);
-        })
-    }
-    
-    window.Element.prototype._x_intersect = function (callback) {
-        let observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => callback(entry, observer))
-        }, {
-            // threshold: 1,
-        })
-        
-        observer.observe(this);
-        
-        return observer
-    } */
-    
+document.addEventListener('alpine:init', () => {  
     console.log('Registering persistedStore');
     window.__ferns = {}
     Alpine.persistedStore = function (name, value) {
@@ -107,7 +29,7 @@ document.addEventListener('alpine:init', () => {
     };
 
     /* Alpine Stores */
-    console.log('Registering Stores');
+    console.log('Registering Storage');
     Alpine.persistedStore('cart', {
         value: 0
     })
@@ -296,8 +218,6 @@ document.addEventListener('alpine:init', () => {
 });
 
 /* Global Functions */
-
-
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -320,4 +240,38 @@ function setCookie(cname, cvalue, exdays) {
     var expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     console.log('Setting Cookie: ' + cname + '\nto:' + expires);
+}
+
+Daybreak = {
+    async addToCart(id,q) {
+        console.log(`Adding ${q} products of id: ${id} to Cart`);
+        return 'Added to Cart';
+    }
+};
+
+
+/* Prototypes */
+window.Element.prototype._x_intersectEnter = function (callback, modifiers) {
+    this._x_intersect((entry, observer) => {
+        if (entry.intersectionRatio > 0) {
+            
+            callback()
+            
+            modifiers.includes('once') && observer.unobserve(this)
+            
+            
+        }
+        setTimeout(() => {
+        }, 100);
+    })
+}
+
+window.Element.prototype._x_intersect = function (callback) {
+    let observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => callback(entry, observer))
+    }, {
+        // threshold: 1,
+    })
+    observer.observe(this);
+    return observer
 }
