@@ -1,0 +1,229 @@
+<!-- order-bump.liquid start-->
+
+<style scoped>
+    aside > bump-offer > bump-item:nth-child(n+{{section.settings.toLimit | plus: 1 }}) {
+        display: none;
+    }
+    aside.expanded > bump-offer > bump-item {
+        display: flex;
+    }
+</style>
+
+<script>
+document.addEventListener('alpine:init', () => {
+    Alpine.data('orderBump',({
+        title,
+        price,
+        variants,
+        id,
+        image,
+        onlyDefault
+    } = {}) => ({
+        title: title || 'Product Data Missing',
+        price: price || 0,
+        variants: variants || {},
+        id: id,
+        image: image != '' ? image:`https://picsum.photos/seed/${id}/{width}`,
+        quantity: 1,
+        onlyDefault: onlyDefault,
+        async addItem() {
+            let response = await Daybreak.addToCart(id,quantity);
+            console.log(response);
+        }
+    }))
+});
+</script>
+
+{%- liquid
+    assign addonCollection = collections[section.settings.bumpCollection]
+    assign startingIndex = 0
+    assign bumpsShown = 0
+    assign size = addonCollection.products_count
+    assign lastIndex = size | minus: 1
+    if section.settings.random
+        assign seed = "now" | date: '%S'
+        assign startingIndex = seed | modulo: size
+    endif
+    assign indexedArray = ''
+    for i in (startingIndex..lastIndex)
+        assign indexedArray = indexedArray | append: i
+    endfor
+    for i in (0..startingIndex)
+        assign indexedArray = indexedArray | append: i
+    endfor
+    assign indexedArray = indexedArray | split: '' | uniq
+    if section.settings.center
+        assign alignClass = 'max-w-max mx-auto'
+    else
+        assign alignClass = 'w-full'
+    endif
+    if section.settings.showPrice
+        assign buttonText = 'x-text="`Add to Cart - ${price}`"'
+    endif
+-%}
+
+    <bump-title class="w-full p-4 bg-truegray-700 text-truegray-200">
+        <div class="block mx-auto text-3xl max-w-max text-truegray-100">{{ section.settings.title }}</div>
+        <div class="block mx-auto text-2xl text-center max-w-max">{{ section.settings.desc}}</div>
+    </bump-title>
+    <bump-offer class="limited min-h-[max-content] flex flex-col transition-all duration-300 ease-out z-0 wrapper-hide-notFirst border-truegray-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-truegray-200" id="customAddon-Wrapper">
+
+        {%- if section.settings.bumpProduct -%}
+            {%- assign bumpProd = section.settings.bumpProduct -%}
+            {%- assign bumpsShown = bumpsShown | plus: 1 -%}
+            <bump-item class="flex flex-row justify-between p-2 flex-nowrap" x-data="orderBump({
+                title: '{{bumpProd.title}}',
+                price: '{{bumpProd.first_available_variant.price | money}}',
+                id: {{bumpProd.id}},
+                image: '{{bumpProd.featured_image}}',
+                onlyDefault: {{bumpProd.has_only_default_variant}}
+            })">
+                <div class="flex-shrink w-1/3 p-2">
+                    <img class="w-full lazyload" :data-src="image" data-sizes="auto" alt="{{ bumpProd.title }}">
+                </div>
+                <bump-info class="flex-grow p-4">
+                    <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
+                    <div class="{{ alignClass }}" x-text="price">{{ bumpProd.first_available_variant.price | money }}</div>
+                    <div class="pt-4 mx-auto">
+                        {%- if bumpProd.has_only_default_variant != true -%}
+                            <div class="w-full py-2 mx-auto">
+                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" onclick="ga('send', 'event', 'daybreak', 'order-bump', 'selectOption');">
+                                    {%- for variant in bumpProd.variants -%}
+                                        <option value="{{variant.id}}">{{variant.title}} / {{variant.price | money}}</option>
+                                    {%- endfor -%}
+                                </select>
+                            </div>
+                        {%- endif -%}
+                        <button class="bg-[#26b522] text-white w-full py-2 px-2 text-center disabled:opacity-50 disabled:bg-truegray-600" id="customAddonButton-{{ bumpProd.id }}" {{buttonText}} @click="addItem()">Add to Cart</button>
+                    </div>
+                </bump-info>
+            </bump-item>
+        {%- endif -%}
+        {%- if size != '' -%}
+        {%- for i in indexedArray -%}
+            {%- liquid
+                if bumpsShown == section.settings.toShow
+                    break
+                endif
+                assign bumpProd = addonCollection.products[i]
+                if bumpProd.id == section.settings.bumpProduct.id
+                    continue
+                endif
+                assign bumpsShown = bumpsShown | plus: 1
+            -%}
+            <bump-item class="flex flex-row justify-between p-2 flex-nowrap" x-data="orderBump({
+                title: '{{bumpProd.title}}',
+                price: '{{bumpProd.first_available_variant.price | money}}',
+                id: {{bumpProd.id}},
+                image: '{{bumpProd.featured_image}}',
+                onlyDefault: {{bumpProd.has_only_default_variant}}
+            })">
+                <div class="flex-shrink w-1/3 p-2">
+                    <img class="w-full lazyload" :data-src="image" data-sizes="auto" alt="{{ bumpProd.title }}" >
+                </div>
+                <bump-info class="flex-grow p-4">
+                    <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
+                    <div class="{{ alignClass }}" x-text="price">{{ bumpProd.first_available_variant.price | money }}</div>
+                    <div class="pt-4 mx-auto">
+                        {%- if bumpProd.has_only_default_variant != true -%}
+                            <div class="w-full py-2 mx-auto">
+                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" onclick="ga('send', 'event', 'daybreak', 'order-bump', 'selectOption');">
+                                    {%- for variant in bumpProd.variants -%}
+                                        <option value="{{variant.id}}">{{variant.title}} / {{variant.price | money}}</option>
+                                    {%- endfor -%}
+                                </select>
+                            </div>
+                        {%- endif -%}
+                        <button class="bg-[#26b522] text-white w-full py-2 px-2 text-center disabled:opacity-50 disabled:bg-truegray-600" id="customAddonButton-{{ bumpProd.id }}" {{buttonText}}>Add to Cart</button>
+                    </div>
+                </bump-info>
+            </bump-item>
+
+        {%- endfor -%}
+        {%- endif -%}
+    </bump-offer>
+    {%- if bumpsShown > section.settings.toLimit -%}
+        <button class="block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-truegray-500 hover:text-gray-200" onclick="this.classList.add('hidden');this.closest('aside').classList.add('expanded')">Show More</button>
+    {%- endif -%}
+
+<!-- custom-addon-app.liquid end -->
+
+{% schema %}
+{
+    "name": "Order Bump",
+    "tag": "aside",
+    "class": "js p-4 max-w-screen-sm mx-auto",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Display"
+        },
+        {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "default": "Check out this item!"
+        },
+        {
+            "type": "textarea",
+            "id": "desc",
+            "label": "Description",
+            "default": "This product goes so well with that other product"
+        },
+        {
+            "type": "checkbox",
+            "id": "center",
+            "label": "Center Product Info",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "showPrice",
+            "label": "Show Price in ATC Button",
+            "default": true
+        },
+        {
+            "type": "number",
+            "id": "toLimit",
+            "label": "Min Bumps to Show",
+            "info": "When the Min and Max Bumps are different, some bumps will be hidden behind a tab that extends to reveal the hidden bumps",
+            "default": 1
+        },
+        {
+            "type": "number",
+            "id": "toShow",
+            "label": "Max Bumps to Show",
+            "info": "When the Max Bumps is less than the available bumps to show (individual product + collection) the first available items will be displayed up to the limit. Use the 'Random' setting to rotate which items from the collection display",
+            "default": 1
+        },
+        {
+            "type": "header",
+            "content": "Offer",
+            "info": "Use these settings to set up the offers on your order bump. Please review the documentation if you have any problems"
+        },
+        {
+            "type": "product",
+            "id": "bumpProduct",
+            "label": "Product",
+            "info": "This enables the use of specific product and collection bumps on a per product basis. Refer to Theme documentation for setup"
+        },
+        {
+            "type": "collection",
+            "id": "bumpCollection",
+            "label": "Collection Fallback",
+            "info": "This collection will be displayed on products that do not have unique bumps selected"
+        },
+        {
+            "type": "checkbox",
+            "id": "random",
+            "label": "Randomize Collection Display Order",
+            "default": true
+        }
+    ],
+    "presets": [
+        {
+            "name": "Order Bump"
+        }
+    ]
+}
+{% endschema %}

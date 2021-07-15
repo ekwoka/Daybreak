@@ -4,7 +4,7 @@
 
 @layer components {
     /* Custom Elements */
-    announcement-bar, announcement-message {
+    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info {
         @apply block
     }
 }
