@@ -7,6 +7,8 @@
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
+    "reset": "run-s pull build push",
+    "build": "run-p css:build css:critical minify:all",
     "css:build": "NODE_ENV=production TAILWIND_MODE=build postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose",
     "css:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss assets/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose",
     "css:fulldev": "NODE_ENV=development TAILWIND_MODE=build postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose",
@@ -23,6 +25,7 @@
   "license": "ISC",
   "dependencies": {
     "@ryangjchandler/fern": "^0.1.0",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
     "alpinejs": "^3.2.2",
     "lazysizes": "^5.3.2"
   },

@@ -20,9 +20,9 @@ module.exports = {
       ? [
         require(`tailwindcss`)(`./tailwind.header.config.js`),
         require(`autoprefixer`),
-        /* require(`cssnano`)({
+        require(`cssnano`)({
           preset: "default",
-        }), */
+        }),
       ]
       : []),
   ],
