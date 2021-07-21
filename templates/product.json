@@ -82,7 +82,7 @@
       }
     },
     "1626325752d849a2a3": {
-      "type": "order-bump",
+      "type": "order-bump-comp",
       "settings": {
         "title": "Check out this item!",
         "desc": "This product goes so well with that other product",

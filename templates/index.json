@@ -81,7 +81,7 @@
       }
     },
     "1626254638dce48bfc": {
-      "type": "order-bump",
+      "type": "order-bump-comp",
       "settings": {
         "title": "Check out these items!",
         "desc": "These go great with those things you already have!",

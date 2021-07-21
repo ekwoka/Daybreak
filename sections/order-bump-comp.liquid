@@ -1,4 +1,5 @@
 <!-- order-bump.liquid start-->
+{{ 'order-bump.comp.css' | asset_url | stylesheet_tag }}
 
 <style scoped>
     aside > bump-offer > bump-item:nth-child(n+{{section.settings.toLimit | plus: 1 }}) {

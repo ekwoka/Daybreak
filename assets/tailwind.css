@@ -1007,33 +1007,21 @@ announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump
 .ease-out {
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
-
-@layer components {
-    /* Custom Elements */
-    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info {
-		display: block;
-	}
-}
-
 .hover\:bg-truegray-500:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(115, 115, 115, var(--tw-bg-opacity));
 }
-
 .hover\:text-gray-200:hover {
 	--tw-text-opacity: 1;
 	color: rgba(229, 231, 235, var(--tw-text-opacity));
 }
-
 .disabled\:bg-truegray-600:disabled {
 	--tw-bg-opacity: 1;
 	background-color: rgba(82, 82, 82, var(--tw-bg-opacity));
 }
-
 .disabled\:opacity-50:disabled {
 	opacity: 0.5;
 }
-
 @media (min-width: 768px) {
 
 	.md\:order-first {
@@ -1044,7 +1032,6 @@ announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump
 		display: block;
 	}
 }
-
 @media (min-width: 1024px) {
 
 	.lg\:hidden {

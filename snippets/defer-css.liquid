@@ -1,9 +1,12 @@
 {%- comment -%}Usage: {%- render 'defer-css', css: 'tailwind.css' -%}{%- endcomment -%}
+{{ css | asset_url | stylesheet_tag }}
 
-{%- if preload -%}
-    <link rel="preload" href="{{ css | asset_url }}" as="style">
-{%- endif -%}
-<link rel="stylesheet" href="{{ css | asset_url }}" media="print" onload="this.media = 'all'">
-<noscript>
-    {{ css | asset_url | stylesheet_tag }}
-</noscript>
+{%- comment -%}
+    {%- if preload -%}
+        <link rel="preload" href="{{ css | asset_url }}" as="style">
+    {%- endif -%}
+    <link rel="stylesheet" href="{{ css | asset_url }}" media="print" onload="this.media = 'all'">
+    <noscript>
+        {{ css | asset_url | stylesheet_tag }}
+    </noscript>
+{%- endcomment -%}
