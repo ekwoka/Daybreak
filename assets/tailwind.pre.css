@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-    /* Custom Elements */
-    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info {
-        @apply block
-    }
+@layer base {
+
+/* Custom Elements */
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture {
+    @apply block
+}
+
+custom-span {
+    @apply inline
+}
+
 }

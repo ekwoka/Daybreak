@@ -1,0 +1,303 @@
+<!-- 'sections/inline-newsletter-comp.liquid' START -->
+
+{{ 'inline-newsletter.comp.css' | asset_url | stylesheet_tag }}
+
+<style>
+    #shopify-section-{{ section.id }} {
+        {%- case section.settings.cardStyle -%}
+        {%- when 'full' %}
+        width: 100%;
+        {%- when 'smCard' %}
+        max-width: 640px;
+        {%- when 'mdCard' %}
+        max-width: 768px;
+        {%- when 'lgCard' %}
+        max-width: 1024px;
+        {%- endcase %}
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 0.375rem;
+        --tw-bg-opacity: 1;
+        background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+        --tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+        {%- if section.settings.sticky %}
+        position: sticky;
+        top: 25%;
+        z-index: 100;
+        {%- endif -%}
+    }
+</style>
+
+<email-capture class="relative flex flex-col items-center w-full p-8 mx-auto md:max-w-screen-sm gap-y-2 newsletter-section"
+    x-data="emailCapture({
+        provider: '{{ section.settings.emailProvider }}',
+        listID: '{{ section.settings.listID }}',
+        code: '{{ section.settings.couponCode }}'
+    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open == true" {%- endif -%} x-cloak>
+    <button @click.prevent="open = false" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
+        x-show="open == true" {%- endif -%}>close
+        <svg class="inline-block w-5 h-5 mx-auto icon">
+            <use xlink:href="#icon-close">
+        </svg>
+    </button>
+    <capture-main class="flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300 newsletter-section" :class="sending ? 'opacity-40': ''" x-show="sent == false">
+        <h2 class="flex-auto">{{ section.settings.captureHeader }}</h2>
+            <p class="flex-auto">{{ section.settings.captureHtml }}</p>
+            <form class="flex flex-col w-full gap-1 md:flex-row">
+                <input
+                    class="flex-auto w-full px-4 py-2 text-gray-900 placeholder-gray-500 bg-white shadow-md md:w-3/4 focus:ring-cta-600 focus:border-cta-600"
+                    x-model="email" type="email" name="email" id="email" placeholder="Enter Email Here"
+                    aria-label="Enter Email">
+                <button
+                    class="px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50"
+                    aria-label="Submit Email" @click.prevent="submitEmail()">
+                    <span x-show="!sending">{{ section.settings.captureButton}}</span>
+                    <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon animate-bounce">
+                        <use xlink:href="#icon-cloud-upload"></use>
+                    </svg>
+                </button>
+            </form>
+    </capture-main>
+    <capture-error class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="error" :class="sending ? 'opacity-40': ''">
+        <h2 class="flex-auto">{{ section.settings.errorH2 }}</h2>
+        <p>{{ section.settings.errorP }}</p>
+        {%- if section.settings.errorAgain -%}
+        <button
+            class="px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50"
+            aria-label="Submit Email" @click.prevent="sent=error=false">
+            <span x-show="!sending">Try Again</span>
+            <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon animate-bounce">
+                <use xlink:href="#icon-cloud-upload"></use>
+            </svg>
+        </button>
+        {%- endif -%}
+    </capture-error>
+    <capture-existed class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="existed">
+        <h2 class="flex-auto">{{ section.settings.existedH2 }}</h2>
+        <p>{{ section.settings.existedP }}
+            {%- if section.settings.existedCoupon -%}<br/>
+            Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ section.settings.couponOffer }}!
+            {%- endif -%}
+        </p>
+    </capture-existed>
+    <capture-success class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="success">
+        <h2 class="flex-auto">{{ section.settings.successH2 }}</h2>
+        <p>
+            {{ section.settings.successP }}
+            {%- if section.settings.showCoupon -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. Enjoy your {{ section.settings.couponOffer }}{%- endif -%}
+        </p>
+    </capture-success>
+
+
+    {%- if request.design_mode -%}
+        <div class="newsletter-section" x-show="$store.subscribed == true">
+        <p class="flex-auto" x-cloak>
+            You have already submitted this newsletter or closed the dialogue box. This box here will only show in the
+            Theme Customizer and will not show for customers. If you would like to see the fresh Newsletter Signup,
+            click the button below.</p>
+        <button
+            class="px-4 py-2 tracking-wider rounded-md shadow-md min-w-max bg-gradient-to-t from-gray-700 to-gray-600 text-gray-50"
+            @click.prevent="$store.subscribed=false;">Reset Newsletter box.</button>
+        <template x-if="$store.subscribed == true">
+            <style>
+                #shopify-section-{{ section.id }} {
+                    position: relative;
+                }
+            </style>
+        </template>
+        </div>
+    {%- endif -%}
+
+</email-capture>
+
+
+<!-- 'sections/inline-newsletter-comp.liquid' END -->
+
+
+{% schema %}
+{
+    "name": "Inline Email Capture",
+    "tag": "aside",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Email Tracking Data",
+            "info": "Information Necessary for Hooking up your Email Service Provider"
+        },
+        {
+            "type": "select",
+            "id": "cardStyle",
+            "label": "Newsletter Display Style",
+            "default": "full",
+            "options": [
+                {
+                    "value": "full",
+                    "label": "Full Width",
+                    "group": "Simple"
+                },
+                {
+                    "value": "smCard",
+                    "label": "Small Card",
+                    "group": "Card"
+                },
+                {
+                    "value": "mdCard",
+                    "label": "Medium Card",
+                    "group": "Card"
+                },
+                {
+                    "value": "lgCard",
+                    "label": "Large Card",
+                    "group": "Card"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "sticky",
+            "label": "Sticky Email Capture When Scrolling Past",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Email Settings"
+        },
+        {
+            "type": "select",
+            "id": "emailProvider",
+            "label": "Email Service Provider",
+            "options": [
+                {
+                    "value": "klaviyo",
+                    "label": "Klaviyo"
+                },
+                {
+                    "value": "activeCampaign",
+                    "label": "Active Campaign"
+                },
+                {
+                    "value": "custom",
+                    "label": "Other (Use Box Below)"
+                }
+            ]
+        },
+        {
+            "type": "text",
+            "id": "listID",
+            "label": "List ID"
+        },
+        {
+            "type": "header",
+            "content": "Offer Settings"
+        },
+        {
+            "type": "text",
+            "id": "captureHeader",
+            "label": "Newsletter Header",
+            "default": "Join our Newsletter"
+        },
+        {
+            "type": "html",
+            "id": "captureHtml",
+            "label": "Newsletter Promotional Copy",
+            "info": "This accepts HTML elements and styling"
+        },
+        {
+            "type": "text",
+            "id": "captureButton",
+            "label": "Submit Button Label",
+            "default": "Get My Coupon"
+        },
+        {
+            "type": "checkbox",
+            "id": "showCoupon",
+            "label": "Offer Coupon",
+            "default": false
+        },
+        {
+            "type": "text",
+            "id": "couponCode",
+            "label": "Coupon Code",
+            "info": "Coupon Code to apply for those who successfully submit their email. Both a Coupon Code and Coupon Value are required for a coupon to apply",
+            "placeholder": "get10now"
+        },
+        {
+            "type": "text",
+            "id": "couponOffer",
+            "label": "Coupon Discount Offer",
+            "info": "Value of Coupon. '10% Off', '$20', etc. This will show automatically in the Success Message",
+            "placeholder": "10% off"
+        },
+        {
+            "type": "header",
+            "content": "Success Message"
+        },
+        {
+            "type": "text",
+            "id": "successH2",
+            "label": "Success Header",
+            "default": "Thank You!"
+        },
+        {
+            "type": "textarea",
+            "id": "successP",
+            "label": "Success Message",
+            "default": "Look forward to our amazing emails in your inbox!"
+        },
+        {
+            "type": "header",
+            "content": "Error Message"
+        },
+        {
+            "type": "text",
+            "id": "errorH2",
+            "label": "Error Header",
+            "default": "Oh No!"
+        },
+        {
+            "type": "textarea",
+            "id": "errorP",
+            "label": "Error Message",
+            "default": "It looks like there was an error!"
+        },
+        {
+            "type": "checkbox",
+            "id": "errorAgain",
+            "label": "Allow User to Try Again",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "existed Message"
+        },
+        {
+            "type": "text",
+            "id": "existedH2",
+            "label": "Already Subscribed Header",
+            "default": "Wait a sec..."
+        },
+        {
+            "type": "textarea",
+            "id": "existedP",
+            "label": "Already Subscribed Message",
+            "default": "You're already subscribed!"
+        },
+        {
+            "type": "checkbox",
+            "id": "existedCoupon",
+            "label": "Give Coupon Anyway",
+            "default": true
+        }
+    ],
+    "presets": [
+        {
+            "category": "Promotional",
+            "name":"Inline Email Capture"
+        }
+    ]
+}
+{% endschema %}

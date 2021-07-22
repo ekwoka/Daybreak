@@ -80,6 +80,29 @@
         "layout": "image_first"
       }
     },
+    "16268596694b99fb13": {
+      "type": "inline-newsletter-comp",
+      "settings": {
+        "cardStyle": "smCard",
+        "sticky": true,
+        "emailProvider": "klaviyo",
+        "listID": "",
+        "captureHeader": "Join our Newsletter",
+        "captureHtml": "We have lots of super cool things, and we'll even give you 100% off because we're so cool!!!",
+        "captureButton": "Get My Coupon",
+        "showCoupon": false,
+        "couponCode": "",
+        "couponOffer": "",
+        "successH2": "Thank You!",
+        "successP": "Look forward to our amazing emails in your inbox!",
+        "errorH2": "Oh No!",
+        "errorP": "It looks like there was an error!",
+        "errorAgain": true,
+        "existedH2": "Wait a sec...",
+        "existedP": "You're already subscribed!",
+        "existedCoupon": true
+      }
+    },
     "1626254638dce48bfc": {
       "type": "order-bump-comp",
       "settings": {
@@ -99,6 +122,7 @@
     "image_banner",
     "featured_products",
     "image_text",
+    "16268596694b99fb13",
     "1626254638dce48bfc"
   ]
 }
