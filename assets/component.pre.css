@@ -1,15 +1,11 @@
-/* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture {
-    @apply block
+.inline-email-capture {
+    @apply relative flex flex-col items-center w-full p-8 mx-auto md:max-w-screen-sm gap-y-2
 }
 
-custom-span {
-    @apply inline
-}
-.newsletter-section h2 {
-        @apply text-3xl
-}
-.newsletter-section p {
-    @apply text-base py-4
+.inline-email-capture capture-main {
+    @apply flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300
 }
 
+.inline-email-capture capture-main form {
+    @apply flex flex-col w-full gap-1 md:flex-row mt-4
+}

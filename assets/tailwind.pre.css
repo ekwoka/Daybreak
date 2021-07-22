@@ -4,13 +4,48 @@
 
 @layer base {
 
-/* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture {
-    @apply block
+    /* Custom Elements */
+    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info,   email-capture, capture-main, capture-error , capture-existed , capture-success, floating-label {
+        @apply block
+    }
+
+    custom-span {
+        @apply inline
+    }
+
+    button:disabled {
+        @apply pointer-events-none
+    }
+
 }
 
-custom-span {
-    @apply inline
-}
+@layer components {
+    .btn-primary {
+        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50
+    }
 
+    floating-label {
+        @apply relative mt-4;
+
+        & input[type="text"], & input[type="email"] {
+            @apply w-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
+            
+            &:placeholder-shown ~ label {
+                @apply text-base text-gray-600 top-2
+            }
+            
+            &:focus ~ label {
+                @apply -top-5 text-gray-600 text-sm
+            }
+
+        }
+
+        & label {
+            @apply w-full absolute left-2 -top-5 text-gray-800 text-sm transition-all
+        }
+    }
+
+    svg.icon {
+        @apply inline-block w-6 h-6 mx-auto fill-current
+    }
 }

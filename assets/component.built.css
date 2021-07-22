@@ -1,1 +1,45 @@
-announcement-bar,announcement-message,bump-info,bump-item,bump-offer,bump-title,email-capture,order-bump{display:block}custom-span{display:inline}.newsletter-section h2{font-size:1.171875rem;line-height:1.40625rem}.newsletter-section p{font-size:0.625rem;line-height:0.9375rem;padding-bottom:0.625rem;padding-top:0.625rem}
+.inline-email-capture {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 0.5rem;
+  padding: 2rem
+}
+
+@media (min-width: 768px) {
+  .inline-email-capture {
+    max-width: 640px
+  }
+}
+
+.inline-email-capture capture-main {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 300ms
+}
+
+.inline-email-capture capture-main form {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.25rem
+}
+
+@media (min-width: 768px) {
+  .inline-email-capture capture-main form {
+    flex-direction: row
+  }
+}

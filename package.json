@@ -15,7 +15,7 @@
     "css:fulldev": "NODE_ENV=development TAILWIND_MODE=build postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose",
     "css:watch": "NODE_ENV=development TAILWIND_MODE=watch postcss assets/tailwind.pre.css --o assets/tailwind.css --verbose -w",
     "css:component": "run-s css:component-build css:component-purge",
-    "css:component-build": "npx tailwindcss -i ./assets/component.pre.css -o ./assets/component.built.css --jit -m",
+    "css:component-build": "npx tailwindcss -i ./assets/component.pre.css -o ./assets/component.built.css --jit",
     "css:component-purge": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx purgecss --css ./assets/component.built.css -o ./assets/$x.comp.css --content $i & done; wait",
     "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx tailwindcss -i ./assets/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w & done; wait",
     "minify:all": "run-p minify:alpine minify:css && run-s minify:js sizes:assets",
