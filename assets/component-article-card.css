@@ -1,10 +1,10 @@
 .articles-wrapper.grid {
-  margin: 0 0 5rem 0;
+  margin: 0 0 3.125rem 0;
 }
 
 @media screen and (min-width: 750px) {
   .articles-wrapper.grid {
-    margin-bottom: 7rem;
+    margin-bottom: 4.375rem;
   }
 }
 
@@ -41,7 +41,7 @@
 }
 
 .article-card__info {
-  padding: 2.5rem 2.5rem 3rem;
+  padding: 1.5625rem 1.5625rem 1.875rem;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
@@ -49,7 +49,7 @@
 
 @media screen and (min-width: 750px) {
   .article-card__info {
-    padding: 4rem 5rem;
+    padding: 2.5rem 3.125rem;
   }
 }
 
@@ -64,7 +64,7 @@
 
 .article-content:hover .article-card__title {
   text-decoration: underline;
-  text-underline-offset: 0.3rem;
+  text-underline-offset: 0.1875rem;
 }
 
 .article-card__image {
@@ -93,11 +93,11 @@
 }
 
 .article-card__link {
-  text-underline-offset: 0.3rem;
+  text-underline-offset: 0.1875rem;
 }
 
 .article-content:hover .article-card__link {
-  text-decoration-thickness: 0.2rem;
+  text-decoration-thickness: 0.125rem;
 }
 
 .article-card__header h2 {
@@ -105,16 +105,16 @@
 }
 
 .article-card__header h2:not(:first-child) {
-  margin-top: 1rem;
+  margin-top: 0.625rem;
 }
 
 .article-card__footer {
-  letter-spacing: 0.1rem;
-  font-size: 1.4rem;
+  letter-spacing: 0.0625rem;
+  font-size: 0.875rem;
 }
 
 .article-card__footer:not(:last-child) {
-  margin-bottom: 1rem;
+  margin-bottom: 0.625rem;
 }
 
 .article-card__footer:last-child {
@@ -122,11 +122,11 @@
 }
 
 .article-card__link:not(:only-child) {
-  margin-right: 3rem;
+  margin-right: 1.875rem;
 }
 
 @media screen and (min-width: 990px) {
   .article-card__link:not(:only-child) {
-    margin-right: 4rem;
+    margin-right: 2.5rem;
   }
 }

@@ -1,19 +1,19 @@
 .blog:not(.background-secondary) {
-  margin: 5rem 0;
+  margin: 3.125rem 0;
 }
 
 .blog.background-secondary {
-  padding: 4rem 0 5rem;
+  padding: 2.5rem 0 3.125rem;
 }
 
 .blog .placeholder {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 22rem;
+  height: 13.75rem;
   text-align: center;
-  padding: 4rem 2rem 5rem;
-  margin: 0 2rem;
+  padding: 2.5rem 1.25rem 3.125rem;
+  margin: 0 1.25rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -24,13 +24,13 @@
 
 @media screen and (max-width: 749px) {
   .blog:not(.no-heading) {
-    margin-top: -1rem;
+    margin-top: -0.625rem;
   }
 }
 
 @media screen and (min-width: 750px) {
   .blog.no-heading {
-    margin-top: 6rem;
+    margin-top: 3.75rem;
   }
 }
 
@@ -64,14 +64,14 @@
 
 @media screen and (min-width: 750px) {
   .blog__posts .article + .article {
-    margin-left: 1rem;
+    margin-left: 0.625rem;
   }
 }
 
 @media screen and (max-width: 749px) {
   .blog__post.article {
-    width: calc(100% - 3rem);
-    padding-left: 0.5rem;
+    width: calc(100% - 1.875rem);
+    padding-left: 0.3125rem;
   }
 }
 
@@ -80,12 +80,12 @@
 }
 
 .blog__button {
-  margin-top: 3rem;
+  margin-top: 1.875rem;
 }
 
 @media screen and (min-width: 750px) {
   .blog__button {
-    margin-top: 5rem;
+    margin-top: 3.125rem;
   }
 }
 

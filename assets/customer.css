@@ -1,29 +1,29 @@
 .customer:not(.account, .order) {
-  margin: 6rem auto 9rem;
-  max-width: 33.4rem;
-  padding: 0 1.5rem;
+  margin: 3.75rem auto 5.625rem;
+  max-width: 32.125rem;
+  padding: 0 0.9375rem;
   text-align: center;
 }
 
 @media screen and (min-width: 750px) {
   .customer:not(.account, .order) {
-    max-width: 47.8rem;
+    max-width: 44.875rem;
   }
 }
 
 .customer form {
-  margin-top: 4rem;
+  margin-top: 2.5rem;
 }
 
 .customer button {
-  margin: 4rem 0 1.5rem;
+  margin: 2.5rem 0 0.9375rem;
 }
 
 .customer ul {
   line-height: 1.6;
-  padding-left: 4.4rem;
+  padding-left: 2.75rem;
   text-align: left;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .customer ul a {
@@ -36,17 +36,17 @@
 }
 
 .customer h2.form__message {
-  font-size: 1.8rem;
+  font-size: 1.125rem;
 }
 
 @media only screen and (min-width: 750px) {
   .customer h2.form__message {
-    font-size: 2.2rem;
+    font-size: 1.375rem;
   }
 }
 
 .customer .field {
-  margin: 2rem 0 0 0;
+  margin: 1.25rem 0 0 0;
 }
 
 .customer .field:first-of-type {
@@ -57,17 +57,17 @@
 .customer table {
   table-layout: auto;
   border-collapse: collapse;
-  border-bottom: 0.01rem solid rgba(var(--color-foreground), 0.2);
+  border-bottom: 0.00625rem solid rgba(var(--color-foreground), 0.2);
   box-shadow: none;
   width: 100%;
-  font-size: 1.6rem;
+  font-size: 1rem;
   position: relative;
 }
 
 @media screen and (min-width: 750px) {
   .customer table {
     border: none;
-    box-shadow: 0 0 0 0.1rem rgba(var(--color-foreground), 0.2);
+    box-shadow: 0 0 0 0.0625rem rgba(var(--color-foreground), 0.2);
   }
 }
 
@@ -85,13 +85,13 @@
 
 @media screen and (min-width: 750px) {
   .customer td {
-    padding-right: 2.2rem;
+    padding-right: 1.375rem;
   }
 }
 
 .customer tbody td {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -110,41 +110,41 @@
   .customer td:first-of-type {
     text-align: left;
     padding-left: 0;
-    padding-right: 2.2rem;
+    padding-right: 1.375rem;
   }
 
   .customer thead th,
   .customer tbody td:first-of-type {
-    padding-top: 2.4rem;
-    padding-bottom: 2.4rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
   }
 }
 
 .customer thead th {
-  font-size: 1.2rem;
-  letter-spacing: 0.07rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04375rem;
   text-transform: uppercase;
 }
 
 @media screen and (min-width: 750px) {
   .customer th:first-of-type,
   .customer td:first-of-type {
-    padding-left: 2.2rem;
+    padding-left: 1.375rem;
   }
 }
 
 .customer tbody td:first-of-type {
-  padding-top: 4rem;
+  padding-top: 2.5rem;
 }
 
 @media screen and (min-width: 750px) {
   .customer tbody td:first-of-type {
-    padding-top: 2.4rem;
+    padding-top: 1.5rem;
   }
 }
 
 .customer tbody td:last-of-type {
-  padding-bottom: 4rem;
+  padding-bottom: 2.5rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -154,7 +154,7 @@
 }
 
 .customer tbody tr {
-  border-top: 0.01rem solid rgba(var(--color-foreground), 0.2);
+  border-top: 0.00625rem solid rgba(var(--color-foreground), 0.2);
 }
 
 @media screen and (min-width: 750px) {
@@ -165,8 +165,8 @@
 
 .customer tfoot td:first-of-type,
 .customer tfoot td {
-  padding-top: 0.6rem;
-  padding-bottom: 0.6rem;
+  padding-top: 0.375rem;
+  padding-bottom: 0.375rem;
 }
 
 .customer tfoot td:first-of-type {
@@ -174,24 +174,24 @@
 }
 
 .customer tfoot tr:first-of-type td {
-  padding-top: 4rem;
+  padding-top: 2.5rem;
 }
 
 @media screen and (min-width: 750px) {
   .customer tfoot tr:first-of-type td,
   .customer tfoot tr:first-of-type th {
-    padding-top: 2.4rem;
+    padding-top: 1.5rem;
   }
 }
 
 .customer tfoot tr:last-of-type td {
-  padding-bottom: 4rem;
+  padding-bottom: 2.5rem;
 }
 
 @media screen and (min-width: 750px) {
   .customer tfoot tr:last-of-type td,
   .customer tfoot tr:last-of-type th {
-    padding-bottom: 2.4rem;
+    padding-bottom: 1.5rem;
   }
 }
 
@@ -199,7 +199,7 @@
 .customer thead::after,
 .customer tfoot::before {
   content: ' ';
-  height: 0.1rem;
+  height: 0.0625rem;
   width: 100%;
   display: block;
   position: absolute;
@@ -222,7 +222,7 @@
 
   .customer td::before {
     content: attr(data-label);
-    padding-right: 2rem;
+    padding-right: 1.25rem;
     text-transform: uppercase;
     flex-grow: 1;
     text-align: left;
@@ -243,14 +243,14 @@
 
 /* Pagination */
 .customer .pagination {
-  margin-top: 5rem;
-  margin-bottom: 7rem;
+  margin-top: 3.125rem;
+  margin-bottom: 4.375rem;
 }
 
 @media screen and (min-width: 990px) {
   .customer .pagination {
-    margin-top: 7rem;
-    margin-bottom: 10rem;
+    margin-top: 4.375rem;
+    margin-bottom: 6.25rem;
   }
 }
 
@@ -263,11 +263,11 @@
 
 .customer .pagination li {
   flex: 1 1;
-  max-width: 4rem;
+  max-width: 2.5rem;
 }
 
 .customer .pagination li:not(:last-child) {
-  margin-right: 1rem;
+  margin-right: 0.625rem;
 }
 
 .customer .pagination li :first-child {
@@ -275,33 +275,33 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 4rem;
+  height: 2.5rem;
   width: 100%;
   padding: 0;
   text-decoration: none;
 }
 
 .customer .pagination li :first-child svg {
-  height: 0.6rem;
+  height: 0.375rem;
 }
 
 .customer .pagination li:first-of-type svg {
-  margin-left: -0.2rem;
+  margin-left: -0.125rem;
   transform: rotate(90deg);
 }
 
 .customer .pagination li:last-of-type svg {
-  margin-right: -0.2rem;
+  margin-right: -0.125rem;
   transform: rotate(-90deg);
 }
 
 .customer .pagination li [aria-current]::after {
   content: '';
   display: block;
-  width: 2rem;
-  height: 0.01rem;
+  width: 1.25rem;
+  height: 0.00625rem;
   position: absolute;
-  bottom: 0.08rem;
+  bottom: 0.05rem;
   left: 50%;
   transform: translateX(-50%);
   background-color: currentColor;
@@ -320,17 +320,17 @@
 }
 
 .login .field + a {
-  margin-top: 1rem;
+  margin-top: 0.625rem;
 }
 
 .login p {
-  margin: 1.5rem 0;
+  margin: 0.9375rem 0;
 }
 
 .login h3 {
-  margin-top: 1.5rem;
+  margin-top: 0.9375rem;
   text-align: left;
-  font-size: 1.6rem;
+  font-size: 1rem;
 }
 
 #customer_login_guest button {
@@ -359,47 +359,47 @@
 .addresses li > button,
 .addresses form button[type] {
   background-color: transparent;
-  box-shadow: 0 0 0 0.1rem rgb(var(--color-link));
+  box-shadow: 0 0 0 0.0625rem rgb(var(--color-link));
   color: rgb(var(--color-link));
 }
 
 .activate button[name='decline']:hover,
 .addresses li > button:hover,
 .addresses form button[type]:hover {
-  box-shadow: 0 0 0 0.2rem rgb(var(--color-link));
+  box-shadow: 0 0 0 0.125rem rgb(var(--color-link));
 }
 
 @media only screen and (min-width: 750px) {
   .activate button[name='decline'] {
     margin-top: inherit;
-    margin-left: 1rem;
+    margin-left: 0.625rem;
   }
 }
 
 /* Account/Order */
 :is(.account, .order) {
-  margin: 6rem auto 9rem;
-  max-width: 120rem;
-  padding: 0 2rem;
+  margin: 3.75rem auto 5.625rem;
+  max-width: 75rem;
+  padding: 0 1.25rem;
 }
 
 @media screen and (min-width: 750px) {
   :is(.account, .order) {
-    padding: 0 5rem;
+    padding: 0 3.125rem;
   }
 }
 
 @media screen and (min-width: 990px) {
   :is(.account, .order) > div:nth-of-type(2) {
     display: flex;
-    margin-top: 5rem;
+    margin-top: 3.125rem;
   }
 }
 
 @media screen and (min-width: 990px) {
   :is(.account, .order) > div:nth-of-type(2) > div:first-of-type {
     flex-grow: 1;
-    padding-right: 3.2rem;
+    padding-right: 2rem;
   }
 }
 
@@ -409,22 +409,22 @@
   }
 
   .order > div:nth-of-type(2) > div:last-of-type div {
-    padding-right: 3.2rem;
+    padding-right: 2rem;
   }
 }
 
 :is(.account, .order) p {
-  margin: 0 0 2rem;
-  font-size: 1.6rem;
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
 }
 
 :is(.account, .order) h1 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.625rem;
 }
 
 :is(.account, .order) h2 {
-  margin-top: 4rem;
-  margin-bottom: 3rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1.875rem;
 }
 
 @media screen and (min-width: 990px) {
@@ -439,8 +439,8 @@
 }
 
 .account a svg {
-  width: 1.5rem;
-  margin-right: 1rem;
+  width: 0.9375rem;
+  margin-right: 0.625rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -450,20 +450,20 @@
   }
 
   .account table td:first-of-type {
-    padding-top: 1.2rem;
-    padding-bottom: 1.2rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
   }
 }
 
 .account table td:first-of-type a {
-  padding: 1.1rem 1.5rem;
+  padding: 0.6875rem 0.9375rem;
   text-decoration: none;
-  box-shadow: 0 0 0 0.1rem rgba(var(--color-link), 0.2);
-  font-size: 1.2rem;
+  box-shadow: 0 0 0 0.0625rem rgba(var(--color-link), 0.2);
+  font-size: 0.75rem;
 }
 
 .account table td:first-of-type a:hover {
-  box-shadow: 0 0 0 0.2rem rgba(var(--color-link), 0.2);
+  box-shadow: 0 0 0 0.125rem rgba(var(--color-link), 0.2);
   color: rgb(var(--color-link));
 }
 
@@ -479,30 +479,30 @@
 }
 
 .order tbody td:nth-of-type(3) dd:nth-of-type(2) {
-  font-size: 1.1rem;
-  letter-spacing: 0.07rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.04375rem;
   line-height: 1.2;
-  margin-top: 0.2rem;
+  margin-top: 0.125rem;
   text-transform: uppercase;
   color: var(--color-foreground-70);
 }
 
 .order tfoot tr:last-of-type td,
 .order tfoot tr:last-of-type th {
-  font-size: 2.2rem;
-  padding-top: 1.5rem;
-  padding-bottom: 4rem;
+  font-size: 1.375rem;
+  padding-top: 0.9375rem;
+  padding-bottom: 2.5rem;
 }
 
 @media screen and (min-width: 750px) {
   .order tfoot tr:last-of-type td,
   .order tfoot tr:last-of-type th {
-    padding-bottom: 2.4rem;
+    padding-bottom: 1.5rem;
   }
 }
 
 .order tfoot tr:last-of-type td:before {
-  font-size: 2.2rem;
+  font-size: 1.375rem;
 }
 
 .order table p,
@@ -513,15 +513,15 @@
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p {
   margin-bottom: 0;
-  font-size: 1.4rem;
+  font-size: 0.875rem;
 }
 
 .order > div:nth-of-type(2) > div:first-of-type h2 ~ p:last-of-type {
-  margin-bottom: 3rem;
+  margin-bottom: 1.875rem;
 }
 
 .order .item-props {
-  font-size: 1.4rem;
+  font-size: 0.875rem;
   margin-top: 0.05px;
   display: flex;
   flex-direction: column;
@@ -534,15 +534,15 @@
 
 .order .fulfillment {
   width: fit-content;
-  border: 0.01rem solid rgba(var(--color-foreground), 0.2);
-  padding: 1rem;
-  margin-top: 1rem;
-  font-size: 1.2rem;
+  border: 0.00625rem solid rgba(var(--color-foreground), 0.2);
+  padding: 0.625rem;
+  margin-top: 0.625rem;
+  font-size: 0.75rem;
   text-align: left;
 }
 
 .order .fulfillment a {
-  margin: 0.7rem 0;
+  margin: 0.4375rem 0;
 }
 
 .order .fulfillment span {
@@ -551,9 +551,9 @@
 
 .order .cart-discount {
   display: block;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
+  margin-top: 0.625rem;
+  margin-bottom: 0.3125rem;
+  font-size: 0.75rem;
 }
 
 @media screen and (min-width: 750px) {
@@ -564,10 +564,10 @@
 
 .order tbody ul {
   list-style: none;
-  font-size: 1.2rem;
+  font-size: 0.75rem;
   text-align: right;
   padding-left: 0;
-  margin-top: 1rem;
+  margin-top: 0.625rem;
   margin-bottom: 0;
 }
 
@@ -599,8 +599,8 @@
 }
 
 .order .properties {
-  font-size: 1.4rem;
-  margin-top: 1rem;
+  font-size: 0.875rem;
+  margin-top: 0.625rem;
 }
 
 .order .properties span {
@@ -609,9 +609,9 @@
 }
 
 .order svg {
-  width: 1.1rem;
+  width: 0.6875rem;
   color: rgb(var(--color-base-accent-2));
-  margin-right: 0.5rem;
+  margin-right: 0.3125rem;
 }
 
 .order dl {
@@ -629,8 +629,8 @@
 
 /* Addresses */
 .addresses li > button {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  margin-left: 0.3125rem;
+  margin-right: 0.3125rem;
 }
 
 .addresses li > button + button,
@@ -640,19 +640,19 @@
 
 @media screen and (min-width: 750px) {
   .addresses li > button:first-of-type {
-    margin-top: 3rem;
+    margin-top: 1.875rem;
   }
 }
 
 .addresses form button:first-of-type {
-  margin-right: 1rem;
+  margin-right: 0.625rem;
 }
 
 label[for='AddressCountryNew'],
 label[for='AddressProvinceNew'] {
   display: block;
-  font-size: 1.4rem;
-  margin-bottom: 0.6rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.375rem;
 }
 
 .addresses form {
@@ -672,7 +672,7 @@ label[for='AddressProvinceNew'] {
 }
 
 li[data-address] {
-  margin-top: 5rem;
+  margin-top: 3.125rem;
 }
 
 .addresses [aria-expanded='false'] ~ div[id] {
@@ -689,13 +689,13 @@ li[data-address] {
 
 li[data-address] > h2 {
   text-align: center;
-  font-size: 1.8rem;
+  font-size: 1.125rem;
   margin-bottom: 0;
 }
 
 @media only screen and (min-width: 750px) {
   li[data-address] > h2 {
-    font-size: 2.2rem;
+    font-size: 1.375rem;
   }
 }
 
@@ -704,13 +704,13 @@ li[data-address] > h2 {
 }
 
 .addresses input[type='checkbox'] {
-  margin-top: 2rem;
+  margin-top: 1.25rem;
   margin-left: 0;
 }
 
 @media only screen and (min-width: 750px) {
   .addresses form > div:nth-of-type(1) {
-    padding-right: 2rem;
+    padding-right: 1.25rem;
   }
 
   .addresses form > div:nth-of-type(2) {
@@ -726,5 +726,5 @@ li[data-address] > h2 {
 
 .addresses form > div:nth-of-type(7),
 .addresses form > div:nth-of-type(7) + div[id] {
-  margin-top: 1.5rem;
+  margin-top: 0.9375rem;
 }

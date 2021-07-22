@@ -8,13 +8,13 @@
 
 @media screen and (max-width: 749px) {
   .multicolumn.no-heading.background-secondary {
-    padding-top: 5rem;
+    padding-top: 3.125rem;
   }
 }
 
 @media screen and (min-width: 750px) {
   .multicolumn.no-heading:not(.background-secondary) {
-    margin-top: 6rem;
+    margin-top: 3.75rem;
   }
 }
 
@@ -24,7 +24,7 @@
 
 @media screen and (max-width: 749px) {
   .multicolumn .title-wrapper-with-link {
-    margin-bottom: 3rem;
+    margin-bottom: 1.875rem;
   }
 }
 
@@ -44,12 +44,12 @@
 }
 
 .multicolumn .button {
-  margin-top: 1.5rem;
+  margin-top: 0.9375rem;
 }
 
 @media screen and (min-width: 750px) {
   .multicolumn .button {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 }
 
@@ -59,7 +59,7 @@
 }
 
 .multicolumn-list__item:only-child {
-  max-width: 72rem;
+  max-width: 45rem;
 }
 
 .multicolumn:not(.background-none) .multicolumn-card {
@@ -72,11 +72,11 @@
 }
 
 .multicolumn.background-secondary {
-  padding: 4rem 0 5rem;
+  padding: 2.5rem 0 3.125rem;
 }
 
 .multicolumn:not(.background-secondary) {
-  margin: 5rem 0;
+  margin: 3.125rem 0;
 }
 
 .multicolumn-list h3,
@@ -85,13 +85,13 @@
 }
 
 .multicolumn-card-spacing {
-  padding-top: 2.5rem;
-  margin-left: 2.5rem;
-  margin-right: 2.5rem;
+  padding-top: 1.5625rem;
+  margin-left: 1.5625rem;
+  margin-right: 1.5625rem;
 }
 
 .multicolumn-card__info > :nth-child(2) {
-  margin-top: 1rem;
+  margin-top: 0.625rem;
 }
 
 .multicolumn-list__item.center .media--adapt,
@@ -115,21 +115,21 @@
   }
 
   .multicolumn-list__item {
-    margin: 0 0 1rem;
+    margin: 0 0 0.625rem;
     padding: 0;
   }
 
   .multicolumn-list:not(.slider) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
   }
 
   .multicolumn-list.slider .multicolumn-list__item {
-    width: calc(100% - 3rem);
+    width: calc(100% - 1.875rem);
   }
 
   .multicolumn-list.slider .multicolumn-list__item + .multicolumn-list__item {
-    padding-left: 0.5rem;
+    padding-left: 0.3125rem;
   }
 }
 
@@ -145,12 +145,12 @@
   }
 
   .grid--2-col-tablet .multicolumn-list__item {
-    margin-top: 1rem;
+    margin-top: 0.625rem;
     max-width: 50%;
   }
 
   .background-none .grid--2-col-tablet .multicolumn-list__item {
-    margin-top: 4rem;
+    margin-top: 2.5rem;
   }
 
   .grid--2-col-tablet .multicolumn-list__item:nth-of-type(-n + 2) {
@@ -175,7 +175,7 @@
 }
 
 .multicolumn-card__info {
-  padding: 2.5rem 2.5rem;
+  padding: 1.5625rem 1.5625rem;
 }
 
 .background-none .multicolumn-card__info {
@@ -185,32 +185,32 @@
 }
 
 .background-none .multicolumn-card__image-wrapper + .multicolumn-card__info {
-  padding-top: 2.5rem;
+  padding-top: 1.5625rem;
 }
 
 .background-none .slider .multicolumn-card__info {
-  padding-left: 0.5rem;
+  padding-left: 0.3125rem;
 }
 
 .background-none
   .slider
   .multicolumn-card__image-wrapper
   + .multicolumn-card__info {
-  padding-left: 1.5rem;
+  padding-left: 0.9375rem;
 }
 
 .background-none
   .multicolumn-list:not(.slider)
   .center
   .multicolumn-card__info {
-  padding-left: 2.5rem;
-  padding-right: 2.5rem;
+  padding-left: 1.5625rem;
+  padding-right: 1.5625rem;
 }
 
 @media screen and (min-width: 750px) {
   .background-none .multicolumn-card__image-wrapper {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+    margin-left: 0.9375rem;
+    margin-right: 0.9375rem;
   }
 
   .background-none .multicolumn-list .multicolumn-card__info,
@@ -218,7 +218,7 @@
     .multicolumn-list:not(.slider)
     .center
     .multicolumn-card__info {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 0.9375rem;
+    padding-right: 0.9375rem;
   }
 }

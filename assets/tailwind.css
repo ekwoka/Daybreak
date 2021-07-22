@@ -1157,29 +1157,49 @@ custom-span {
 .ease-out {
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+
+@layer base {
+
+/* Custom Elements */
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture {
+		display: block;
+	}
+
+custom-span {
+		display: inline;
+	}
+
+}
+
 .hover\:bg-truegray-500:hover {
 	--tw-bg-opacity: 1;
 	background-color: rgba(115, 115, 115, var(--tw-bg-opacity));
 }
+
 .hover\:text-gray-200:hover {
 	--tw-text-opacity: 1;
 	color: rgba(229, 231, 235, var(--tw-text-opacity));
 }
+
 .focus\:border-cta-600:focus {
 	--tw-border-opacity: 1;
 	border-color: rgba(22, 163, 74, var(--tw-border-opacity));
 }
+
 .focus\:ring-cta-600:focus {
 	--tw-ring-opacity: 1;
 	--tw-ring-color: rgba(22, 163, 74, var(--tw-ring-opacity));
 }
+
 .disabled\:bg-truegray-600:disabled {
 	--tw-bg-opacity: 1;
 	background-color: rgba(82, 82, 82, var(--tw-bg-opacity));
 }
+
 .disabled\:opacity-50:disabled {
 	opacity: 0.5;
 }
+
 @media (min-width: 768px) {
 
 	.md\:right-4 {
@@ -1206,6 +1226,7 @@ custom-span {
 		flex-direction: row;
 	}
 }
+
 @media (min-width: 1024px) {
 
 	.lg\:hidden {

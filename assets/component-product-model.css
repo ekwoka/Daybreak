@@ -1,7 +1,7 @@
 .button.product__xr-button {
   background: rgba(var(--color-foreground), 0.08);
   color: rgb(var(--color-foreground));
-  margin: 1rem auto;
+  margin: 0.625rem auto;
   box-shadow: none;
 }
 
@@ -34,6 +34,6 @@
 }
 
 .product__xr-button .icon {
-  width: 1.4rem;
-  margin-right: 1rem;
+  width: 0.875rem;
+  margin-right: 0.625rem;
 }
