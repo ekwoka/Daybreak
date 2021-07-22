@@ -27,7 +27,7 @@
                   {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
                   {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
           src="{{ media | img_url: '550x550' }}"
-          sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+          sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
           loading="lazy"
           width="576"
           height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -43,7 +43,7 @@
                 {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
                 {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
         src="{{ media | img_url: '550x550' }}"
-        sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+        sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
         loading="lazy"
         width="576"
         height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -74,7 +74,7 @@
               {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
               {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
       src="{{ media | img_url: '550x550' }}"
-      sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+      sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
       loading="lazy"
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
@@ -114,7 +114,7 @@
               {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
               {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
       src="{{ media | img_url: '550x550' }}"
-      sizes="(min-width: 1200px) calc((1200px - 10rem) / 2), (min-width: 750px) calc((100vw - 11.5rem) / 2), calc(100vw - 4rem)"
+      sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
       loading="lazy"
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"

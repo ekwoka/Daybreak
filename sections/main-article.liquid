@@ -20,7 +20,7 @@
                   {% if article.image.width >= 1498 %}{{ article.image | img_url: '1498x' }} 1498w,{% endif %}
                   {% if article.image.width >= 1100 %}{{ article.image | img_url: '1100x' }} 1100w,{% endif %}
                   {% if article.image.width >= 2200 %}{{ article.image | img_url: '2200x' }} 2200w,{% endif %}"
-                sizes="(min-width: 1200px) 1100px, (min-width: 750px) calc(100vw - 10rem), 100vw"
+                sizes="(min-width: 1200px) 1100px, (min-width: 750px) calc(100vw - 6.25rem), 100vw"
                 src="{{ article.image | img_url: '1100x' }}"
                 loading="lazy"
                 width="{{ article.image.width }}"
