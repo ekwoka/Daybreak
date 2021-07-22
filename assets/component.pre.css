@@ -1,9 +1,15 @@
-@tailwind components;
-
-@layer components {
-    /* Custom Elements */
-    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info {
-        @apply block
-    }
-
+/* Custom Elements */
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture {
+    @apply block
 }
+
+custom-span {
+    @apply inline
+}
+.newsletter-section h2 {
+        @apply text-3xl
+}
+.newsletter-section p {
+    @apply text-base py-4
+}
+
