@@ -37,10 +37,15 @@ document.addEventListener('alpine:init', () => {
 
     /* Alpine.data */
     console.log('Registering Alpine Data Objects');
-    Alpine.data('emailCaptureSection', () => ({
+    Alpine.data('emailCapture',({
+        provider,
+        listID,
+        code
+    } = {}) => ({
+        provider: provider || false,
         url: 'https://manage.kmail-lists.com/ajax/subscriptions/subscribe',
-        listID: '',
-        code: '',
+        listID: listID || false,
+        code: code || false,
         fetchData(data) {
             return {
                 method: 'POST',
@@ -50,47 +55,41 @@ document.addEventListener('alpine:init', () => {
                 body: data
             }
         },
-        email: '',
-        open: true,
-        subscribed: false,
+        get subscribed() {
+            return this.$store.subscribed;
+        },
+        email:'',
+        open: false,
         sending: false,
+        sent: false,
         success: false,
         error: false,
         existed: false,
-        get sent() {
-            if(this.success || this.error || this.existed) return true;
-            return false;
-        },
-        async fetchCoupon() {
-            if (this.code) await fetch(`https://${window.location.hostname}/discount/${this.code}`);
+        fetchCoupon() {
+            if(this.code) return fetch(`/discount/${code}`);
         },
         async submitEmail() {
-            console.log(`Submitting subscriber: ${this.email}`);
             this.sending = true;
             data = new URLSearchParams();
             data.set('g', this.listID);
-            data.set('email', this.email);
-            response = await fetch(this.url, this.fetchData(data.toString()));
-            if (!response?.ok) return setTimeout(() => this.submitEmail(),1000)
+            data.set('email',this.email);
+            response = await fetch(this.url,this.fetchData(data.toString()));
+            if(response.ok) {
+                this.sending = false;
+                this.sent = true;
+            };
             data = await response?.json();
-            this.sending = false;
-            if (data?.data?.is_subscribed) return this.existed = true;
-            if (!data?.success) return this.error = true;
-            this.success = true;
+            if(!data?.success) return this.error = true;
             this.$store.subscribed = true;
-            console.log(data);
+            if(data?.data?.is_subscribed) return this.existed = true;
+            this.success = true;
             this.fetchCoupon();
         },
         init() {
-            console.log('Initializing newsletter capture');
-
-            if (this.$store.subscribed == true) {
-                this.open = false;
-                return console.log('User Already Subscribed.\nHiding Newsletter Signup.');
-            }
-            return console.log('User not subscribed.\nShowing Newsletter Signup.');
+            if (this.subscribed == false) this.open = true;
+            console.log(`initializing...subscribed: ${this.subscribed}, open: ${this.open}`);
         }
-    }));
+    }))
     Alpine.data('themeAlpine', () => ({
         menuOpen: false,
         cartOpen: false,
