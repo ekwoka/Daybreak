@@ -191,7 +191,7 @@
 
 @media screen and (max-width: 749px) {
   .footer-block__newsletter .newsletter-form__field-wrapper {
-    width: 30rem;
+    width: 100%;
   }
 }
 
