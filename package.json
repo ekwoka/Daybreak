@@ -3,7 +3,8 @@
   "version": "0.0.4-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
-    "test": "npx lighthouse https://kwoka-theme-2.myshopify.com --output-path ./lighthouse.html --view --only-categories performance --extra-headers '{\"Cookie\":\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\"}' --budget-path=./budget.json",
+    "test": "for i in {1..3}; do npm run tester; done",
+    "tester": "npx lighthouse https://kwoka-theme-2.myshopify.com --output-path ./lighthouse.html --view --only-categories performance --extra-headers '{\"Cookie\":\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\"}' --budget-path=./budget.json",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
