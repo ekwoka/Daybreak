@@ -15,8 +15,7 @@ document.addEventListener('alpine:init', () => {
     /* Alpine Plugins */
     console.log('Registering Storage');
     window.__daybreaks = {}
-    Alpine.persistedStore = function (name, value, type = 1) {
-        let storage = type ? localStorage : sessionStorage
+    Alpine.persistedStore = function (name, value, storage = localStorage) {
         let stored = storage.getItem(`__daybreak_${name}`)
         
         if (![null, undefined].includes(stored)) {
@@ -48,6 +47,9 @@ document.addEventListener('alpine:init', () => {
         value: 0
     })
     Alpine.persistedStore('subscribed', false);
+
+    Alpine.persistedStore('storage','local');
+    Alpine.persistedStore('storage2','session',sessionStorage);
 
     /* Alpine Data */
     console.log('Registering Alpine Data Objects');
@@ -109,7 +111,7 @@ document.addEventListener('alpine:init', () => {
         }
     }));
 
-    Alpine.data('themeAlpine', () => ({
+    /* Alpine.data('themeAlpine', () => ({
         menuOpen: false,
         cartOpen: false,
         cart: {
@@ -132,15 +134,15 @@ document.addEventListener('alpine:init', () => {
             return this.cart.items_subtotal_price - this.discountValue;
         },
         themeSettings: {
-            /* "freeShippingThreshold": {{ settings.freeShippingThreshold }},
-            "estimatedShipping": {{ settings.estimatedShipping }} */
+            "freeShippingThreshold": {{ settings.freeShippingThreshold }},
+            "estimatedShipping": {{ settings.estimatedShipping }}
         },
         cartMessage: "Cart",
         productAdded: false,
         storeUrl: "kwoka-test-theme.myshopify.com",
         get discountCode() { return getCookie("discount_code"); },
         discounts: [
-            /* {%- if settings.displayDiscounts -%}
+            {%- if settings.displayDiscounts -%}
                 {%- assign discounts = settings.discountCodes | split: "," -%}
                 {%- for discount in discounts -%}
                     {%- assign code = discount | split: ':' | first -%}
@@ -150,7 +152,7 @@ document.addEventListener('alpine:init', () => {
                 "multiplier": {{multiplier}}
             },
                 {%- endfor -%}
-            {%- endif %} */
+            {%- endif %}
         ],
         cartText(showEstimatedShipping, showShippingThreshold) {
             var lines = [];
@@ -232,7 +234,7 @@ document.addEventListener('alpine:init', () => {
             var newPrice = price * this.discounts[this.discountIndex].multiplier;
             return '-' + this.formatCurrency(newPrice);
         }
-    }));
+    })); */
 });
 
 /* Daybreak Functions */
