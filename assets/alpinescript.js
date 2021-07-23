@@ -65,6 +65,7 @@ document.addEventListener('alpine:init', () => {
         success: false,
         error: false,
         existed: false,
+        errorReason: '',
         fetchCoupon() {
             if(this.code) return fetch(`/discount/${code}`);
         },
@@ -79,7 +80,10 @@ document.addEventListener('alpine:init', () => {
                 this.sent = true;
             };
             data = await response?.json();
-            if(!data?.success) return this.error = true;
+            if(!data?.success) {
+                this.error = true;
+                return this.errorReason = data?.errors[0];
+            };
             this.$store.subscribed = true;
             if(data?.data?.is_subscribed) return this.existed = true;
             this.success = true;

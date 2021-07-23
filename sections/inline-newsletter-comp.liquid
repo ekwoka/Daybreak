@@ -76,6 +76,7 @@
     <capture-error class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="error" :class="sending ? 'opacity-40': ''">
         <h2 class="flex-auto">{{ section.settings.errorH2 }}</h2>
         <p>{{ section.settings.errorP }}</p>
+        <p x-text="errorReason" class="font-mono"></p>
         {%- if section.settings.errorAgain -%}
         <button
             class="px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50"
