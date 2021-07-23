@@ -259,9 +259,6 @@
               <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-search">
               </svg>
-              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-close">
-              </svg>
             </span>
           </summary>
           <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
@@ -293,7 +290,7 @@
       <h1 class="header__heading">
     {%- endif -%}
 
-    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-8 text-xl font-semibold tracking-widest text-center break-word md:order-first">
+    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-8 mx-auto text-xl font-semibold tracking-widest text-center break-word md:order-first">
       {%- case section.settings.logoType -%}
         {%- when 'none' -%}
           <h1 class="">
@@ -384,9 +381,6 @@
             <span>
               <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-search">
-              </svg>
-              <svg class="modal__toggle-close icon icon-close" aria-hidden="true" focusable="false" role="presentation">
-                <use href="#icon-close">
               </svg>
             </span>
           </summary>
