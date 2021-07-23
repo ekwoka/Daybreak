@@ -1,9 +1,23 @@
-console.log('Registering Alpine Init Listener');
+console.log(`
+ ____              _                    _    
+|  _ \\  __ _ _   _| |__  _ __ ___  __ _| | __
+| | | |/ _\` | | | | '_ \\| '__/ _ \\/ _\` | |/ /
+| |_| | (_| | |_| | |_) | | |  __/ (_| |   < 
+|____/ \\__,_|\\__, |_.__/|_|  \\___|\\__,_|_|\\_\\
+             |___/                           
+                                    by Eric Kwoka
+             `);
+
+
+console.log('Registering alpine:init Listener');
 document.addEventListener('alpine:init', () => {  
-    console.log('Registering persistedStore');
+
+    /* Alpine Plugins */
+    console.log('Registering Storage');
     window.__daybreaks = {}
-    Alpine.persistedStore = function (name, value) {
-        let stored = localStorage.getItem(`__daybreak_${name}`)
+    Alpine.persistedStore = function (name, value, type = 1) {
+        let storage = type ? localStorage : sessionStorage
+        let stored = storage.getItem(`__daybreak_${name}`)
         
         if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
@@ -24,18 +38,18 @@ document.addEventListener('alpine:init', () => {
                 Alpine.store(name)
             )
 
-            localStorage.setItem(`__daybreak_${name}`, json)
+            storage.setItem(`__daybreak_${name}`, json)
         })
     };
 
     /* Alpine Stores */
-    console.log('Registering Storage');
+    console.log('Registering Stores');
     Alpine.persistedStore('cart', {
         value: 0
     })
     Alpine.persistedStore('subscribed', false);
 
-    /* Alpine.data */
+    /* Alpine Data */
     console.log('Registering Alpine Data Objects');
     Alpine.data('emailCapture',({
         provider,
@@ -91,9 +105,10 @@ document.addEventListener('alpine:init', () => {
         },
         init() {
             if (this.subscribed == false) this.open = true;
-            console.log(`initializing...subscribed: ${this.subscribed}, open: ${this.open}`);
+            console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
         }
-    }))
+    }));
+
     Alpine.data('themeAlpine', () => ({
         menuOpen: false,
         cartOpen: false,
@@ -220,38 +235,14 @@ document.addEventListener('alpine:init', () => {
     }));
 });
 
-/* Global Functions */
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "null";
-}
-
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    console.log('Setting Cookie: ' + cname + '\nto:' + expires);
-}
-
+/* Daybreak Functions */
+console.log('Registering Daybreak');
 Daybreak = {
     async addToCart(id,q) {
         console.log(`Adding ${q} products of id: ${id} to Cart`);
         return 'Added to Cart';
     }
 };
-
 
 /* Prototypes */
 window.Element.prototype._x_intersectEnter = function (callback, modifiers) {
