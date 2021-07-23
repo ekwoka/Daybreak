@@ -80,18 +80,20 @@ document.addEventListener('alpine:init', () => {
         {%- if section.settings.bumpProduct -%}
             {%- assign bumpProd = section.settings.bumpProduct -%}
             {%- assign bumpsShown = bumpsShown | plus: 1 -%}
+            {%- assign img_url = bumpProd.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <bump-item x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
                 id: {{ bumpProd.id }},
-                image: '{{ bumpProd.featured_image.src | img_url: '360x' }}',
+                image: '{{ img_url }}',
                 {% unless bumpProd.has_only_default_variant -%}
                 variants: [
                     {% for var in bumpProd.variants -%}
+                    {%- assign img_url = var.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                     {
                         available: {{ var.available }},
                         id: {{ var.id }},
-                        image: '{{ var.image.src | img_url: '360x' }}',
+                        image: '{{ img_url }}',
                         title: '{{ var.title }}',
                         price: '{{ var.price | money }}'
                     }{%- unless forloop.last -%},{%- endunless -%}
@@ -101,7 +103,7 @@ document.addEventListener('alpine:init', () => {
                 onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
                 <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
-                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" :src="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}">
+                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" width="180" height="180">
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
@@ -154,7 +156,7 @@ document.addEventListener('alpine:init', () => {
                 onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
                 <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
-                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" :src="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}">
+                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}">
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>

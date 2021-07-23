@@ -41,6 +41,23 @@ document.addEventListener('alpine:init', () => {
         })
     };
 
+    console.log('Registering RIAS');
+    Alpine.directive('rias', (el, { expression }, { evaluate, effect }) => {
+        effect(() => {let imgBase = evaluate(expression);
+        let width = [180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2376, 2592, 2808, 3024];
+
+        let imgSrc = imgBase.replaceAll('{width}', width[0]);
+        let setArray = [];
+        width.forEach(w => setArray.push(`${imgBase.replaceAll('{width}', w)} ${w}w`));
+        let imgSet = setArray.join(',');
+
+        el.setAttribute('loading', 'lazy');
+        el.setAttribute('src', imgSrc);
+        el.setAttribute('srcset', imgSet);
+        }
+        );
+    });
+
     /* Alpine Stores */
     console.log('Registering Stores');
     Alpine.persistedStore('cart', {
@@ -243,8 +260,39 @@ Daybreak = {
     async addToCart(id,q) {
         console.log(`Adding ${q} products of id: ${id} to Cart`);
         return 'Added to Cart';
+    },
+    RIAS: {
+        updateSize(el) {
+            let sizes = el.offsetWidth;
+            let parent = el.parentNode;
+            while (sizes < 100 && parent) {
+                width = parent.offsetWidth;
+                parent = parent.parentNode;
+            }
+            sizes += 'px';
+            el.setAttribute('sizes', sizes);
+        },
+        updateSizes() {
+            document.querySelectorAll('img[data-sizes="auto"').forEach((el) => this.updateSize(el));
+        },
+        init() {
+            this.updateSizes();
+            const config = { attribute: false, childList: true, subtree: true };
+            const cb = (mutationsList) => {
+                mutationsList.forEach(m => {
+                    m.addedNodes.forEach(el => {
+                        if(el.nodeName=='IMG') this.updateSize(el);
+                    })
+                });
+            };
+            const observer = new MutationObserver(cb);
+    
+            observer.observe(document.body, config);
+        }
     }
 };
+
+document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', Daybreak.RIAS.init()): Daybreak.RIAS.init();
 
 /* Prototypes */
 window.Element.prototype._x_intersectEnter = function (callback, modifiers) {
