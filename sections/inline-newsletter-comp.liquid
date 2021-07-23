@@ -45,41 +45,41 @@
         provider: '{{ section.settings.emailProvider }}',
         listID: '{{ section.settings.listID }}',
         code: '{{ section.settings.couponCode }}'
-    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open == true" {%- endif -%} x-cloak>
+    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open == true" {%- endif -%} style="display:none;" x-cloak>
     <button @click.prevent="open = false" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
         x-show="open == true" {%- endif -%}>close
         <svg class="inline-block w-5 h-5 mx-auto icon">
             <use xlink:href="#icon-close">
         </svg>
     </button>
-    <capture-main class="" :class="sending ? 'opacity-40': ''" x-show="sent == false">
-        <h2 class="flex-auto text-3xl">{{ section.settings.captureHeader }}</h2>
+    <capture-main :class="sending ? 'opacity-40': ''" x-show="sent == false">
+        <h2 class="flex-auto text-2xl">{{ section.settings.captureHeader }}</h2>
             <p class="flex-auto py-4">{{ section.settings.captureHtml }}</p>
-            <form class="">
+            <form>
                 <floating-label class="flex-auto w-full md:w-3/4">
                     <input
-                        class=""
+                       
                         x-model="email" type="email" name="email" id="email" placeholder="Enter Email Here"
                         aria-label="Enter Email" :disabled="sending"/>
-                    <label for="email" class="">Enter Email Here</label>
+                    <label for="email">Enter Email Here</label>
                 </floating-label>
                 <button
                     class="flex-auto w-full btn-primary md:w-1/4"
                     aria-label="Submit Email" @click.prevent="submitEmail()" :disabled="sending">
-                    <span x-show="!sending">{{ section.settings.captureButton}}</span>
+                    <span x-show="!sending">{{ section.settings.captureButton }}</span>
                     <svg x-show="sending" class="icon animate-bounce">
                         <use xlink:href="#icon-cloud-upload"></use>
                     </svg>
                 </button>
             </form>
     </capture-main>
-    <capture-error class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="error" :class="sending ? 'opacity-40': ''">
-        <h2 class="flex-auto">{{ section.settings.errorH2 }}</h2>
+    <capture-error x-show="error">
+        <h3 class="flex-auto text-xl">{{ section.settings.errorH2 }}</h2>
         <p>{{ section.settings.errorP }}</p>
         <p x-text="errorReason" class="font-mono"></p>
         {%- if section.settings.errorAgain -%}
         <button
-            class="px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50"
+            class="mt-2 btn-primary"
             aria-label="Submit Email" @click.prevent="sent=error=false">
             <span x-show="!sending">Try Again</span>
             <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon animate-bounce">
@@ -88,19 +88,23 @@
         </button>
         {%- endif -%}
     </capture-error>
-    <capture-existed class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="existed">
+    <capture-existed x-show="existed">
         <h2 class="flex-auto">{{ section.settings.existedH2 }}</h2>
-        <p>{{ section.settings.existedP }}
-            {%- if section.settings.existedCoupon -%}<br/>
-            Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ section.settings.couponOffer }}!
-            {%- endif -%}
-        </p>
+        <p>{{ section.settings.existedP }}</p>
+        {%- if section.settings.showCoupon and section.settings.existedCoupon and section.settings.couponCode != '' -%}
+        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ section.settings.couponOffer }}!</p>
+        {%- else -%}
+        <p>Sorry, we can't offer you a coupon when you're already subscribed.</p>
+        {%- endif -%}
     </capture-existed>
-    <capture-success class="flex flex-col items-center p-8 mx-auto newsletter-section" x-show="success">
+    <capture-success x-show="success">
         <h2 class="flex-auto">{{ section.settings.successH2 }}</h2>
         <p>
             {{ section.settings.successP }}
-            {%- if section.settings.showCoupon -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. Enjoy your {{ section.settings.couponOffer }}{%- endif -%}
+            {%- if section.settings.showCoupon and section.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. 
+            {%- if section.settings.couponOffer != '' %} Enjoy your {{ section.settings.couponOffer }}
+            {%- endif -%}
+            {%- endif -%}
         </p>
     </capture-success>
 
