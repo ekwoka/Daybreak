@@ -19,14 +19,25 @@ document.addEventListener('alpine:init', () => {
     } = {}) => ({
         title: title || 'Product Data Missing',
         price: price || 0,
-        variants: variants || {},
+        variants: variants || [],
         id: id,
         image: image != '' ? image:`https://picsum.photos/seed/${id}/360`,
         quantity: 1,
         onlyDefault: onlyDefault,
-        async addItem() {
+        selected: false,
+        select(id) {
+            if (!id) return;
+            var newV = variants.find((v) => {
+                return v.id == id;
+            });
+            [this.id, this.image, this.price] = [newV.id,newV.image,newV.price];
+        },
+        async addItem(id,quantity) {
             let response = await Daybreak.addToCart(id,quantity);
             console.log(response);
+        },
+        selectInit(){
+            if (variants?.length) [this.id,this.price] = [variants[0].id,variants[0].price];
         }
     }))
 });
@@ -69,12 +80,25 @@ document.addEventListener('alpine:init', () => {
         {%- if section.settings.bumpProduct -%}
             {%- assign bumpProd = section.settings.bumpProduct -%}
             {%- assign bumpsShown = bumpsShown | plus: 1 -%}
-                title: '{{bumpProd.title}}',
-                price: '{{bumpProd.first_available_variant.price | money}}',
-                id: {{bumpProd.id}},
-                image: '{{bumpProd.featured_image}}',
-                onlyDefault: {{bumpProd.has_only_default_variant}}
             <bump-item x-data="orderBump({
+                title: '{{ bumpProd.title }}',
+                price: '{{ bumpProd.first_available_variant.price | money }}',
+                id: {{ bumpProd.id }},
+                image: '{{ bumpProd.featured_image.src | img_url: '360x' }}',
+                {% unless bumpProd.has_only_default_variant -%}
+                variants: [
+                    {% for var in bumpProd.variants -%}
+                    {
+                        available: {{ var.available }},
+                        id: {{ var.id }},
+                        image: '{{ var.image.src | img_url: '360x' }}',
+                        title: '{{ var.title }}',
+                        price: '{{ var.price | money }}'
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                    {% endfor %}
+                ],
+                {%- endunless -%}
+                onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
                 <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
                     <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" :src="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}">
@@ -85,10 +109,10 @@ document.addEventListener('alpine:init', () => {
                     <div class="pt-4 mx-auto">
                         {%- unless bumpProd.has_only_default_variant -%}
                             <div class="w-full py-2 mx-auto">
-                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" onclick="ga('send', 'event', 'daybreak', 'order-bump', 'selectOption');">
-                                    {%- for variant in bumpProd.variants -%}
-                                        <option value="{{variant.id}}">{{variant.title}} / {{variant.price | money}}</option>
-                                    {%- endfor -%}
+                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" x-model="selected" x-effect="select(selected)" x-init="selectInit()">
+                                    <template x-for="variant in variants" :key="variant?.id">
+                                        <option :value="variant.id" x-text="`${variant.title} / ${variant.price}`"></option>
+                                    </template>
                                 </select>
                             </div>
                         {%- endunless -%}
@@ -109,29 +133,42 @@ document.addEventListener('alpine:init', () => {
                 endif
                 assign bumpsShown = bumpsShown | plus: 1
             -%}
-            <bump-item class="flex flex-row justify-between p-2 flex-nowrap" x-data="orderBump({
-                title: '{{bumpProd.title}}',
-                price: '{{bumpProd.first_available_variant.price | money}}',
-                id: {{bumpProd.id}},
-                image: '{{bumpProd.featured_image}}',
-                onlyDefault: {{bumpProd.has_only_default_variant}}
+            <bump-item x-data="orderBump({
+                title: '{{ bumpProd.title }}',
+                price: '{{ bumpProd.first_available_variant.price | money }}',
+                id: {{ bumpProd.id }},
+                image: '{{ bumpProd.featured_image.src | img_url: '360x' }}',
+                {% unless bumpProd.has_only_default_variant -%}
+                variants: [
+                    {% for var in bumpProd.variants -%}
+                    {
+                        available: {{ var.available }},
+                        id: {{ var.id }},
+                        image: '{{ var.image.src | img_url: '360x' }}',
+                        title: '{{ var.title }}',
+                        price: '{{ var.price | money }}'
+                    }{%- unless forloop.last -%},{%- endunless -%}
+                    {% endfor %}
+                ],
+                {%- endunless -%}
+                onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
-                <div class="flex-shrink w-1/3 p-2">
-                    <img class="" src="{{ bumpProd.featured_image | img_url: '360x' }}" :src="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" width="{{ bumpProd.featured_image.width }}" height="{{ bumpProd.featured_image.height }}">
+                <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
+                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" :src="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}">
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
                     <div class="{{ alignClass }}" x-text="price">{{ bumpProd.first_available_variant.price | money }}</div>
                     <div class="pt-4 mx-auto">
-                        {%- if bumpProd.has_only_default_variant != true -%}
+                        {%- unless bumpProd.has_only_default_variant -%}
                             <div class="w-full py-2 mx-auto">
-                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" onclick="ga('send', 'event', 'daybreak', 'order-bump', 'selectOption');" aria-label="Select Variant">
-                                    {%- for variant in bumpProd.variants -%}
-                                        <option value="{{ variant.id }}">{{ variant.title }} / {{ variant.price | money }}</option>
-                                    {%- endfor -%}
+                                <select class="w-full" name="variant-ID" id="{{ bumpProd.id }}-variant" x-model="selected" x-effect="select(selected)" x-init="selectInit()">
+                                    <template x-for="variant in variants" :key="variant?.id">
+                                        <option :value="variant.id" x-text="`${variant.title} / ${variant.price}`"></option>
+                                    </template>
                                 </select>
                             </div>
-                        {%- endif -%}
+                        {%- endunless -%}
                         <button class="w-full btn-primary" id="customAddonButton-{{ bumpProd.id }}" {{ buttonText }} @click="addItem(id,quantity)">Add to Cart</button>
                     </div>
                 </bump-info>
