@@ -17,11 +17,15 @@
         @apply pointer-events-none
     }
 
+    img, video {
+        aspect-ratio: attr(width) / attr(height);
+    }
+
 }
 
 @layer components {
     .btn-primary {
-        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50
+        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:bg-truegray-600
     }
 
     floating-label {

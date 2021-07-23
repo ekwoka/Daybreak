@@ -16,7 +16,7 @@
   }
 }
 
-.inline-email-capture capture-main {
+.inline-email-capture capture-main, .inline-email-capture capture-error, .inline-email-capture capture-existed, .inline-email-capture capture-success {
   margin-left: auto;
   margin-right: auto;
   display: flex;
@@ -31,7 +31,6 @@
 }
 
 .inline-email-capture capture-main form {
-  margin-top: 1rem;
   display: flex;
   width: 100%;
   flex-direction: column;
