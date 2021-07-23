@@ -813,7 +813,7 @@ summary::-webkit-details-marker {
 }
 
 /* component-grid */
-.grid {
+.dawn-grid {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1.25rem;
@@ -823,7 +823,7 @@ summary::-webkit-details-marker {
 }
 
 @media screen and (min-width: 750px) {
-  .grid {
+  .dawn-grid {
     margin-left: -0.625rem;
   }
 }

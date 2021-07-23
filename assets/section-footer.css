@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 749px) {
-  .footer .grid {
+  .footer .dawn-grid {
     display: block;
     margin-left: 0;
   }
@@ -35,7 +35,7 @@
     padding-bottom: 4.375rem;
   }
 
-  .footer__content-top .grid {
+  .footer__content-top .dawn-grid {
     margin-left: -1.875rem;
     row-gap: 3.75rem;
     margin-bottom: 0;

@@ -30,7 +30,7 @@
     {%- if section.settings.blog != blank and section.settings.blog.articles_count > 0 -%}
       <slider-component class="slider-mobile-gutter">
         <ul id="Slider-{{ section.id }}"
-          class="blog__posts articles-wrapper grid grid--peek grid--2-col-tablet grid--3-col-desktop slider slider--tablet{% if posts_exceed_limit %} blog__posts--{{ section.settings.post_limit }}-items{% else %} blog__posts--{{ section.settings.blog.articles_count }}-items{% endif %}"
+          class="blog__posts articles-wrapper dawn-grid grid--peek grid--2-col-tablet grid--3-col-desktop slider slider--tablet{% if posts_exceed_limit %} blog__posts--{{ section.settings.post_limit }}-items{% else %} blog__posts--{{ section.settings.blog.articles_count }}-items{% endif %}"
           role="list"
         >
           {%- for article in section.settings.blog.articles limit: section.settings.post_limit -%}

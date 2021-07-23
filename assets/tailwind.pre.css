@@ -31,7 +31,7 @@
     floating-label {
         @apply relative mt-4;
 
-        & input[type="text"], & input[type="email"] {
+        & input[type="text"], & input[type="email"], & input[type="search"] {
             @apply w-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
             
             &:placeholder-shown ~ label {
@@ -46,6 +46,10 @@
 
         & label {
             @apply w-full absolute left-2 -top-5 text-gray-800 text-sm transition-all
+        }
+
+        & ~ button {
+            @apply md:mt-4
         }
     }
 

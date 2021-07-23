@@ -17,7 +17,7 @@
     endif
   -%}
 
-  <ul class="collection-list grid grid--1-col grid--3-col-tablet" role="list">
+  <ul class="collection-list dawn-grid grid--1-col grid--3-col-tablet" role="list">
     {%- for collection in collections -%}
       <li class="collection-list__item grid__item">
         <a{% if collection.all_products_count > 0 %} href="{{ collection.url }}"{% endif %}

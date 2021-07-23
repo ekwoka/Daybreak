@@ -1,9 +1,9 @@
-.articles-wrapper.grid {
+.articles-wrapper.dawn-grid {
   margin: 0 0 3.125rem 0;
 }
 
 @media screen and (min-width: 750px) {
-  .articles-wrapper.grid {
+  .articles-wrapper.dawn-grid {
     margin-bottom: 4.375rem;
   }
 }
