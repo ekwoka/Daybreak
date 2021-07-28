@@ -43,7 +43,10 @@ document.addEventListener('alpine:init', () => {
 
     console.log('Registering RIAS');
     Alpine.directive('rias', (el, { expression }, { evaluate, effect }) => {
-        effect(() => {let imgBase = evaluate(expression);
+        effect(() => {
+        
+        let imgBase = evaluate(expression);
+        if (!imgBase) return;
         let width = [180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2376, 2592, 2808, 3024];
 
         let imgSrc = imgBase.replaceAll('{width}', width[0]);
@@ -54,8 +57,7 @@ document.addEventListener('alpine:init', () => {
         el.setAttribute('loading', 'lazy');
         el.setAttribute('src', imgSrc);
         el.setAttribute('srcset', imgSet);
-        }
-        );
+        });
     });
 
     /* Alpine Stores */
