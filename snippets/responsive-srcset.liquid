@@ -1,0 +1,20 @@
+{%- comment -%}
+
+Parameters:
+    - image: image object to generate srcset from
+
+Usage:
+    <img src="{{ product.featured_image.src }}" srcset="{%- render 'responsive-srcset', image: product.featured_image -%}" alt="">
+
+{%- endcomment -%}
+
+{%- liquid
+    assign sizes = '180,360,540,720,900,1080,1296,1512,1728,1944,2160,2376,2592,2808,3024' | split: ','
+    for size in sizes
+        assign sizeX = size | append: 'x'
+        echo image | img_url: sizeX | append: ' ' | append: size | append: 'w'
+        unless forloop.last
+            echo ','
+        endunless
+    endfor
+-%}
