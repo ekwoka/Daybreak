@@ -54,7 +54,7 @@ document.addEventListener('alpine:init', () => {
         width.forEach(w => setArray.push(`${imgBase.replaceAll('{width}', w)} ${w}w`));
         let imgSet = setArray.join(',');
 
-        el.setAttribute('loading', 'lazy');
+        el.setAttribute('loading', el.getAttribute('loading')||'lazy');
         el.setAttribute('src', imgSrc);
         el.setAttribute('srcset', imgSet);
         });
