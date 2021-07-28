@@ -1,0 +1,33 @@
+{%- comment -%}
+
+Parameters:
+    - product: Product to use when rendering stars
+    - alpine: Boolean, whether to implement template for alpine integration
+
+Set Alpine true, or provide a product object
+
+Usage: {%- render 'review-stars', product: product -%}
+
+{%- endcomment -%}
+
+{%- liquid
+    if alpine
+        case settings.reviewApp
+            when 'stamped'
+                echo '<review-stars class="stamped-product-reviews-badge" :data-id="product.id" :data-product-sku="product.handle"></review-stars>'
+            when 'shopify'
+                echo 'Shopify Reviews'
+            else
+                echo ''
+        endcase
+    elsif product
+        case settings.reviewApp
+            when 'stamped'
+                echo '<review-stars class="stamped-product-reviews-badge" data-id="' | append: product.id | append: '" data-product-sku="' | append: product.handle | append: '"></review-stars>'
+            when 'shopify'
+                echo 'Shopify Reviews'
+            else
+                echo ''
+        endcase
+    endif
+-%}

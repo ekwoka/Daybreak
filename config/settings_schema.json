@@ -263,7 +263,37 @@
       }
     ]
   },
-
+  {
+    "name": "Apps",
+    "settings": [
+      {
+        "type": "select",
+        "id": "reviewApp",
+        "label": "Review App",
+        "options": [
+          {
+              "value": "stamped",
+              "label": "Stamped"
+          },
+          {
+              "value": "none",
+              "label": "None"
+          },
+          {
+              "value": "shopify",
+              "label": "Shopify"
+          }
+        ],
+        "default": "none"
+      },
+      {
+        "type": "text",
+        "id": "noReviewMsg",
+        "label": "Message when no reviews",
+        "default": "new product, no reviews"
+      }
+    ]
+  },
   {
     "name": "t:settings_schema.favicon.name",
     "settings": [
