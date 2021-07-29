@@ -4,8 +4,7 @@
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "push:test": "run-s build push test",
-    "test": "for i in {1..3}; do npm run tester; done",
-    "tester": "npx lighthouse https://kwoka-theme-2.myshopify.com --output-path ./lighthouse.html --view --only-categories performance --extra-headers '{\"Cookie\":\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\"}' --budget-path=./budget.json",
+    "test": "for u in / /collections/all /products/damp-mountain; do npx lighthouse \"https://kwoka-theme-2.myshopify.com$u\" --output-path ./lighthouse.html --view --only-categories performance --extra-headers '{\"Cookie\":\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\"}' --budget-path=./budget.json; done",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
@@ -47,6 +46,6 @@
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
-    "tailwindcss": "^2.2.6"
+    "tailwindcss": "^2.2.7"
   }
 }
