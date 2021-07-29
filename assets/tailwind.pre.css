@@ -3,29 +3,38 @@
 @tailwind utilities;
 
 @layer base {
+/* Custom Color Variables */
+:root {
+    --price-color: rgba(22, 101, 52, 1);
+    --old-price: rgba(0,0,0,.6);
+}
 
-    /* Custom Elements */
-    announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info,   email-capture, capture-main, capture-error , capture-existed , capture-success, floating-label {
+/* Custom Elements */
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars {
         @apply block
     }
 
-    custom-span {
+new-price, old-price {
         @apply inline
     }
 
-    button:disabled {
+button:disabled {
         @apply pointer-events-none
     }
 
-    img, video {
+img, video {
         aspect-ratio: attr(width) / attr(height);
+    }
+
+*:focus-visible {
+        outline: 2px auto black;
     }
 
 }
 
 @layer components {
     .btn-primary {
-        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:bg-truegray-600
+        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500
     }
 
     floating-label {
@@ -56,4 +65,13 @@
     svg.icon {
         @apply inline-block w-6 h-6 mx-auto fill-current
     }
+
+    new-price {
+        @apply text-[color:var(--price-color)]
+    }
+
+    old-price {
+        @apply pl-1 text-[color:var(--old-price)] line-through text-sm
+    }
+
 }

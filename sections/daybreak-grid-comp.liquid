@@ -1,0 +1,277 @@
+{{ 'daybreak-grid.comp.css' | asset_url | stylesheet_tag }}
+
+<style scoped>
+
+</style>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        {% if section.settings.showColors -%}
+        Alpine.data('colorSwatches',({
+            colors,
+            starting
+        } = {}) => ({
+            colors: colors || {},
+            selected: starting || colors[0] || null,
+            get image() {
+                return colors[this.selected];
+            } 
+        }));
+        {%- endif %}
+
+
+        {%- case section.settings.pageType -%}
+            {%- when 'load' -%}
+            Alpine.data('loadMore',({
+                perpage,
+                totalItems,
+                page
+            } = {}) => ({
+                items: perpage || 36,
+                totalItems: totalItems || 1,
+                get shownItems() {
+                    let pagesItems = (this.page-1)*this.items;
+                    return pagesItems>this.totalItems ? this.totalItems : pagesItems
+                },
+                page: page || 1,
+                url: document.location.pathname, 
+                target: document.querySelector('product-grid'),
+                loading: true,
+                get complete() {
+                    if (this.shownItems == this.totalItems) return true;
+                    return false;
+                },
+                async load() {
+                    this.loading = true;
+                    let response = await fetch(`${this.url}?page=${this.page}`);
+                    console.log(response);
+                    if (!response.ok) return setTimeout(this.loadMore,200);
+                    let content = await response.text();
+                    console.log(content);
+                    let grid = new DOMParser().parseFromString(content, "text/html").querySelectorAll('product-card');
+                    console.log(grid);
+                    document.querySelector('product-grid').append(...grid);
+                    this.page++;
+                    this.loading = false;
+                },
+                init(){
+                    this.page++;
+                    this.loading = false;
+                    console.log(`Will load page ${this.page} at end of:`);
+                    console.log(this.target);
+                }
+            }));
+            {%- when 'page' -%}
+            {%- when 'infinite' -%}
+        {%- endcase -%}
+
+    });
+</script>
+
+<product-grid class="grid w-full max-w-screen-xl grid-cols-2 gap-2 px-4 mx-auto lg:grid-cols-3">
+    {% paginate collection.products by section.settings.ppp %}
+        {% for product in collection.products %}
+        {%- liquid
+            assign firstVariant = product.first_available_variant
+            assign firstColor = 'none'
+            if product.options contains 'Color'
+                assign hasColor = true
+                capture obj
+                    echo '{'
+                    for color in product.options_by_name['Color'].values
+                        echo "'" | append: color | append: "':'"
+                        for variant in product.variants
+                            if variant.options contains color
+                                echo variant.image | img_url: '1x1' | replace: '_1x1.','_{width}x.'
+                                assign firstColor = color
+                                assign firstVariant = variant
+                                break
+                            endif
+                        endfor
+                        echo "'"
+                        unless forloop.last
+                            echo ','
+                        endunless
+                    endfor
+                    echo '}'
+                endcapture
+            else
+                assign hasColor = false
+                assign obj = "'none'"
+            endif
+        -%}
+            <product-card class="w-full min-h-[max-content]" 
+                {%- if hasColor -%}
+                x-data="colorSwatches({
+                    starting: '{{ firstColor }}',
+                    colors: {{ obj }}})"
+                {%- endif -%}>
+                <a href="{{product.url}}" aria-label="{{ product.title }}" class="w-full mx-auto">
+                    <img class="w-full {{ section.settings.imgShape }}" src="{{ firstVariant.image | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstVariant.image -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
+                </a>
+
+                {% if section.settings.showColors -%}
+                <swatch-wrapper class="flex flex-row justify-center w-full gap-1 pt-2 no-js-hidden" aria-hidden="true">
+                    {%- for color in product.options_by_name['Color'].values -%}
+                    {%- liquid
+                            if color == 'white'
+                                assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-gray-400'"
+                            else
+                                assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-white'"
+                            endif
+                    -%}
+
+                    <button class="w-6 h-6 border-2 border-solid rounded-full shadow-md hover:border-cta-500" :class="{{ classes }}" style="background-color: var(--{{ color }}, {{color}})" aria-label="{{ color }}" @click.prevent="selected='{{ color }}'"></button>
+                    {%- endfor -%}
+                </swatch-wrapper>
+                {%- endif %}
+
+                <card-info class="flex flex-col items-center w-full gap-1 pt-2 text-base">
+                    <a class="text-blue-800" href="{{product.url}}" tabindex="-1">
+                        {{ product.title }}
+                    </a>
+                    {%- if section.settings.showReviews -%}
+                        <a href="{{ product.url }}#Reviews">
+                            {%- render 'review-stars', product: product -%}
+                        </a>
+                    {%- endif -%}
+                    <card-price>
+                        <new-price class="{%- if product.compare_at_price %} text-lg{%- endif -%}">{{ product.price | money }}</new-price>
+                        {%- if product.compare_at_price -%}
+                            <old-price>{{ product.compare_at_price | money }}</old-price>
+                        {%- endif -%}
+                    </card-price>
+                </card-info>
+
+            </product-card>
+        {% endfor %}
+    {% endpaginate %}
+</product-grid>
+
+
+{%- case section.settings.pageType -%}
+    {%- when 'load' -%}
+        <load-more class="flex flex-col items-center w-full py-4 no-js-hidden" x-data="loadMore({
+            perpage: {{ section.settings.ppp }},
+            totalItems: {{ collection.products_count }},
+            page: {{ current_page }}
+        })">
+        <label for="shown-items" class="block" x-text="`You've viewed ${shownItems} products out of ${totalItems}`">You've viewed {{ section.settings.ppp }} products out of {{ collection.products_count }}</label>
+        <progress class="mt-2 load-more" id="shown-items" max="{{ collection.products_count }}" :max="totalItems" value="{{section.settings.ppp}}" :value="shownItems" x-text="`${(shownItems/totalItems*100)}%`"></progress>
+        <button class="mx-auto mt-2 btn-primary" @click.prevent="load()" x-show="!complete" :disabled="loading" x-text="loading ? 'Loading...' : 'Load More'">Loading...</button>
+        </load-more>
+    {%- when 'page' -%}
+        <pagination-links>
+
+        </pagination-links>
+    {%- when 'infinite' -%}
+        <infinite-scroll>
+
+        </infinite-scroll>
+{%- endcase -%}
+
+
+{% schema %}
+{
+    "name": "Daybreak Product Grid",
+    "tag": "section",
+    "class": "block",
+    "settings": [
+        {
+            "type": "range",
+            "id": "ppp",
+            "label": "Products per Page",
+            "min": 8,
+            "max": 64,
+            "step": 4,
+            "default": 16
+        },  
+        {
+            "type": "select",
+            "id": "pageType",
+            "label": "Pagination Type",
+            "options": [
+                {
+                    "value": "load",
+                    "label": "Load More (recommended)"
+                },
+                {
+                    "value": "infinite",
+                    "label": "Infinite Scrolling (disabled)"
+                },
+                {
+                    "value": "page",
+                    "label": "Page Links (disabled)"
+                }
+            ]
+        },
+        {
+            "type": "header",
+            "content": "Grid Item"
+        },
+        {
+            "type": "select",
+            "id": "imgShape",
+            "label": "Grid Image Shape",
+            "options": [
+                {
+                    "value": "",
+                    "label": "Adapt to Image Ratio"
+                },
+                {
+                    "value": "force-tall",
+                    "label": "Force Tall Rectangle"
+                },
+                {
+                    "value": "force-wide",
+                    "label": "Force Wide Rectangle"
+                }
+            ]
+        },
+        {
+            "type": "checkbox",
+            "id": "showVender",
+            "label": "Show Vendor Name",
+            "default": false
+        },
+        {
+            "type": "checkbox",
+            "id": "showColors",
+            "label": "Show Interactive Color Swatches",
+            "default": true,
+            "info": "Colors will display with default CSS colors. For using custom colors, review the theme documentation"
+        },
+        {
+            "type": "checkbox",
+            "id": "showReviews",
+            "label": "Show Reviews Badge",
+            "default": true,
+            "info": "To change your selected reviews app, check the Theme Settings > Apps"
+        },
+        {
+            "type": "header",
+            "content": "Filtering and Sorting"
+        },
+        {
+            "type": "select",
+            "id": "filterType",
+            "label": "Filter and Sorting Options",
+            "options": [
+                {
+                    "value": "none",
+                    "label": "None"
+                },  
+                {
+                    "value": "dawn",
+                    "label": "Shopify Dawn Default"
+                },
+                {
+                    "value": "daybreak",
+                    "label": "Daybreak Experimental Filters"
+                }
+            ],
+            "default": "none"
+        }
+    ]
+}
+{% endschema %}

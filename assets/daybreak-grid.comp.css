@@ -1,0 +1,56 @@
+img.force-tall {
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 5/6
+}
+
+img.force-wide {
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 6/5
+}
+
+progress.load-more {
+  height: 1rem;
+  width: 75%;
+  max-width: 28rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none
+}
+
+progress.load-more[value]::-webkit-progress-bar {
+  border-radius: 0.125rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+  --tw-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)
+}
+
+progress.load-more[value]::-webkit-progress-value {
+  border-radius: 0.125rem;
+  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
+  --tw-gradient-from: #166534;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(22, 101, 52, 0));
+  --tw-gradient-to: #22c55e;
+  -webkit-transition-property: all;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}
+
+progress.load-more[value]::-moz-progress-bar {
+  border-radius: 0.125rem;
+  background-image: linear-gradient(to top right, var(--tw-gradient-stops));
+  --tw-gradient-from: #166534;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(22, 101, 52, 0));
+  --tw-gradient-to: #22c55e;
+  -moz-transition-property: all;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  transition-duration: 1000ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+}

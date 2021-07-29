@@ -1,10 +1,23 @@
 {
   "sections": {
     "banner": {
-      "type": "main-collection-banner"
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": false,
+        "show_collection_image": false
+      }
     },
     "product-grid": {
-      "type": "main-collection-product-grid"
+      "type": "daybreak-grid-comp",
+      "settings": {
+        "ppp": 8,
+        "pageType": "load",
+        "adaptImage": false,
+        "showVender": false,
+        "showColors": true,
+        "showReviews": true,
+        "filterType": "none"
+      }
     }
   },
   "order": [
