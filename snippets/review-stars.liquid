@@ -21,13 +21,20 @@ Usage: {%- render 'review-stars', product: product -%}
                 echo ''
         endcase
     elsif product
+        assign noReviews = true
         case settings.reviewApp
             when 'stamped'
-                echo '<review-stars class="stamped-product-reviews-badge" data-id="' | append: product.id | append: '" data-product-sku="' | append: product.handle | append: '"></review-stars>'
+                if prod.metafields.stamped.reviews_count > 0
+                    echo '<review-stars class="stamped-product-reviews-badge" data-id="' | append: product.id | append: '" data-product-sku="' | append: product.handle | append: '"></review-stars>'
+                    assign noReviews = false
+                endif
             when 'shopify'
-                echo 'Shopify Reviews'
+                echo 'Shopify Reviews Not Yet Supported'
             else
-                echo ''
+                assign noReviews = false
         endcase
+        if noReviews
+            echo '<review-stars class="text-sm text-center text-gray-600">new product, no reviews</review-stars>'
+        endif
     endif
 -%}
