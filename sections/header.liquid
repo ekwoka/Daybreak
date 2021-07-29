@@ -298,20 +298,14 @@
           </h1>
         {%- when 'img' -%}
           {%- assign img_url = section.settings.logoimg | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-          <img class="mx-auto headerLogo-image lazyload js"
+          <img class="mx-auto headerLogo-image lazyload"
                src="{{ section.settings.logoimg | img_url: '100x' }}"
-               data-src="{{ img_url }}"
-               data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+               srcset="{%- render 'responsive-srcset', image: section.settings.logoimg -%}"
                data-sizes="auto"
+               sizes="25vw"
                alt="{{ section.settings.logo.alt | default: shop.name }}"
-               data-aspectratio="{{ section.settings.logoimg.aspect_ratio }}">
-          <noscript>
-            {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
-            <img class="mx-auto headerLogo-image"
-                 src="{{ section.settings.logoimg | img_url: image_size }}"
-                 srcset="{{ section.settings.logoimg | img_url: image_size }} 1x, {{ section.settings.logoimg | img_url: image_size, scale: 2 }} 2x"
-                 alt="{{ section.settings.logo.alt | default: shop.name }}">
-          </noscript>
+               width="{{ section.settings.logoimg.width }}"
+               height="{{ section.settings.logoimg.height }}">
         {%- when 'svg' -%}
           <div id="logo-svg" class="mx-auto" style="max-width: {{ section.settings.logo_width }}px;">
             {{ section.settings.logosvg }}
