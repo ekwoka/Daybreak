@@ -12,7 +12,6 @@ console.log(`
 console.log("Registering Daybreak");
 
 export async function addToCart(id, q, cart) {
-  console.log(`Adding ${q} products of id: ${id} to Cart`);
   let response, item;
   let body = JSON.stringify({ id, q });
   try {
