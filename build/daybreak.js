@@ -9,65 +9,96 @@ console.log(`
              `);
 
 /* Daybreak Functions */
-console.log('Registering Daybreak');
+console.log("Registering Daybreak");
 
-export async function addToCart(id,q) {
-        console.log(`Adding ${q} products of id: ${id} to Cart`);
-        return 'Added to Cart';
-    }
+export async function addToCart(id, q, cart) {
+  console.log(`Adding ${q} products of id: ${id} to Cart`);
+  let response, item;
+  let body = JSON.stringify({ id, q });
+  try {
+    response = await fetch(routes.cart_add_url, {
+      ...fetchConfig("javascript"),
+      body
+    });
+    item = await response.json();
+  } catch (e) {
+    console.log(e);
+  }
+  let index = cart.items.findIndex((e) => e.id == id);
+  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
+  return cart;
+}
+
+export async function changeCart(i, q, cart) {
+  let response, item;
+  let body = JSON.stringify({ i, q });
+  try {
+    response = await fetch(routes.cart_change_url, {
+      ...fetchConfig("javascript"),
+      body
+    });
+    item = await response.json();
+  } catch (e) {
+    console.log(e);
+  }
+  let index = cart.items.findIndex((e) => e.id == item.id);
+  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
+  return cart;
+}
 
 export const RIAS = {
-        updateSize(el) {
-            let sizes = el.offsetWidth;
-            let parent = el.parentNode;
-            while (sizes < 100 && parent) {
-                width = parent.offsetWidth;
-                parent = parent.parentNode;
-            }
-            sizes += 'px';
-            el.setAttribute('sizes', sizes);
-        },
-        updateSizes() {
-            document.querySelectorAll('img[data-sizes="auto"').forEach((el) => this.updateSize(el));
-        },
-        start() {
-            this.updateSizes();
-            const config = { attribute: false, childList: true, subtree: true };
-            const cb = (mutationsList) => {
-                mutationsList.forEach(m => {
-                    m.addedNodes.forEach(el => {
-                        if(el.nodeName=='IMG') this.updateSize(el);
-                    })
-                });
-            };
-            const observer = new MutationObserver(cb);
-    
-            observer.observe(document.body, config);
-        }
+  updateSize(el) {
+    let sizes = el.offsetWidth;
+    let parent = el.parentNode;
+    while (sizes < 100 && parent) {
+      width = parent.offsetWidth;
+      parent = parent.parentNode;
     }
+    sizes += "px";
+    el.setAttribute("sizes", sizes);
+  },
+  updateSizes() {
+    document
+      .querySelectorAll('img[data-sizes="auto"')
+      .forEach((el) => this.updateSize(el));
+  },
+  start() {
+    this.updateSizes();
+    const config = { attribute: false, childList: true, subtree: true };
+    const cb = (mutationsList) => {
+      mutationsList.forEach((m) => {
+        m.addedNodes.forEach((el) => {
+          if (el.nodeName == "IMG") this.updateSize(el);
+        });
+      });
+    };
+    const observer = new MutationObserver(cb);
+
+    observer.observe(document.body, config);
+  }
+};
 
 /* Prototypes */
 window.Element.prototype._x_intersectEnter = function (callback, modifiers) {
-    this._x_intersect((entry, observer) => {
-        if (entry.intersectionRatio > 0) {
-            
-            callback()
-            
-            modifiers.includes('once') && observer.unobserve(this)
-            
-            
-        }
-        setTimeout(() => {
-        }, 100);
-    })
-}
+  this._x_intersect((entry, observer) => {
+    if (entry.intersectionRatio > 0) {
+      callback();
+
+      modifiers.includes("once") && observer.unobserve(this);
+    }
+    setTimeout(() => {}, 100);
+  });
+};
 
 window.Element.prototype._x_intersect = function (callback) {
-    let observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => callback(entry, observer))
-    }, {
-        // threshold: 1,
-    })
-    observer.observe(this);
-    return observer
-}
+  let observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => callback(entry, observer));
+    },
+    {
+      // threshold: 1,
+    }
+  );
+  observer.observe(this);
+  return observer;
+};

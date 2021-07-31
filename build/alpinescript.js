@@ -49,12 +49,19 @@ export default function (Alpine) {
     /* Alpine Stores */
     console.log('Registering Stores');
     Alpine.persistedStore('cart', {
-        value: 0
-    })
-    Alpine.persistedStore('subscribed', false);
-
-    Alpine.persistedStore('storage','local');
-    Alpine.persistedStore('storage2','session',sessionStorage);
+        items: [],
+        get value() {
+            let v = 0
+            this.items.forEach(item => v += item.line_price || 0)
+            return v
+        },
+        get quantity() {
+            let q = 0
+            this.items.forEach(item => q += item.quantity || 0)
+            return q
+        }
+    }, sessionStorage)
+    Alpine.persistedStore('subscribed', false)
 
     /* Alpine Data */
     console.log('Registering Alpine Data Objects');
