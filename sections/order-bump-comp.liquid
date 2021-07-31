@@ -33,8 +33,8 @@ document.addEventListener('alpine:init', () => {
             [this.id, this.image, this.price] = [newV.id,newV.image,newV.price];
         },
         async addItem(id,quantity) {
-            let response = await Daybreak.addToCart(id,quantity);
-            console.log(response);
+            this.$store.cart = await Daybreak.addToCart(id,quantity,this.$store.cart)
+            console.log(this.$store.cart)
         },
         selectInit(){
             if (variants?.length) [this.id,this.price] = [variants[0].id,variants[0].price];

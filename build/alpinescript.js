@@ -1,7 +1,4 @@
-console.log('Registering alpine:init Listener');
-document.addEventListener('alpine:init', () => {  
-
-    /* Alpine Plugins */
+export default function (Alpine) {  
     console.log('Registering Storage');
     window.__daybreaks = {}
     Alpine.persistedStore = function (name, value, storage = localStorage) {
@@ -243,4 +240,4 @@ document.addEventListener('alpine:init', () => {
             return '-' + this.formatCurrency(newPrice);
         }
     })); */
-});
+};

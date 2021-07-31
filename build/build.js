@@ -6,6 +6,10 @@ window.Daybreak = Daybreak
 
 document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', Daybreak.RIAS.start()): Daybreak.RIAS.start();
 
-import './alpinescript'
+import Data from './alpinescript'
+
 window.Alpine = Alpine
+
+Alpine.plugin(Data)
+
 Alpine.start() 
