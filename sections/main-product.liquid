@@ -18,6 +18,25 @@
 
 <section class="page-width">
   <div class="product dawn-grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+    <div class="flex flex-col items-center pt-4 mx-auto md:hidden">
+      {%- liquid
+        for block in section.blocks
+          if block.settings.showTop
+            case block.type
+              when 'title'
+                echo '<h1 class="text-xl product__title"'
+                echo block.shopify_attributes
+                echo '>'
+                echo product.title | escape
+                echo '</h1>'
+              when 'reviews'
+                render 'review-stars' with product: product
+            endcase
+          endif
+        endfor
+      -%}
+    </div>
+
     <div class="grid__item product__media-wrapper">
       <slider-component class="slider-mobile-gutter">
         <a class="skip-to-content-link button visually-hidden" href="#ProductInfo-{{ section.id }}">
@@ -77,7 +96,7 @@
               {{- block.settings.text -}}
             </p>
           {%- when 'title' -%}
-            <h1 class="product__title" {{ block.shopify_attributes }}>
+            <h1 class=" mx-auto text-center product__title {% if block.settings.showTop %}hidden md:block{% endif %}" {{ block.shopify_attributes }}>
               {{ product.title | escape }}
             </h1>
           {%- when 'price' -%}
@@ -145,7 +164,7 @@
               <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.link_label }}</a>
           {%- when 'share' -%}
             <share-button class="share-button" {{ block.shopify_attributes }}>
-              <button class="share-button__button button button--tertiary hidden">
+              <button class="hidden share-button__button button button--tertiary">
                 {% render 'icon-share' %}
                 {{ 'general.share.share' | t }}
               </button>
@@ -170,7 +189,7 @@
                     {% render 'icon-clipboard' %}
                     {{ 'general.share.copy_to_clipboard' | t }}
                   </button>
-                  <span id="ShareMessage-{{ section.id }}" class="share-button__message hidden" role="status" aria-hidden="true">
+                  <span id="ShareMessage-{{ section.id }}" class="hidden share-button__message" role="status" aria-hidden="true">
                     {{ 'general.share.success_message' | t }}
                   </span>
                 </div>
@@ -262,7 +281,7 @@
                     <button
                       type="submit"
                       name="add"
-                      class="product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
+                      class="btn-primary product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
                     {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                     >
                         {%- if product.selected_or_first_available_variant.available -%}
@@ -301,6 +320,30 @@
             </div>
 
             <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+          {%- when 'reviews' -%}
+            {%- if block.settings.showTop -%}
+              {%- render 'review-stars', product: product, class: 'hidden md:block' -%}
+            {%- else -%}
+              {%- render 'review-stars', product: product -%}
+            {%- endif -%}
+
+          {%- when 'uvp' -%}
+            {%- liquid
+              if block.settings.default
+                assign uvp_content = '<div class="w-full text-center">' | append: block.settings.default | append: '</div>'
+              endif
+              if block.settings.prodIcons
+                assign src = block.settings.prodIcons | img_url: '360x'
+                capture uvp_content 
+                  echo '<img src="' | append: src | append: '" srcset="'
+                  render 'responsive-srcset', image: block.settings.prodIcons
+                  echo '" alt="" data-sizes="auto" loading="lazy" sizes="10px" class="w-full">'
+                endcapture
+              endif
+              
+              echo uvp_content
+              
+            -%}
           {%- endcase -%}
         {%- endfor -%}
       </div>
@@ -464,6 +507,38 @@
       "type": "@app"
     },
     {
+      "type": "reviews",
+      "name": "Review Stars",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "showTop",
+          "label": "Show Above Product Images on Mobile",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "uvp",
+      "name": "UVP Icons",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "default",
+          "label": "Default UVP Code",
+          "info": "SVG Code/HTML"
+        },
+        {
+          "type": "image_picker",
+          "id": "prodIcons",
+          "label": "UVP Image",
+          "info": "This can be linked to a dynamic source to provice product specific UVP icons"
+        }
+      ]
+    },
+    {
       "type": "text",
       "name": "t:sections.main-product.blocks.text.name",
       "settings": [
@@ -498,7 +573,15 @@
     {
       "type": "title",
       "name": "t:sections.main-product.blocks.title.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "showTop",
+          "label": "Show Above Product Images on Mobile",
+          "default": true
+        }
+      ]
     },
     {
       "type": "price",
