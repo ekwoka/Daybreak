@@ -16,7 +16,8 @@ progress.load-more {
   max-width: 28rem;
   -webkit-appearance: none;
      -moz-appearance: none;
-          appearance: none
+          appearance: none;
+  border-radius: 0.125rem
 }
 
 progress.load-more[value]::-webkit-progress-bar {

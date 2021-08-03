@@ -53,7 +53,7 @@ img.force-wide {
 }
 
 progress.load-more {
-    @apply appearance-none w-3/4 max-w-md h-4
+    @apply appearance-none w-3/4 max-w-md h-4 rounded-sm
 }
 
 progress.load-more[value]::-webkit-progress-bar {
