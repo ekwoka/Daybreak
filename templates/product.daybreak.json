@@ -1,0 +1,10 @@
+{
+  "sections": {
+    "main": {
+      "type": "daybreak-product-comp"
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

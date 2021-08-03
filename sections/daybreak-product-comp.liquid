@@ -1,0 +1,13 @@
+{{ 'daybreak-product.comp.css' | asset_url | stylesheet_tag }}
+
+<img src="http://placekitten.com/400/400" data-sizes="auto" alt="{{ product.title }}" loading="eager">
+
+{% schema %}
+{
+    "name": "Product Information",
+    "tag": "section",
+    "settings": [
+        
+    ]
+}
+{% endschema %}

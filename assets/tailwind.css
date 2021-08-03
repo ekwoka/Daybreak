@@ -1240,6 +1240,10 @@ old-price {
 		display: block;
 	}
 
+	.md\:hidden {
+		display: none;
+	}
+
 	.md\:w-3\/4 {
 		width: 75%;
 	}
