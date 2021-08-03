@@ -22,13 +22,17 @@
       <span class="product__media-icon motion-reduce">{% render 'icon-play' %}</span>
       <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
         <img
-          srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-                  {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-                  {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-                  {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-          src="{{ media | img_url: '550x550' }}"
+          srcset="{%- render 'responsive-srcset', image: media.preview_image -%}"
+          src="{{ media | img_url: '360x' }}"
           sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
-          loading="lazy"
+          data-sizes="auto"
+          loading="
+          {%- unless position == 'featured' -%}
+            lazy
+          {%- else -%}
+            eager
+          {%- endunless -%}
+          "
           width="576"
           height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
           alt="{{ media.preview_image.alt | escape }}"
@@ -38,13 +42,17 @@
   {%- else -%}
     <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
       <img
-        srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-                {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-                {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-                {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-        src="{{ media | img_url: '550x550' }}"
+        srcset="{%- render 'responsive-srcset', image: media.preview_image -%}"
+        src="{{ media | img_url: '360x' }}"
         sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
-        loading="lazy"
+        data-sizes="auto"
+        loading="
+          {%- unless position == 'featured' -%}
+            lazy
+          {%- else -%}
+            eager
+          {%- endunless -%}
+          "
         width="576"
         height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
         alt="{{ media.preview_image.alt | escape }}"
@@ -69,13 +77,17 @@
 
   <div class="product__media media" style="padding-top: {{ 1 | divided_by: media.preview_image.aspect_ratio | times: 100 }}%;">
     <img
-      srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-              {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-              {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-              {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-      src="{{ media | img_url: '550x550' }}"
+      srcset="{%- render 'responsive-srcset', image: media.preview_image -%}"
+      src="{{ media | img_url: '360x' }}"
       sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
-      loading="lazy"
+      data-sizes="auto"
+      loading="
+          {%- unless position == 'featured' -%}
+            lazy
+          {%- else -%}
+            eager
+          {%- endunless -%}
+          "
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio | ceil }}"
       alt="{{ media.preview_image.alt | escape }}"
@@ -109,13 +121,17 @@
       {%- endif -%}
     </span>
     <img
-      srcset="{% if media.preview_image.width >= 288 %}{{ media.preview_image | img_url: '288x' }} 288w,{% endif %}
-              {% if media.preview_image.width >= 576 %}{{ media.preview_image | img_url: '576x' }} 576w,{% endif %}
-              {% if media.preview_image.width >= 550 %}{{ media.preview_image | img_url: '550x' }} 550w,{% endif %}
-              {% if media.preview_image.width >= 1100 %}{{ media.preview_image | img_url: '1100x' }} 1100w{% endif %}"
-      src="{{ media | img_url: '550x550' }}"
+      srcset="{%- render 'responsive-srcset', image: media.preview_image -%}"
+      src="{{ media | img_url: '360x' }}"
       sizes="(min-width: 1200px) calc((1200px - 6.25rem) / 2), (min-width: 750px) calc((100vw - 10.9375rem) / 2), calc(100vw - 2.5rem)"
-      loading="lazy"
+      data-sizes="auto"
+      loading="
+          {%- unless position == 'featured' -%}
+            lazy
+          {%- else -%}
+            eager
+          {%- endunless -%}
+          "
       width="576"
       height="{{ 576 | divided_by: media.preview_image.aspect_ratio }}"
       alt="{{ media.preview_image.alt | escape }}"

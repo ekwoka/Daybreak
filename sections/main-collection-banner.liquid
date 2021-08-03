@@ -15,16 +15,12 @@
 
     {%- if section.settings.show_collection_image and collection.image -%}
       <div class="collection-hero__image-container media">
-        <img srcset="{%- if collection.image.width >= 165 -%}{{ collection.image | img_url: '165x' }} 165w,{%- endif -%}
-          {%- if collection.image.width >= 360 -%}{{ collection.image | img_url: '360x' }} 360w,{%- endif -%}
-          {%- if collection.image.width >= 535 -%}{{ collection.image | img_url: '535x' }} 535w,{%- endif -%}
-          {%- if collection.image.width >= 720 -%}{{ collection.image | img_url: '720x' }} 720w,{%- endif -%}
-          {%- if collection.image.width >= 940 -%}{{ collection.image | img_url: '940x' }} 940w,{%- endif -%}
-          {%- if collection.image.width >= 1070 -%}{{ collection.image | img_url: '1070x' }} 1070w{%- endif -%}"
-          src="{{ collection.image | img_url: '533x' }}"
+        <img srcset="{%- render 'responsive-srcset', image: collection.image -%}"
+          src="{{ collection.image | img_url: '360x' }}"
           sizes="(min-width: 1100px) 535px, (min-width: 750px) calc(50vw - 130px), calc(50vw - 55px)"
+          data-sizes="auto"
           alt="{{ collection.title | escape }}"
-          loading="lazy"
+          loading="eager"
           width="{{ collection.image.width }}"
           height="{{ collection.image.height }}"
         >
