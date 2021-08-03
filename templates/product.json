@@ -3,15 +3,13 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
-          "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
-          }
-        },
         "title": {
           "type": "title",
+          "settings": {
+          }
+        },
+        "a7c271ee-7337-48ac-928a-8e26974516d0": {
+          "type": "reviews",
           "settings": {
           }
         },
@@ -41,16 +39,17 @@
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
-            "show_dynamic_checkout": true
+            "show_dynamic_checkout": false
+          }
+        },
+        "4703828b-badf-4179-800d-0177d2e0f214": {
+          "type": "uvp",
+          "settings": {
+            "default": ""
           }
         },
         "description": {
           "type": "description",
-          "settings": {
-          }
-        },
-        "share": {
-          "type": "share",
           "settings": {
           }
         },
@@ -65,15 +64,15 @@
         }
       },
       "block_order": [
-        "vendor",
         "title",
+        "a7c271ee-7337-48ac-928a-8e26974516d0",
         "subtitle",
         "price",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "4703828b-badf-4179-800d-0177d2e0f214",
         "description",
-        "share",
         "36ab57c3-4fd3-4f99-ad71-ea7853fcb3b4"
       ],
       "settings": {
@@ -86,6 +85,9 @@
       "settings": {
         "title": "Check out this item!",
         "desc": "This product goes so well with that other product",
+        "center": false,
+        "showPrice": true,
+        "toLimit": 1,
         "toShow": 3,
         "bumpProduct": "patient-fog",
         "bumpCollection": "",
