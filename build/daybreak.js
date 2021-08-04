@@ -28,6 +28,22 @@ export async function addToCart(id, q, cart) {
   return cart;
 }
 
+export async function addToCartFromForm(body,cart) {
+  let response, item;
+  try {
+    response = await fetch(routes.cart_add_url, {...fetchConfig('javascript'), body});
+    item = await response.json();
+    if(item.status == 'bad_request') throw item.description
+  } catch (e) {
+    console.log(e);
+    return cart;
+  }
+  let id = item.id
+  let index = cart.items.findIndex((e) => e.id == id);
+  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
+  return cart;
+}
+
 export async function changeCart(i, q, cart) {
   let response, item;
   let body = JSON.stringify({ i, q });

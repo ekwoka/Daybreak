@@ -127,6 +127,22 @@ export default function (Alpine) {
         }
     }));
 
+    Alpine.data('productForm',({} = {}) => ({
+        form: false,
+        sending: false,
+        async addToCart(){
+            this.sending=true
+            let formData = JSON.stringify({
+                ...JSON.parse(serializeForm(this.form)),
+                sections: ['cart-icon-bubble'],
+                sections_url: window.location.pathname
+              })
+              console.log(formData)
+            this.$store.cart = await Daybreak.addToCartFromForm(formData,this.$store.cart)
+            this.sending=false
+        }
+    }))
+
     /* Alpine.data('themeAlpine', () => ({
         menuOpen: false,
         cartOpen: false,

@@ -161,7 +161,6 @@
               <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
                 <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.link_label | default: block.settings.page.title }}</button>
               </modal-opener>
-              <a href="{{ block.settings.page.url }}" class="product-popup-modal__button link no-js">{{ block.settings.link_label }}</a>
           {%- when 'share' -%}
             <share-button class="share-button" {{ block.shopify_attributes }}>
               <button class="hidden share-button__button button button--tertiary">
@@ -274,15 +273,16 @@
             </noscript>
           {%- when 'buy_buttons' -%}
             <div {{ block.shopify_attributes }}>
-              <product-form class="product-form">
+              <product-form class="product-form" x-data="productForm" x-init="form = $el.querySelector('form')">
                 {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                   <div class="product-form__buttons">
                     <button
+                      @click.prevent="addToCart()"
                       type="submit"
                       name="add"
                       class="btn-primary product-form__submit button button--full-width {% if block.settings.show_dynamic_checkout and product.selling_plan_groups == empty %}button--secondary{% else %}button--primary{% endif %}"
-                    {% if product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                    {% if product.selected_or_first_available_variant.available == false %}:disabled="true"{% else -%}:disabled="sending"{% endif %}
                     >
                         {%- if product.selected_or_first_available_variant.available -%}
                           {{ 'products.product.add_to_cart' | t }}
@@ -480,7 +480,6 @@
 
   customElements.define('product-modal', ProductModal);
 {% endjavascript %}
-<script src="{{ 'product-form.js' | asset_url }}" defer="defer"></script>
 
 {%- if first_3d_model -%}
   <script type="application/json" id="ProductJSON-{{ product.id }}">
