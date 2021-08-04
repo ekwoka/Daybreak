@@ -6,11 +6,13 @@
         "title": {
           "type": "title",
           "settings": {
+            "showTop": true
           }
         },
         "a7c271ee-7337-48ac-928a-8e26974516d0": {
           "type": "reviews",
           "settings": {
+            "showTop": true
           }
         },
         "subtitle": {
@@ -29,6 +31,13 @@
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
+          }
+        },
+        "a822d694-d1c6-4711-a38c-edd24439f023": {
+          "type": "popup",
+          "settings": {
+            "link_label": "Size Chart",
+            "page": "{{ product.metafields.my_fields.size_chart.value }}"
           }
         },
         "quantity_selector": {
@@ -57,7 +66,7 @@
           "type": "collapsible_tab",
           "settings": {
             "heading": "Collapsible tab",
-            "content": "",
+            "content": "<p>{{ product.metafields.my_fields.first_tab | metafield_tag }}<\/p>",
             "page": "",
             "icon": "none"
           }
@@ -69,6 +78,7 @@
         "subtitle",
         "price",
         "variant_picker",
+        "a822d694-d1c6-4711-a38c-edd24439f023",
         "quantity_selector",
         "buy_buttons",
         "4703828b-badf-4179-800d-0177d2e0f214",
