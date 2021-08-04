@@ -63,6 +63,18 @@ export default function (Alpine) {
             let q = 0
             this.items.forEach(item => q += item.quantity || 0)
             return q
+        },
+        async init(){
+            let response,cart
+            try {
+                response = await fetch(routes.cart_update_url, {
+                  ...fetchConfig("javascript")
+                });
+                cart = await response.json();
+              } catch (e) {
+                console.log(e);
+              }
+            this.items = cart.items
         }
     }, sessionStorage)
     Alpine.persistedStore('subscribed', false)

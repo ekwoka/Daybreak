@@ -417,7 +417,7 @@
         </a>
       {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data>
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
@@ -426,14 +426,12 @@
           endif
         -%}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-        {%- if cart != empty -%}
-          <div class="cart-count-bubble">
+          <div class="cart-count-bubble" x-show="$store.cart.quantity > 0" {%- if cart == empty %} style="display:none;"{%- endif -%}>
             {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true">{{ cart.item_count }}</span>
+              <span aria-hidden="true" x-text="$store.cart.quantity">{{ cart.item_count }}</span>
             {%- endif -%}
             <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
           </div>
-        {%- endif -%}
       </a>
     </div>
   </header>
