@@ -1,4 +1,4 @@
-.customer:not(.account, .order) {
+.customer:not(.account):not(.order) {
   margin: 3.75rem auto 5.625rem;
   max-width: 32.125rem;
   padding: 0 0.9375rem;
@@ -6,7 +6,7 @@
 }
 
 @media screen and (min-width: 750px) {
-  .customer:not(.account, .order) {
+  .customer:not(.account):not(.order) {
     max-width: 44.875rem;
   }
 }
