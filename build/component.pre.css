@@ -67,3 +67,27 @@ progress.load-more[value]::-webkit-progress-value {
 progress.load-more[value]::-moz-progress-bar {
     @apply bg-gradient-to-tr from-cta-800 to-cta-500 rounded-sm transition-all duration-1000 ease-in-out
 }
+
+toast-item {
+    @apply fixed inset-x-0 z-[110] w-3/4 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md min-w-max
+}
+
+toast-icon {
+    @apply flex items-center justify-center w-12
+}
+
+toast-icon > svg {
+    @apply w-6 h-6 text-white fill-current
+}
+
+toast-content {
+    @apply px-4 py-2 -mx-3
+}
+
+toast-title {
+    @apply font-semibold capitalize
+}
+
+toast-message {
+    @apply text-sm text-gray-600
+}

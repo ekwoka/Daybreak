@@ -34,6 +34,7 @@ document.addEventListener('alpine:init', () => {
         },
         async addItem(id,quantity) {
             this.$store.cart = await Daybreak.addToCart(id,quantity,this.$store.cart)
+            this.$store.toast.addToast('success',`${this.title} was added to cart`)
         },
         selectInit(){
             if (variants?.length) [this.id,this.price] = [variants[0].id,variants[0].price];

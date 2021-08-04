@@ -10,7 +10,7 @@
 }
 
 /* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars {
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message {
         @apply block
     }
 

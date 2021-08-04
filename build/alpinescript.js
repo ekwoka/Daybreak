@@ -78,6 +78,17 @@ export default function (Alpine) {
         }
     }, sessionStorage)
     Alpine.persistedStore('subscribed', false)
+    Alpine.store('toast',{
+        items: [],
+        addToast(type,msg){
+            let newToast = {
+                type: type || false,
+                msg: msg || false,
+                show: false
+            }
+            this.items.push(newToast)
+        }
+    })
 
     /* Alpine Data */
     console.log('Registering Alpine Data Objects');
@@ -139,9 +150,10 @@ export default function (Alpine) {
         }
     }));
 
-    Alpine.data('productForm',({} = {}) => ({
+    Alpine.data('productForm',({title} = {}) => ({
         form: false,
         sending: false,
+        title: title || 'product',
         async addToCart(){
             this.sending=true
             let formData = JSON.stringify({
@@ -149,8 +161,8 @@ export default function (Alpine) {
                 sections: ['cart-icon-bubble'],
                 sections_url: window.location.pathname
               })
-              console.log(formData)
             this.$store.cart = await Daybreak.addToCartFromForm(formData,this.$store.cart)
+            this.$store.toast.addToast('success',`${this.title} added to cart`)
             this.sending=false
         }
     }))
