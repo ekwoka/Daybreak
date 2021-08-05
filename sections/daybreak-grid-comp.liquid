@@ -44,12 +44,9 @@
                 async load() {
                     this.loading = true;
                     let response = await fetch(`${this.url}?page=${this.page}`);
-                    console.log(response);
                     if (!response.ok) return setTimeout(this.loadMore,200);
                     let content = await response.text();
-                    console.log(content);
                     let grid = new DOMParser().parseFromString(content, "text/html").querySelectorAll('product-card');
-                    console.log(grid);
                     document.querySelector('product-grid').append(...grid);
                     this.page++;
                     this.loading = false;
@@ -57,8 +54,6 @@
                 init(){
                     this.page++;
                     this.loading = false;
-                    console.log(`Will load page ${this.page} at end of:`);
-                    console.log(this.target);
                 }
             }));
             {%- when 'page' -%}

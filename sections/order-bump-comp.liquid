@@ -138,7 +138,7 @@ document.addEventListener('alpine:init', () => {
             <bump-item x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
-                id: {{ bumpProd.id }},
+                id: {{ bumpProd.first_available_variant.id }},
                 image: '{{ bumpProd.featured_image.src | img_url: '360x' }}',
                 {% unless bumpProd.has_only_default_variant -%}
                 variants: [

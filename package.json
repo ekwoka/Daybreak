@@ -1,6 +1,6 @@
 {
   "name": "Daybreak",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "push:test": "run-s build push test",
@@ -8,6 +8,7 @@
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
+    "open": "sleep 10s && open http://127.0.0.1:9292/",
     "reset": "run-s pull build push",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-p css:build css:critical css:component js:build && npm run sizes:assets",
@@ -22,7 +23,7 @@
     "js:build": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify",
     "js:watch": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --watch",
     "sizes:assets": "ls -lh assets/daybreak.min.js assets/tailwind.css assets/*.comp.css",
-    "watch": "run-p serve css:watch css:component-watch js:watch & open http://127.0.0.1:9292/",
+    "watch": "run-p serve css:watch css:component-watch js:watch open",
     "watch:alpine": "nodemon -x 'npm run minify:alpine && npm run minify:js' -w build/alpinescript.js",
     "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;"
   },
