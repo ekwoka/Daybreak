@@ -17,23 +17,46 @@
                 }
                 setTimeout(cb,50);
                 
+            },
+            colors: {
+                success: ['bg-cta-600','text-cta-600'],
+                love: ['bg-pink-500','text-pink-500'],
+                error: ['bg-red-600','text-red-600']
+            },
+            icons: {
+                success: '<use xlink:href="#icon-check"></use>',
+                love: '<use xlink:href="#icon-heart"></use>',
+                error: '<use xlink:href="#icon-error"></use>'
             }
         }))
     });
 </script>
 
-<div x-data="toasts" x-init="$store.toast.addToast('success','I luv you')">
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+    <symbol id="icon-check" viewBox="0 0 40 40">
+        <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"></path>
+    </symbol>
+    <symbol id="icon-heart" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+    </symbol>
+    <symbol id="icon-error" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+      </symbol>
+    </defs>
+    </svg>
+
+<div x-data="toasts">
     <template x-for="(toast,i) in $store.toast.items" :key="i">
 
         <toast-item :class="toast.show ? 'top-32 opacity-100' : '-top-4 opacity-0'" x-init="timeout(i)">
-            <toast-icon :class="{ 'bg-cta-600':[toast.type] == 'success'}">
-                <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"></path>
+            <toast-icon :class="colors[toast.type][0]">
+                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" x-html="icons[toast.type]">
                 </svg>
             </toast-icon>
             <toast-content>
-                <div class="mx-3">
-                    <toast-title :class="{ 'text-cta-600':[toast.type] == 'success'}" x-text="toast.type">Success</toast-title>
+                <div class="mx-3 bg-p">
+                    <toast-title :class="colors[toast.type][1]" x-text="toast.title">Success</toast-title>
                     <toast-message x-text="toast.msg">Item was added to Cart</toast-message>
                 </div>
             </toast-content>

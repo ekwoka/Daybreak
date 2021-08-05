@@ -5,7 +5,7 @@ import './../node_modules/alpinejs/src/directives/x-model'
 import './../node_modules/alpinejs/src/directives/x-cloak'
 import './../node_modules/alpinejs/src/directives/x-init'
 import './../node_modules/alpinejs/src/directives/x-text'
-/* import './../node_modules/alpinejs/src/directives/x-html' */
+import './../node_modules/alpinejs/src/directives/x-html'
 import './../node_modules/alpinejs/src/directives/x-bind'
 import './../node_modules/alpinejs/src/directives/x-data'
 import './../node_modules/alpinejs/src/directives/x-show'
