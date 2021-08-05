@@ -80,9 +80,10 @@ export default function (Alpine) {
     Alpine.persistedStore('subscribed', false)
     Alpine.store('toast',{
         items: [],
-        addToast(type,msg){
+        addToast(msg,type,title){
             let newToast = {
-                type: type || false,
+                type: type || 'success',
+                title: title || type || 'success',
                 msg: msg || false,
                 show: false
             }
@@ -137,11 +138,14 @@ export default function (Alpine) {
             data = await response?.json();
             if(!data?.success) {
                 this.error = true;
+                this.$store.toast.addToast(`${data?.errors[0]}`,'error','Something went wrong');
                 return this.errorReason = data?.errors[0];
             };
             this.$store.subscribed = true;
             if(data?.data?.is_subscribed) return this.existed = true;
             this.success = true;
+            let msg = code ? 'Enjoy your coupon':'Welcome to the Legion'
+            this.$store.toast.addToast(msg,'success','Thank You')
             this.fetchCoupon();
         },
         init() {
@@ -162,7 +166,7 @@ export default function (Alpine) {
                 sections_url: window.location.pathname
               })
             this.$store.cart = await Daybreak.addToCartFromForm(formData,this.$store.cart)
-            this.$store.toast.addToast('success',`${this.title} added to cart`)
+            this.$store.toast.addToast(`${this.title} added to cart`,'success')
             this.sending=false
         }
     }))
