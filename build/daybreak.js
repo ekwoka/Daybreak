@@ -61,6 +61,8 @@ export async function changeCart(i, q, cart) {
   return cart;
 }
 
+export const currency = new Intl.NumberFormat([Shopify.locale + '-'+ Shopify.country], { style: 'currency', currency: Shopify.currency.active }) || new Intl.NumberFormat([en-US], { style: 'currency', currency: USD })
+
 export const RIAS = {
   updateSize(el) {
     let sizes = el.offsetWidth;
