@@ -74,23 +74,29 @@ export const RIAS = {
     sizes += "px";
     el.setAttribute("sizes", sizes);
   },
-  updateSizes() {
-    document
+  updateSizes(el = document) {
+    console.log('updating sizes')
+    el
       .querySelectorAll('img[data-sizes="auto"')
       .forEach((el) => this.updateSize(el));
   },
   start() {
     this.updateSizes();
-    const config = { attribute: false, childList: true, subtree: true };
+    const config = { attribute: true, childList: true, subtree: true };
     const cb = (mutationsList) => {
+      let crawler = (el) => {
+        if (el.nodeName == "IMG") return this.updateSize(el)
+        if (el.nodeName == "#text") return
+        el.querySelectorAll('img').forEach(el => this.updateSize(el))
+      }
       mutationsList.forEach((m) => {
         m.addedNodes.forEach((el) => {
-          if (el.nodeName == "IMG") this.updateSize(el);
+          crawler(el)
         });
       });
     };
-    const observer = new MutationObserver(cb);
 
+    const observer = new MutationObserver(cb);
     observer.observe(document.body, config);
   }
 };
