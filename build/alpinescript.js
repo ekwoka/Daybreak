@@ -56,9 +56,10 @@ export default function (Alpine) {
     console.log('Registering Stores');
     Alpine.persistedStore('cart', {
         items: [],
+        isOpen: false,
         get value() {
             let v = 0
-            this.items.forEach(item => v += item.line_price || 0)
+            this.items.forEach(item => v += item.final_price * item.quantity || 0)
             return v
         },
         get quantity() {
@@ -67,6 +68,7 @@ export default function (Alpine) {
             return q
         },
         async init(){
+            this.isOpen = false
             let response,cart
             try {
                 response = await fetch(routes.cart_update_url, {
@@ -77,6 +79,10 @@ export default function (Alpine) {
                 console.log(e);
               }
             this.items = cart.items
+        },
+        open(){
+            this.isOpen=true
+            requestAnimationFrame(()=>{requestAnimationFrame(()=>{Daybreak.RIAS.updateSizes()})})
         }
     }, sessionStorage)
     Alpine.persistedStore('subscribed', false)
