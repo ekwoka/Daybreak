@@ -1,4 +1,4 @@
-/* import './../node_modules/alpinejs/src/directives/x-transition' */
+import './../node_modules/alpinejs/src/directives/x-transition'
 /* import './../node_modules/alpinejs/src/directives/x-ignore' */
 import './../node_modules/alpinejs/src/directives/x-effect'
 import './../node_modules/alpinejs/src/directives/x-model'
