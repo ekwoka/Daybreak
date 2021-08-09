@@ -11,7 +11,7 @@ console.log(`
 /* Daybreak Functions */
 console.log("Registering Daybreak");
 
-export async function addToCart(id, q, cart) {
+export async function addToCart(id, q, items) {
   let response, item;
   let body = JSON.stringify({ id, q });
   try {
@@ -23,12 +23,13 @@ export async function addToCart(id, q, cart) {
   } catch (e) {
     console.log(e);
   }
-  let index = cart.items.findIndex((e) => e.id == id);
-  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
-  return cart;
+  if (Array.isArray(item)) return fetchCart();
+  let index = items.findIndex((e) => e.id == id);
+  index >= 0 ? (items[index] = item) : items.push(item);
+  return items;
 }
 
-export async function addToCartFromForm(body,cart) {
+export async function addToCartFromForm(body,items) {
   let response, item;
   try {
     response = await fetch(routes.cart_add_url, {...fetchConfig('javascript'), body});
@@ -36,29 +37,43 @@ export async function addToCartFromForm(body,cart) {
     if(item.status == 'bad_request') throw item.description
   } catch (e) {
     console.log(e);
-    return cart;
+    return items;
   }
+  if (Array.isArray(item)) return fetchCart();
   let id = item.id
-  let index = cart.items.findIndex((e) => e.id == id);
-  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
-  return cart;
+  let index = items.findIndex((e) => e.id == id);
+  index >= 0 ? (items[index] = item) : items.push(item);
+  return items;
 }
 
-export async function changeCart(i, q, cart) {
-  let response, item;
-  let body = JSON.stringify({ i, q });
+export async function changeCart(line, quantity, items) {
+  let response, cart;
+  let body = JSON.stringify({ line, quantity });
   try {
     response = await fetch(routes.cart_change_url, {
       ...fetchConfig("javascript"),
       body
     });
-    item = await response.json();
+    cart = await response.json();
+  } catch (e) {
+    console.log(e);
+    return fetchCart()
+  }
+  items = cart.items
+  return items;
+}
+
+export async function fetchCart() {
+  let response, cart;
+  try {
+    response = await fetch(routes.cart_update_url, {
+      ...fetchConfig("javascript")
+    });
+    cart = await response.json();
   } catch (e) {
     console.log(e);
   }
-  let index = cart.items.findIndex((e) => e.id == item.id);
-  index >= 0 ? (cart.items[index] = item) : cart.items.push(item);
-  return cart;
+  return cart.items
 }
 
 export const currency = new Intl.NumberFormat([Shopify.locale + '-'+ Shopify.country], { style: 'currency', currency: Shopify.currency.active }) || new Intl.NumberFormat([en-US], { style: 'currency', currency: USD })

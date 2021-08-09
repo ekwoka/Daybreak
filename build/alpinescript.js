@@ -69,16 +69,7 @@ export default function (Alpine) {
         },
         async init(){
             this.isOpen = false
-            let response,cart
-            try {
-                response = await fetch(routes.cart_update_url, {
-                  ...fetchConfig("javascript")
-                });
-                cart = await response.json();
-              } catch (e) {
-                console.log(e);
-              }
-            this.items = cart.items
+            this.items = await Daybreak.fetchCart();
         },
         open(){
             this.isOpen=true
@@ -173,7 +164,7 @@ export default function (Alpine) {
                 sections: ['cart-icon-bubble'],
                 sections_url: window.location.pathname
               })
-            this.$store.cart = await Daybreak.addToCartFromForm(formData,this.$store.cart)
+            this.$store.cart.items = await Daybreak.addToCartFromForm(formData,this.$store.cart.items)
             this.$store.toast.addToast(`${this.title} added to cart`,'success')
             this.sending=false
         }
