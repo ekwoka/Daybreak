@@ -37,9 +37,11 @@ export default function (Alpine) {
         
         let imgBase = evaluate(expression);
         if (!imgBase) return;
+        if (!imgBase.includes('{width}')) imgBase = imgBase.replace(/.jpg|.png/g,(m) => {
+            return `_{width}x${m}`
+        })
         let width = [180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2160, 2376, 2592, 2808, 3024];
-
-        let imgSrc = imgBase.replaceAll('{width}', width[0]);
+        let imgSrc = imgBase.replaceAll('{width}', width[1]);
         let setArray = [];
         width.forEach(w => setArray.push(`${imgBase.replaceAll('{width}', w)} ${w}w`));
         let imgSet = setArray.join(',');
