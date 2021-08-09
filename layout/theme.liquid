@@ -120,9 +120,9 @@
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-
+    {%- section 'cart-drawer-comp' -%}
     {% section 'footer' %}
-
+    {%- section 'toast-display-comp' -%}
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
     </ul>
@@ -148,6 +148,6 @@
 
     <script src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script>
-    {%- section 'toast-display-comp' -%}
+    
   </body>
 </html>

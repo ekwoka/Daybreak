@@ -1,4 +1,4 @@
-const height = require("tailwindcss/defaultTheme")
+const theme = require("tailwindcss/defaultTheme")
 const colors = require('tailwindcss/colors')
 
 module.exports = {
@@ -14,6 +14,10 @@ module.exports = {
   theme: {
     container: {
       center: true,
+    },
+    screens: {
+      'xs': '340px',
+      ...theme.screens,
     },
     extend: {
       colors: {
