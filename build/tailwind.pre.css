@@ -34,7 +34,7 @@ img, video {
 
 @layer components {
     .btn-primary {
-        @apply px-4 py-2 transition-all shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500
+        @apply px-4 py-2 transition-all duration-500 shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 hover:from-cta-600 hover:to-cta-500 hover:text-white
     }
 
     floating-label {
@@ -74,4 +74,10 @@ img, video {
         @apply pl-1 text-[color:var(--old-price)] line-through text-sm
     }
 
+}
+
+@layer utilities {
+    .scroll-lock {
+        @apply overflow-hidden md:overflow-auto
+    }
 }
