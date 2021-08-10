@@ -1024,6 +1024,9 @@ old-price {
 .ml-auto {
 	margin-left: auto;
 }
+.mr-2 {
+	margin-right: 0.5rem;
+}
 .mt-2 {
 	margin-top: 0.5rem;
 }
@@ -1135,6 +1138,22 @@ old-price {
 }
 .transform {
 	transform: var(--tw-transform);
+}
+@-webkit-keyframes spin {
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes spin {
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+.animate-spin {
+	-webkit-animation: spin 1s linear infinite;
+	        animation: spin 1s linear infinite;
 }
 @-webkit-keyframes bounce {
 
@@ -1414,6 +1433,10 @@ old-price {
 	--tw-text-opacity: 1;
 	color: rgba(248, 113, 113, var(--tw-text-opacity));
 }
+.text-white {
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
 .text-blue-800 {
 	--tw-text-opacity: 1;
 	color: rgba(30, 64, 175, var(--tw-text-opacity));
@@ -1436,6 +1459,12 @@ old-price {
 }
 .underline {
 	text-decoration: underline;
+}
+.opacity-25 {
+	opacity: 0.25;
+}
+.opacity-75 {
+	opacity: 0.75;
 }
 .opacity-40 {
 	opacity: 0.4;
