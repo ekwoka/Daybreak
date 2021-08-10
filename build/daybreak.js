@@ -25,7 +25,8 @@ export async function addToCart(id, q, items) {
   }
   if (Array.isArray(item)) return fetchCart();
   let index = items.findIndex((e) => e.id == id);
-  index >= 0 ? (items[index] = item) : items.push(item);
+  (index >= 0 && items[index]?.removed) && items.splice(index,1) && (index = -1);
+  (index >= 0) ? items[index] = item : items.unshift(item)
   return items;
 }
 
@@ -42,7 +43,7 @@ export async function addToCartFromForm(body,items) {
   if (Array.isArray(item)) return fetchCart();
   let id = item.id
   let index = items.findIndex((e) => e.id == id);
-  index >= 0 ? (items[index] = item) : items.push(item);
+  index >= 0 ? (items[index] = item) : items.unshift(item);
   return items;
 }
 
@@ -59,7 +60,12 @@ export async function changeCart(line, quantity, items) {
     console.log(e);
     return fetchCart()
   }
-  items = cart.items
+  if(quantity==0) {
+    items[line-1].removed = true
+    items.push(items.splice(line-1,1)[0])
+    return items;
+  }
+  items = cart.items;
   return items;
 }
 
