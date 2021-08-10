@@ -91,3 +91,67 @@ toast-title {
 toast-message {
     @apply text-sm text-gray-600
 }
+
+cart-backdrop {
+    @apply fixed inset-0 z-10 transition-all duration-700 ease-out transform bg-gray-900/60 md:bg-gray-900/90 backdrop-blur overscroll-contain md:backdrop-blur-[2px]
+}
+
+cart-drawer {
+    @apply fixed inset-y-0 right-0 z-10 flex flex-col w-full transition-all duration-700 ease-out transform bg-white border border-gray-500 shadow-md xs:w-11/12 sm:w-5/6 overscroll-contain md:max-w-screen-sm
+}
+
+cart-title {
+    @apply p-2 pt-4 pl-4 text-lg
+}
+
+button.close-btn {
+    @apply absolute block px-4 py-2 right-2 top-2
+}
+
+button.close-btn > svg {
+    @apply inline-block w-5 h-5 align-bottom
+}
+
+cart-container {
+    @apply flex flex-col w-full px-1 py-2 overflow-auto divide-y divide-gray-300
+}
+
+cart-empty {
+    @apply w-full p-4 mx-auto text-center
+}
+
+cart-item {
+    @apply flex flex-row w-full gap-2 px-1
+}
+
+cart-item > img {
+    @apply flex-none object-scale-down w-1/3
+}
+
+cart-item > item-details {
+    @apply flex flex-col flex-auto
+}
+
+cart-item quantity-control {
+    @apply flex flex-row flex-none w-24 mt-4 max-w-1/2 flex-nowrap focus-within:ring-2 ring-primary-500
+}
+
+quantity-control > button {
+    @apply flex-auto w-8 h-8 border border-gray-400 focus:outline-none disabled:bg-gray-200
+}
+
+quantity-control > input[type="text"] {
+    @apply flex-none w-8 h-8 p-1 text-center border border-gray-400 appearance-none focus:border-gray-400
+}
+
+remove-price {
+    @apply flex-auto w-full pt-2 pr-2 ml-auto text-base font-medium text-right divide-x md:pr-8 min-w-max text-cta-600
+}
+
+remove-price > button {
+    @apply flex-none float-left pr-2 text-red-400 underline
+}
+
+remove-price > * {
+    @apply pl-2
+}
