@@ -230,6 +230,7 @@ progress.load-more[value]::-moz-progress-bar {
 }
 
 toast-item {
+  pointer-events: none;
   position: fixed;
   left: 0px;
   right: 0px;
