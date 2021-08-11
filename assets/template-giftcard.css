@@ -30,7 +30,7 @@ html {
 body {
   background-color: rgb(var(--color-base-background-1));
   color: rgb(var(--color-base-text));
-  font-size: 0.9375rem;
+  font-size: 1rem;
   letter-spacing: 0.04375rem;
   line-height: 1.9;
   max-width: 75rem;
@@ -124,7 +124,7 @@ h2,
   color: rgb(var(--color-base-solid-button-labels));
   min-width: 7.5rem;
   height: auto;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   letter-spacing: 0.0625rem;
   line-height: 1.2;
 }
