@@ -89,7 +89,7 @@ export const RIAS = {
     let sizes = el.offsetWidth;
     let parent = el.parentNode;
     while (sizes < 100 && parent) {
-      width = parent.offsetWidth;
+      sizes = parent.offsetWidth;
       parent = parent.parentNode;
     }
     sizes += "px";
