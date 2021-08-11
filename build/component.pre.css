@@ -145,13 +145,28 @@ quantity-control > input[type="text"] {
 }
 
 remove-price {
-    @apply flex-auto w-full pt-2 pr-2 ml-auto text-base font-medium text-right divide-x md:pr-8 min-w-max text-cta-600
+    @apply flex-auto w-full pt-2 pr-2 ml-auto text-base text-right divide-x md:pr-8 min-w-max text-cta-600
 }
 
 remove-price > button {
-    @apply flex-none float-left pr-2 text-red-400 underline
+    @apply flex-none float-left pr-2 text-red-600 tracking-wide underline -ml-2
 }
 
 remove-price > * {
     @apply pl-2
+}
+
+cart-footer {
+    @apply sticky bottom-0 flex flex-col items-center w-full px-4 py-4 mx-auto bg-white gap-y-2 md:px-16
+}
+
+payment-options > * {
+    @apply mx-auto max-w-max
+}
+
+cart-details > * {
+    @apply max-w-max ml-auto
+}
+cart-details :nth-child(odd) {
+    @apply col-span-3
 }

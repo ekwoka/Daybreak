@@ -10,7 +10,7 @@
 }
 
 /* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price {
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price, cart-footer, payment-options, payment-icons,cart-details, sub-total, estimated-shipping, cart-total, expected-discount {
         @apply block
     }
 
@@ -34,7 +34,7 @@ img, video {
 
 @layer components {
     .btn-primary {
-        @apply px-4 py-2 transition-all duration-500 shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 hover:from-cta-600 hover:to-cta-500 hover:text-white
+        @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t from-cta-700 to-cta-600 text-gray-50 disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 hover:from-cta-600 hover:to-cta-500 hover:text-white
     }
 
     floating-label {
@@ -66,8 +66,12 @@ img, video {
         @apply inline-block w-6 h-6 mx-auto fill-current
     }
 
+    svg.inline-spinner {
+        @apply inline-block w-5 h-5 mx-2 text-white align-bottom animate-spin
+    }
+
     new-price {
-        @apply text-[color:var(--price-color)]
+        @apply text-[color:var(--price-color)] font-medium
     }
 
     old-price {

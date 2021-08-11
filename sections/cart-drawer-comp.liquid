@@ -1,7 +1,7 @@
 <!-- cart-drawer-comp.liquid START -->
 {{ 'cart-drawer.comp.css' | asset_url | stylesheet_tag }}
 <div x-data="cart" x-effect="$store.cart.isOpen?document.body.classList.add('scroll-lock'):document.body.classList.remove('scroll-lock')">
-    <cart-backdrop @click="$store.cart.isOpen = false" x-show="$store.cart.isOpen" x-cloak style="display: none"
+    <cart-backdrop class="backdrop-filter" @click="$store.cart.isOpen = false" x-show="$store.cart.isOpen" x-cloak style="display: none"
         x-transition:enter-start="translate-y-full"
         x-transition:leave-end="translate-y-full"> </cart-backdrop>
     <cart-drawer x-show="$store.cart.isOpen" x-cloak style="display: none"
@@ -35,23 +35,33 @@
                 </cart-item>
             </template>
         </cart-container>
-        <div class="sticky bottom-0 flex flex-col items-center w-full p-2 pb-4 mx-auto bg-white">
-            <button class="w-full my-2 btn-primary" @click.prevent="window.location.href='/checkout'" :disabled="$store.cart.quantity==0||updating">
-                <svg class="inline-block w-5 h-5 mr-2 text-white align-bottom animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" x-show="updating">
+        <cart-footer>
+            <cart-details class="grid w-full grid-cols-4 mx-auto max-w-screen-xs md:w-3/4">
+                <expected-discount>Discount:</expected-discount><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                <sub-total>
+                    Subtotal:
+                </sub-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                <estimated-shipping>Estimated Shipping:</estimated-shipping><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                <cart-total>Total:</cart-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+            </cart-details>
+            <button class="w-full btn-primary" @click.prevent="window.location.href='/checkout'" :disabled="$store.cart.quantity==0||updating">
+                <svg class="inline-spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" x-show="updating">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
               <span x-text="updating?'updating...':`Checkout - ${Daybreak.currency.format($store.cart.value/100)}`" {%- if cart.item_count < 1 %} disabled {%- endif -%}>Checkout</span>
             </button>
-            <div>Available at Checkout</div>
-            <div class="flex">
-                {%- liquid
-                    for type in shop.enabled_payment_types
-                        echo type | payment_type_svg_tag
-                    endfor
-                -%}
-            </div>
-        </div>
+            <payment-options class="w-full">
+                <div>Available at Checkout</div>
+                <payment-icons class="flex">
+                    {%- liquid
+                        for type in shop.enabled_payment_types
+                            echo type | payment_type_svg_tag
+                        endfor
+                    -%}
+                </payment-icons>
+            </payment-options>
+        </cart-footer>
     </cart-drawer>
 </div>
 
