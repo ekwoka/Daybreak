@@ -176,10 +176,8 @@ export default function (Alpine) {
             let time = this.time = Date.now()
             let item = this.$store.cart.items[i]
             this.updating=true
-            let removed = item.removed
-            item.removed = false
             let response
-            response = removed ? await Daybreak.addToCart(item.id,q,this.$store.cart.items) : await Daybreak.changeCart(i+1,q,this.$store.cart.items)
+            response = item.removed ? await Daybreak.addToCart(item.id,q,this.$store.cart.items) : await Daybreak.changeCart(i+1,q,this.$store.cart.items)
             this.$store.cart.items = time==this.time ? response : this.$store.cart.items
             this.updating=false
         },
