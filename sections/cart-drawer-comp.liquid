@@ -1,5 +1,35 @@
 <!-- cart-drawer-comp.liquid START -->
 {{ 'cart-drawer.comp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+    assign thresholdBlocks = section.blocks | where: 'type','threshold'
+    assign itemsBlocks = section.blocks | where: 'type','items'
+    assign detailsBlocks = section.blocks | where: 'type','details'
+    assign continueBlocks = section.blocks | where: 'type','continue'
+    assign paymentsBlocks = section.blocks | where: 'type','payments'
+-%}
+
+<style>
+
+</style>
+
+<script>
+{%- if thresholdBlocks.size > 0 -%}
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('shippingThreshold',({}={}) => ({
+            threshold: {{ settings.free_shipping_threshold }},
+            get remaining() {
+                return Daybreak.currency.format((this.threshold-this.cartValue)/100)
+            },
+            get cartValue(){
+                return this.$store.cart.value
+            }
+        }))
+    });
+{%- endif -%}
+
+</script>
+
 <div x-data="cart" x-effect="$store.cart.isOpen?document.body.classList.add('scroll-lock'):document.body.classList.remove('scroll-lock')">
     <cart-backdrop class="backdrop-filter" @click="$store.cart.isOpen = false" x-show="$store.cart.isOpen" x-cloak style="display: none"
         x-transition:enter-start="translate-y-full"
@@ -9,11 +39,19 @@
     x-transition:leave-end="translate-x-full">
         <cart-title>Cart</cart-title>
         <button class="close-btn" @click="$store.cart.isOpen = false">Close<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-          </svg></button>
+            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        </button>
+        {%- for block in thresholdBlocks -%}
+            {%- if block.settings.showTop -%}
+                <shipping-threshold class="{{ block.settings.style }} max-w-full p-2 block" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40':''">
+                    <threshold-message class="block text-center" x-html="cartValue>=threshold?`{{ block.settings.afterMessage }}`:`{{ block.settings.beforeMessage }}`"></threshold-message>
+                </shipping-threshold>
+            {%- endif -%}
+        {%- endfor -%}
+
         <cart-container>
             <template x-if="$store.cart.items.length == 0">
-                <cart-empty class="w-full p-4 mx-auto text-center">Your cart is empty</cart-empty>
+                <cart-empty class="w-full p-4 mx-auto text-center">{{ settings.emptyMessage }}</cart-empty>
             </template>
             <template x-for="(item,index) in $store.cart.items" :key="item.id">
                 <cart-item>
@@ -72,6 +110,155 @@
 {
     "name": "Cart Drawer",
     "tag": "aside", 
-    "class": "h-0"
+    "class": "h-0",
+    "settings": [
+        {
+            "type": "text",
+            "id": "emptyMessage",
+            "label": "Empty Cart Message",
+            "default": "Your cart is empty"
+        },
+        {
+            "type": "paragraph",
+            "content": "Note: Blocks in this section have default orders, and will mostly not be affected by resorting. A few have some adjustable order."
+        }
+    ],
+    "blocks": [
+        {
+            "type": "items",
+            "name": "Cart Items",
+            "limit": 1
+        },
+        {
+            "type": "threshold",
+            "name": "Shipping Threshold",
+            "limit": 2,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "showTop",
+                    "label": "Show at Top of Cart",
+                    "default": true
+                },
+                {
+                    "type": "select",
+                    "id": "style",
+                    "label": "Display Style",
+                    "options": [
+                        {
+                            "value": "glass",
+                            "label": "Glass Style Card"
+                        },
+                        {
+                            "value": "minimal",
+                            "label": "Minimalist"
+                        }
+                    ]
+                },
+                {
+                    "type": "text",
+                    "id": "beforeMessage",
+                    "label": "Cart Too Small Message",
+                    "default": "You are ${remaining} away from <strong>FREE SHIPPING</strong>",
+                    "info": "Use '${remaining}' for the amount left to spend, and '${thresholdValue}' for the amount needed to qualify. Accepts HTML"
+                },
+                {
+                    "type": "text",
+                    "id": "afterMessage",
+                    "label": "Message for Those Who Qualify",
+                    "default": "Congratulations! You qualify for <strong>FREE SHIPPING</strong>",
+                    "info": "Accepts HTML"
+                }
+            ]
+        },
+        {
+            "type": "details",
+            "name": "Cart Details",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "checkbox",
+                    "id": "showDiscount",
+                    "label": "Show Estimated Discounts",
+                    "default": false,
+                    "info": "For information on how to get this set up, review the theme documentation"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "showShipping",
+                    "label": "Show Estimated Shipping",
+                    "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "showTotal",
+                    "label": "Show Total",
+                    "default": false
+                }
+            ]
+        },
+        {
+            "type": "payments",
+            "name": "Available at Checkout",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "text",
+                    "id": "paymentsMessage",
+                    "label": "Message for Payments",
+                    "default": "Available at Checkout"
+                },
+                {
+                    "type": "checkbox",
+                    "id": "showDefault",
+                    "label": "Show Default Payment Icons",
+                    "default": true,
+                    "info": "These Icons are generated by Shopify for your currently accepted payments as configured in your Account settings"
+                },
+                {
+                    "type": "html",
+                    "id": "custom",
+                    "label": "Custom Payment Options"
+                }
+            ]
+        },
+        {
+            "type": "continue",
+            "name": "Continue Shopping",
+            "limit": 1,
+            "settings": [
+                {
+                    "type": "radio",
+                    "id": "target",
+                    "label": "Continue Link Target",
+                    "default": "dynamic",
+                    "options": [
+                        {
+                            "value": "dynamic",
+                            "label": "Dynamic Target (recommended)"
+                        },
+                        {
+                            "value": "close",
+                            "label": "Close Cart Drawer"
+                        },
+                        {
+                            "value": "home",
+                            "label": "Home Page"
+                        },
+                        {
+                            "value": "bestseller",
+                            "label": "Best Sellers"
+                        }
+                    ]
+                },
+                {
+                    "type": "collection",
+                    "id": "bestCollection",
+                    "label": "Best Sellers Collection",
+                    "info": "Collection to send users to when the 'Continue Link' is set to 'Best Sellers'"
+                }
+            ]
+        }
+    ]
 }
 {% endschema %}

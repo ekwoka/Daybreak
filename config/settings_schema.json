@@ -258,8 +258,7 @@
         "type": "number",
         "id": "free_shipping_threshold",
         "label": "t:settings_schema.free-shipping.settings.free_shipping_threshold.label",
-        "info": "t:settings_schema.free-shipping.settings.free_shipping_threshold.info",
-        "default": 0
+        "info": "t:settings_schema.free-shipping.settings.free_shipping_threshold.info"
       }
     ]
   },

@@ -1072,6 +1072,9 @@ old-price {
 	min-width: -moz-max-content;
 	min-width: max-content;
 }
+.max-w-full {
+	max-width: 100%;
+}
 .max-w-screen-xs {
 	max-width: 340px;
 }
@@ -1207,6 +1210,9 @@ old-price {
 	--tw-border-opacity: 1;
 	border-color: rgba(255, 255, 255, var(--tw-border-opacity));
 }
+.bg-cta-600\/40 {
+	background-color: rgba(22, 163, 74, 0.4);
+}
 .bg-cta-600 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(22, 163, 74, var(--tw-bg-opacity));
@@ -1229,11 +1235,11 @@ old-price {
 .to-gray-600 {
 	--tw-gradient-to: #4b5563;
 }
-.p-4 {
-	padding: 1rem;
-}
 .p-2 {
 	padding: 0.5rem;
+}
+.p-4 {
+	padding: 1rem;
 }
 .px-4 {
 	padding-left: 1rem;
