@@ -1,5 +1,6 @@
 {
   "current": {
+    "free_shipping_threshold": 4200,
     "reviewApp": "stamped",
     "sections": {
       "announcement-bar": {
@@ -55,6 +56,63 @@
           "enable_country_selector": true,
           "enable_language_selector": true,
           "payment_enable": true
+        }
+      },
+      "cart-drawer-comp": {
+        "type": "cart-drawer-comp",
+        "blocks": {
+          "b7d440b7-542c-488d-8837-2d39c80d8fff": {
+            "type": "threshold",
+            "settings": {
+              "showTop": true,
+              "style": "glass",
+              "beforeMessage": "You are ${remaining} away from <strong>FREE SHIPPING<\/strong>",
+              "afterMessage": "Congratulations! You qualify for <strong>FREE SHIPPING<\/strong>"
+            }
+          },
+          "607ba348-3a6e-4957-b1fe-28ee33895acd": {
+            "type": "items",
+            "settings": {
+            }
+          },
+          "b9e790e0-1c21-404f-a446-d461d42610f7": {
+            "type": "details",
+            "settings": {
+              "showDiscount": false,
+              "showShipping": false,
+              "showTotal": false
+            }
+          },
+          "f0ac9495-4423-4e5b-82fa-2d5ebfd8c2b0": {
+            "type": "payments",
+            "settings": {
+              "paymentsMessage": "Available at Checkout",
+              "showDefault": true,
+              "custom": ""
+            }
+          },
+          "12a75623-cfcf-49d5-a61c-b9b997e6d389": {
+            "type": "continue",
+            "settings": {
+              "target": "dynamic",
+              "bestCollection": ""
+            }
+          }
+        },
+        "block_order": [
+          "b7d440b7-542c-488d-8837-2d39c80d8fff",
+          "607ba348-3a6e-4957-b1fe-28ee33895acd",
+          "b9e790e0-1c21-404f-a446-d461d42610f7",
+          "f0ac9495-4423-4e5b-82fa-2d5ebfd8c2b0",
+          "12a75623-cfcf-49d5-a61c-b9b997e6d389"
+        ],
+        "settings": {
+          "emptyMessage": "Your cart is empty"
+        }
+      },
+      "toast-display-comp": {
+        "type": "toast-display-comp",
+        "settings": {
         }
       }
     },
