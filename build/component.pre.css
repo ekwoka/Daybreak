@@ -1,3 +1,5 @@
+/* inline-email-comp.liquid */
+
 .inline-email-capture {
     @apply relative flex flex-col items-center w-full p-8 mx-auto md:max-w-screen-sm gap-y-2
 }
@@ -9,6 +11,8 @@
 .inline-email-capture capture-main form {
     @apply flex flex-col w-full gap-1 md:flex-row
 }
+
+/* order-bump-comp.liquid */
 
 .order-bump-section {
     @apply p-4 max-w-screen-sm mx-auto
@@ -42,6 +46,8 @@ bump-item img {
     @apply block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-truegray-500 hover:text-gray-200
 }
 
+/* daybreak-grid-comp.liquid */
+
 img.force-tall {
     @apply object-cover;
     aspect-ratio: 5/6;
@@ -68,6 +74,8 @@ progress.load-more[value]::-moz-progress-bar {
     @apply bg-gradient-to-tr from-cta-800 to-cta-500 rounded-sm transition-all duration-1000 ease-in-out
 }
 
+/* toast-display-comp.liquid */
+
 toast-item {
     @apply fixed inset-x-0 z-[110] w-3/4 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md min-w-max pointer-events-none
 }
@@ -91,6 +99,8 @@ toast-title {
 toast-message {
     @apply text-sm text-gray-600
 }
+
+/* cart-drawer-comp.liquid */
 
 cart-backdrop {
     @apply fixed inset-0 z-10 transition-all duration-700 ease-out transform bg-gray-900/60 md:bg-gray-900/90 backdrop-blur overscroll-contain md:backdrop-blur-[2px]
@@ -119,6 +129,12 @@ cart-container {
 cart-empty {
     @apply w-full p-4 mx-auto text-center
 }
+
+cart-footer {
+    @apply sticky bottom-0 flex flex-col items-center w-full px-4 py-4 mx-auto bg-white gap-y-4 md:px-16
+}
+
+/* cart-drawer-comp.liquid, block: cart items */
 
 cart-item {
     @apply flex flex-row w-full gap-2 px-1
@@ -156,17 +172,65 @@ remove-price > * {
     @apply pl-2
 }
 
-cart-footer {
-    @apply sticky bottom-0 flex flex-col items-center w-full px-4 py-4 mx-auto bg-white gap-y-2 md:px-16
-}
-
 payment-options > * {
     @apply mx-auto max-w-max
 }
+
+/* cart-drawer-comp.liquid, block: cart details */
 
 cart-details > * {
     @apply max-w-max ml-auto
 }
 cart-details :nth-child(odd) {
     @apply col-span-3
+}
+
+/* cart-drawer-comp.liquid, block: shipping threshold */
+
+shipping-threshold {
+    @apply max-w-full py-2 px-4 flex flex-col items-center gap-y-2 border-t border-b border-solid border-cta-600
+}
+
+shipping-threshold > progress {
+    @apply appearance-none w-full h-3 rounded-md
+}
+
+shipping-threshold > progress[value]::-webkit-progress-bar {
+    @apply bg-gray-300 rounded-md
+}
+
+shipping-threshold.glass > progress[value]::-webkit-progress-bar {
+    @apply shadow-inner
+}
+
+shipping-threshold > progress[value]::-webkit-progress-value {
+    @apply rounded-md transition-all duration-1000 ease-in-out
+}
+
+shipping-threshold > progress[value]::-moz-progress-bar {
+    @apply rounded-md transition-all duration-1000 ease-in-out
+}
+
+shipping-threshold.glass > progress[value]::-webkit-progress-value {
+    @apply from-cta-800 to-cta-500
+}
+
+shipping-threshold.glass > progress[value]::-moz-progress-bar {
+    @apply from-cta-800 to-cta-500
+}
+
+shipping-threshold.minimal > progress[value]::-webkit-progress-value {
+    @apply bg-cta-600
+}
+
+shipping-threshold.minimal > progress[value]::-moz-progress-bar {
+    @apply bg-cta-600
+}
+
+shipping-threshold.glass > progress[value]::-webkit-progress-value {
+    @apply bg-gradient-to-tr
+}
+
+shipping-threshold.glass > progress[value]::-moz-progress-bar {
+    @apply bg-gradient-to-tr
 }

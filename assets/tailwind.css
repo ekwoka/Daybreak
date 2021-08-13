@@ -1072,9 +1072,6 @@ old-price {
 	min-width: -moz-max-content;
 	min-width: max-content;
 }
-.max-w-full {
-	max-width: 100%;
-}
 .max-w-screen-xs {
 	max-width: 340px;
 }
@@ -1210,6 +1207,12 @@ old-price {
 	--tw-border-opacity: 1;
 	border-color: rgba(255, 255, 255, var(--tw-border-opacity));
 }
+.border-opacity-60 {
+	--tw-border-opacity: 0.6;
+}
+.border-opacity-0 {
+	--tw-border-opacity: 0;
+}
 .bg-cta-600\/40 {
 	background-color: rgba(22, 163, 74, 0.4);
 }
@@ -1235,11 +1238,11 @@ old-price {
 .to-gray-600 {
 	--tw-gradient-to: #4b5563;
 }
-.p-2 {
-	padding: 0.5rem;
-}
 .p-4 {
 	padding: 1rem;
+}
+.p-2 {
+	padding: 0.5rem;
 }
 .px-4 {
 	padding-left: 1rem;
@@ -1331,6 +1334,9 @@ old-price {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
+.underline {
+	text-decoration: underline;
+}
 .opacity-25 {
 	opacity: 0.25;
 }
@@ -1369,6 +1375,9 @@ old-price {
 .hover\:border-cta-500:hover {
 	--tw-border-opacity: 1;
 	border-color: rgba(34, 197, 94, var(--tw-border-opacity));
+}
+.hover\:opacity-75:hover {
+	opacity: 0.75;
 }
 @media (min-width: 768px) {
 

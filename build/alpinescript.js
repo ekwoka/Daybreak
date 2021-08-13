@@ -73,7 +73,6 @@ export default function (Alpine) {
         },
         open(){
             this.isOpen=true
-            requestAnimationFrame(()=>{requestAnimationFrame(()=>{Daybreak.RIAS.updateSizes()})})
         }
     }, sessionStorage)
     Alpine.persistedStore('subscribed', false)

@@ -5,8 +5,6 @@
     assign thresholdBlocks = section.blocks | where: 'type','threshold'
     assign itemsBlocks = section.blocks | where: 'type','items'
     assign detailsBlocks = section.blocks | where: 'type','details'
-    assign continueBlocks = section.blocks | where: 'type','continue'
-    assign paymentsBlocks = section.blocks | where: 'type','payments'
 -%}
 
 <style>
@@ -17,7 +15,7 @@
 {%- if thresholdBlocks.size > 0 -%}
     document.addEventListener('alpine:init', () => {
         Alpine.data('shippingThreshold',({}={}) => ({
-            threshold: {{ settings.free_shipping_threshold }},
+            threshold: {{ settings.free_shipping_threshold | default: false }},
             get remaining() {
                 return Daybreak.currency.format((this.threshold-this.cartValue)/100)
             },
@@ -43,8 +41,9 @@
         </button>
         {%- for block in thresholdBlocks -%}
             {%- if block.settings.showTop -%}
-                <shipping-threshold class="{{ block.settings.style }} max-w-full p-2 block" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40':''">
+                <shipping-threshold class="{{ block.settings.style }}" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40 border-opacity-60':'border-opacity-0'">
                     <threshold-message class="block text-center" x-html="cartValue>=threshold?`{{ block.settings.afterMessage }}`:`{{ block.settings.beforeMessage }}`"></threshold-message>
+                    <progress :max="threshold" :value="cartValue" x-text="`${remaining} left`" :class="cartValue>=threshold?'complete':'incomplete'"></progress>
                 </shipping-threshold>
             {%- endif -%}
         {%- endfor -%}
@@ -53,35 +52,45 @@
             <template x-if="$store.cart.items.length == 0">
                 <cart-empty class="w-full p-4 mx-auto text-center">{{ settings.emptyMessage }}</cart-empty>
             </template>
-            <template x-for="(item,index) in $store.cart.items" :key="item.id">
-                <cart-item>
-                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" x-rias="item.featured_image.url" :width="item.featured_image.width" :height="item.featured_image.height" :alt="item.featured_image.alt" data-sizes="auto" loading="lazy"/>
-                    <item-details>
-                        <a :href="item.url" x-text="item.product_title"></a>
-                        <div class="block text-gray-700" x-text="item.variant_title"></div>
-                        <quantity-control>
-                            <button class="border-r-0" @click.prevent="item.quantity--;updateCart(index,item.quantity)" :disabled="item.quantity <=0||updating">-</button>
-                            <input type="text" disabled x-model="item.quantity" :aria-label="`Quantity: ${item.quantity}`" aria-label="Quantity:"/>
-                            <button class="border-l-0" @click.prevent="item.quantity++;updateCart(index,item.quantity)" :disabled="updating">+</button>
-                        </quantity-control>
-                        <remove-price>
-                            <button x-show="item.quantity != 0" @click.prevent="item.quantity=0;updateCart(index,item.quantity)" :disabled="updating">remove</button>
-                            <old-price class="hidden" x-cloak x-text="'$19.00'" ></old-price>
-                            <new-price x-text="Daybreak.currency.format(item.final_price*item.quantity/100)"></new-price>
-                        </remove-price>
-                    </item-details>
-                </cart-item>
-            </template>
+            {%- for block in itemsBlocks -%}
+                <template x-for="(item,index) in $store.cart.items" :key="item.id">
+                    <cart-item>
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" x-rias="item.featured_image.url" :width="item.featured_image.width" :height="item.featured_image.height" :alt="item.featured_image.alt" data-sizes="auto" loading="lazy"/>
+                        <item-details>
+                            <a :href="item.url" x-text="item.product_title"></a>
+                            <div class="block text-gray-700" x-text="item.variant_title"></div>
+                            <quantity-control>
+                                <button class="border-r-0" @click.prevent="item.quantity--;updateCart(index,item.quantity)" :disabled="item.quantity <=0||updating">-</button>
+                                <input type="text" disabled x-model="item.quantity" :aria-label="`Quantity: ${item.quantity}`" aria-label="Quantity:"/>
+                                <button class="border-l-0" @click.prevent="item.quantity++;updateCart(index,item.quantity)" :disabled="updating">+</button>
+                            </quantity-control>
+                            <remove-price>
+                                <button x-show="item.quantity != 0" @click.prevent="item.quantity=0;updateCart(index,item.quantity)" :disabled="updating">remove</button>
+                                <old-price class="hidden" x-cloak x-text="'$19.00'" ></old-price>
+                                <new-price x-text="Daybreak.currency.format(item.final_price*item.quantity/100)"></new-price>
+                            </remove-price>
+                        </item-details>
+                    </cart-item>
+                </template>
+            {%- endfor -%}
         </cart-container>
         <cart-footer>
-            <cart-details class="grid w-full grid-cols-4 mx-auto max-w-screen-xs md:w-3/4">
-                <expected-discount>Discount:</expected-discount><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
-                <sub-total>
-                    Subtotal:
-                </sub-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
-                <estimated-shipping>Estimated Shipping:</estimated-shipping><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
-                <cart-total>Total:</cart-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
-            </cart-details>
+            {%- for block in detailsBlocks-%}
+                <cart-details class="grid w-full grid-cols-4 mx-auto max-w-screen-xs md:w-3/4">
+                    {%- if block.settings.showDiscount -%}
+                        <expected-discount>Discount:</expected-discount><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                    {%- endif -%}
+                    <sub-total>
+                        Subtotal:
+                    </sub-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                    {%- if block.settings.showShipping -%}
+                        <estimated-shipping>Estimated Shipping:</estimated-shipping><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                    {%- endif -%}
+                    {%- if block.settings.showTotal -%}
+                        <cart-total>Total:</cart-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                    {%- endif -%}
+                </cart-details>
+            {%- endfor -%}
             <button class="w-full btn-primary" @click.prevent="window.location.href='/checkout'" :disabled="$store.cart.quantity==0||updating">
                 <svg class="inline-spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" x-show="updating">
                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -89,16 +98,60 @@
               </svg>
               <span x-text="updating?'updating...':`Checkout - ${Daybreak.currency.format($store.cart.value/100)}`" {%- if cart.item_count < 1 %} disabled {%- endif -%}>Checkout</span>
             </button>
-            <payment-options class="w-full">
-                <div>Available at Checkout</div>
-                <payment-icons class="flex">
-                    {%- liquid
-                        for type in shop.enabled_payment_types
-                            echo type | payment_type_svg_tag
-                        endfor
-                    -%}
-                </payment-icons>
-            </payment-options>
+            {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                    {%- when 'threshold' -%}
+                        {%- unless block.settings.showTop -%}
+                            <shipping-threshold class="{{ block.settings.style }}" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40 border-opacity-60':'border-opacity-0'">
+                                <threshold-message class="block text-center" x-html="cartValue>=threshold?`{{ block.settings.afterMessage }}`:`{{ block.settings.beforeMessage }}`"></threshold-message>
+                                <progress :max="threshold" :value="cartValue" x-text="`${remaining} left`" :class="cartValue>=threshold?'complete':'incomplete'"></progress>
+                            </shipping-threshold>
+                        {%- endunless -%}
+                    {%- when 'payments' -%}
+                        <payment-options class="w-full">
+                            <div>{{ block.settings.paymentsMessage }}</div>
+                            {%- if block.settings.showDefault -%}
+                                <payment-icons class="flex">
+                                    {%- liquid
+                                        for type in shop.enabled_payment_types
+                                            echo type | payment_type_svg_tag
+                                        endfor
+                                    -%}
+                                </payment-icons>
+                            {%- endif -%}
+                            {{ block.settings.custom }}
+                        </payment-options>
+                    {%- when 'continue' -%}
+                        {%- liquid
+                            case block.settings.target
+                                when 'dynamic'
+                                    case request.page_type
+                                        when 'product'
+                                            if collection.url
+                                                assign attr = 'href="' | append: collection.url | append: '"'
+                                            elsif block.settings.bestCollection.url
+                                                assign attr = 'href="' | append: block.settings.bestCollection.url | append: '"'
+                                            else
+                                                assign attr = 'href="/"'
+                                            endif
+                                        when 'collection'
+                                            assign attr = '@click.prevent="$store.cart.isOpen = false"'
+                                        when 'index'
+                                            assign attr = '@click.prevent="$store.cart.isOpen = false"'
+                                        else
+                                            assign attr = 'href="/"'
+                                    endcase
+                                when 'close'
+                                    assign attr = '@click.prevent="$store.cart.isOpen = false"'
+                                when 'home'
+                                    assign attr = 'href="/"'
+                                when 'bestseller'
+                                    assign attr = 'href="' | append: block.settings.bestCollection.url | append: '"'
+                            endcase
+                        -%}
+                        <a class="underline hover:opacity-75" {{ attr }}>Continue Shopping</a>
+                {%- endcase -%}
+            {%- endfor -%}
         </cart-footer>
     </cart-drawer>
 </div>
