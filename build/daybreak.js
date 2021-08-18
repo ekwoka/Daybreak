@@ -20,13 +20,17 @@ export async function addToCart(id, q, items) {
       body
     });
     item = await response.json();
+    if(item.status == 'bad_request' || item.status == 404) throw item.description
   } catch (e) {
     console.log(e);
+    Alpine.store('toast').addToast(e,'error')
+    return items;
   }
   if (Array.isArray(item)) return fetchCart();
   let index = items.findIndex((e) => e.id == id);
   (index >= 0 && items[index]?.removed) && items.splice(index,1) && (index = -1);
   (index >= 0) ? items[index] = item : items.unshift(item)
+  Alpine.store('toast').addToast(item.product_title,'success')
   return items;
 }
 
@@ -35,15 +39,17 @@ export async function addToCartFromForm(body,items) {
   try {
     response = await fetch(routes.cart_add_url, {...fetchConfig('javascript'), body});
     item = await response.json();
-    if(item.status == 'bad_request') throw item.description
+    if(item.status == 'bad_request' || item.status == '404') throw item.description
   } catch (e) {
     console.log(e);
+    Alpine.store('toast').addToast(e,'error')
     return items;
   }
   if (Array.isArray(item)) return fetchCart();
   let id = item.id
   let index = items.findIndex((e) => e.id == id);
-  index >= 0 ? (items[index] = item) : items.unshift(item);
+  index >= 0 ? (items[index] = item) : items.unshift(item)
+  Alpine.store('toast').addToast(item.product_title,'success')
   return items;
 }
 

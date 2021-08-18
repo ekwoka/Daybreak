@@ -1,35 +1,19 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "button"
-      ],
+    "1629110654344cccde": {
+      "type": "hero-section-comp",
       "settings": {
-        "desktop_text_box_position": "flex-end",
-        "color_scheme": "background-1",
-        "stack_images_on_mobile": true,
-        "adapt_height_first_image": false
+        "h1": "Welcome to Daybreak",
+        "p": "A damn fast theme built on top of Dawn with TailwindCSS and AlpineJS",
+        "btn1txt": "Check out features",
+        "btn1url": "shopify:\/\/products\/damp-mountain",
+        "btn2txt": "View Deals",
+        "btn2url": "shopify:\/\/collections",
+        "mobile": "shopify:\/\/shop_images\/grey-couch-with-a-bookcase-behind-it.jpg",
+        "desktop": "shopify:\/\/shop_images\/working-at-night.jpg",
+        "aspect": "dynamic",
+        "mobileRatio": 26,
+        "deskRatio": 40
       }
     },
     "featured_products": {
@@ -80,29 +64,6 @@
         "layout": "image_first"
       }
     },
-    "16268596694b99fb13": {
-      "type": "inline-newsletter-comp",
-      "settings": {
-        "cardStyle": "smCard",
-        "sticky": true,
-        "emailProvider": "klaviyo",
-        "listID": "",
-        "captureHeader": "Join our Newsletter",
-        "captureHtml": "We have lots of super cool things, and we'll even give you 100% off because we're so cool!!!",
-        "captureButton": "Get My Coupon",
-        "showCoupon": false,
-        "couponCode": "",
-        "couponOffer": "",
-        "successH2": "Thank You!",
-        "successP": "Look forward to our amazing emails in your inbox!",
-        "errorH2": "Oh No!",
-        "errorP": "It looks like there was an error!",
-        "errorAgain": true,
-        "existedH2": "Wait a sec...",
-        "existedP": "You're already subscribed!",
-        "existedCoupon": true
-      }
-    },
     "1626254638dce48bfc": {
       "type": "order-bump-comp",
       "settings": {
@@ -119,10 +80,9 @@
     }
   },
   "order": [
-    "image_banner",
+    "1629110654344cccde",
     "featured_products",
     "image_text",
-    "16268596694b99fb13",
     "1626254638dce48bfc"
   ]
 }

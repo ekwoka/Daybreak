@@ -89,6 +89,9 @@
                     {%- if block.settings.showTotal -%}
                         <cart-total>Total:</cart-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
                     {%- endif -%}
+                    {%- if block.settings.showDisclaimer -%}
+                        <cart-disclaimer class="!col-span-4 text-sm italic text-gray-900/75">Shipping and taxes calculated at checkout</cart-disclaimer>
+                    {%- endif -%}
                 </cart-details>
             {%- endfor -%}
             <button class="w-full btn-primary" @click.prevent="window.location.href='/checkout'" :disabled="$store.cart.quantity==0||updating">
@@ -247,6 +250,12 @@
                     "id": "showTotal",
                     "label": "Show Total",
                     "default": false
+                },
+                {
+                    "type": "checkbox",
+                    "id": "showDisclaimer",
+                    "label": "Show Disclaimer Message",
+                    "default": true
                 }
             ]
         },

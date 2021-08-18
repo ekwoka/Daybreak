@@ -34,7 +34,6 @@ document.addEventListener('alpine:init', () => {
         },
         async addItem(id,quantity) {
             this.$store.cart.items = await Daybreak.addToCart(id,quantity,this.$store.cart.items)
-            this.$store.toast.addToast(`${this.title} was added to cart`,'success')
         },
         selectInit(){
             if (variants?.length) [this.id,this.price] = [variants[0].id,variants[0].price];
@@ -80,11 +79,11 @@ document.addEventListener('alpine:init', () => {
         {%- if section.settings.bumpProduct -%}
             {%- assign bumpProd = section.settings.bumpProduct -%}
             {%- assign bumpsShown = bumpsShown | plus: 1 -%}
-            {%- assign img_url = bumpProd.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            {%- assign img_url = bumpProd.featured_image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             <bump-item x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
-                id: {{ bumpProd.id }},
+                id: {{ bumpProd.first_available_variant.id }},
                 image: '{{ img_url }}',
                 {% unless bumpProd.has_only_default_variant -%}
                 variants: [
@@ -107,7 +106,7 @@ document.addEventListener('alpine:init', () => {
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
-                    <div class="{{ alignClass }}" x-text="price">{{ bumpProd.first_available_variant.price | money }}</div>
+                    <new-price class="{{ alignClass }} block" x-text="price">{{ bumpProd.first_available_variant.price | money }}</new-price>
                     <div class="pt-4 mx-auto">
                         {%- unless bumpProd.has_only_default_variant -%}
                             <div class="w-full py-2 mx-auto">
@@ -134,19 +133,21 @@ document.addEventListener('alpine:init', () => {
                     continue
                 endif
                 assign bumpsShown = bumpsShown | plus: 1
+                assign img_url = bumpProd.featured_image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
             -%}
             <bump-item x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
                 id: {{ bumpProd.first_available_variant.id }},
-                image: '{{ bumpProd.featured_image.src | img_url: '360x' }}',
+                image: '{{ img_url }}',
                 {% unless bumpProd.has_only_default_variant -%}
                 variants: [
                     {% for var in bumpProd.variants -%}
+                    {%- assign img_url = var.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
                     {
                         available: {{ var.available }},
                         id: {{ var.id }},
-                        image: '{{ var.image.src | img_url: '360x' }}',
+                        image: '{{ img_url }}',
                         title: '{{ var.title }}',
                         price: '{{ var.price | money }}'
                     }{%- unless forloop.last -%},{%- endunless -%}
@@ -160,7 +161,7 @@ document.addEventListener('alpine:init', () => {
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
-                    <div class="{{ alignClass }}" x-text="price">{{ bumpProd.first_available_variant.price | money }}</div>
+                    <new-price class="{{ alignClass }} block" x-text="price">{{ bumpProd.first_available_variant.price | money }}</new-price>
                     <div class="pt-4 mx-auto">
                         {%- unless bumpProd.has_only_default_variant -%}
                             <div class="w-full py-2 mx-auto">

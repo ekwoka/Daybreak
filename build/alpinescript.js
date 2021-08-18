@@ -164,7 +164,6 @@ export default function (Alpine) {
                 sections_url: window.location.pathname
               })
             this.$store.cart.items = await Daybreak.addToCartFromForm(formData,this.$store.cart.items)
-            this.$store.toast.addToast(`${this.title} added to cart`,'success')
             this.sending=false
         }
     }));

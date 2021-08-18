@@ -1,0 +1,174 @@
+{{ 'hero-section.comp.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+
+-%}
+
+<style>
+
+{%- if section.settings.aspect == 'dynamic' -%}
+
+    .min-h-custom {
+        min-height: {{ 1 | divided_by: section.settings.mobile.aspect_ratio | times: 100 | minus: 10 }}vw;
+    }
+
+    @media (min-width: 768px) {
+        .min-h-custom {
+            min-height: 0px;
+        }
+        .min-h-custom > div {
+            min-height: {{ 1 | divided_by: section.settings.desktop.aspect_ratio | times: 100 | minus: 10 }}vw;
+        }
+    }
+
+{%- else -%}
+
+.min-h-custom {
+        min-height: {{ section.settings.mobileRatio }}vw;
+    }
+
+    @media (min-width: 768px) {
+        .min-h-custom {
+            min-height: 0px;
+        }
+        .min-h-custom > div {
+            min-height: {{ section.settings.deskRatio }}vw;
+        }
+    }
+
+{%- endif -%}
+
+</style>
+
+<script>
+
+</script>
+
+<hero-container>
+    <picture>
+        <source media="(min-width:768px)" srcset="{%- render 'responsive-srcset', image: section.settings.desktop, max: 1920 -%}">
+        <source srcset="{%- render 'responsive-srcset', image: section.settings.mobile, max: 1080 -%}">
+        <img src="https://placekitten.com/1080/1920" class="absolute inset-0 w-full" alt="" loading="eager" sizes="100vw"/>
+    </picture>
+    <div class="relative w-full max-w-screen-xl mx-auto min-h-custom">
+        <hero-overlay>
+          <h1>
+            {{ section.settings.h1 }}
+          </h1>
+          <p class="text-xl text-gray-700">{{ section.settings.p }}</p>
+            <hero-buttons>
+                {%- if section.settings.btn1txt -%}
+                    <a href="{{ section.settings.btn1url }}" class="btn-primary">{{ section.settings.btn1txt }}</a>
+                {%- endif -%}
+                {%- if section.settings.btn2txt -%}
+                    <a href="{{ section.settings.btn2url }}" class="btn-secondary">{{ section.settings.btn2txt }}</a>
+                {%- endif -%}
+            </hero-buttons>
+        </hero-overlay>
+    </div>
+</hero-container>
+
+{% schema %}
+{
+    "name": "Daybreak Hero",
+    "tag": "section",
+    "settings": [
+        {
+            "type": "text",
+            "id": "h1",
+            "label": "Heading",
+            "default": "Welcome to Daybreak"
+        },
+        {
+            "type": "html",
+            "id": "p",
+            "label": "Subheadline",
+            "default": "A damn fast theme built on top of Dawn with TailwindCSS and AlpineJS"
+        },
+        {
+            "type": "header",
+            "content": "Buttons"
+        },
+        {
+            "type": "text",
+            "id": "btn1txt",
+            "label": "Button 1 CTA Label",
+            "default": "Check out features"
+        },
+        {
+            "type": "url",
+            "id": "btn1url",
+            "label": "Button 1 Destination"
+        },
+        {
+            "type": "text",
+            "id": "btn2txt",
+            "label": "Button 2 CTA Label",
+            "default": "View Deals"
+        },
+        {
+            "type": "url",
+            "id": "btn2url",
+            "label": "Button 2 Destination"
+        },
+        {
+            "type": "header",
+            "content": "Images"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobile",
+            "label": "Mobile Image",
+            "info": "Tall Aspect Ratio 1440px+ in width"
+        },
+        {
+            "type": "image_picker",
+            "id": "desktop",
+            "label": "Desktop Image",
+            "info": "Wide Aspect Ratio 2160px+ in width"
+        },
+        {
+            "type": "select",
+            "id": "aspect",
+            "label": "Image Aspect Ratios",
+            "info": "(if Manual) use the sliders below",
+            "options": [
+                {
+                    "value": "dynamic",
+                    "label": "Dynamic"
+                },
+                {
+                    "value": "manual",
+                    "label": "Manual"
+                }
+            ]
+        },
+        {
+            "type": "range",
+            "id": "mobileRatio",
+            "label": "Mobile Image Height",
+            "unit": "vw",
+            "min": 2,
+            "max": 200,
+            "step": 2,
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "deskRatio",
+            "label": "Desktop Image Height",
+            "unit": "vw",
+            "min": 2,
+            "max": 100,
+            "step": 2,
+            "default": 40
+        }
+    ],
+    "presets": [
+        {
+            "category": "Hero",
+            "name":"Hero Section Tiles"
+        }
+    ]
+}
+{% endschema %}

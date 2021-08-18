@@ -401,3 +401,5 @@ shipping-threshold.glass > progress[value]::-webkit-progress-value {
 shipping-threshold.glass > progress[value]::-moz-progress-bar {
   background-image: linear-gradient(to top right, var(--tw-gradient-stops))
 }
+
+/* hero-section-comp.liquid */

@@ -234,3 +234,25 @@ shipping-threshold.glass > progress[value]::-webkit-progress-value {
 shipping-threshold.glass > progress[value]::-moz-progress-bar {
     @apply bg-gradient-to-tr
 }
+
+/* hero-section-comp.liquid */
+
+hero-container {
+    @apply relative flex flex-col overflow-hidden shadow-md xl:shadow-none
+}
+
+hero-overlay {
+    @apply flex flex-col justify-center p-8 border-l border-r border-solid shadow-lg md:py-20 md:px-12 md:max-w-screen-sm gap-y-6 bg-white/60 backdrop-blur border-white/40
+}
+
+hero-overlay > h1 {
+    @apply text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl
+}
+
+hero-buttons {
+    @apply flex flex-col gap-3 text-xl sm:flex-row
+}
+
+hero-buttons > a {
+    @apply w-full px-8 rounded-md md:max-w-max
+}
