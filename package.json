@@ -8,7 +8,7 @@
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
-    "open": "sleep 10s && open http://127.0.0.1:9292/",
+    "open": "sleep 15s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/125231693990/editor",
     "reset": "run-s pull build push",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-p css:build css:critical css:component js:build && npm run sizes:assets",
