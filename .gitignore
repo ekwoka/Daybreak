@@ -11,3 +11,4 @@ node_modules/
 .vscode/
 lighthouse.html
 package-lock.json
+config.yml
