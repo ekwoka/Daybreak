@@ -101,7 +101,7 @@
                     starting: '{{ firstColor }}',
                     colors: {{ obj }}})"
                 {%- endif -%}>
-                <a href="{{product.url}}" aria-label="{{ product.title }}" class="w-full mx-auto">
+                <a href="{{ product.url }}" aria-label="{{ product.title }}" class="w-full mx-auto">
                     <img class="w-full {{ section.settings.imgShape }}" src="{{ firstVariant.image | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstVariant.image -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
                 </a>
 
@@ -122,7 +122,7 @@
                 {%- endif %}
 
                 <card-info class="flex flex-col items-center w-full gap-1 pt-2 text-base">
-                    <a class="text-blue-800" href="{{product.url}}" tabindex="-1">
+                    <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
                         {{ product.title }}
                     </a>
                     {%- if section.settings.showReviews -%}
