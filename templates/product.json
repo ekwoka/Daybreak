@@ -18,14 +18,13 @@
         "subtitle": {
           "type": "text",
           "settings": {
-            "text": "{{ product.metafields.descriptors.subtitle.value }}",
-            "text_style": "subtitle"
+            "text": "Text block",
+            "text_style": "body"
           }
         },
         "price": {
           "type": "price",
-          "settings": {
-          }
+          "settings": {}
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -36,14 +35,13 @@
         "a822d694-d1c6-4711-a38c-edd24439f023": {
           "type": "popup",
           "settings": {
-            "link_label": "Size Chart",
-            "page": "{{ product.metafields.my_fields.size_chart.value }}"
+            "link_label": "Pop-up link text",
+            "page": ""
           }
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {
-          }
+          "settings": {}
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -59,16 +57,15 @@
         },
         "description": {
           "type": "description",
-          "settings": {
-          }
+          "settings": {}
         },
         "36ab57c3-4fd3-4f99-ad71-ea7853fcb3b4": {
           "type": "collapsible_tab",
           "settings": {
             "heading": "Collapsible tab",
-            "content": "<p>{{ product.metafields.my_fields.first_tab | metafield_tag }}<\/p>",
+            "content": "",
             "page": "",
-            "icon": "none"
+            "icon": "check_mark"
           }
         }
       },
@@ -90,20 +87,6 @@
         "enable_video_looping": false
       }
     },
-    "1626325752d849a2a3": {
-      "type": "order-bump-comp",
-      "settings": {
-        "title": "Check out this item!",
-        "desc": "This product goes so well with that other product",
-        "center": false,
-        "showPrice": true,
-        "toLimit": 1,
-        "toShow": 3,
-        "bumpProduct": "patient-fog",
-        "bumpCollection": "",
-        "random": true
-      }
-    },
     "product-recommendations": {
       "type": "product-recommendations",
       "settings": {
@@ -117,7 +100,6 @@
   },
   "order": [
     "main",
-    "1626325752d849a2a3",
     "product-recommendations"
   ]
 }

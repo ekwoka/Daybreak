@@ -6,13 +6,13 @@
         "h1": "Welcome to Daybreak",
         "p": "A damn fast theme built on top of Dawn with TailwindCSS and AlpineJS",
         "btn1txt": "Check out features",
-        "btn1url": "shopify:\/\/products\/damp-mountain",
+        "btn1url": "shopify:\/\/collections\/latest-designs",
         "btn2txt": "View Deals",
-        "btn2url": "shopify:\/\/collections",
-        "mobile": "shopify:\/\/shop_images\/grey-couch-with-a-bookcase-behind-it.jpg",
-        "desktop": "shopify:\/\/shop_images\/working-at-night.jpg",
+        "btn2url": "shopify:\/\/products\/gov-unisex-t-shirt",
+        "mobile": "shopify:\/\/shop_images\/RAP_mobile_banner_copy.png",
+        "desktop": "shopify:\/\/shop_images\/Christmas_Banner_copy.png",
         "aspect": "dynamic",
-        "mobileRatio": 26,
+        "mobileRatio": 14,
         "deskRatio": 40
       }
     },
@@ -63,26 +63,11 @@
         "color_scheme": "background-1",
         "layout": "image_first"
       }
-    },
-    "1626254638dce48bfc": {
-      "type": "order-bump-comp",
-      "settings": {
-        "title": "Check out these items!",
-        "desc": "These go great with those things you already have!",
-        "center": true,
-        "showPrice": true,
-        "toLimit": 2,
-        "toShow": 4,
-        "bumpProduct": "ancient-pine",
-        "bumpCollection": "frontpage",
-        "random": true
-      }
     }
   },
   "order": [
     "1629110654344cccde",
     "featured_products",
-    "image_text",
-    "1626254638dce48bfc"
+    "image_text"
   ]
 }

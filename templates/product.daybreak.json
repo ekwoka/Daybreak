@@ -1,7 +1,8 @@
 {
   "sections": {
     "main": {
-      "type": "daybreak-product-comp"
+      "type": "daybreak-product-comp",
+      "settings": {}
     }
   },
   "order": [
