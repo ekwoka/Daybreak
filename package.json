@@ -27,8 +27,9 @@
     "watch:alpine": "nodemon -x 'npm run minify:alpine && npm run minify:js' -w build/alpinescript.js",
     "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;",
     "theme:push": "theme deploy -e daybreak",
-    "theme:download": "theme download -e daybreak",
-    "theme:watch": "theme watch -e daybreak"
+    "theme:pull": "theme download -e daybreak",
+    "theme:watch": "theme watch -e daybreak",
+    "theme:reset": "run-s theme:pull build theme:push"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
