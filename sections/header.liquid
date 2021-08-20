@@ -307,7 +307,7 @@
                width="{{ section.settings.logoimg.width }}"
                height="{{ section.settings.logoimg.height }}">
         {%- when 'svg' -%}
-          <div id="logo-svg" class="mx-auto" style="max-width: {{ section.settings.logo_width }}px;">
+          <div class="mx-auto logo-svg" style="max-width: {{ section.settings.logo_width }}px;">
             {{ section.settings.logosvg }}
           </div>
         {%- endcase -%}
@@ -592,7 +592,8 @@
     {
       "type": "html",
       "id": "logosvg",
-      "label": "Logo SVG Code"
+      "label": "Logo SVG Code",
+      "info": "If you SVG does not appear, try adding 'width=\"100%\"' to the top SVG element",
     },
     {
       "type": "range",
