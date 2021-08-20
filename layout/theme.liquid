@@ -26,7 +26,11 @@
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'daybreak.min.js' | asset_url }}" defer="defer"></script>
+    <!-- content_for_header.start -->
+    {%- capture content -%}
     {{ content_for_header }}
+    {%- endcapture -%}
+    <!-- content_for_header.end -->
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -145,6 +149,8 @@
         unavailable: `{{ 'products.product.unavailable' | t }}`,
       }
     </script>
+
+    {{ content | replace_first: 'asyncload','dummyload' | strip_newlines }}
 
     <script src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script>
