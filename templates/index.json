@@ -3,17 +3,17 @@
     "1629110654344cccde": {
       "type": "hero-section-comp",
       "settings": {
-        "h1": "Welcome to Daybreak",
-        "p": "A damn fast theme built on top of Dawn with TailwindCSS and AlpineJS",
-        "btn1txt": "Check out features",
+        "h1": "Veterans Gear",
+        "p": "Veteran owned, printed in the UK, and delivered fast.<br>We keep it stupid simple.",
+        "btn1txt": "View Latest Designs",
         "btn1url": "shopify:\/\/collections\/latest-designs",
-        "btn2txt": "View Deals",
-        "btn2url": "shopify:\/\/products\/gov-unisex-t-shirt",
+        "btn2txt": "View Best Sellers",
+        "btn2url": "shopify:\/\/collections\/bestsellers",
         "mobile": "shopify:\/\/shop_images\/RAP_mobile_banner_copy.png",
         "desktop": "shopify:\/\/shop_images\/Christmas_Banner_copy.png",
         "aspect": "dynamic",
-        "mobileRatio": 14,
-        "deskRatio": 40
+        "mobileRatio": 2,
+        "deskRatio": 6
       }
     },
     "featured_products": {
