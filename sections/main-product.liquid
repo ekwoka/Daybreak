@@ -285,7 +285,7 @@
                     {% if product.selected_or_first_available_variant.available == false %}:disabled="true"{% else -%}:disabled="sending"{% endif %}
                     >
                         {%- if product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.add_to_cart' | t }}
+                          {{ 'products.product.add_to_cart' | t }} - {{ product.selected_or_first_available_variant.price | money }}
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
