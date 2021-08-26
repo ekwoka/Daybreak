@@ -150,10 +150,33 @@
       }
     </script>
 
-    {{ content | replace_first: 'asyncload','dummyload' | strip_newlines }}
+    <!-- content_for_header.start -->
+    {{ content | replace_first: 'asyncLoad','dummyLoad' }}
+    <!-- content_for_header.end -->
+
+    <script>(function() {
+      function asyncLoad() {
+        var urls = [
+          "https:\/\/cdn1.stamped.io\/files\/widget.min.js?shop=lion-legion.myshopify.com"
+        ];
+        for (var i = 0; i < urls.length; i++) {
+          var s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = urls[i];
+          var x = document.getElementsByTagName('script')[0];
+          x.parentNode.insertBefore(s, x);
+        }
+      };
+      if(window.attachEvent) {
+        window.attachEvent('onload', asyncLoad);
+      } else {
+        window.addEventListener('load', asyncLoad, false);
+      }
+    })();</script>
 
     <script src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
-    <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script> 
     
   </body>
 </html>

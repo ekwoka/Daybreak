@@ -286,11 +286,7 @@
       </details-modal>
     {%- endif -%}
 
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__heading">
-    {%- endif -%}
-
-    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-8 mx-auto text-xl font-semibold tracking-widest text-center break-word md:order-first">
+    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-full mx-auto text-xl font-semibold tracking-widest text-center break-word lg:order-first">
       {%- case section.settings.logoType -%}
         {%- when 'none' -%}
           <h1 class="">
@@ -312,9 +308,6 @@
           </div>
         {%- endcase -%}
     </a>
-    {%- if request.page_type == 'index' -%}
-      </h1>
-    {%- endif -%}
 
     {%- if section.settings.menu != blank -%}
       <nav class="header__inline-menu">
@@ -402,7 +395,7 @@
         </details>
       </details-modal>
 
-      {%- if shop.customer_accounts_enabled -%}
+      {% comment %} {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link link--text focus-inset">
           {% render 'icon-account' %}
           <span class="visually-hidden">
@@ -415,7 +408,7 @@
             -%}
           </span>
         </a>
-      {%- endif -%}
+      {%- endif -%} {% endcomment %}
 
       <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data @click.prevent="$store.cart.open($el)">
         {%- liquid
