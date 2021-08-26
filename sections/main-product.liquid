@@ -161,6 +161,10 @@
               <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
                 <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.link_label | default: block.settings.page.title }}</button>
               </modal-opener>
+          {%- when 'sizechart' -%}
+              <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ block.id }}" {{ block.shopify_attributes }}>
+                <button id="ProductPopup-{{ block.id }}" class="product-popup-modal__button link" type="button" aria-haspopup="dialog">{{ block.settings.link_label | default: block.settings.page.title }}</button>
+              </modal-opener>
           {%- when 'share' -%}
             <share-button class="share-button" {{ block.shopify_attributes }}>
               <button class="hidden share-button__button button button--tertiary">
@@ -442,6 +446,25 @@
         <div class="product-popup-modal__content-info">
           <h1 class="h2">{{ block.settings.page.title }}</h1>
           {{ block.settings.page.content }}
+        </div>
+      </div>
+    </modal-dialog>
+  {%- endfor -%}
+  {% assign sizecharts = section.blocks | where: "type", "sizechart" %}
+  {%- for block in sizecharts -%}
+    <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+      <div role="dialog" aria-label="{{ block.settings.link_label }}" aria-modal="true" class="product-popup-modal__content max-h-[80%] !p-0 min-h-[max-content]" tabindex="-1">
+        <button id="ModalClose-{{ block.id }}" type="button" class="product-popup-modal__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+        <div class="product-popup-modal__content-info !p-0">
+          {%- liquid
+            if block.settings.default
+              assign sizeImage = block.settings.default
+            endif
+            if block.settings.productChart
+              assign sizeImage = productChart
+            endif
+          -%}
+          <img src="{{ sizeImage | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: sizeImage -%}" alt="Product Size Chart" loading="lazy">
         </div>
       </div>
     </modal-dialog>
@@ -783,6 +806,28 @@
           "id": "page",
           "type": "page",
           "label": "t:sections.main-product.blocks.popup.settings.page.label"
+        }
+      ]
+    },
+    {
+      "type": "sizechart",
+      "name": "Size Chart",
+      "settings": [
+        {
+          "type": "text",
+          "id": "link_label",
+          "default": "Pop-up link text",
+          "label": "t:sections.main-product.blocks.popup.settings.link_label.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "default",
+          "label": "Default Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "productChart",
+          "label": "Per Product Size Chart Selector"
         }
       ]
     }
