@@ -1,0 +1,606 @@
+{{ 'sparq-filters.comp.css' | asset_url | stylesheet_tag }}
+
+<style>
+
+{%- assign sizeClasses = 'Small,Medium,Large,X-Large,2X-Large,3X-Large,4X-Large,5X-Large' | split: ',' -%}{%- for size in sizeClasses -%}
+    [filter="sizes-{{size}}"] {
+        order: {{forloop.index0}};
+    }
+{%- endfor -%}
+{%- assign collectionOrder = 'Latest Designs,Bestsellers,Royal Navy,Royal Marines,British Army,Royal Air Force' | split: ',' -%}
+{%- assign startOrder = -10 -%}
+{%- for thing in collectionOrder -%}
+    [filter="collections-{{thing}}"] {
+        order: {{forloop.index0 | plus: startOrder}};
+        display: block !important;
+        opacity: 1 !important;
+    }
+{%- endfor -%}
+{%- assign tagOrder = 'Humorous,Tri-Service,Pride Of Service,Patriotic,Remembrance' | split: ',' -%}
+{%- assign startOrder = -10 -%}
+{%- for thing in tagOrder -%}
+    [filter="tags-{{thing}}"] {
+        order: {{forloop.index0 | plus: startOrder}};
+        display: block !important;
+        opacity: 1 !important;
+    }
+{%- endfor -%}
+
+ul.filtersTruncate li:nth-child(n+7){
+display:none
+}
+ul.filtersTruncate li:nth-child(5){
+opacity:.6
+}
+ul.filtersTruncate li:nth-child(6){
+opacity:.3
+}
+ul.filtersTruncate li:nth-child(6) span{
+--tw-gradient-from:#fff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,hsla(0,0%,100%,0));--tw-gradient-to:#000;-webkit-background-clip:text;background-clip:text;background-image:linear-gradient(to top,var(--tw-gradient-stops));color:transparent}
+
+</style>
+
+<div class="w-full h-full px-2 pb-2" x-data="sparqCollection()">
+
+    <div class="flex flex-row justify-around justify-items-stretch flex-nowrap">
+        <div :class="{'!translate-x-0': filterDrawer}" class="fixed inset-0 z-20 flex-none w-full max-h-screen min-h-screen pt-16 pl-8 pr-4 overflow-y-auto transition-all duration-700 ease-out transform -translate-x-full bg-white md:overflow-auto md:py-4 md:max-h-full md:transform-none md:flex md:flex-col md:static md:w-1/4 md:z-auto overscroll-contain" x-cloak x-effect="scrollLock(filterDrawer)">
+            <h3 class="w-full pb-4 pl-4">Filters</h3>
+            <button @click.prevent="filterDrawer=false" class="absolute left-auto p-2 text-gray-900 lowercase bg-transparent rounded-md pointer-events-auto top-12 right-4 md:hidden" data-uw-styling-context="true">
+                <svg class="inline-block w-4 h-4 align-middle fill-current"><use xlink:href="#icon-cancel-circle"></use></svg> Close
+            </button>
+            {%- assign filterOptions = 'tags,system_tags;collections,system_collections;colours,option_auto_colour;product type,system_producttype' | split: ';'-%}
+            {%- for filterOption in filterOptions -%}
+                {%- assign filter = filterOption | split: ',' -%}
+                {%- if filter.first == 'colours' -%}
+                    <div class="w-full pb-4" x-show="removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}}).length > 1" x-cloak>
+                        <div class="capitalize">{{filter | first }}:</div>
+                        <ul :class="{'filtersTruncate': truncate.{{filter | first | remove: ' '}} && removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})?.length >=8}" class="flex flex-col w-full pl-2 divide-y divide-gray-100">
+                            <template :key="option.label" x-for="(option, index, options) in removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})">
+                                <li :filter="`{{filter | first }}-${option.label}`" @click="changeFilter(option?.label,'{{filter | last }}')" class="flex-none block w-full cursor-pointer group">
+                                    <button :class="query?.textFacetFilters?.{{filter | last }}.includes(option?.label) ? '!border-cta-500 group-hover:!border-red-500' : 'border-white group-hover:!border-cta-500'" :data-colour="option?.label" :id="`{{filter | first }}-${option.label}`" class="pointer-events-none" :data-swatch="option?.label"></button>
+                                    <span class="capitalize pointer-events-none" x-text="`${option.label} (${option.value})`"></span>
+                                </li>
+                            </template>
+                        </ul>
+                        <span @click.prevent="truncate.{{filter | first | remove: ' '}} = false" class="flex-none block w-full pl-2 underline capitalize cursor-pointer" x-cloak x-show="truncate.{{filter | first | remove: ' '}} && removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})?.length >=8">Show More</span>
+                    </div>
+                {%- else -%}
+                    <div class="w-full pb-4" x-show="removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}}).length > 1" x-cloak>
+                        <div class="capitalize">{{filter | first }}:</div>
+                        <ul :class="{'filtersTruncate': truncate.{{filter | first | remove: ' '}} && removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})?.length >=8}" class="flex flex-col w-full pl-2 divide-y divide-gray-100">
+                            <template :key="option.label" x-for="(option, index, options) in removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})">
+                                <li :filter="`{{filter | first }}-${option.label}`" @click="changeFilter(option?.label,'{{filter | last }}')" class="flex-none block w-full cursor-pointer">
+                                    <input :checked="query?.textFacetFilters?.{{filter | last }}.includes(option?.label)" :id="`{{filter | first }}-${option.label}`" class="!w-4 pointer-events-none" type="checkbox">
+                                    <label :for="`{{filter | first }}-${option.label}`" class="capitalize pointer-events-none" x-text="`${option.label} (${option.value})`"></label>
+                                </li>
+                            </template>
+                        </ul>
+                        <span @click.prevent="truncate.{{filter | first | remove: ' '}} = false" class="flex-none block w-full pl-2 underline capitalize cursor-pointer" x-cloak x-show="truncate.{{filter | first | remove: ' '}} && removeOptions(response?.textFacets?.{{filter | last }},hide{{filter | first | remove: ' '}})?.length >=8">Show More</span>
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+
+            <div class="sticky inset-x-0 bottom-0 w-full pt-2 pb-20 pointer-events-none md:hidden bg-gradient-to-t from-white via-white to-transparent">
+                <div class="h-6 bg-gradient-to-t from-white to-transparent"></div>
+                <div class="flex flex-row justify-around gap-2 bg-white flex-nowrap">
+                    <button @click.prevent="filterDrawer=false" class="flex-auto p-2 text-gray-800 uppercase rounded-md shadow pointer-events-auto bg-gradient-to-t from-gray-300 to-gray-200">
+                        Close
+                    </button>
+                    <button @click.prevent="filterDrawer=false" class="flex-auto p-2 text-white uppercase rounded-md shadow pointer-events-auto bg-gradient-to-t from-cta-600 to-cta-500">
+                        Apply
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="flex-auto py-4 border-0 border-gray-100 border-solid md:border-l-2">
+            <h1 class="w-full pb-4 pl-4 capitalize" x-text="collection.title">{{collection.title}}</h1>
+            <p class="pl-4 capitalize" x-show="collection.title=='{{collection.title}}'">{{ collection.description | split: '<!-- split -->' | first }}</p>
+            <p class="pt-2 pl-4" style="display:none;" x-cloak x-show="response?.results?.length!=0" x-text="`Showing ${response?.results?.length} of ${response?.totalHits}`"></p>
+            <div class="flex flex-row flex-wrap gap-2 px-2 py-3">
+                <template x-for="(filter, i, filters) in Object.values(query.textFacetFilters).flat()">
+                    <div @click.prevent="changeFilter(filters[i])" class="flex-none px-2 py-1 text-gray-800 bg-blue-200 rounded-full" x-show="filters[i]!=collection.title">
+                        <span class="pl-1" x-text="filters[i]"></span>
+                        <svg class="inline-block w-4 h-4 align-middle fill-current">
+                            <use xlink:href="#icon-cancel-circle"></use>
+                        </svg>
+                    </div>
+                </template>
+            </div>
+            <div class="flex flex-row items-start justify-around pb-4 flex-nowrap gap-x-2 md:px-2">
+                <button @click.prevent="sortExpanded=false;filterDrawer=true" class="flex-auto w-full border border-gray-400 shadow-none pointer-events-auto btn-secondary md:hidden">
+                    <svg class="inline-block w-5 h-5 align-middle fill-current">
+                        <use xlink:href="#icon-menu"></use>
+                    </svg>
+                    Filters</button>
+                <div class="flex-auto max-h-[max-content] relative md:max-w-sm md:w-1/2 md:mr-auto md:flex-none">
+                    <button @click.prevent="sortExpanded=!sortExpanded" class="w-full border border-gray-400 shadow-none pointer-events-auto btn-secondary" x-text="`Sort by: ${sortByLabel}`">Sort by:</button>
+                    <ul class="absolute z-10 flex flex-col list-none transition-all duration-300 ease-out bg-gray-200 divide-y divide-gray-400 shadow-md appearance-none inset-x-2 rounded-b-md" x-cloak x-show="sortExpanded" x-transition:enter-end="opacity-100 scale-100" x-transition:enter-start="-translate-y-1 opacity-0 scale-90" x-transition:enter="transform origin-top" x-transition:leave-end="-translate-y-1 opacity-0 scale-90" x-transition:leave-start="opacity-100 scale-100" x-transition:leave="transform origin-top">
+                        <template x-for="(sortOption, sorti, sorts) in Object.values(sortOptions)">
+                            <li :class="{'tracking-wider bg-gray-50':sorts[sorti]==query.sort}" :value="sorts[sorti]" @click.prevent="setSort(sorts[sorti],sorti)" class="w-full p-2 text-center capitalize border-l-0 border-r-0 border-solid appearance-none cursor-pointer last:rounded-b-md hover:bg-gray-100" x-text="Object.keys(sortOptions)[sorti]">Hi</li>
+                        </template>
+                    </ul>
+                </div>
+            </div>
+            <button @click.prevent="lastPage()" class="block w-full max-w-screen-sm mx-auto mb-4 btn-primary" x-cloak x-show="page.last>=1">
+                <svg class="inline-block w-5 h-5 align-middle fill-current">
+                    <use xlink:href="#icon-double-up"></use>
+                </svg>
+                <span>load last page</span>
+            </button>
+            <div class="relative grid flex-auto w-full min-h-screen grid-flow-row grid-cols-2 gap-2 lg:grid-cols-3" x-effect="updateColors(response?.results)">
+                <div class="absolute inset-0 bg-white bg-opacity-40 backdrop-filter backdrop-blur-sm" x-show="searching" x-transition:leave-end="opacity-0" x-transition:leave-start="opacity-100" x-transition:leave="transition-all duration-300 ease-out">
+                    <div class="sticky w-3/4 max-w-sm p-4 mx-auto mt-8 text-gray-900 rounded-md shadow-lg bg-gradient-to-tr from-gray-100 to-gray-200 top-80">
+                        <svg class="block w-12 h-12 p-2 mx-auto align-middle fill-current animate-spin">
+                            <use xlink:href="#icon-searching"></use>
+                        </svg>
+                        <span class="block mx-auto max-w-max">Loading...</span>
+                    </div>
+                </div>
+                <template :key="product.id" x-for="(product, productIndex) in response?.results">
+                    <div class="p-2 border-0 border-b border-solid rounded border-gray-50">
+                        <a :href="productLink(productIndex)" :aria-label="product.title">
+                            <img x-rias="imageURL(product?.image?.src)" class="w-full lazyload" :loading="productIndex<3?'eager':'lazy'" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" sizes="33vw">
+                        </a>
+                        <div class="mx-auto max-w-max" aria-hidden="true">
+                                <template x-for="(colour, index, colours) in product?.option_auto_colour?.length > 1 ? product?.option_auto_colour : []" :key="colours[index]">
+                                    <button :data-swatch="colours[index]" :data-colour="colours[index]" :disabled="product.selected==colours[index]" @click.prevent="changeImage(product,colours[index],productIndex)" class="hover:border-cta-500 disabled:!border-cta-500" tabindex="-1"></button>
+                                </template>
+                        </div>
+                        <a :href="productLink(productIndex)">
+                            <span class="block mx-auto text-center" x-text="product.title"></span>
+                        </a>
+                        <template x-if="product.rating_count >= 1">
+                            <a class="mx-auto" :href="`${productLink(productIndex)}#stamped-main-widget`" :data-handle="product.handle">
+                                <span :data-id="product.id" :data-product-sku="product.handle" :data-product-title="product.title" :data-product-type="product.producttype" class="block mx-auto text-center max-w-max stamped-product-reviews-badge"></span>
+                            </a>
+                        </template>
+                        <template x-if="product.rating_count == 0">
+                            <span class="block mx-auto text-sm text-center text-gray-700">new product, no reviews</span>
+                        </template>
+                        <span class="block mx-auto text-center" x-text="`£${product.price}`"></span>
+                        <div :data-id="product.id" class="flex flex-row justify-center mx-auto" x-show="cartContents.includes(product.id)">
+                            <svg class="inline-block w-5 h-5 align-middle fill-current text-cta-600">
+                                <use xlink:href="#icon-check-circle"></use>
+                            </svg>
+                            <span>Item in Cart</span>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            <load-more class="flex flex-col items-center w-full py-4">
+            <label for="shown-items" class="block" x-text="`You've viewed ${response?.results?.length} products out of ${response?.totalHits}`">You've viewed some products out of many</label>
+            <progress class="mt-2 load-more" id="shown-items" max="{{ collection.products_count }}" :max="response?.totalHits" value="{{section.settings.ppp}}" :value="response?.results?.length" x-text="`${(response?.results?.length/response?.totalHits*100)}%`"></progress>
+            <button @click.prevent="nextPage()" class="flex-none block w-full max-w-screen-sm mx-auto mt-2 btn-primary" x-cloak x-show="showNext" :disabled="searching">
+                <span x-text="searching ? 'Loading...' : 'load next page'">loading...</span>
+                <svg class="inline-block w-5 h-5 align-middle fill-current">
+                    <use xlink:href="#icon-double-down"></use>
+                </svg>
+            </button>
+            </load-more>
+        </div>
+    </div>
+</div>
+
+<svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <symbol fill="none" id="icon-menu" stroke="currentColor" viewbox="0 0 24 24">
+            <path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+        </symbol>
+        <symbol id="icon-cancel-circle" viewbox="0 0 20 20">
+            <path clip-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" fill-rule="evenodd"/>
+        </symbol>
+        <symbol fill="none" id="icon-searching" viewbox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke-width="4" stroke="currentColor"></circle>
+            <path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+        </symbol>
+        <symbol fill="currentColor" id="icon-double-down" viewbox="0 0 20 20">
+            <path clip-rule="evenodd" d="M15.707 4.293a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 011.414-1.414L10 8.586l4.293-4.293a1 1 0 011.414 0zm0 6a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-5-5a1 1 0 111.414-1.414L10 14.586l4.293-4.293a1 1 0 011.414 0z" fill-rule="evenodd"/>
+        </symbol>
+        <symbol fill="currentColor" id="icon-double-up" viewbox="0 0 20 20">
+            <path clip-rule="evenodd" d="M4.293 15.707a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 0zm0-6a1 1 0 010-1.414l5-5a1 1 0 011.414 0l5 5a1 1 0 01-1.414 1.414L10 5.414 5.707 9.707a1 1 0 01-1.414 0z" fill-rule="evenodd"/>
+        </symbol>
+        <symbol fill="currentColor" id="icon-check-circle" viewbox="0 0 20 20">
+            <path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"/>
+        </symbol>
+    </defs>
+</svg>
+
+<script>
+    function sparqCollection() {
+        return {
+            async init() {
+                this.urlRouting();
+                await this.performSearch();
+                console.log(`Found ${
+                    this.response ?. results ?. length
+                } Items`);
+            },
+            async searchRepeat() {
+                this.updateURL();
+                var retry = true;
+                while (retry) {
+                    response = await this.searchAPI().catch(error => console.log(error));
+                    if (response != undefined) 
+                        retry = false;
+                    
+                    if (!response ?. query) 
+                        console.log("Search Failed. Trying again 2 seconds.");
+                    
+                    if (!response ?. query) 
+                        await sleep(2000);
+                    
+                };
+                return response
+            },
+            queryTime: 1,
+            resultsTime: 1,
+            async performSearch() {
+                let queryTime = Date.now();
+                this.queryTime = queryTime;
+                let response = await this.searchRepeat();
+                if (!response ?. query) return console.log("Update Failed");
+                if (this.resultsTime > queryTime) return console.log(`Query Expired`);
+                this.resultsTime = queryTime;
+                this.response = response;
+                if(this.resultsTime == this.queryTime) this.searching = false;
+            },
+            urlRouting() {
+                queryString = window.location.search;
+                this.urlParams = new URLSearchParams(queryString);
+                page = parseInt(this.urlParams.get("page")) || 1;
+                this.page = {
+                    last: page - 1,
+                    current: page,
+                    next: page + 1
+                };
+                this.query.skip = page * 36 - 36;
+                if (this.urlParams.getAll("colour") != undefined) 
+                    this
+                        .query
+                        .textFacetFilters
+                        .option_auto_colour = this.urlParams.getAll("colour");
+                
+                if (this.urlParams.getAll("size") != undefined) 
+                    this
+                        .query
+                        .textFacetFilters
+                        .option_auto_size = this.urlParams.getAll("size");
+                
+                if (this.urlParams.getAll("type") != undefined) 
+                    this
+                        .query
+                        .textFacetFilters
+                        .system_producttype = this.urlParams.getAll("type");
+                
+                if (this.urlParams.getAll("tag") != undefined) 
+                    this
+                        .query
+                        .textFacetFilters
+                        .system_tags = this.urlParams.getAll("tag");
+                
+                if (this.urlParams.get("sort") != undefined) 
+                    this.query.sort = [this.sortOptions[this.urlParams.get("sort")]];
+                
+            },
+            updateParams(facet, value, change) {
+                if (facet == "system_collections") 
+                    return;
+                
+                var facetParams = {
+                    option_auto_colour: "colour",
+                    option_auto_size: "size",
+                    system_producttype: "type",
+                    system_tags: "tag"
+                }
+                if (change == "add") 
+                    return this.urlParams.append(facetParams[facet], value);
+                
+                this.urlParams.delete(facetParams[facet]);
+                this
+                    .query
+                    .textFacetFilters[facet]
+                    .forEach(v => this.urlParams.append(facetParams[facet], v), this);
+                return;
+            },
+            updateURL() {
+                var url = `${
+                    this
+                        .collection
+                        .title
+                        .replace(/\s/g, "-")
+                }?${
+                    this.urlParams.toString()
+                }`;
+                history.replaceState(null, "", url);
+            },
+            cartContents: [{%- for item in cart.items -%}
+                    {{ item.product_id }}
+                    {%- unless forloop.last -%},{% endunless -%}
+                {%- endfor -%}],
+            page: {
+                last: 1,
+                current: 2,
+                next: 3
+            },
+            get showNext() {
+                if (this.response.totalHits >= (this.page.next - 1) * 36 + 1) 
+                    return true;
+                
+                return false;
+            },
+            async lastPage() {
+                
+                if (this.page.last == 0) 
+                    return;
+                
+                this.page.current = this.page ?. last || 1;
+                this.urlParams.set("page", this.page.current);
+                this.page.last --;
+                this.query.skip = this.page.current * 36 - 36;
+                response = await this.searchRepeat();
+                responseNew = this.combineResults(response, "first");
+                this.response = responseNew;
+                this.searching = false;
+            },
+            resetPage() {
+                this.page = {
+                    last: 0,
+                    current: 1,
+                    next: 2
+                }
+                this.query.skip = 0;
+                this.urlParams.delete("page");
+            },
+            async nextPage() {
+                
+                if (this
+                        .response
+                        .results
+                        .length == this.response.totalHits) 
+                    return;
+                
+                this.page.current = this.page ?. next || 1;
+                this.urlParams.set("page", this.page.current);
+                this.page.next ++;
+                this.query.skip = this.page.current * 36 - 36;
+                response = await this.searchRepeat();
+                responseNew = this.combineResults(response, "last");
+                this.response = responseNew;
+                this.searching = false;
+            },
+            combineResults(arr, pos) {
+                curArr = this.response ?. results;
+                newArr = arr ?. results;
+                if (pos == "first") 
+                    arr.results = newArr.concat(curArr);
+                
+                if (pos == "last") 
+                    arr.results = curArr.concat(newArr);
+                
+                return arr;
+
+            },
+            scrollLock(e){
+                if(e) return document.body.classList.add('scroll-lock');
+                document.body.classList.remove('scroll-lock');
+            },
+            filterDrawer: false,
+            sortExpanded: false,
+            searching: true,
+            hidecolours: ["{{ settings.coloursToHide | remove: '"' | split: ',' | join: '","' }}"],
+            hidecollections: ["{{ settings.collectionsToHide | remove: '"' | split: ',' | join: '","' }}"],
+            hidesizes: ["{{ settings.sizesToHide | remove: '"' | split: ',' | join: '","' }}"],
+            hideproducttype: ["{{ settings.productTypeToHide | split: ',' | join: '","' }}"],
+            hidetags: ["{{ settings.tagsToHide | remove: '"' | split: ',' | join: '","' }}"],
+            response: {
+                results: [],
+                textFacets: {
+                    option_auto_colour: [],
+                    option_auto_size: [],
+                    system_collections: [],
+                    system_producttype: [],
+                    system_tags: []
+                }
+            },
+            collection: {
+                "title": "{{ collection.title }}"
+            },
+            truncate: {
+                colours: true,
+                collections: true,
+                sizes: false,
+                producttype: true,
+                tags: true
+            },
+            productLink(i) {
+                varQuery = "";
+                if (this.response ?. results[i] ?. variantID) 
+                    varQuery = `?variant=${
+                        this
+                            .response
+                            .results[i]
+                            .variantID
+                    }`;
+                
+                if (this.collection.title) 
+                    return `/collections/${
+                        this
+                            .collection
+                            .title
+                            .replace(/\s/g, "-")
+                    }/products/${
+                        this.response ?. results[i] ?. handle
+                    }${varQuery}`;
+                
+                return `/products/${handle}`;
+            },
+            updateColors(arr){
+                this.response.results.forEach((product,i) => {
+                    this.selectColor(product,this.query?.textFacetFilters?.option_auto_colour)
+                });
+            },
+            selectColor(product,colors){
+                if (colors?.length === 0) return;
+                colors.some(color => {
+                    if (product?.option_auto_colour?.includes(color)) {
+                        this.changeImage(product,color);
+                        return true;
+                    }
+                });
+            },
+            changeImage(product, colour) {
+                variant = product.variants.find(variant => {
+                    return variant ?. title ?. toLowerCase() ?. includes(`${
+                        colour ?. toLowerCase()
+                    }`)
+                });
+                if (!variant || !variant?.image_id) return;
+                imgID = variant?.image_id;
+
+                imgSRC = product ?. images ?. find(img => {
+                    return img ?. id === imgID
+                }) ?. src;
+                product.selected = colour;
+                product.image.src = imgSRC;
+                product.variantID = variant.id;
+            },
+            imageURL(url) {
+                return url.substring(0, url.lastIndexOf(".")) + "_{width}x" + url.substring(url.lastIndexOf("."))
+            },
+            removeOptions(optionArray, optionsToRemove) {
+                cleanOptions = optionArray ?. reduce(function (acc, val) {
+                    if (!optionsToRemove?.includes(val?.label) && ! val ?. label ?. toLowerCase().includes("bump") && ! val ?. label ?. toLowerCase().includes("clothing") && ! val ?. label ?. toLowerCase().includes("drinkware")) 
+                        acc.push(val);
+                    return acc;
+                }, []);
+                return cleanOptions;
+            },
+            addFilter(option, facet) {
+                if (facet == "system_collections") {
+                    this.query.textFacetFilters[facet] = [];
+                    this.collection.title = option;
+                };
+                this
+                    .query
+                    .textFacetFilters[facet]
+                    .push(option);
+                this.updateParams(facet, option, "add");
+            },
+            async changeFilter(option, facet) {
+                
+                if (!facet) 
+                    facet = await Object.keys(this.query.textFacetFilters)[Object.values(this.query.textFacetFilters).findIndex(element => element.includes(option))];
+                
+                add = await !this
+                    .query
+                    .textFacetFilters[facet]
+                    .includes(option);
+                if (!add) 
+                    await this.removeFilter(option, facet);
+                
+                if (add) 
+                    await this.addFilter(option, facet);
+                
+                await this.resetPage();
+                await this.performSearch();
+            },
+            removeFilter(option, facet) {
+                if (facet == "system_collections") 
+                    this.collection.title = "all products"
+                
+                arr = this
+                    .query
+                    .textFacetFilters[facet]
+                    .filter(function (item) {
+                        return item != option;
+                    });
+                this.query.textFacetFilters[facet] = arr;
+                this.updateParams(facet, option, "remove");
+            },
+            sortOptions: {
+                relevance: "",
+                "best selling": "bestSellingScore",
+                "new to old": "-publishedTimestamp"
+            },
+            get sortByLabel() {
+                if (this.query.sort == "") 
+                    return "relevance";
+                
+                return Object.keys(this.sortOptions)[Object.values(this.sortOptions).findIndex(element => element.includes(this.query.sort))];
+            },
+            async setSort(sort, i) {
+                
+                this.sortExpanded = false;
+                this.query.sort = [sort];
+                this.urlParams.set("sort", Object.keys(this.sortOptions)[i]);
+                await this.resetPage();
+                await this.performSearch();
+            },
+            apiAuth: "Bearer VZGGFMM2T9K5GX23JCYU4QEV",
+            query: {
+                query: "",
+                fields: ["*"],
+                textFacets: [
+                    "option_auto_colour", "option_auto_size", "system_collections", "system_producttype", "system_tags"
+                ],
+                highlightFields: [],
+                searchFields: [
+                    "title", "description", "collections", "tags"
+                ],
+                filter: "priorityScore >= 0 AND publishedTimestamp > 0",
+                skip: 0,
+                count: 36,
+                sort: ["{%- if collection.handle == 'latest-designs' -%}-publishedTimestamp{%- else -%}bestSellingScore{%- endif -%}"],
+                collection: "X77WPT9TT2FZHRHYD22L1P4P",
+                facetCount: 100,
+                groupCount: -1,
+                typoTolerance: 1,
+                textFacetFilters: {
+                    option_auto_colour: [],
+                    option_auto_size: [],
+                    system_collections: ["{{ collection.title }}"],
+                    system_producttype: [],
+                    system_tags: []
+                },
+                numericFacetFilters: {},
+                textFacetQuery: null,
+                geo: {}
+            },
+            appliedFilters() {
+                return Object.values(this.query.textFacetFilters).flat()
+            },
+            async searchAPI(timeout = 0) {
+                    this.searching = true;
+                
+                response = await fetch("https://7hsb45sprvitftfe3eg1648d-fast.searchtap.net/v2", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        authorization: this.apiAuth
+                    },
+                    body: JSON.stringify(this.query)
+                });
+                if (timeout > 0) console.log(`Request Timeout: ${timeout ++}`);
+                if (!response.ok && timeout <= 5) 
+                    return this.searchAPI(timeout);
+                if (!response.ok && timeout > 5) {
+                    console.log("Trying again in 2 seconds");
+                    await new Promise(r => setTimeout(r, 2000));
+                    return this.searchAPI();
+                };
+                if (response.ok) {
+                    data = await response.json();
+                    setTimeout(function () {
+                        StampedFn.reloadUGC();
+                    }, 1000);
+
+                    return data;
+                };
+            }
+        }
+    }
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+</script>

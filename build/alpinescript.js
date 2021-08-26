@@ -149,6 +149,7 @@ export default function (Alpine) {
         init() {
             if (this.subscribed == false) this.open = true;
             console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
+            this.$store.subscribed = true;
         }
     }));
 

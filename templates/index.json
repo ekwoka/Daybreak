@@ -9,65 +9,54 @@
         "btn1url": "shopify:\/\/collections\/latest-designs",
         "btn2txt": "View Best Sellers",
         "btn2url": "shopify:\/\/collections\/bestsellers",
-        "mobile": "shopify:\/\/shop_images\/RAP_mobile_banner_copy.png",
-        "desktop": "shopify:\/\/shop_images\/Christmas_Banner_copy.png",
-        "aspect": "dynamic",
-        "mobileRatio": 2,
-        "deskRatio": 6
+        "mobile": "shopify:\/\/shop_images\/RM_RAP_15_opacity_4fcbfe9f-39c2-4934-8415-95295f65c3bd.png",
+        "desktop": "shopify:\/\/shop_images\/ARMY_RAP_15_opacity_c5a45410-de8d-4c93-8654-6f2594ecb2aa.png",
+        "aspect": "manual",
+        "mobileRatio": 60,
+        "deskRatio": 50
       }
     },
     "featured_products": {
       "type": "featured-collection",
       "settings": {
         "title": "Featured products",
-        "collection": "",
+        "collection": "home-page-bestsellers",
         "products_to_show": 4,
         "show_view_all": true,
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "image_ratio": "adapt",
         "show_secondary_image": false,
         "add_image_padding": false,
         "show_vendor": false
       }
     },
-    "image_text": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
+    "162944343615fc3157": {
+      "type": "inline-newsletter-comp",
       "settings": {
-        "height": "adapt",
-        "color_scheme": "background-1",
-        "layout": "image_first"
+        "cardStyle": "full",
+        "sticky": true,
+        "emailProvider": "klaviyo",
+        "listID": "UxjaW4",
+        "captureHeader": "Join Lion Legion",
+        "captureHtml": "Sign up and receive a coupon for <strong>10% off<\/strong> your first order<br>\nYou'll also get:<br>\nMembers-only exclusive offers, early access to new designs, and other benefits guaranteed to knock your socks off",
+        "captureButton": "Get My Coupon",
+        "showCoupon": true,
+        "couponCode": "get10now",
+        "couponOffer": "10% Off",
+        "successH2": "Thank You!",
+        "successP": "Look forward to our amazing emails in your inbox!",
+        "errorH2": "Oh No!",
+        "errorP": "It looks like there was an error!",
+        "errorAgain": true,
+        "existedH2": "Wait a sec...",
+        "existedP": "You're already subscribed!",
+        "existedCoupon": true
       }
     }
   },
   "order": [
     "1629110654344cccde",
     "featured_products",
-    "image_text"
+    "162944343615fc3157"
   ]
 }

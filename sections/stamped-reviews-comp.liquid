@@ -1,0 +1,20 @@
+{{ 'stamped-reviews.comp.css' | asset_url | stylesheet_tag }}
+
+<!--Start Stamped.io Auto Installation-->
+<div id="stamped-main-widget" data-offset-mobile="210" data-offset = "210" class="stamped-main-widget" data-widget-style="standard" data-product-id="{{ product.id }}" data-name="{{ product.title | escape }}" data-url="{{ shop.url }}{{ product.url }}" data-image-url="{{ product.featured_image | product_img_url: "large" |replace: '?', '%3F' | replace: '&','%26'}}" data-description="{{ product.description | escape }}" data-product-sku="{{product.handle}}" data-product-type="{{product.type}}">
+    {{ product.metafields.stamped.reviews }}
+</div>
+<!--End Stamped.io Auto Installation-->
+
+{% schema %}
+{
+    "name": "Stamped Reviews",
+    "tag": "section",
+    "presets": [
+        {
+            "category": "Reviews",
+            "name":"Stamped Reviews"
+        }
+    ]
+}
+{% endschema %}

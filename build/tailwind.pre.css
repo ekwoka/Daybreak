@@ -3,93 +3,182 @@
 @tailwind utilities;
 
 @layer base {
-/* Custom Color Variables */
-:root {
+  /* Custom Color Variables */
+  :root {
     --price-color: rgba(22, 101, 52, 1);
-    --old-price: rgba(0,0,0,.6);
-}
+    --old-price: rgba(0, 0, 0, 0.6);
+  }
 
-/* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price, cart-footer, payment-options, payment-icons,cart-details, sub-total, estimated-shipping, cart-total, expected-discount {
-        @apply block
-    }
+  /* Custom Elements */
+  announcement-bar,
+  announcement-message,
+  order-bump,
+  bump-title,
+  bump-offer,
+  bump-item,
+  bump-info,
+  email-capture,
+  capture-main,
+  capture-error,
+  capture-existed,
+  capture-success,
+  floating-label,
+  product-grid,
+  product-card,
+  card-info,
+  card-price,
+  swatch-wrapper,
+  review-stars,
+  toast-item,
+  toast-icon,
+  toast-content,
+  toast-title,
+  toast-message,
+  cart-backdrop,
+  cart-drawer,
+  cart-item,
+  cart-empty,
+  cart-title,
+  cart-container,
+  item-details,
+  quantity-control,
+  remove-price,
+  cart-footer,
+  payment-options,
+  payment-icons,
+  cart-details,
+  sub-total,
+  estimated-shipping,
+  cart-total,
+  expected-discount {
+    @apply block;
+  }
 
-new-price, old-price {
-        @apply inline
-    }
+  new-price,
+  old-price {
+    @apply inline;
+  }
 
-button:disabled {
-        @apply pointer-events-none
-    }
+  button:disabled {
+    @apply pointer-events-none;
+  }
 
-img, video {
-        aspect-ratio: attr(width) / attr(height);
-    }
+  img,
+  video {
+    aspect-ratio: attr(width) / attr(height);
+  }
 
-*:focus-visible {
-        outline: 2px auto black;
-    }
-
+  *:focus-visible {
+    outline: 2px auto black;
+  }
 }
 
 @layer components {
-    .btn-primary, .btn-secondary {
-        @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 disabled:text-gray-50 hover:shadow-inner hover:bg-gradient-to-b
+  .btn-primary,
+  .btn-secondary {
+    @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 disabled:text-gray-50 hover:shadow-inner hover:bg-gradient-to-b;
+  }
+
+  .btn-primary {
+    @apply from-cta-700 to-cta-600 text-gray-50 hover:text-white;
+  }
+
+  .btn-secondary {
+    @apply text-gray-800 from-gray-300 to-gray-200 hover:text-gray-900;
+  }
+
+  floating-label {
+    @apply relative mt-4;
+
+    & input[type="text"],
+    & input[type="email"],
+    & input[type="search"] {
+      @apply w-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
+
+      &:placeholder-shown ~ label {
+        @apply text-base text-gray-600 top-2;
+      }
+
+      &:focus ~ label {
+        @apply text-sm text-gray-600 -top-5;
+      }
     }
 
-    .btn-primary {
-        @apply from-cta-700 to-cta-600 text-gray-50  hover:text-white
+    & label {
+      @apply absolute w-full text-sm text-gray-800 transition-all left-2 -top-5;
     }
 
-    .btn-secondary {
-        @apply  from-gray-300 to-gray-200 text-gray-800 hover:text-gray-900
+    & ~ button {
+      @apply md:mt-4;
     }
+  }
 
-    floating-label {
-        @apply relative mt-4;
+  svg.icon-tw {
+    @apply inline-block w-6 h-6 mx-auto fill-current;
+  }
 
-        & input[type="text"], & input[type="email"], & input[type="search"] {
-            @apply w-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
-            
-            &:placeholder-shown ~ label {
-                @apply text-base text-gray-600 top-2
-            }
-            
-            &:focus ~ label {
-                @apply -top-5 text-gray-600 text-sm
-            }
+  svg.inline-spinner {
+    @apply inline-block w-5 h-5 mx-2 text-white align-bottom animate-spin;
+  }
 
-        }
+  new-price {
+    @apply text-[color:var(--price-color)] font-medium;
+  }
 
-        & label {
-            @apply w-full absolute left-2 -top-5 text-gray-800 text-sm transition-all
-        }
+  old-price {
+    @apply pl-1 text-[color:var(--old-price)] line-through text-sm;
+  }
 
-        & ~ button {
-            @apply md:mt-4
-        }
-    }
+  [data-swatch] {
+    @apply shadow-lg border-white border-solid border-2 h-6 w-6 rounded-full
+  }
 
-    svg.icon {
-        @apply inline-block w-6 h-6 mx-auto fill-current
-    }
+  [data-swatch="Jet Black"],
+  [data-swatch="Jet Black"]:disabled,
+  [data-swatch="Black"],
+  [data-swatch="Black"]:disabled {
+    @apply bg-black
+  }
 
-    svg.inline-spinner {
-        @apply inline-block w-5 h-5 mx-2 text-white align-bottom animate-spin
-    }
+  [data-swatch="White"],
+  [data-swatch="White"]:disabled {
+    @apply border-gray-400
+  }
 
-    new-price {
-        @apply text-[color:var(--price-color)] font-medium
-    }
+  [data-swatch="White"] {
+    @apply bg-white
+  }
 
-    old-price {
-        @apply pl-1 text-[color:var(--old-price)] line-through text-sm
-    }
+  [data-swatch="Oxford Navy"],
+  [data-swatch="Oxford Navy"]:disabled,
+  [data-swatch="Navy"],
+  [data-swatch="Navy"]:disabled {
+    @apply bg-indigo-900
+  }
+
+  [data-swatch="Bottle Green"],
+  [data-swatch="Bottle Green"]:disabled,
+  [data-swatch="Military Green"],
+  [data-swatch="Military Green"]:disabled {
+    @apply bg-[#5e7461]
+  }
+
+  [data-swatch="Heather Grey"],
+  [data-swatch="Heather Grey"]:disabled,
+  [data-swatch="Charcoal"],
+  [data-swatch="Charcoal"]:disabled {
+    @apply bg-gray-500
+  }
+
+  [data-swatch="Red"],
+  [data-swatch="Red"]:disabled {
+    @apply bg-[#d50032]
+  }
 
 }
 
 @layer utilities {
-    .scroll-lock {
-        @apply overflow-hidden md:overflow-auto
-    }
+  .scroll-lock {
+    @apply overflow-hidden md:overflow-auto;
+  }
 }
