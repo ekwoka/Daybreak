@@ -12,7 +12,6 @@
       "settings": {
         "ppp": 8,
         "pageType": "load",
-        "adaptImage": false,
         "showVender": false,
         "showColors": true,
         "showReviews": true,
