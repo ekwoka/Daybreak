@@ -16,73 +16,77 @@
         "deskRatio": 40
       }
     },
-    "featured_products": {
+    "16300481333c195d52": {
+      "type": "collection-highlight-comp",
+      "blocks": {
+        "708d466a-6b23-4b56-86f5-87327766a133": {
+          "type": "collection",
+          "settings": {
+            "collection": "frontpage",
+            "collection_image": "shopify:\/\/shop_images\/grey-couch-with-a-bookcase-behind-it.jpg",
+            "collection_title": ""
+          }
+        },
+        "6b5c7f1c-147b-4bd6-9b74-0a2b5c29211b": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/working-at-night.jpg",
+            "collection_title": ""
+          }
+        },
+        "d234783f-a879-4f51-8555-0eb91f3b0e78": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/hand-pours-a-green-liquid-into-a-glass-of-ice-and-milk.jpg",
+            "collection_title": ""
+          }
+        },
+        "3af22f44-f5ee-495c-8ee9-f23868ff8fab": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "collection_image": "shopify:\/\/shop_images\/milkshake-on-pink.jpg",
+            "collection_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "708d466a-6b23-4b56-86f5-87327766a133",
+        "6b5c7f1c-147b-4bd6-9b74-0a2b5c29211b",
+        "d234783f-a879-4f51-8555-0eb91f3b0e78",
+        "3af22f44-f5ee-495c-8ee9-f23868ff8fab"
+      ],
+      "settings": {
+        "custom_class": "",
+        "border_color_collection_list": "#444444",
+        "text_bg_color_collection_list": "#444444",
+        "text_color_collection_list": "#ffffff",
+        "title": "Featured Collections",
+        "top_margin_featured": 125,
+        "text_transform_title": "",
+        "collection_product_title_text_transform": "capitalize"
+      }
+    },
+    "163005622527db0d77": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "collection": "",
+        "title": "Featured collection",
+        "collection": "frontpage",
         "products_to_show": 4,
         "show_view_all": true,
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "image_ratio": "adapt",
         "show_secondary_image": false,
         "add_image_padding": false,
         "show_vendor": false
       }
-    },
-    "image_text": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Image with text"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "height": "adapt",
-        "color_scheme": "background-1",
-        "layout": "image_first"
-      }
-    },
-    "1626254638dce48bfc": {
-      "type": "order-bump-comp",
-      "settings": {
-        "title": "Check out these items!",
-        "desc": "These go great with those things you already have!",
-        "center": true,
-        "showPrice": true,
-        "toLimit": 2,
-        "toShow": 4,
-        "bumpProduct": "ancient-pine",
-        "bumpCollection": "frontpage",
-        "random": true
-      }
     }
   },
   "order": [
     "1629110654344cccde",
-    "featured_products",
-    "image_text",
-    "1626254638dce48bfc"
+    "16300481333c195d52",
+    "163005622527db0d77"
   ]
 }
