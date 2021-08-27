@@ -145,3 +145,12 @@ main#MainContent {
     @apply overflow-hidden md:overflow-auto;
   }
 }
+
+span.stamped-badge-caption[data-reviews][data-label][data-version="2"]::before {
+  content: "\a";
+  white-space: pre;
+}
+
+span.stamped-badge::before {
+  content: '' attr(data-rating) ' ';
+}
