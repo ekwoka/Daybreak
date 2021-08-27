@@ -8,7 +8,7 @@
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
-    "open": "sleep 15s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/125231693990/editor",
+    "open": "sleep 25s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/125231693990/editor",
     "reset": "run-s pull build push",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-p css:build css:critical css:component js:build && npm run sizes:assets",
@@ -25,21 +25,22 @@
     "sizes:assets": "ls -lh assets/daybreak.min.js assets/tailwind.css assets/*.comp.css",
     "watch": "run-p serve css:watch css:component-watch js:watch open",
     "watch:alpine": "nodemon -x 'npm run minify:alpine && npm run minify:js' -w build/alpinescript.js",
-    "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;"
+    "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;",
+    "postinstall": "v=$(npm list | grep alpinejs | cut -f 2 -d '@') && echo $v && for f in ./node_modules/alpinejs/**/*.js; do perl -pi -e \"s/ALPINE_VERSION/'DAYBREAK custom v$v'/g\" \"$f\"; done;"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
     "@ryangjchandler/fern": "^0.1.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
-    "alpinejs": "^3.2.3",
+    "alpinejs": "^3.2.4",
     "lazysizes": "^5.3.2"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.1",
-    "cssnano": "^5.0.7",
+    "autoprefixer": "^10.3.3",
+    "cssnano": "^5.0.8",
     "minify": "^7.0.2",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.6",

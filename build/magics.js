@@ -3,4 +3,4 @@
 /* import './../node_modules/alpinejs/src/magics/$watch' */
 import './../node_modules/alpinejs/src/magics/$store'
 /* import './../node_modules/alpinejs/src/magics/$refs' */
-import './../node_modules/alpinejs/src/magics/$el'
+/* import './../node_modules/alpinejs/src/magics/$el' */

@@ -48,7 +48,7 @@
     })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open == true" {%- endif -%} style="display:none;" x-cloak>
     <button @click.prevent="open = false" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
         x-show="open == true" {%- endif -%}>close
-        <svg class="inline-block w-5 h-5 mx-auto icon">
+        <svg class="inline-block w-5 h-5 mx-auto icon-tw">
             <use xlink:href="#icon-close">
         </svg>
     </button>
@@ -67,7 +67,7 @@
                     class="flex-auto w-full btn-primary md:w-1/4"
                     aria-label="Submit Email" @click.prevent="submitEmail()" :disabled="sending">
                     <span x-show="!sending">{{ section.settings.captureButton }}</span>
-                    <svg x-show="sending" class="icon animate-bounce">
+                    <svg x-show="sending" class="icon-tw animate-bounce">
                         <use xlink:href="#icon-cloud-upload"></use>
                     </svg>
                 </button>
@@ -82,7 +82,7 @@
             class="mt-2 btn-primary"
             aria-label="Submit Email" @click.prevent="sent=error=false">
             <span x-show="!sending">Try Again</span>
-            <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon animate-bounce">
+            <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon-tw animate-bounce">
                 <use xlink:href="#icon-cloud-upload"></use>
             </svg>
         </button>
