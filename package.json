@@ -30,7 +30,7 @@
     "theme:pull": "theme download -e daybreak",
     "theme:watch": "theme watch -e daybreak",
     "theme:reset": "run-s theme:pull build theme:push theme:open",
-    "theme:open": "theme open -e daybreak --hidepb"
+    "theme:open": "theme open -e daybreak --hidepb",
     "postinstall": "v=$(npm list | grep alpinejs | cut -f 2 -d '@') && echo $v && for f in ./node_modules/alpinejs/**/*.js; do perl -pi -e \"s/ALPINE_VERSION/'DAYBREAK custom v$v'/g\" \"$f\"; done;"
   },
   "author": "Eric Kwoka",
@@ -51,6 +51,6 @@
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
-    "tailwindcss": "^2.2.7"
+    "tailwindcss": "^2.2.8"
   }
 }
