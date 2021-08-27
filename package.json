@@ -8,7 +8,7 @@
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
-    "open": "sleep 15s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/125231693990/editor",
+    "open": "sleep 25s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/126042210470/editor",
     "reset": "run-s pull build push",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-p css:build css:critical css:component js:build && npm run sizes:assets",
@@ -31,6 +31,7 @@
     "theme:watch": "theme watch -e daybreak",
     "theme:reset": "run-s theme:pull build theme:push theme:open",
     "theme:open": "theme open -e daybreak --hidepb"
+    "postinstall": "v=$(npm list | grep alpinejs | cut -f 2 -d '@') && echo $v && for f in ./node_modules/alpinejs/**/*.js; do perl -pi -e \"s/ALPINE_VERSION/'DAYBREAK custom v$v'/g\" \"$f\"; done;"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
@@ -43,7 +44,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.2",
+    "autoprefixer": "^10.3.3",
     "cssnano": "^5.0.8",
     "minify": "^7.0.2",
     "npm-run-all": "^4.1.5",

@@ -6,71 +6,34 @@
   /* Custom Color Variables */
   :root {
     --price-color: rgba(22, 101, 52, 1);
-    --old-price: rgba(0, 0, 0, 0.6);
-  }
+    --old-price: rgba(0,0,0,.6);
+}
 
-  /* Custom Elements */
-  announcement-bar,
-  announcement-message,
-  order-bump,
-  bump-title,
-  bump-offer,
-  bump-item,
-  bump-info,
-  email-capture,
-  capture-main,
-  capture-error,
-  capture-existed,
-  capture-success,
-  floating-label,
-  product-grid,
-  product-card,
-  card-info,
-  card-price,
-  swatch-wrapper,
-  review-stars,
-  toast-item,
-  toast-icon,
-  toast-content,
-  toast-title,
-  toast-message,
-  cart-backdrop,
-  cart-drawer,
-  cart-item,
-  cart-empty,
-  cart-title,
-  cart-container,
-  item-details,
-  quantity-control,
-  remove-price,
-  cart-footer,
-  payment-options,
-  payment-icons,
-  cart-details,
-  sub-total,
-  estimated-shipping,
-  cart-total,
-  expected-discount {
-    @apply block;
-  }
+/* Custom Elements */
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price, cart-footer, payment-options, payment-icons,cart-details, sub-total, estimated-shipping, cart-total, expected-discount {
+        @apply block
+    }
 
-  new-price,
-  old-price {
-    @apply inline;
-  }
+new-price, old-price {
+        @apply inline
+    }
 
-  button:disabled {
-    @apply pointer-events-none;
-  }
+button:disabled {
+        @apply pointer-events-none
+    }
 
-  img,
-  video {
-    aspect-ratio: attr(width) / attr(height);
-  }
+img, video {
+        aspect-ratio: attr(width) / attr(height);
+    }
 
-  *:focus-visible {
-    outline: 2px auto black;
-  }
+*:focus-visible {
+        outline: 2px auto black;
+    }
+
+main#MainContent {
+    @apply gap-y-6 flex flex-col flex-nowrap justify-start mb-6
+}
+
 }
 
 @layer components {
