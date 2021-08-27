@@ -787,6 +787,15 @@ img, video {
 *:focus-visible {
         outline: 2px auto black;
     }
+
+main#MainContent {
+	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	row-gap: 1.5rem;
+}
 .container {
 	width: 100%;
 	margin-right: auto;
