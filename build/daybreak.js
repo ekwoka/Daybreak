@@ -30,7 +30,7 @@ export async function addToCart(id, q, items) {
   let index = items.findIndex((e) => e.id == id);
   (index >= 0 && items[index]?.removed) && items.splice(index,1) && (index = -1);
   (index >= 0) ? items[index] = item : items.unshift(item)
-  Alpine.store('toast').addToast(item.product_title,'success')
+  Alpine.store('toast').addToast(`${item.product_title} Added to Cart`,'success')
   return items;
 }
 
@@ -49,7 +49,7 @@ export async function addToCartFromForm(body,items) {
   let id = item.id
   let index = items.findIndex((e) => e.id == id);
   index >= 0 ? (items[index] = item) : items.unshift(item)
-  Alpine.store('toast').addToast(item.product_title,'success')
+  Alpine.store('toast').addToast(`${item.product_title} Added to Cart`,'success')
   return items;
 }
 

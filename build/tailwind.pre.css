@@ -70,7 +70,7 @@ img, video {
         }
     }
 
-    svg.icon {
+    svg.icon-tw {
         @apply inline-block w-6 h-6 mx-auto fill-current
     }
 

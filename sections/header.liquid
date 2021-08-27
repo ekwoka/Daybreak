@@ -286,11 +286,7 @@
       </details-modal>
     {%- endif -%}
 
-    {%- if request.page_type == 'index' -%}
-      <h1 class="header__heading">
-    {%- endif -%}
-
-    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-8 mx-auto text-xl font-semibold tracking-widest text-center break-word md:order-first">
+    <a href="{{ routes.root_url }}" class="flex-auto order-2 w-full mx-auto text-xl font-semibold tracking-widest text-center break-word lg:order-first">
       {%- case section.settings.logoType -%}
         {%- when 'none' -%}
           <h1 class="">
@@ -593,7 +589,7 @@
       "type": "html",
       "id": "logosvg",
       "label": "Logo SVG Code",
-      "info": "If you SVG does not appear, try adding 'width=\"100%\"' to the top SVG element",
+      "info": "If you SVG does not appear, try adding 'width=\"100%\"' to the top SVG element"
     },
     {
       "type": "range",

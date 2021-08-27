@@ -111,7 +111,7 @@
             </div>
           {%- when 'description' -%}
             {%- if product.description != blank -%}
-              <div class="product__description rte">
+              <div class="prose product__description rte">
                 {{ product.description }}
               </div>
             {%- endif -%}
@@ -285,7 +285,7 @@
                     {% if product.selected_or_first_available_variant.available == false %}:disabled="true"{% else -%}:disabled="sending"{% endif %}
                     >
                         {%- if product.selected_or_first_available_variant.available -%}
-                          {{ 'products.product.add_to_cart' | t }}
+                          {{ 'products.product.add_to_cart' | t }} - {{ product.selected_or_first_available_variant.price | money }}
                         {%- else -%}
                           {{ 'products.product.sold_out' | t }}
                         {%- endif -%}
@@ -330,14 +330,14 @@
           {%- when 'uvp' -%}
             {%- liquid
               if block.settings.default
-                assign uvp_content = '<div class="w-full text-center">' | append: block.settings.default | append: '</div>'
+                assign uvp_content = '<div class="max-w-full text-center">' | append: block.settings.default | append: '</div>'
               endif
               if block.settings.prodIcons
                 assign src = block.settings.prodIcons | img_url: '360x'
                 capture uvp_content 
                   echo '<img src="' | append: src | append: '" srcset="'
                   render 'responsive-srcset', image: block.settings.prodIcons
-                  echo '" alt="" data-sizes="auto" loading="lazy" sizes="10px" class="w-full">'
+                  echo '" alt="" data-sizes="auto" loading="lazy" sizes="10px" class="w-full h-[1%]">'
                 endcapture
               endif
               

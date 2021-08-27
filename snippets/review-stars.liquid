@@ -25,7 +25,7 @@ Usage: {%- render 'review-stars', product: product -%}
         assign noReviews = true
         case settings.reviewApp
             when 'stamped'
-                if prod.metafields.stamped.reviews_count > 0
+                if prod.metafields.stamped.reviews_count
                     echo '<review-stars class="stamped-product-reviews-badge ' | append: class | append: '" data-id="' | append: product.id | append: '" data-product-sku="' | append: product.handle | append: '"></review-stars>'
                     assign noReviews = false
                 endif

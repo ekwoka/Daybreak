@@ -47,7 +47,14 @@ module.exports = {
       },
       lineHeight: {
       },
-      letterSpacing: ['dark']
+      letterSpacing: ['dark'],
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.900'),
+          },
+        },
+      }),
     },
   },
   variants: {

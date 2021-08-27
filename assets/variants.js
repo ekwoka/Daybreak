@@ -82,7 +82,7 @@ class VariantSelects extends HTMLElement {
         if (source && destination) destination.innerHTML = source.innerHTML;
 
         document.getElementById(`price-${this.dataset.section}`)?.classList.remove('visibility-hidden');
-        this.toggleAddButton(!this.currentVariant.available, window.variantStrings.soldOut);
+        this.toggleAddButton(!this.currentVariant.available, html.getElementById(`product-form-${this.dataset.section}`)?.querySelector('[name="add"]').innerText);
       });
   }
 
@@ -96,7 +96,7 @@ class VariantSelects extends HTMLElement {
       if (text) addButton.textContent = text;
     } else {
       addButton.removeAttribute('disabled');
-      addButton.textContent = window.variantStrings.addToCart;
+      if (text) addButton.textContent = text;
     }
 
     if (!modifyClass) return;
