@@ -19,8 +19,8 @@
     "css:component": "run-s css:component-build css:component-purge",
     "css:component-build": "npx tailwindcss -i ./build/component.pre.css -o ./build/component.built.css --jit -m",
     "css:component-purge": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx purgecss --css ./build/component.built.css -o ./assets/$x.comp.css --content $i & done; wait",
-    "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx tailwindcss -i ./build/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w -m & done; wait",
-    "js:build": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify",
+    "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx tailwindcss -i ./build/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w & done; wait",
+    "js:build": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify && npx esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
     "js:watch": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --watch --minify",
     "sizes:assets": "ls -lh assets/daybreak.min.js assets/tailwind.css assets/*.comp.css",
     "watch": "run-p theme:watch css:watch css:component-watch js:watch theme:open",
@@ -51,6 +51,6 @@
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
-    "tailwindcss": "^2.2.8"
+    "tailwindcss": "^2.2.9"
   }
 }
