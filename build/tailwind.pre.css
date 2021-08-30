@@ -138,6 +138,93 @@ main#MainContent {
     @apply bg-[#d50032]
   }
 
+  /* Stamped Styles */
+
+
+.stamped-badge,
+.stamped-badge:after {
+  clear: both;
+}
+@font-face {
+  font-family: stamped-font;
+  font-display: swap;
+  src: url(https://cdn1.stamped.io/fonts/stamped-font.eot?rkevfi);
+  src: url(https://cdn1.stamped.io/fonts/stamped-font.eot?rkevfi#iefix)
+      format("embedded-opentype"),
+    url(https://cdn1.stamped.io/fonts/stamped-font.ttf?rkevfi)
+      format("truetype"),
+    url(https://cdn1.stamped.io/fonts/stamped-font.woff?rkevfi) format("woff"),
+    url(https://cdn1.stamped.io/fonts/stamped-font.svg?rkevfi#stamped-font)
+      format("svg");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.stamped-fa {
+  display: inline-block;
+  font-style: normal;
+}
+[class*=" stamped-fa-"]:before,
+[class^="stamped-fa-"]:before {
+  font-family: stamped-font, FontAwesome, "Font Awesome 5 Pro",
+    "Font Awesome 5 Brands";
+  font-style: normal;
+  font-weight: 400;
+  speak: none;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: 0.2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+}
+
+.stamped-fa-star:before {
+  content: "\f005";
+}
+
+.stamped-fa-star {
+  color: #ffd200;
+  padding: 0;
+}
+
+.stamped-fa-star:before {
+  font-size: 18px;
+  margin-right: -1px;
+}
+
+.stamped-fa-star:before {
+  font-family: stamped-font, FontAwesome !important;
+}
+.stamped-badge {
+  min-height: auto;
+  min-width: auto;
+  display: block;
+  cursor: pointer;
+}
+.stamped-badge-starrating {
+  color: gold;
+  margin: 0 3px 0 0 !important;
+  vertical-align: middle;
+}
+.stamped-badge-starrating .stamped-fa {
+  font-size: 100%;
+}
+.stamped-badge-caption[data-reviews]:after {
+  content: " reviews";
+}
+.stamped-badge-caption[data-reviews][data-label]:after {
+  content: " " attr(data-label);
+}
+.stamped-badge-caption[data-reviews][data-label][data-version="2"]:after {
+  content: "" !important;
+}
+.stamped-badge-caption[data-reviews][data-label][data-version="2"] > span {
+  display: inline !important;
+}
+
+
 }
 
 @layer utilities {

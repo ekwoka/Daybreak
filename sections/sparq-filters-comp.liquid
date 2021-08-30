@@ -158,7 +158,7 @@ ul.filtersTruncate li:nth-child(6) span{
                             <span class="block mx-auto text-sm text-center text-gray-700">new product, no reviews</span>
                         </template>
                         <span class="block mx-auto text-center" x-text="`£${product.price}`"></span>
-                        <div :data-id="product.id" class="flex flex-row justify-center mx-auto" x-show="cartContents.includes(product.id)">
+                        <div class="flex flex-row justify-center mx-auto" x-show="cartContents.includes(product.id)">
                             <svg class="inline-block w-5 h-5 align-middle fill-current text-cta-600">
                                 <use xlink:href="#icon-check-circle"></use>
                             </svg>
@@ -591,7 +591,7 @@ ul.filtersTruncate li:nth-child(6) span{
                 if (response.ok) {
                     data = await response.json();
                     setTimeout(function () {
-                        StampedFn.reloadUGC();
+                        Daybreak.stampedUGC();
                     }, 1000);
 
                     return data;
