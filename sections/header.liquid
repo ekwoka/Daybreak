@@ -413,7 +413,7 @@
         </a>
       {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data @click.prevent="$store.cart.open($el)">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open($el)">
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
@@ -422,7 +422,7 @@
           endif
         -%}
         <span class="visually-hidden">{{ 'templates.cart.cart' | t }}</span>
-          <div class="cart-count-bubble" x-show="$store.cart.quantity > 0" {%- if cart == empty %} style="display:none;"{%- endif -%}>
+          <div class="transition-opacity cart-count-bubble" x-show="$store.cart.quantity > 0" x-init="$watch('$store.cart.quantity',()=>{$el.classList.add('animate-bubble-ping');setTimeout(()=>{$el.classList.remove('animate-bubble-ping')},4000)})" {%- if cart == empty %} style="display:none;"{%- endif -%}>
             {%- if cart.item_count < 100 -%}
               <span aria-hidden="true" x-text="$store.cart.quantity">{{ cart.item_count }}</span>
             {%- endif -%}
@@ -432,10 +432,6 @@
     </div>
   </header>
 </{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
-
-{%- if request.page_type != 'cart' -%}
-  {%- render 'cart-notification' -%}
-{%- endif -%}
 
 {% javascript %}
   class StickyHeader extends HTMLElement {

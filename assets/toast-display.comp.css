@@ -15,10 +15,7 @@ toast-item {
   margin-left: auto;
   margin-right: auto;
   display: flex;
-  width: 75%;
-  min-width: -webkit-max-content;
-  min-width: -moz-max-content;
-  min-width: max-content;
+  width: 83.333333%;
   max-width: 640px;
   overflow: hidden;
   border-radius: 0.5rem;
@@ -36,6 +33,7 @@ toast-item {
 toast-icon {
   display: flex;
   width: 3rem;
+  flex: none;
   align-items: center;
   justify-content: center
 }
