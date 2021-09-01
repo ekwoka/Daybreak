@@ -77,11 +77,11 @@ progress.load-more[value]::-moz-progress-bar {
 /* toast-display-comp.liquid */
 
 toast-item {
-    @apply fixed inset-x-0 z-[110] w-3/4 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md min-w-max pointer-events-none
+    @apply fixed inset-x-0 z-[110] w-5/6 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md  pointer-events-none
 }
 
 toast-icon {
-    @apply flex items-center justify-center w-12
+    @apply flex items-center justify-center w-12 flex-none
 }
 
 toast-icon > svg {

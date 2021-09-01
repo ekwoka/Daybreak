@@ -55,6 +55,16 @@ module.exports = {
           },
         },
       }),
+      animation: {
+        'bubble-ping': 'bubble 2s cubic-bezier(0, 0, 0.2, 1) 2'
+      },
+      keyframes: {
+        bubble: {
+          '50%': { opacity: '0', transform: 'scale(2)'},
+          '51%': { opacity: '0', transform: 'scale(0)'},
+          '15%, 85%': { opacity: 1, transform: 'scale(1)'}
+        }
+      }
     },
   },
   variants: {

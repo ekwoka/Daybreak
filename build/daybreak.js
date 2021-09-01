@@ -50,6 +50,7 @@ export async function addToCartFromForm(body,items) {
   let index = items.findIndex((e) => e.id == id);
   index >= 0 ? (items[index] = item) : items.unshift(item)
   Alpine.store('toast').addToast(`${item.product_title} Added to Cart`,'success')
+  document.querySelector('sticky-header').reveal()
   return items;
 }
 
@@ -88,7 +89,7 @@ export async function fetchCart() {
   return cart.items
 }
 
-export const currency = new Intl.NumberFormat([Shopify.locale + '-'+ Shopify.country], { style: 'currency', currency: Shopify.currency.active }) || new Intl.NumberFormat([en-US], { style: 'currency', currency: USD })
+export const currency = new Intl.NumberFormat([Shopify.locale + '-'+ Shopify.country], { style: 'currency', currency: Shopify?.currency?.active || 'USD' }) || new Intl.NumberFormat([en-US], { style: 'currency', currency: USD })
 
 export const RIAS = {
   updateSize(el) {
