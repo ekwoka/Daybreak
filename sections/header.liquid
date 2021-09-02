@@ -362,7 +362,7 @@
     {%- endif -%}
 
     <div class="header__icons">
-      <details-modal class="header__search">
+      {% comment %} <details-modal class="header__search">
         <details>
           <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
             <span>
@@ -393,7 +393,7 @@
             </div>
           </div>
         </details>
-      </details-modal>
+      </details-modal> {% endcomment %}
 
       {% comment %} {%- if shop.customer_accounts_enabled -%}
         <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="header__icon header__icon--account link link--text focus-inset">
@@ -428,6 +428,7 @@
       </a>
     </div>
   </header>
+  {%- render 'sparq-search-comp' -%}
 </{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
 
 {% javascript %}
@@ -497,7 +498,7 @@
 
     closeSearchModal() {
       this.searchModal = this.searchModal || this.header.querySelector('details-modal');
-      this.searchModal.close(false);
+      if(this.searchModal!=null) this.searchModal.close(false);
     }
   }
 
@@ -543,8 +544,6 @@
     }
   </script>
 {%- endif -%}
-
-<script src="{{ 'cart-notification.js' | asset_url }}" defer="defer"></script>
 
 {% schema %}
 {

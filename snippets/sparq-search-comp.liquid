@@ -1,0 +1,57 @@
+{%- liquid -%}
+
+<script>
+  document.addEventListener("alpine:init", () => {
+    Alpine.data("instantSearch", ({ args } = {}) => ({
+      searchTerms: "",
+      results:[],
+      query:{},
+      async search(){
+          this.query.query=this.searchTerms
+          this.results = (await Daybreak.sparq.performSearch(this.query)).results
+          console.log(this.results)
+      },
+      init(){
+          this.query = Daybreak.sparq.TEST_QUERY
+          this.query.count=6;
+      }
+    }));
+  });
+</script>
+
+<div class="relative shadow-sm" x-data="instantSearch">
+  <div class="flex flex-row w-full max-w-screen-md px-4 py-2 mx-auto flex-nowrap">
+    <floating-label class="flex-auto w-full mt-0">
+      <input
+        @input.debounce.400="search()"
+        class="overflow-hidden"
+        id="search"
+        name="search"
+        type="search"
+        x-model="searchTerms"
+        placeholder="Search for things here..."
+      />
+      <label for="search">Search for things here...</label>
+    </floating-label>
+  </div>
+
+  <div class="absolute inset-x-0 grid max-w-screen-md max-h-screen grid-cols-2 px-8 mx-auto overflow-y-auto bg-white border border-t-0 border-gray-300 shadow-sm md:grid-cols-3 overscroll-contain gap-x-2 gap-y-1" x-show="results.length" style="display:none;">
+    <template x-for="(product,index) in searchTerms==''?[]:results" :key="product.id">
+        <div class="flex-none p-2 border-0 border-b border-solid rounded border-gray-50" :class="index>3?'hidden md:block':'block'">
+            <a :href="`/products/${product.handle}`" :aria-label="product.title">
+                <img x-rias="product?.image?.src" class="w-full" loading="lazy" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" alt="" sizes="25vw">
+                <span class="block mx-auto text-center" x-text="product.title">Product Title</span>
+            </a>
+            <template x-if="product.rating_count >= 1">
+                <a class="mx-auto" :href="`/products/${product.handle}#stamped-main-widget`" :data-handle="product.handle">
+                    <span :data-id="product.id" :data-product-sku="product.handle" :data-product-title="product.title" :data-product-type="product.producttype" class="block mx-auto text-center max-w-max stamped-product-reviews-badge"><span class="invisible">Review Stars</span></span>
+                </a>
+            </template>
+            <template x-if="product.rating_count == 0">
+                <span class="block mx-auto text-sm text-center text-gray-700">new product, no reviews</span>
+            </template>
+            <span class="block mx-auto text-center" x-text="`£${product.price}`"></span>
+        </div>
+    </template>
+  </div>
+</div>

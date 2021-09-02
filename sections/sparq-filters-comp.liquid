@@ -432,7 +432,7 @@ ul.filtersTruncate li:nth-child(6) span{
                         this.response ?. results[i] ?. handle
                     }${varQuery}`;
                 
-                return `/products/${handle}`;
+                return `/products/${this.response?.results[i]?.handle}`;
             },
             updateColors(arr){
                 this.response.results.forEach((product,i) => {
