@@ -6,10 +6,12 @@
       searchTerms: "",
       results:[],
       query:{},
+      empty: false,
       async search(){
+          this.empty = false
           this.query.query=this.searchTerms
           this.results = (await Daybreak.sparq.performSearch(this.query)).results
-          console.log(this.results)
+          if(this.results.length==0) this.empty = true
       },
       init(){
           this.query = Daybreak.sparq.TEST_QUERY
@@ -29,17 +31,18 @@
         name="search"
         type="search"
         x-model="searchTerms"
-        placeholder="Search for things here..."
+        placeholder="{{ section.settings.searchPlaceholder }}"
       />
-      <label for="search">Search for things here...</label>
+      <label for="search">{{ section.settings.searchPlaceholder }}</label>
     </floating-label>
   </div>
 
-  <div class="absolute inset-x-0 grid max-w-screen-md max-h-screen grid-cols-2 px-8 mx-auto overflow-y-auto bg-white border border-t-0 border-gray-300 shadow-sm md:grid-cols-3 overscroll-contain gap-x-2 gap-y-1" x-show="results.length" style="display:none;">
+  <div class="absolute inset-x-0 grid max-w-screen-md max-h-screen grid-cols-2 px-8 mx-auto overflow-y-auto bg-white border border-t-0 border-gray-300 shadow-sm md:grid-cols-3 overscroll-contain gap-x-2 gap-y-1" x-cloak x-show="!!searchTerms">
+    <template x-if="empty||results.length==0"><span class="col-span-2 pb-2 text-center text-gray-800 md:col-span-3" x-text="empty?'No Results':'Searching...'">No results</span></template>
     <template x-for="(product,index) in searchTerms==''?[]:results" :key="product.id">
         <div class="flex-none p-2 border-0 border-b border-solid rounded border-gray-50" :class="index>3?'hidden md:block':'block'">
             <a :href="`/products/${product.handle}`" :aria-label="product.title">
-                <img x-rias="product?.image?.src" class="w-full" loading="lazy" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" alt="" sizes="25vw">
+                <img x-rias="product?.image?.src" class="w-full" loading="lazy" :loading="index<2?'eager':'lazy'" data-sizes="auto" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw" alt="" sizes="25vw">
                 <span class="block mx-auto text-center" x-text="product.title">Product Title</span>
             </a>
             <template x-if="product.rating_count >= 1">

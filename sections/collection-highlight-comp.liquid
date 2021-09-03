@@ -18,7 +18,7 @@
             {%- endif -%}
         {%- endfor -%}
         {%- if section.settings.overlay -%}
-            <img src="{{ section.settings.overlay | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: section.settings.overlay -%}" class="absolute inset-0 block object-cover w-full h-full transform pointer-events-none opacity-80 object-x1/3 sm:object-center mix-blend-soft-light md:hidden" loading="lazy" alt="" data-sizes="auto" sizes="5px" width="{{ section.settings.overlay.width }}" height="{{ section.settings.overlay.height }}/>
+            <img src="{{ section.settings.overlay | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: section.settings.overlay -%}" class="absolute inset-0 block object-cover w-full h-full transform pointer-events-none opacity-80 object-x1/3 sm:object-center mix-blend-soft-light md:hidden" loading="lazy" alt="" data-sizes="auto" sizes="5px" width="{{ section.settings.overlay.width }}" height="{{ section.settings.overlay.height }}">
         {%- endif -%}
 </div>
 

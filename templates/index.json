@@ -16,18 +16,58 @@
         "deskRatio": 50
       }
     },
-    "featured_products": {
-      "type": "featured-collection",
+    "16306686664b0312bc": {
+      "type": "collection-highlight-comp",
+      "blocks": {
+        "16306686668305824e-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "royal-navy",
+            "collection_image": "shopify:\/\/shop_images\/RN_RAP_15_opacity_copy_2b3eb423-d7d0-47f2-bf6b-9c1662327d90.png",
+            "collection_title": ""
+          }
+        },
+        "16306686668305824e-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "royal-marines",
+            "collection_image": "shopify:\/\/shop_images\/RM_RAP_15_opacity_4fcbfe9f-39c2-4934-8415-95295f65c3bd.png",
+            "collection_title": ""
+          }
+        },
+        "16306686668305824e-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "british-army",
+            "collection_image": "shopify:\/\/shop_images\/ARMY_RAP_15_opacity_c5a45410-de8d-4c93-8654-6f2594ecb2aa.png",
+            "collection_title": ""
+          }
+        },
+        "4a56957f-3f95-4fe2-b711-c2107e57d9c3": {
+          "type": "collection",
+          "settings": {
+            "collection": "royal-air-force",
+            "collection_image": "shopify:\/\/shop_images\/RAF_RAP_15_opacity_aa4b792c-66ed-4c27-a8d2-a45022c48652.png",
+            "collection_title": ""
+          }
+        }
+      },
+      "block_order": [
+        "16306686668305824e-0",
+        "16306686668305824e-1",
+        "16306686668305824e-2",
+        "4a56957f-3f95-4fe2-b711-c2107e57d9c3"
+      ],
       "settings": {
-        "title": "Featured products",
-        "collection": "home-page-bestsellers",
-        "products_to_show": 4,
-        "show_view_all": true,
-        "swipe_on_mobile": true,
-        "image_ratio": "adapt",
-        "show_secondary_image": false,
-        "add_image_padding": false,
-        "show_vendor": false
+        "custom_class": "",
+        "border_color_collection_list": "#444",
+        "text_bg_color_collection_list": "#444",
+        "text_color_collection_list": "#fff",
+        "title": "Featured Collections",
+        "top_margin_featured": 0,
+        "text_transform_title": "",
+        "collection_product_title_text_transform": "capitalize",
+        "overlay": "shopify:\/\/shop_images\/UK_flag.png"
       }
     },
     "162944343615fc3157": {
@@ -52,11 +92,26 @@
         "existedP": "You're already subscribed!",
         "existedCoupon": true
       }
+    },
+    "featured_products": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "collection": "home-page-bestsellers",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_vendor": false
+      }
     }
   },
   "order": [
     "1629110654344cccde",
-    "featured_products",
-    "162944343615fc3157"
+    "16306686664b0312bc",
+    "162944343615fc3157",
+    "featured_products"
   ]
 }

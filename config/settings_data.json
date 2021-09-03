@@ -1,21 +1,22 @@
 {
   "current": {
+    "colors_accent_1": "#012169",
     "free_shipping_threshold": 4200,
     "reviewApp": "stamped",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
-          "announcement-bar-0": {
-            "type": "message",
+          "70cf9e5f-5fbe-4120-816b-4958ade876fd": {
+            "type": "shipping",
             "settings": {
-              "text": "Welcome to our store",
-              "link": ""
+              "default": "Free Shipping Available over £39",
+              "congrats": "Congratulations! You qualify for free shipping!"
             }
           }
         },
         "block_order": [
-          "announcement-bar-0"
+          "70cf9e5f-5fbe-4120-816b-4958ade876fd"
         ],
         "settings": {
           "showAnnouncement": true,
@@ -31,7 +32,8 @@
           "logo_position": "middle-left",
           "menu": "main-menu",
           "show_line_separator": true,
-          "enable_sticky_header": true
+          "enable_sticky_header": true,
+          "searchPlaceholder": "Search..."
         }
       },
       "footer": {
