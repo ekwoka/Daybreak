@@ -1,10 +1,10 @@
 {
   "name": "Daybreak",
-  "version": "0.0.7-alpha",
+  "version": "0.0.8-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "push:test": "run-s build push test",
-    "test": "for u in / /collections/latest-designs /products/oh-dear-how-sad-never-mind-unisex-t-shirt; do npx lighthouse \"https://kpyerqs53w8lbpcw-26840891438.shopifypreview.com$u?view=sparq&pb=0\" --output-path ./lighthouse.html --view --only-categories performance --budget-path=./budget.json; done",
+    "test": "for u in / /collections/latest-designs /products/oh-dear-how-sad-never-mind-unisex-t-shirt; do lighthouse \"https://kpyerqs53w8lbpcw-26840891438.shopifypreview.com$u?pb=0\" --output-path ./lighthouse.html --view --only-categories performance --budget-path=./budget.json; done",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
@@ -16,12 +16,12 @@
     "css:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss build/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose -m",
     "css:fulldev": "NODE_ENV=development TAILWIND_MODE=build postcss build/tailwind.pre.css --o assets/tailwind.css --verbose",
     "css:watch": "NODE_ENV=development TAILWIND_MODE=watch postcss build/tailwind.pre.css --o assets/tailwind.css --verbose -w -m",
-    "css:component": "run-s css:component-build css:component-purge",
-    "css:component-build": "npx tailwindcss -i ./build/component.pre.css -o ./build/component.built.css --jit -m",
-    "css:component-purge": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx purgecss --css ./build/component.built.css -o ./assets/$x.comp.css --content $i & done; wait",
-    "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;npx tailwindcss -i ./build/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w & done; wait",
-    "js:build": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify && npx esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
-    "js:watch": "npx esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --watch --minify",
+    "css:component": "run-s css:component-build css:component-purge -m",
+    "css:component-build": "tailwindcss -i ./build/component.pre.css -o ./build/component.built.css --jit",
+    "css:component-purge": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;purgecss --css ./build/component.built.css -o ./assets/$x.comp.css --content $i & done; wait",
+    "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;tailwindcss -i ./build/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w & done; wait",
+    "js:build": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify && esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
+    "js:watch": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --watch --minify",
     "sizes:assets": "ls -lh assets/daybreak.min.js assets/tailwind.css assets/*.comp.css",
     "watch": "run-p theme:watch css:watch css:component-watch js:watch theme:open",
     "watch:alpine": "nodemon -x 'npm run minify:alpine && npm run minify:js' -w build/alpinescript.js",
@@ -31,26 +31,27 @@
     "theme:watch": "theme watch -e daybreak",
     "theme:reset": "run-s theme:pull build theme:push theme:open",
     "theme:open": "theme open -e daybreak --hidepb",
-    "postinstall": "v=$(npm list | grep alpinejs | cut -f 2 -d '@') && echo $v && for f in ./node_modules/alpinejs/**/*.js; do perl -pi -e \"s/ALPINE_VERSION/'DAYBREAK custom v$v'/g\" \"$f\"; done;"
+    "postinstall": "v=$(npm list | grep alpinejs | cut -f 2 -d '@') && echo $v && for f in ./node_modules/alpinejs/**/*.js; do perl -pi -e \"s/ALPINE_VERSION/'DAYBREAK custom v$v'/g\" \"$f\"; done; npm run build"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
     "@ryangjchandler/fern": "^0.1.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
-    "alpinejs": "^3.2.4",
-    "lazysizes": "^5.3.2"
+    "alpinejs": "^3.3.1"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.3",
+    "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
-    "minify": "^7.0.2",
+    "esbuild": "^0.12.25",
+    "lighthouse": "^8.3.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
+    "purgecss": "^4.0.3",
     "tailwindcss": "^2.2.9"
   }
 }

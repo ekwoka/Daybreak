@@ -32,7 +32,7 @@ img, video {
 
 main#MainContent {
     @apply gap-y-6 flex flex-col flex-nowrap justify-start mb-6
-  }
+}
 
 }
 
