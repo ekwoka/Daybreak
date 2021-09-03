@@ -1,5 +1,5 @@
 {
-  "name": "Daybreak",
+  "name": "Daybreak-Lion-Legion",
   "version": "0.0.8-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
@@ -16,8 +16,8 @@
     "css:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss build/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose -m",
     "css:fulldev": "NODE_ENV=development TAILWIND_MODE=build postcss build/tailwind.pre.css --o assets/tailwind.css --verbose",
     "css:watch": "NODE_ENV=development TAILWIND_MODE=watch postcss build/tailwind.pre.css --o assets/tailwind.css --verbose -w -m",
-    "css:component": "run-s css:component-build css:component-purge -m",
-    "css:component-build": "tailwindcss -i ./build/component.pre.css -o ./build/component.built.css --jit",
+    "css:component": "run-s css:component-build css:component-purge",
+    "css:component-build": "tailwindcss -i ./build/component.pre.css -o ./build/component.built.css --jit -m",
     "css:component-purge": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;purgecss --css ./build/component.built.css -o ./assets/$x.comp.css --content $i & done; wait",
     "css:component-watch": "for i in ./sections/*-comp.liquid; do f=$(basename $i);x=$(echo $f | cut -f 1 -d '.' | cut -f 1,2 -d '-' );echo $x;tailwindcss -i ./build/component.pre.css --purge $i -o ./assets/$x.comp.css --jit -w & done; wait",
     "js:build": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify && esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
