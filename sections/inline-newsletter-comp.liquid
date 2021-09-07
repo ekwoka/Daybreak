@@ -92,7 +92,7 @@
         <h2 class="flex-auto">{{ section.settings.existedH2 }}</h2>
         <p>{{ section.settings.existedP }}</p>
         {%- if section.settings.showCoupon and section.settings.existedCoupon and section.settings.couponCode != '' -%}
-        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ section.settings.couponOffer }}!</p>
+        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your basket. Enjoy your {{ section.settings.couponOffer }}!</p>
         {%- else -%}
         <p>Sorry, we can't offer you a coupon when you're already subscribed.</p>
         {%- endif -%}
@@ -101,7 +101,7 @@
         <h2 class="flex-auto">{{ section.settings.successH2 }}</h2>
         <p>
             {{ section.settings.successP }}
-            {%- if section.settings.showCoupon and section.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. 
+            {%- if section.settings.showCoupon and section.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your basket. 
             {%- if section.settings.couponOffer != '' %} Enjoy your {{ section.settings.couponOffer }}
             {%- endif -%}
             {%- endif -%}

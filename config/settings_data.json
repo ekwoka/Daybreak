@@ -109,7 +109,7 @@
           "12a75623-cfcf-49d5-a61c-b9b997e6d389"
         ],
         "settings": {
-          "emptyMessage": "Your cart is empty"
+          "emptyMessage": "Your basket is empty"
         }
       },
       "toast-display-comp": {
