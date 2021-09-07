@@ -33,7 +33,7 @@
   "dependencies": {
     "@ryangjchandler/fern": "^0.1.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
-    "alpinejs": "^3.3.1"
+    "alpinejs": "^3.3.2"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
@@ -47,6 +47,6 @@
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
     "purgecss": "^4.0.3",
-    "tailwindcss": "^2.2.9"
+    "tailwindcss": "^2.2.11"
   }
 }
