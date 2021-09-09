@@ -45,6 +45,19 @@ main#MainContent {
 }
 
 @layer components {
+
+    product-grid {
+        @apply grid w-full gap-2 px-4 mx-auto;
+
+        & product-card {
+            @apply w-full min-h-[max-content]
+        }
+
+        & card-info {
+            @apply flex flex-col items-center w-full gap-1 pt-2
+        }
+    }
+    
   .btn-primary,
   .btn-secondary {
     @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 disabled:text-gray-50 hover:shadow-inner hover:bg-gradient-to-b;
@@ -147,7 +160,6 @@ main#MainContent {
   }
 
   /* Stamped Styles */
-
 
 .stamped-badge,
 .stamped-badge:after {
