@@ -5,7 +5,7 @@
         {% if request.page_type == 'product' %}
             {%- assign imgurl = product.featured_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
             let currentProduct = {
-                title: '{{ product.title }}',
+                title: `{{ product.title }}`,
                 price: '{{ product.first_available_variant.price | money }}',
                 id: '{{ product.first_available_variant.id }}',
                 image: '{{ imgurl }}',
