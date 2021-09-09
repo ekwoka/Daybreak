@@ -44,15 +44,15 @@
     x-data="emailCapture({
         provider: '{{ section.settings.emailProvider }}',
         listID: '{{ section.settings.listID }}',
-        code: '{{ section.settings.couponCode }}'
-    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open == true" {%- endif -%} style="display:none;" x-cloak>
+        code: '{%- if section.settings.showCoupon -%}{{ section.settings.couponCode }}{%- endif -%}'
+    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open" {%- endif -%} style="display:none;" x-cloak>
     <button @click.prevent="open = false" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
         x-show="open == true" {%- endif -%}>close
         <svg class="inline-block w-5 h-5 mx-auto icon-tw">
-            <use xlink:href="#icon-close">
+            <use href="#icon-close">
         </svg>
     </button>
-    <capture-main :class="sending ? 'opacity-40': ''" x-show="sent == false">
+    <capture-main :class="sending ? 'opacity-40': ''" x-show="!sent">
         <h2 class="flex-auto text-2xl">{{ section.settings.captureHeader }}</h2>
             <p class="flex-auto py-4">{{ section.settings.captureHtml }}</p>
             <form>
@@ -68,7 +68,7 @@
                     aria-label="Submit Email" @click.prevent="submitEmail()" :disabled="sending">
                     <span x-show="!sending">{{ section.settings.captureButton }}</span>
                     <svg x-show="sending" class="icon-tw animate-bounce">
-                        <use xlink:href="#icon-cloud-upload"></use>
+                        <use href="#icon-cloud-upload"></use>
                     </svg>
                 </button>
             </form>
@@ -83,7 +83,7 @@
             aria-label="Submit Email" @click.prevent="sent=error=false">
             <span x-show="!sending">Try Again</span>
             <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon-tw animate-bounce">
-                <use xlink:href="#icon-cloud-upload"></use>
+                <use href="#icon-cloud-upload"></use>
             </svg>
         </button>
         {%- endif -%}
@@ -92,7 +92,7 @@
         <h2 class="flex-auto">{{ section.settings.existedH2 }}</h2>
         <p>{{ section.settings.existedP }}</p>
         {%- if section.settings.showCoupon and section.settings.existedCoupon and section.settings.couponCode != '' -%}
-        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your basket. Enjoy your {{ section.settings.couponOffer }}!</p>
+        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ section.settings.couponOffer }}!</p>
         {%- else -%}
         <p>Sorry, we can't offer you a coupon when you're already subscribed.</p>
         {%- endif -%}
@@ -101,7 +101,7 @@
         <h2 class="flex-auto">{{ section.settings.successH2 }}</h2>
         <p>
             {{ section.settings.successP }}
-            {%- if section.settings.showCoupon and section.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your basket. 
+            {%- if section.settings.showCoupon and section.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. 
             {%- if section.settings.couponOffer != '' %} Enjoy your {{ section.settings.couponOffer }}
             {%- endif -%}
             {%- endif -%}

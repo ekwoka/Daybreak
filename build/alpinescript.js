@@ -7,8 +7,6 @@ export default function (Alpine) {
         
         if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
-
-            if (typeof storedValue == 'boolean') value = storedValue
             
             const diff = Object.entries(storedValue).reduce((acc, [key, val]) => {
                 if (!storedValue.hasOwnProperty(key) || Object.getOwnPropertyDescriptor(value, key).get) return acc
@@ -17,7 +15,7 @@ export default function (Alpine) {
             }, {})
 
             value = Object.assign(value, diff)
-
+            if (typeof storedValue == 'boolean') value = storedValue
         }
 
         Alpine.store(name, value)
@@ -75,7 +73,27 @@ export default function (Alpine) {
             this.isOpen=true
         }
     }, sessionStorage)
+
     Alpine.persistedStore('subscribed', false)
+
+    Alpine.persistedStore('recentlyViewed',{
+        items: [],
+        next: {},
+        init(){
+            if(!this.next.id) return
+            if(this.items.some(i=>i.id==this.next.id)) return
+            let items = this.items.slice(Math.max(this.items.length-3,0))
+            items.push(this.next)
+            this.next = {}
+            this.items = items
+        },
+        add(item){
+            if(!item.id) return
+            if(this.items.some(i=>i.id==item.id)) return
+            this.next = item
+        }
+    })
+
     Alpine.store('toast',{
         items: [],
         addToast(msg,type,title){
@@ -124,6 +142,7 @@ export default function (Alpine) {
             if(this.code) return fetch(`/discount/${code}`);
         },
         async submitEmail() {
+            if(!this.email) return
             this.sending = true;
             data = new URLSearchParams();
             data.set('g', this.listID);
@@ -147,7 +166,7 @@ export default function (Alpine) {
             this.fetchCoupon();
         },
         init() {
-            if (this.subscribed == false) this.open = true;
+            this.open = !this.subscribed;
             console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
             this.$store.subscribed = true;
         }

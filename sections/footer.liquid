@@ -89,7 +89,9 @@
                       {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
                     {%- endif -%}
                   </div>
-                {%- endcase -%}
+                {%- when 'newsletter' -%}
+                  {%- render 'simple-capture', block:block -%}
+              {%- endcase -%}
             </div>
           {%- endfor -%}
         </div>
@@ -377,6 +379,114 @@
   "name": "t:sections.footer.name",
   "blocks": [
     {
+      "type": "newsletter",
+      "name": "Klaviyo Newsletter Signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "h3",
+          "label": "Heading",
+          "default": "Sign up for our emails"
+        },
+        {
+          "type": "html",
+          "id": "html",
+          "label": "Description Paragraph",
+          "info": "Accepts HTML"
+        },
+        {
+          "type": "text",
+          "id": "listID",
+          "label": "Klaviyo List ID"
+        },
+        {
+          "type": "text",
+          "id": "captureButton",
+          "label": "Submit Button Text",
+          "default": "Submit"
+        },
+        {
+          "type": "checkbox",
+          "id": "showCoupon",
+          "label": "Auto Apply Coupon Code",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "couponCode",
+          "label": "Coupon Code to Auto Apply"
+        },
+        {
+          "type": "text",
+          "id": "couponOffer",
+          "label": "Coupon Discount Offer",
+          "info": "Value of Coupon. '10% Off', '$20', etc. This will show automatically in the Success Message",
+          "placeholder": "10% off"
+        },
+        {
+            "type": "header",
+            "content": "Success Message"
+        },
+        {
+            "type": "text",
+            "id": "successh3",
+            "label": "Success Header",
+            "default": "Thank You!"
+        },
+        {
+            "type": "textarea",
+            "id": "successP",
+            "label": "Success Message",
+            "default": "Look forward to our amazing emails in your inbox!"
+        },
+        {
+            "type": "header",
+            "content": "Error Message"
+        },
+        {
+            "type": "text",
+            "id": "errorh3",
+            "label": "Error Header",
+            "default": "Oh No!"
+        },
+        {
+            "type": "textarea",
+            "id": "errorP",
+            "label": "Error Message",
+            "default": "It looks like there was an error!"
+        },
+        {
+            "type": "checkbox",
+            "id": "errorAgain",
+            "label": "Allow User to Try Again",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "existed Message"
+        },
+        {
+            "type": "text",
+            "id": "existedh3",
+            "label": "Already Subscribed Header",
+            "default": "Wait a sec..."
+        },
+        {
+            "type": "textarea",
+            "id": "existedP",
+            "label": "Already Subscribed Message",
+            "default": "You're already subscribed!"
+        },
+        {
+            "type": "checkbox",
+            "id": "existedCoupon",
+            "label": "Give Coupon Anyway",
+            "default": true
+        }
+      ]
+    },
+    {
       "type": "link_list",
       "name": "t:sections.footer.blocks.link_list.name",
       "settings": [
@@ -494,7 +604,7 @@
       "type": "checkbox",
       "id": "newsletter_enable",
       "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
+      "label": "Include Shopify Newsletter Form"
     },
     {
       "type": "text",

@@ -1,0 +1,73 @@
+<!-- snippets/simple-capture.liquid START -->
+
+<svg aria-hidden="true" class="absolute w-0 h-0 overflow-hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <symbol id="icon-cloud-upload" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+        </symbol>
+    </defs>
+</svg>
+
+<email-capture class="w-full max-w-screen-md mx-auto no-js-hidden" x-data="emailCapture({
+    provider: 'klaviyo',
+    listID: '{{ block.settings.listID }}',
+    code: '{%- if block.settings.showCoupon -%}{{ block.settings.couponCode }}{%- endif -%}'
+})" x-show="open" x-cloak>
+    <capture-main class="flex flex-col items-center gap-y-2":class="sending ? 'opacity-40': ''" x-show="!sent">
+        <h3 class="mx-auto max-w-max">{{ block.settings.h3 }}</h3>
+        <div class="mx-auto max-w-max">
+            {{ block.settings.html }}
+        </div>
+        <form class="flex flex-col items-center w-full gap-y-2 md:flex-row md:gap-y-0 md:gap-x-1">
+            <floating-label class="w-full">
+                <input x-model="email" type="email" name="email" id="email" placeholder="Enter Email Here"
+                aria-label="Enter Email" :disabled="sending"/>
+                <label for="email">Enter Email Here</label>
+            </floating-label>
+            <button class="flex-none mx-auto" :class="!email?'btn-secondary':'btn-primary'" @click.prevent="submitEmail()" :disabled="sending">
+                <span x-show="!sending">{{ block.settings.captureButton }}</span>
+                <svg x-show="sending" class="icon-tw animate-bounce">
+                    <use href="#icon-cloud-upload"></use>
+                </svg>
+            </button>
+        </form>
+    </capture-main>
+    <capture-error class="flex flex-col items-center w-full gap-y-2" x-show="error" x-cloak>
+        <h3 class="flex-auto text-xl">{{ block.settings.errorh3 }}</h3>
+        <p>{{ block.settings.errorP }}</p>
+        <p x-text="errorReason" class="font-mono"></p>
+        {%- if block.settings.errorAgain -%}
+        <button
+            class="mt-2 btn-secondary"
+            aria-label="Submit Email" @click.prevent="sent=error=false">
+            <span x-show="!sending">Try Again</span>
+            <svg x-show="sending" class="inline-block w-6 h-6 mx-auto icon-tw animate-bounce">
+                <use href="#icon-cloud-upload"></use>
+            </svg>
+        </button>
+        {%- endif -%}
+    </capture-error>
+    <capture-existed x-show="existed" class="flex flex-col items-center w-full gap-y-2" x-cloak>
+        <h3 class="flex-auto">{{ block.settings.existedh3 }}</h3>
+        <p>{{ block.settings.existedP }}</p>
+        {%- if block.settings.showCoupon and block.settings.existedCoupon and block.settings.couponCode != '' -%}
+        <p>Don't worry, we've still applied the coupon (<span class="font-mono" x-text="code"></span>) to your cart. Enjoy your {{ block.settings.couponOffer }}!</p>
+        {%- else -%}
+        <p>Sorry, we can't offer you a coupon when you're already subscribed.</p>
+        {%- endif -%}
+    </capture-existed>
+    <capture-success x-show="success" class="flex flex-col items-center w-full gap-y-2" x-cloak>
+        <h3 class="flex-auto">{{ block.settings.successh3 }}</h3>
+        <p>
+            {{ block.settings.successP }}
+            {%- if block.settings.showCoupon and block.settings.couponCode != '' -%}<br/>Your Coupon code (<span class="font-mono" x-text="code"></span>) has been automatically added to your cart. 
+            {%- if block.settings.couponOffer != '' %} Enjoy your {{ block.settings.couponOffer }}
+            {%- endif -%}
+            {%- endif -%}
+        </p>
+    </capture-success>
+
+</email-capture>
+
+
+<!-- snippets/simple-capture.liquid END -->

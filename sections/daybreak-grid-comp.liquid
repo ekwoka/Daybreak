@@ -63,7 +63,7 @@
     });
 </script>
 
-<product-grid class="grid w-full max-w-screen-xl grid-cols-2 gap-2 px-4 mx-auto lg:grid-cols-3">
+<product-grid class="max-w-screen-xl grid-cols-2 lg:grid-cols-3">
     {% paginate collection.products by section.settings.ppp %}
         {% for product in collection.products %}
         {%- liquid
@@ -95,8 +95,8 @@
                 assign obj = "'none'"
             endif
         -%}
-            <product-card class="w-full min-h-[max-content]" 
-                {%- if hasColor -%}
+            <product-card 
+                {% if hasColor -%}
                 x-data="colorSwatches({
                     starting: '{{ firstColor }}',
                     colors: {{ obj }}})"
@@ -121,7 +121,7 @@
                 </swatch-wrapper>
                 {%- endif %}
 
-                <card-info class="flex flex-col items-center w-full gap-1 pt-2 text-base">
+                <card-info>
                     <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
                         {{ product.title }}
                     </a>
