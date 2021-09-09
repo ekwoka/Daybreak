@@ -82,11 +82,17 @@
         "add_image_padding": false,
         "show_vendor": false
       }
+    },
+    "1631089052fb221e00": {
+      "type": "recently-viewed-comp",
+      "settings": {
+      }
     }
   },
   "order": [
     "1629110654344cccde",
     "16300481333c195d52",
-    "163005622527db0d77"
+    "163005622527db0d77",
+    "1631089052fb221e00"
   ]
 }

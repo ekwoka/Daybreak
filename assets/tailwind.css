@@ -1,4 +1,4 @@
-/*! tailwindcss v2.2.11 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
+/*! tailwindcss v2.2.14 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
 
 /*
 Document
@@ -780,7 +780,7 @@ select {
 }
 
 /* Custom Elements */
-announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price, cart-footer, payment-options, payment-icons, cart-details, sub-total, estimated-shipping, cart-total, expected-discount {
+announcement-bar, announcement-message, order-bump, bump-title, bump-offer, bump-item, bump-info, email-capture, capture-main, capture-error, capture-existed, capture-success, floating-label, product-grid, product-card, card-info, card-price, swatch-wrapper, review-stars, toast-item, toast-icon, toast-content, toast-title, toast-message, cart-backdrop, cart-drawer, cart-item, cart-empty, cart-title, cart-container, item-details, quantity-control, remove-price, cart-footer, payment-options, payment-icons, cart-details, sub-total, estimated-shipping, cart-total, expected-discount, recently-viewed {
 	display: block;
 }
 
@@ -807,6 +807,10 @@ main#MainContent {
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	row-gap: 1.5rem;
+}
+
+[x-cloak]{
+    display: none;
 }
 .container {
 	width: 100%;
@@ -1153,6 +1157,29 @@ main#MainContent {
 .prose > :last-child {
 	margin-bottom: 0;
 }
+product-grid {
+	margin-left: auto;
+	margin-right: auto;
+	display: grid;
+	width: 100%;
+	gap: 0.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+product-grid product-card {
+	min-height: -webkit-max-content;
+	min-height: -moz-max-content;
+	min-height: max-content;
+	width: 100%;
+}
+product-grid card-info {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.25rem;
+	padding-top: 0.5rem;
+}
 .btn-primary, .btn-secondary {
 	min-width: -webkit-max-content;
 	min-width: -moz-max-content;
@@ -1203,6 +1230,8 @@ main#MainContent {
 floating-label {
 	position: relative;
 	margin-top: 1rem;
+	--tw-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 floating-label input[type="text"], floating-label input[type="email"], floating-label input[type="search"] {
 	width: 100%;
@@ -1256,6 +1285,7 @@ floating-label input[type="text"]:focus ~ label, floating-label input[type="emai
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
 }
 floating-label label {
+	pointer-events: none;
 	position: absolute;
 	left: 0.5rem;
 	top: -1.25rem;
@@ -1426,11 +1456,6 @@ old-price {
 	max-height: -moz-max-content;
 	max-height: max-content;
 }
-.min-h-\[max-content\] {
-	min-height: -webkit-max-content;
-	min-height: -moz-max-content;
-	min-height: max-content;
-}
 .w-full {
 	width: 100%;
 }
@@ -1471,8 +1496,14 @@ old-price {
 	max-width: -moz-max-content;
 	max-width: max-content;
 }
+.max-w-screen-md {
+	max-width: 768px;
+}
 .flex-auto {
 	flex: 1 1 auto;
+}
+.flex-none {
+	flex: none;
 }
 .flex-shrink-0 {
 	flex-shrink: 0;
@@ -1597,15 +1628,15 @@ old-price {
 .gap-6 {
 	gap: 1.5rem;
 }
-.gap-2 {
-	gap: 0.5rem;
-}
 .gap-1 {
 	gap: 0.25rem;
 }
 .gap-x-2 {
 	-moz-column-gap: 0.5rem;
 	     column-gap: 0.5rem;
+}
+.gap-y-2 {
+	row-gap: 0.5rem;
 }
 .overflow-hidden {
 	overflow: hidden;
@@ -1721,8 +1752,15 @@ old-price {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
+.px-2 {
+	padding-left: 0.5rem;
+	padding-right: 0.5rem;
+}
 .pt-2 {
 	padding-top: 0.5rem;
+}
+.pb-12 {
+	padding-bottom: 3rem;
 }
 .pt-4 {
 	padding-top: 1rem;
@@ -1744,10 +1782,6 @@ old-price {
 .text-2xl {
 	font-size: 1.5rem;
 	line-height: 2rem;
-}
-.text-base {
-	font-size: 1rem;
-	line-height: 1.5rem;
 }
 .text-lg {
 	font-size: 1.125rem;
@@ -1950,6 +1984,10 @@ old-price {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 	}
 
+	.md\:flex-row {
+		flex-direction: row;
+	}
+
 	.md\:flex-col {
 		flex-direction: column;
 	}
@@ -1960,6 +1998,15 @@ old-price {
 
 	.md\:justify-start {
 		justify-content: flex-start;
+	}
+
+	.md\:gap-y-0 {
+		row-gap: 0px;
+	}
+
+	.md\:gap-x-1 {
+		-moz-column-gap: 0.25rem;
+		     column-gap: 0.25rem;
 	}
 
 	.md\:rounded-sm {

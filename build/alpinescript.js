@@ -7,8 +7,6 @@ export default function (Alpine) {
         
         if (![null, undefined].includes(stored)) {
             const storedValue = JSON.parse(stored)
-
-            if (typeof storedValue == 'boolean') value = storedValue
             
             const diff = Object.entries(storedValue).reduce((acc, [key, val]) => {
                 if (!storedValue.hasOwnProperty(key) || Object.getOwnPropertyDescriptor(value, key).get) return acc
@@ -17,7 +15,7 @@ export default function (Alpine) {
             }, {})
 
             value = Object.assign(value, diff)
-
+            if (typeof storedValue == 'boolean') value = storedValue
         }
 
         Alpine.store(name, value)
@@ -75,7 +73,27 @@ export default function (Alpine) {
             this.isOpen=true
         }
     }, sessionStorage)
+
     Alpine.persistedStore('subscribed', false)
+
+    Alpine.persistedStore('recentlyViewed',{
+        items: [],
+        next: {},
+        init(){
+            if(!this.next.id) return
+            if(this.items.some(i=>i.id==this.next.id)) return
+            let items = this.items.slice(Math.max(this.items.length-3,0))
+            items.push(this.next)
+            this.next = {}
+            this.items = items
+        },
+        add(item){
+            if(!item.id) return
+            if(this.items.some(i=>i.id==item.id)) return
+            this.next = item
+        }
+    })
+
     Alpine.store('toast',{
         items: [],
         addToast(msg,type,title){
@@ -124,6 +142,7 @@ export default function (Alpine) {
             if(this.code) return fetch(`/discount/${code}`);
         },
         async submitEmail() {
+            if(!this.email) return
             this.sending = true;
             data = new URLSearchParams();
             data.set('g', this.listID);
@@ -147,7 +166,7 @@ export default function (Alpine) {
             this.fetchCoupon();
         },
         init() {
-            if (this.subscribed == false) this.open = true;
+            this.open = !this.subscribed;
             console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
         }
     }));
@@ -182,129 +201,4 @@ export default function (Alpine) {
         time: 0,
         updating: false
     }))
-
-    /* Alpine.data('themeAlpine', () => ({
-        menuOpen: false,
-        cartOpen: false,
-        cart: {
-            "items": [],
-            "items_subtotal_price": 0,
-        },
-        get subtotalPrice() {
-            return this.cart.items_subtotal_price
-        },
-        get discountValue() {
-            if (this.discountIndex != -1) return this.subtotalPrice * (1 - this.discounts[discountIndex].multiplier);
-            return 0;
-        },
-        shippingCost(showShippingThreshold) {
-            if (this.totalPriceWithoutShipping >= this.themeSettings.freeShippingThreshold && showShippingThreshold) return 0;
-            return this.themeSettings.estimatedShipping;
-        },
-        get totalPriceWithoutShipping() {
-            if (this.discountIndex != -1) return this.cart.items_subtotal_price;
-            return this.cart.items_subtotal_price - this.discountValue;
-        },
-        themeSettings: {
-            "freeShippingThreshold": {{ settings.freeShippingThreshold }},
-            "estimatedShipping": {{ settings.estimatedShipping }}
-        },
-        cartMessage: "Cart",
-        productAdded: false,
-        storeUrl: "kwoka-test-theme.myshopify.com",
-        get discountCode() { return getCookie("discount_code"); },
-        discounts: [
-            {%- if settings.displayDiscounts -%}
-                {%- assign discounts = settings.discountCodes | split: "," -%}
-                {%- for discount in discounts -%}
-                    {%- assign code = discount | split: ':' | first -%}
-                    {%- assign multiplier = discount | split: ':' | last %}
-            {
-                "code":"{{code}}",
-                "multiplier": {{multiplier}}
-            },
-                {%- endfor -%}
-            {%- endif %}
-        ],
-        cartText(showEstimatedShipping, showShippingThreshold) {
-            var lines = [];
-            if (this.subtotalPrice == 0) return [{ 'label': 'Total', 'value': this.formatCurrency(0) }];
-            if (this.discountIndex != -1 || showEstimatedShipping) lines.push({ 'label': 'Subtotal', 'value': this.formatCurrency(this.subtotalPrice) });
-            if (this.discountIndex != -1) lines.push({ 'label': 'Discount', 'value': this.formatCurrency(0 - this.discountValue) });
-            if (showEstimatedShipping) lines.push({ 'label': 'Estimated Shipping', 'value': this.formatCurrency(this.shippingCost(showShippingThreshold)) });
-            lines.push({ 'label': 'Total', 'value': this.totalPriceFormatted(showEstimatedShipping, showShippingThreshold) });
-
-            return lines;
-        },
-        get shippingThresholdMessage() {
-            var valueRemaining = this.themeSettings.freeShippingThreshold - this.totalPriceWithoutShipping;
-            if (valueRemaining <= 0) return 'Congratulations, you qualify for FREE shipping!';
-            return `Add ${this.formatCurrency(valueRemaining)} to your cart to qualify for FREE Shipping`;
-        },
-        get discountIndex() {
-            return this.discounts.findIndex(x => x.code.toLowerCase() === this.discountCode.toLowerCase())
-        },
-        init() {
-            console.log('Initializing themeAlpine');
-            this.fetchCart();
-        },
-        async fetchCart() {
-            var response = await fetch(`https://${this.storeUrl}/cart.js`);
-            var data = await response.json();
-            this.cart = data;
-        },
-        async updateCart(line, quantity) {
-            var formData = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    'line': line,
-                    'quantity': quantity,
-                })
-            };
-            var response = await fetch(`https://${this.storeUrl}/cart/change.js`, formData);
-            if (!response.ok) return this.fetchCart();
-            var data = await response.json();
-            this.cart.items_subtotal_price = data.items_subtotal_price;
-        },
-        async addCart(index, id, quantity) {
-            var formData = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    'id': id,
-                    'quantity': quantity,
-                })
-            };
-            var response = await fetch(`https://${this.storeUrl}/cart/add.js`, formData);
-            this.fetchCart();
-        },
-        dataImg(url) {
-            if (url.includes(".jpg")) return url.replace(".jpg", "_{width}x.jpg");
-            if (url.includes(".png")) return url.replace(".png", "_{width}x.png");
-            return url;
-        },
-        formatCurrency(price) {
-            var formatter = new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            });
-
-            return formatter.format(price / 100);
-        },
-        discountPrice(price) {
-            if (this.discountIndex == -1) return "null";
-            var newPrice = price * (1 - this.discounts[this.discountIndex].multiplier);
-            return this.formatCurrency(newPrice);
-        },
-        totalPriceFormatted(showEstimatedShipping, showShippingThreshold) {
-            if (showEstimatedShipping) return this.formatCurrency(this.totalPriceWithoutShipping + this.shippingCost(showShippingThreshold));
-            return this.formatCurrency(this.totalPriceWithoutShipping);
-        },
-        savings(price) {
-            if (this.discountIndex == -1) return "null";
-            var newPrice = price * this.discounts[this.discountIndex].multiplier;
-            return '-' + this.formatCurrency(newPrice);
-        }
-    })); */
 };

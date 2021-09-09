@@ -90,6 +90,12 @@
         "enable_video_looping": false
       }
     },
+    "1631096375893085b4": {
+      "type": "recently-viewed-comp",
+      "settings": {
+        "showReviews": true
+      }
+    },
     "1626325752d849a2a3": {
       "type": "order-bump-comp",
       "settings": {
@@ -117,6 +123,7 @@
   },
   "order": [
     "main",
+    "1631096375893085b4",
     "1626325752d849a2a3",
     "product-recommendations"
   ]
