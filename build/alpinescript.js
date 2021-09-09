@@ -56,14 +56,14 @@ export default function (Alpine) {
         items: [],
         isOpen: false,
         get value() {
-            let v = 0
-            this.items.forEach(item => v += item.final_price * item.quantity || 0)
-            return v
+            return this.items.reduce((value,item)=>{
+                return value + (item.final_price * item.quantity)
+            },0)
         },
         get quantity() {
-            let q = 0
-            this.items.forEach(item => q += item.quantity || 0)
-            return q
+            return this.items.reduce((quantity,item)=>{
+                return quantity + item.quantity
+            },0)
         },
         async init(){
             this.isOpen = false
@@ -75,6 +75,8 @@ export default function (Alpine) {
     }, sessionStorage)
 
     Alpine.persistedStore('subscribed', false)
+
+    Alpine.persistedStore('dismissedSignup', false, sessionStorage)
 
     Alpine.persistedStore('recentlyViewed',{
         items: [],
@@ -168,7 +170,6 @@ export default function (Alpine) {
         init() {
             this.open = !this.subscribed;
             console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
-            this.$store.subscribed = true;
         }
     }));
 

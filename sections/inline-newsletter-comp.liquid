@@ -45,8 +45,8 @@
         provider: '{{ section.settings.emailProvider }}',
         listID: '{{ section.settings.listID }}',
         code: '{%- if section.settings.showCoupon -%}{{ section.settings.couponCode }}{%- endif -%}'
-    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open" {%- endif -%} style="display:none;" x-cloak>
-    <button @click.prevent="open = false" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
+    })" {%- if request.design_mode %} x-show="true" {%- else -%} x-show="open && !$store.dismissedSignup" {%- endif -%} style="display:none;" x-cloak>
+    <button @click.prevent="open = false;$store.dismissedSignup = true" class="absolute flex flex-row items-center gap-x-2 right-4 md:right-4 top-4" {%- if request.design_mode %}
         x-show="open == true" {%- endif -%}>close
         <svg class="inline-block w-5 h-5 mx-auto icon-tw">
             <use href="#icon-close">

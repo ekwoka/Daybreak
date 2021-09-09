@@ -6,6 +6,7 @@ import * as Sparq from './sparq'
 window.Daybreak = Daybreak
 window.Daybreak.stampedUGC = stampedUGC
 window.Daybreak.sparq = Sparq
+window.requestIdleCallback = requestIdleCallback || function(func){setTimeout(func,2000)}
 
 document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', Daybreak.RIAS.start()): Daybreak.RIAS.start();
 
@@ -15,6 +16,6 @@ window.Alpine = Alpine
 
 Alpine.plugin(Data)
 
-stampedUGC()
+requestIdleCallback(stampedUGC)
 
 Alpine.start()

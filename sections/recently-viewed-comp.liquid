@@ -7,7 +7,7 @@
             let currentProduct = {
                 title: `{{ product.title }}`,
                 price: '{{ product.first_available_variant.price | money }}',
-                id: '{{ product.first_available_variant.id }}',
+                id: '{{ product.id }}',
                 image: '{{ imgurl }}',
                 url: '{{ product.url }}'
             }

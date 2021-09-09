@@ -111,12 +111,12 @@ export const RIAS = {
   start() {
     this.updateSizes();
     const config = { attribute: true, childList: true, subtree: true };
+    let crawler = (el) => {
+      if (el.nodeName == "IMG") return this.updateSize(el)
+      if (el.nodeName == "#text") return
+      el.querySelectorAll('img').forEach(el => this.updateSize(el))
+    }
     const cb = (mutationsList) => {
-      let crawler = (el) => {
-        if (el.nodeName == "IMG") return this.updateSize(el)
-        if (el.nodeName == "#text") return
-        el.querySelectorAll('img').forEach(el => this.updateSize(el))
-      }
       mutationsList.forEach((m) => {
         m.addedNodes.forEach((el) => {
           crawler(el)
