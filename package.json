@@ -1,6 +1,6 @@
 {
   "name": "Daybreak",
-  "version": "0.0.8-alpha",
+  "version": "0.0.10-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "push:test": "run-s build push test",
