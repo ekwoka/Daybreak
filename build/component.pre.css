@@ -242,7 +242,7 @@ hero-container {
 }
 
 hero-overlay {
-    @apply flex flex-col justify-center p-8 border-l border-r border-solid shadow-lg md:py-20 md:px-12 md:max-w-screen-sm gap-y-6 bg-white/60 backdrop-blur-sm border-white/40
+    @apply flex flex-col justify-center p-8 md:py-20 md:px-12 md:max-w-screen-sm gap-y-6
 }
 
 hero-overlay > h1 {

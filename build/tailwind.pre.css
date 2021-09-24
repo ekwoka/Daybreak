@@ -9,6 +9,10 @@
     --old-price: rgba(0,0,0,.6);
   }
 
+  html{
+    scroll-behavior: smooth
+  }
+
   [x-cloak]{
     @apply !hidden
   }
@@ -89,7 +93,7 @@ main#MainContent {
     }
 
     & label {
-      @apply absolute w-full text-sm text-gray-800 transition-all left-2 -top-5;
+      @apply absolute w-full text-sm text-gray-800 transition-all pointer-events-none left-2 -top-5;
     }
 
     & ~ button {

@@ -39,7 +39,7 @@
   }
 </style>
 
-<div class="template-search spaced-section{% unless search.performed and search.results.size > 0 %} template-search--empty{% endunless %}">
+<div class="template-search {% unless search.performed and search.results.size > 0 %} template-search--empty{% endunless %}">
   <div class="page-width center">
     {%- if search.performed -%}
       <h1 class="h2">{{ 'templates.search.title' | t }}</h1>
@@ -159,7 +159,7 @@
 {
   "name": "t:sections.main-search.name",
   "tag": "section",
-  "class": "spaced-section",
+  "class": "mt-4",
   "settings": [
     {
       "type": "header",

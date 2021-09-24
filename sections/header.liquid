@@ -422,7 +422,7 @@
         </a>
       {%- endif -%} {% endcomment %}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open($el)">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open($el)" data-turbo=false>
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
@@ -440,7 +440,9 @@
       </a>
     </div>
   </header>
-  {%- render 'sparq-search-comp' -%}
+  {%- unless request.page_type == 'product' or request.page_type == 'search' -%}
+    {%- render 'sparq-search-comp' -%}
+  {%- endunless -%}
 </{% if section.settings.enable_sticky_header %}sticky-header{% else %}div{% endif %}>
 
 {% javascript %}

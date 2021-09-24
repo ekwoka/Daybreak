@@ -3,17 +3,17 @@
     "1629110654344cccde": {
       "type": "hero-section-comp",
       "settings": {
-        "h1": "Veterans Gear",
-        "p": "Veteran owned, printed in the UK, and delivered fast.<br>We keep it stupid simple.",
-        "btn1txt": "View Latest Designs",
-        "btn1url": "shopify:\/\/collections\/latest-designs",
-        "btn2txt": "View Best Sellers",
-        "btn2url": "shopify:\/\/collections\/bestsellers",
-        "mobile": "shopify:\/\/shop_images\/RM_RAP_15_opacity_4fcbfe9f-39c2-4934-8415-95295f65c3bd.png",
-        "desktop": "shopify:\/\/shop_images\/ARMY_RAP_15_opacity_c5a45410-de8d-4c93-8654-6f2594ecb2aa.png",
+        "h1": "",
+        "p": "",
+        "btn1txt": "",
+        "btn1url": "",
+        "btn2txt": "",
+        "btn2url": "",
+        "mobile": "shopify:\/\/shop_images\/RAP_mobile_banner_copy.png",
+        "desktop": "shopify:\/\/shop_images\/2021_banner_copy.png",
         "aspect": "manual",
-        "mobileRatio": 60,
-        "deskRatio": 50
+        "mobileRatio": 94,
+        "deskRatio": 34
       }
     },
     "16306686664b0312bc": {
@@ -60,37 +60,14 @@
       ],
       "settings": {
         "custom_class": "",
-        "border_color_collection_list": "#444",
-        "text_bg_color_collection_list": "#444",
-        "text_color_collection_list": "#fff",
+        "border_color_collection_list": "#444444",
+        "text_bg_color_collection_list": "#444444",
+        "text_color_collection_list": "#ffffff",
         "title": "Featured Collections",
         "top_margin_featured": 0,
         "text_transform_title": "",
         "collection_product_title_text_transform": "capitalize",
         "overlay": "shopify:\/\/shop_images\/UK_flag.png"
-      }
-    },
-    "162944343615fc3157": {
-      "type": "inline-newsletter-comp",
-      "settings": {
-        "cardStyle": "full",
-        "sticky": true,
-        "emailProvider": "klaviyo",
-        "listID": "UxjaW4",
-        "captureHeader": "Join Lion Legion",
-        "captureHtml": "Sign up and receive a coupon for <strong>10% off<\/strong> your first order<br>\nYou'll also get:<br>\nMembers-only exclusive offers, early access to new designs, and other benefits guaranteed to knock your socks off",
-        "captureButton": "Get My Coupon",
-        "showCoupon": true,
-        "couponCode": "get10now",
-        "couponOffer": "10% Off",
-        "successH2": "Thank You!",
-        "successP": "Look forward to our amazing emails in your inbox!",
-        "errorH2": "Oh No!",
-        "errorP": "It looks like there was an error!",
-        "errorAgain": true,
-        "existedH2": "Wait a sec...",
-        "existedP": "You're already subscribed!",
-        "existedCoupon": true
       }
     },
     "featured_products": {
@@ -106,12 +83,18 @@
         "add_image_padding": false,
         "show_vendor": false
       }
+    },
+    "1631608056b534031d": {
+      "type": "recently-viewed-comp",
+      "settings": {
+        "showReviews": true
+      }
     }
   },
   "order": [
     "1629110654344cccde",
     "16306686664b0312bc",
-    "162944343615fc3157",
-    "featured_products"
+    "featured_products",
+    "1631608056b534031d"
   ]
 }

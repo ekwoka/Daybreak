@@ -29,13 +29,13 @@
           "071cfb78-09ae-4e18-ad71-0f23a986f320": {
             "type": "newsletter",
             "settings": {
-              "h3": "Sign up for our emails",
-              "html": "",
-              "listID": "",
-              "captureButton": "Submit",
+              "h3": "Join Lion Legion",
+              "html": "Special offers, early access to new designs, and more",
+              "listID": "UxjaW4",
+              "captureButton": "Join the Legion",
               "showCoupon": false,
-              "couponCode": "",
-              "couponOffer": "",
+              "couponCode": "get10now",
+              "couponOffer": "10% Off",
               "successh3": "Thank You!",
               "successP": "Look forward to our amazing emails in your inbox!",
               "errorh3": "Oh No!",
@@ -75,10 +75,20 @@
             "type": "newsletter",
             "settings": {
               "h3": "Sign up for our emails",
-              "html": "<ul>\n<li>Hi<\/li>\n<li>This is a list<\/li>\n<\/ul>",
-              "listID": "test",
+              "html": "Members-only exclusive offers, early access to new designs, and other benefits guaranteed to knock your socks off",
+              "listID": "UxjaW4",
+              "captureButton": "Join Lion Legion",
               "showCoupon": false,
-              "couponCode": "get10now"
+              "couponCode": "get10now",
+              "couponOffer": "10% Off",
+              "successh3": "Thank You!",
+              "successP": "Look forward to our amazing emails in your inbox!",
+              "errorh3": "Oh No!",
+              "errorP": "It looks like there was an error!",
+              "errorAgain": true,
+              "existedh3": "Wait a sec...",
+              "existedP": "You're already subscribed!",
+              "existedCoupon": true
             }
           }
         },

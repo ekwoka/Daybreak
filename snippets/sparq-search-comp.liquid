@@ -16,6 +16,9 @@
       init(){
           this.query = Daybreak.sparq.TEST_QUERY
           this.query.count=6;
+      },
+      enter(){
+        if (this.query) window.location.href=`https://${window.location.hostname}/search?q=${this.searchTerms}`
       }
     }));
   });
@@ -26,12 +29,14 @@
     <floating-label class="flex-auto w-full mt-0">
       <input
         @input.debounce.400="search()"
+        @keydown.enter="enter()"
         class="overflow-hidden"
         id="search"
         name="search"
         type="search"
         x-model="searchTerms"
         placeholder="{{ section.settings.searchPlaceholder }}"
+        autocomplete="false"
       />
       <label for="search">{{ section.settings.searchPlaceholder }}</label>
     </floating-label>

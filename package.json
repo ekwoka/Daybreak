@@ -4,7 +4,7 @@
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "push:test": "run-s build push test",
-    "test": "for u in / /collections/latest-designs /products/oh-dear-how-sad-never-mind-unisex-t-shirt; do lighthouse \"https://kpyerqs53w8lbpcw-26840891438.shopifypreview.com$u?pb=0\" --output-path ./lighthouse.html --view --only-categories performance --budget-path=./budget.json; done",
+    "test": "for u in / /collections/latest-designs /products/oh-dear-how-sad-never-mind-unisex-t-shirt; do lighthouse \"https://lss6nex8ly20kavz-26840891438.shopifypreview.com$u?pb=0\" --output-path ./lighthouse.html --view --only-categories performance --budget-path=./budget.json; done",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
     "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
     "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
@@ -36,22 +36,23 @@
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
+    "@alpinejs/intersect": "^3.3.4",
     "@ryangjchandler/fern": "^0.1.0",
     "@tailwindcss/aspect-ratio": "^0.2.1",
-    "alpinejs": "^3.3.2"
+    "alpinejs": "^3.3.4"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
-    "esbuild": "^0.12.25",
+    "esbuild": "^0.12.28",
     "lighthouse": "^8.4.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.6",
     "postcss-cli": "^8.3.1",
     "postcss-nesting": "^8.0.1",
     "purgecss": "^4.0.3",
-    "tailwindcss": "^2.2.14"
+    "tailwindcss": "^2.2.15"
   }
 }

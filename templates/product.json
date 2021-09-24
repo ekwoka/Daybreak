@@ -69,35 +69,13 @@
         "enable_video_looping": false
       }
     },
-    "16297066643ece0415": {
-      "type": "inline-newsletter-comp",
-      "settings": {
-        "cardStyle": "full",
-        "sticky": true,
-        "emailProvider": "klaviyo",
-        "listID": "UxjaW4",
-        "captureHeader": "Join Lion Legion",
-        "captureHtml": "Sign up and receive a coupon for <strong>10% off<\/strong> your first order<br>\nYou'll also get:<br>\nMembers-only exclusive offers, early access to new designs, and other benefits guaranteed to knock your socks off",
-        "captureButton": "Get My Coupon",
-        "showCoupon": true,
-        "couponCode": "get10now",
-        "couponOffer": "10% Off",
-        "successH2": "Thank You!",
-        "successP": "Look forward to our amazing emails in your inbox!",
-        "errorH2": "Oh No!",
-        "errorP": "It looks like there was an error!",
-        "errorAgain": true,
-        "existedH2": "Wait a sec...",
-        "existedP": "You're already subscribed!",
-        "existedCoupon": true
-      }
-    },
     "162971670145c9c113": {
       "type": "stamped-reviews-comp",
       "settings": {}
     },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
         "heading": "You may also like",
         "image_ratio": "adapt",
@@ -105,12 +83,18 @@
         "add_image_padding": false,
         "show_vendor": false
       }
+    },
+    "163160833267bde9c5": {
+      "type": "recently-viewed-comp",
+      "settings": {
+        "showReviews": true
+      }
     }
   },
   "order": [
     "main",
-    "16297066643ece0415",
     "162971670145c9c113",
-    "product-recommendations"
+    "product-recommendations",
+    "163160833267bde9c5"
   ]
 }
