@@ -485,7 +485,7 @@
         requestAnimationFrame(this.reveal.bind(this));
       } else if (scrollTop <= this.headerBounds.top) {
         requestAnimationFrame(this.reset.bind(this));
-        createObserver()
+        createObserver();
       }
 
       this.currentScrollTop = scrollTop;
