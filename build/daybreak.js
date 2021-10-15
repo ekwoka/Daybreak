@@ -114,7 +114,7 @@ export const RIAS = {
     const cb = (mutationsList) => {
       let crawler = (el) => {
         if (el.nodeName == "IMG") return this.updateSize(el)
-        if (el.nodeName == "#text") return
+        if (el.nodeType!=Node.ELEMENT_NODE) return
         try{
           el.querySelectorAll('img').forEach(el => this.updateSize(el))
         } catch(e) {
