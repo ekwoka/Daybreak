@@ -33,13 +33,6 @@
             "picker_type": "button"
           }
         },
-        "a822d694-d1c6-4711-a38c-edd24439f023": {
-          "type": "popup",
-          "settings": {
-            "link_label": "Size Chart",
-            "page": "{{ product.metafields.my_fields.size_chart.value }}"
-          }
-        },
         "quantity_selector": {
           "type": "quantity_selector",
           "settings": {
@@ -61,15 +54,6 @@
           "type": "description",
           "settings": {
           }
-        },
-        "36ab57c3-4fd3-4f99-ad71-ea7853fcb3b4": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Collapsible tab",
-            "content": "<p>{{ product.metafields.my_fields.first_tab | metafield_tag }}<\/p>",
-            "page": "",
-            "icon": "none"
-          }
         }
       },
       "block_order": [
@@ -78,12 +62,10 @@
         "subtitle",
         "price",
         "variant_picker",
-        "a822d694-d1c6-4711-a38c-edd24439f023",
         "quantity_selector",
         "buy_buttons",
         "4703828b-badf-4179-800d-0177d2e0f214",
-        "description",
-        "36ab57c3-4fd3-4f99-ad71-ea7853fcb3b4"
+        "description"
       ],
       "settings": {
         "enable_sticky_info": true,
@@ -98,6 +80,7 @@
     },
     "1626325752d849a2a3": {
       "type": "order-bump-comp",
+      "disabled": true,
       "settings": {
         "title": "Check out this item!",
         "desc": "This product goes so well with that other product",

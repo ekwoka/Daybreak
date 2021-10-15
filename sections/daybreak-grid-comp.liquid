@@ -67,7 +67,13 @@
     {% paginate collection.products by section.settings.ppp %}
         {% for product in collection.products %}
         {%- liquid
-            assign firstVariant = product.first_available_variant
+        	if product.has_only_default_variant
+            	assign firstVariant = product
+                assign firstImage = firstVariant.featured_image
+            else
+            	assign firstVariant = product.first_available_variant
+                assign firstImage = firstVariant.image
+            endif
             assign firstColor = 'none'
             if product.options contains 'Color'
                 assign hasColor = true
@@ -102,7 +108,7 @@
                     colors: {{ obj }}})"
                 {%- endif -%}>
                 <a href="{{ product.url }}" aria-label="{{ product.title }}" class="w-full mx-auto">
-                    <img class="w-full {{ section.settings.imgShape }}" src="{{ firstVariant.image | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstVariant.image -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
+                    <img class="w-full {{ section.settings.imgShape }}" src="{{ firstImage | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstImage -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
                 </a>
 
                 {% if section.settings.showColors -%}
