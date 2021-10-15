@@ -48,7 +48,6 @@
 
 <div x-data="toasts">
     <template x-for="(toast,i) in $store.toast.items" :key="i">
-
         <toast-item :class="toast.show ? 'top-32 opacity-100' : '-top-4 opacity-0'" x-init="timeout(i)">
             <toast-icon :class="colors[toast.type][0]">
                 <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" x-html="icons[toast.type]">
@@ -61,7 +60,6 @@
                 </div>
             </toast-content>
         </toast-item>
-        
     </template>
 </div>
 

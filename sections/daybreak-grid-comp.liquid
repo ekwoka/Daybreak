@@ -44,7 +44,7 @@
                 async load() {
                     this.loading = true;
                     let response = await fetch(`${this.url}?page=${this.page}`);
-                    if (!response.ok) return setTimeout(this.loadMore,200);
+                    if (!response.ok) return setTimeout(this.load,200);
                     let content = await response.text();
                     let grid = new DOMParser().parseFromString(content, "text/html").querySelectorAll('product-card');
                     document.querySelector('product-grid').append(...grid);
