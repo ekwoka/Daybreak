@@ -3,13 +3,8 @@
   "version": "0.0.10-alpha",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
-    "push:test": "run-s build push test",
-    "test": "for u in / /collections/all /products/damp-mountain; do lighthouse \"https://kwoka-theme-2.myshopify.com$u\" --output-path ./lighthouse.html --view --only-categories performance --extra-headers '{\"Cookie\":\"storefront_digest=d22492f60365515ce1c1135abda6558dad382b1bd455518ac9fc4efaa557444e\"}' --budget-path=./budget.json; done",
     "serve": "shopify switch --store=kwoka-theme-2 && shopify theme serve",
-    "pull": "shopify switch --store=kwoka-theme-2 && shopify theme pull -n",
-    "push": "shopify switch --store=kwoka-theme-2 && shopify theme push -n",
     "open": "sleep 25s && open http://127.0.0.1:9292/ && open https://kwoka-theme-2.myshopify.com/admin/themes/126042210470/editor",
-    "reset": "run-s pull build push",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-p css:build css:critical css:component js:build && npm run sizes:assets",
     "css:build": "NODE_ENV=production TAILWIND_MODE=build postcss build/tailwind.pre.css --o assets/tailwind.css --verbose",
