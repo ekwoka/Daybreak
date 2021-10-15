@@ -434,6 +434,7 @@ cart-empty {
 }
 
 cart-footer {
+  position: -webkit-sticky;
   position: sticky;
   bottom: 0px;
   margin-left: auto;
