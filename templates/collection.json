@@ -10,11 +10,12 @@
     "product-grid": {
       "type": "daybreak-grid-comp",
       "settings": {
-        "ppp": 8,
+        "ppp": 12,
         "pageType": "load",
+        "imgShape": "",
         "showVender": false,
-        "showColors": true,
-        "showReviews": true,
+        "showColors": false,
+        "showReviews": false,
         "filterType": "none"
       }
     }
