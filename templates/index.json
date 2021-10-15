@@ -3,17 +3,17 @@
     "1629110654344cccde": {
       "type": "hero-section-comp",
       "settings": {
-        "h1": "Welcome to Daybreak",
-        "p": "A damn fast theme built on top of Dawn with TailwindCSS and AlpineJS",
-        "btn1txt": "Check out features",
-        "btn1url": "shopify:\/\/products\/damp-mountain",
-        "btn2txt": "View Deals",
-        "btn2url": "shopify:\/\/collections",
-        "mobile": "shopify:\/\/shop_images\/grey-couch-with-a-bookcase-behind-it.jpg",
-        "desktop": "shopify:\/\/shop_images\/working-at-night.jpg",
+        "h1": "WHAT DOES WATER FILTRATION MEAN FOR ME?",
+        "p": "No more trips to the groceries for single-use plastic bottles. Most importantly, it means cleaner water and a cleaner planet!",
+        "btn1txt": "Filter My Water",
+        "btn1url": "shopify:\/\/collections\/filter-pitchers",
+        "btn2txt": "",
+        "btn2url": "",
+        "mobile": "shopify:\/\/shop_images\/1234_7ff2c0c1-e326-4568-b226-6091136b29c3.jpg",
+        "desktop": "shopify:\/\/shop_images\/Untitled-3.jpg",
         "aspect": "dynamic",
-        "mobileRatio": 26,
-        "deskRatio": 40
+        "mobileRatio": 2,
+        "deskRatio": 24
       }
     },
     "16300481333c195d52": {
@@ -22,8 +22,7 @@
         "708d466a-6b23-4b56-86f5-87327766a133": {
           "type": "collection",
           "settings": {
-            "collection": "frontpage",
-            "collection_image": "shopify:\/\/shop_images\/grey-couch-with-a-bookcase-behind-it.jpg",
+            "collection": "filter-pitchers",
             "collection_title": ""
           }
         },
@@ -31,7 +30,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "collection_image": "shopify:\/\/shop_images\/working-at-night.jpg",
             "collection_title": ""
           }
         },
@@ -39,7 +37,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "collection_image": "shopify:\/\/shop_images\/hand-pours-a-green-liquid-into-a-glass-of-ice-and-milk.jpg",
             "collection_title": ""
           }
         },
@@ -47,7 +44,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "collection_image": "shopify:\/\/shop_images\/milkshake-on-pink.jpg",
             "collection_title": ""
           }
         }
@@ -73,7 +69,7 @@
       "type": "featured-collection",
       "settings": {
         "title": "Featured collection",
-        "collection": "frontpage",
+        "collection": "all-products",
         "products_to_show": 4,
         "show_view_all": true,
         "swipe_on_mobile": true,
@@ -86,6 +82,7 @@
     "1631089052fb221e00": {
       "type": "recently-viewed-comp",
       "settings": {
+        "showReviews": false
       }
     }
   },
