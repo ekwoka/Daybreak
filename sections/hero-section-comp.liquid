@@ -48,7 +48,7 @@
     <picture>
         <source media="(min-width:768px)" srcset="{%- render 'responsive-srcset', image: section.settings.desktop, max: 1920 -%}">
         <source srcset="{%- render 'responsive-srcset', image: section.settings.mobile, max: 1080 -%}">
-        <img src="https://placekitten.com/1080/1920" class="absolute inset-0 w-full" alt="" loading="eager" sizes="100vw"/>
+        <img src="https://placekitten.com/1080/1920" class="absolute inset-0 object-cover w-full h-full" alt="" loading="eager" sizes="100vw"/>
     </picture>
     <div class="relative w-full max-w-screen-xl mx-auto min-h-custom">
         <hero-overlay>

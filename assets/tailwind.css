@@ -1907,13 +1907,16 @@ old-price {
 		overflow: auto;
 	}
 }
+
 .hover\:border-cta-500:hover {
 	--tw-border-opacity: 1;
 	border-color: rgba(34, 197, 94, var(--tw-border-opacity));
 }
+
 .hover\:opacity-75:hover {
 	opacity: 0.75;
 }
+
 @media (min-width: 640px) {
 
 	.sm\:grid-cols-2 {
@@ -1925,6 +1928,7 @@ old-price {
 		   object-position: center;
 	}
 }
+
 @media (min-width: 768px) {
 
 	.md\:static {
@@ -2082,6 +2086,7 @@ old-price {
 		mix-blend-mode: normal;
 	}
 }
+
 @media (min-width: 1024px) {
 
 	.lg\:order-first {
