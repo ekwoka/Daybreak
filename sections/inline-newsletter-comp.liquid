@@ -1,7 +1,5 @@
 <!-- 'sections/inline-newsletter-comp.liquid' START -->
 
-{{ 'inline-newsletter.comp.css' | asset_url | stylesheet_tag }}
-
 <style>
     #shopify-section-{{ section.id }} {
         {%- case section.settings.cardStyle -%}
@@ -40,7 +38,7 @@
     </defs>
 </svg>
 
-<email-capture class="inline-email-capture"
+<email-capture class="relative flex flex-col items-center w-full p-8 mx-auto md:max-w-screen-sm gap-y-2"
     x-data="emailCapture({
         provider: '{{ section.settings.emailProvider }}',
         listID: '{{ section.settings.listID }}',
@@ -52,10 +50,10 @@
             <use href="#icon-close">
         </svg>
     </button>
-    <capture-main :class="sending ? 'opacity-40': ''" x-show="!sent">
+    <capture-main class="flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300" :class="sending ? 'opacity-40': ''" x-show="!sent">
         <h2 class="flex-auto text-2xl">{{ section.settings.captureHeader }}</h2>
             <p class="flex-auto py-4">{{ section.settings.captureHtml }}</p>
-            <form>
+            <form class="flex flex-col w-full gap-1 md:flex-row">
                 <floating-label class="flex-auto w-full md:w-3/4">
                     <input
                        
@@ -73,7 +71,7 @@
                 </button>
             </form>
     </capture-main>
-    <capture-error x-show="error">
+    <capture-error class="flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300" x-show="error">
         <h3 class="flex-auto text-xl">{{ section.settings.errorH2 }}</h2>
         <p>{{ section.settings.errorP }}</p>
         <p x-text="errorReason" class="font-mono"></p>
@@ -88,7 +86,7 @@
         </button>
         {%- endif -%}
     </capture-error>
-    <capture-existed x-show="existed">
+    <capture-existed class="flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300" x-show="existed">
         <h2 class="flex-auto">{{ section.settings.existedH2 }}</h2>
         <p>{{ section.settings.existedP }}</p>
         {%- if section.settings.showCoupon and section.settings.existedCoupon and section.settings.couponCode != '' -%}
@@ -97,7 +95,7 @@
         <p>Sorry, we can't offer you a coupon when you're already subscribed.</p>
         {%- endif -%}
     </capture-existed>
-    <capture-success x-show="success">
+    <capture-success class="flex flex-col items-center w-full p-8 mx-auto transition-opacity duration-300" x-show="success">
         <h2 class="flex-auto">{{ section.settings.successH2 }}</h2>
         <p>
             {{ section.settings.successP }}

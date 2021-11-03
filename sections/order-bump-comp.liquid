@@ -1,5 +1,4 @@
 <!-- order-bump-comp.liquid start-->
-{{ 'order-bump.comp.css' | asset_url | stylesheet_tag }}
 
 <style scoped>
     aside.order-bump-section:not(.expanded) > bump-offer > bump-item:nth-child(n+{{ section.settings.toLimit | plus: 1 }}) {
@@ -70,17 +69,17 @@ document.addEventListener('alpine:init', () => {
     endif
 -%}
 
-    <bump-title>
-        <h2>{{ section.settings.title }}</h2>
-        <p>{{ section.settings.desc }}</p>
+    <bump-title class="w-full p-4 bg-truegray-700 text-truegray-200">
+        <h2 class="block mx-auto text-2xl max-w-max text-truegray-100">{{ section.settings.title }}</h2>
+        <p class="block mx-auto text-lg text-center max-w-max">{{ section.settings.desc }}</p>
     </bump-title>
-    <bump-offer id="customAddon-Wrapper">
+    <bump-offer class="min-h-[max-content] flex flex-col transition-all duration-300 ease-out border-truegray-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-truegray-200" id="customAddon-Wrapper">
 
         {%- if section.settings.bumpProduct -%}
             {%- assign bumpProd = section.settings.bumpProduct -%}
             {%- assign bumpsShown = bumpsShown | plus: 1 -%}
             {%- assign img_url = bumpProd.featured_image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
-            <bump-item x-data="orderBump({
+            <bump-item class="flex flex-row items-center justify-between p-2 flex-nowrap" x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
                 id: {{ bumpProd.first_available_variant.id }},
@@ -102,7 +101,7 @@ document.addEventListener('alpine:init', () => {
                 onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
                 <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
-                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: bumpProd.featured_image -%}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" sizes="5vw">
+                    <img class="object-cover object-center w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: bumpProd.featured_image -%}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" sizes="5vw">
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
@@ -135,7 +134,7 @@ document.addEventListener('alpine:init', () => {
                 assign bumpsShown = bumpsShown | plus: 1
                 assign img_url = bumpProd.featured_image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.'
             -%}
-            <bump-item x-data="orderBump({
+            <bump-item class="flex flex-row items-center justify-between p-2 flex-nowrap" x-data="orderBump({
                 title: '{{ bumpProd.title }}',
                 price: '{{ bumpProd.first_available_variant.price | money }}',
                 id: {{ bumpProd.first_available_variant.id }},
@@ -157,7 +156,7 @@ document.addEventListener('alpine:init', () => {
                 onlyDefault: {{ bumpProd.has_only_default_variant }}
             })">
                 <div class="flex-shrink w-1/3 p-2 max-h-[max-content]">
-                    <img class="w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: bumpProd.featured_image -%}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" sizes="5vw">
+                    <img class="object-cover object-center w-full" src="{{ bumpProd.featured_image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: bumpProd.featured_image -%}" x-rias="image" data-sizes="auto" loading="lazy" alt="{{ bumpProd.title }}" sizes="5vw">
                 </div>
                 <bump-info class="flex-grow p-4">
                     <div class="{{ alignClass }}" x-text="title">{{ bumpProd.title }}</div>
@@ -176,12 +175,11 @@ document.addEventListener('alpine:init', () => {
                     </div>
                 </bump-info>
             </bump-item>
-
         {%- endfor -%}
         {%- endif -%}
     </bump-offer>
     {%- if bumpsShown > section.settings.toLimit -%}
-        <button class="extend-tab" onclick="this.classList.add('!hidden');this.closest('aside').classList.add('expanded')">Show More</button>
+        <button class="block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-truegray-500 hover:text-gray-200" onclick="this.classList.add('!hidden');this.closest('aside').classList.add('expanded')">Show More</button>
     {%- endif -%}
 
 <!-- custom-addon-app.liquid end -->
@@ -190,7 +188,7 @@ document.addEventListener('alpine:init', () => {
 {
     "name": "Order Bump",
     "tag": "aside",
-    "class": "js order-bump-section",
+    "class": "js order-bump-section p-4 max-w-screen-sm mx-auto",
     "settings": [
         {
             "type": "header",

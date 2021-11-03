@@ -108,6 +108,88 @@ main#MainContent {
         @apply pl-1 text-[color:var(--old-price)] line-through text-sm
     }
 
+    img.force-tall {
+        @apply object-cover;
+        aspect-ratio: 5/6;
+    }
+    
+    img.force-wide {
+        @apply object-cover;
+        aspect-ratio: 6/5;
+    }
+
+    progress.load-more {
+        @apply appearance-none w-3/4 max-w-md h-4 rounded-sm
+    }
+    
+    progress.load-more[value]::-webkit-progress-bar {
+        @apply bg-gray-300 rounded-sm shadow-inner
+    }
+    
+    progress.load-more[value]::-webkit-progress-value {
+        @apply bg-gradient-to-tr from-cta-800 to-cta-500 rounded-sm transition-all duration-1000 ease-in-out
+    }
+    
+    progress.load-more[value]::-moz-progress-bar {
+        @apply bg-gradient-to-tr from-cta-800 to-cta-500 rounded-sm transition-all duration-1000 ease-in-out
+    }
+
+    payment-options > * {
+        @apply mx-auto max-w-max
+    }
+
+    cart-details > * {
+        @apply max-w-max ml-auto
+    }
+
+    cart-details :nth-child(odd) {
+        @apply col-span-3
+    }
+
+    shipping-threshold > progress {
+        @apply appearance-none w-full h-3 rounded-md
+    }
+    
+    shipping-threshold > progress[value]::-webkit-progress-bar {
+        @apply bg-gray-300 rounded-md
+    }
+    
+    shipping-threshold.glass > progress[value]::-webkit-progress-bar {
+        @apply shadow-inner
+    }
+    
+    shipping-threshold > progress[value]::-webkit-progress-value {
+        @apply rounded-md transition-all duration-1000 ease-in-out
+    }
+    
+    shipping-threshold > progress[value]::-moz-progress-bar {
+        @apply rounded-md transition-all duration-1000 ease-in-out
+    }
+    
+    shipping-threshold.glass > progress[value]::-webkit-progress-value {
+        @apply from-cta-800 to-cta-500
+    }
+    
+    shipping-threshold.glass > progress[value]::-moz-progress-bar {
+        @apply from-cta-800 to-cta-500
+    }
+    
+    shipping-threshold.minimal > progress[value]::-webkit-progress-value {
+        @apply bg-cta-600
+    }
+    
+    shipping-threshold.minimal > progress[value]::-moz-progress-bar {
+        @apply bg-cta-600
+    }
+    
+    shipping-threshold.glass > progress[value]::-webkit-progress-value {
+        @apply bg-gradient-to-tr
+    }
+    
+    shipping-threshold.glass > progress[value]::-moz-progress-bar {
+        @apply bg-gradient-to-tr
+    }
+
 }
 
 @layer utilities {

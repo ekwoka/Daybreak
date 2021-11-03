@@ -1,8 +1,4 @@
-{{ 'hero-section.comp.css' | asset_url | stylesheet_tag }}
-
-{%- liquid
-
--%}
+<!-- hero-section-comp.liquid START -->
 
 <style>
 
@@ -44,29 +40,31 @@
 
 </script>
 
-<hero-container>
+<hero-container class="relative flex flex-col overflow-hidden shadow-md xl:shadow-none">
     <picture>
         <source media="(min-width:768px)" srcset="{%- render 'responsive-srcset', image: section.settings.desktop, max: 1920 -%}">
         <source srcset="{%- render 'responsive-srcset', image: section.settings.mobile, max: 1080 -%}">
         <img src="https://placekitten.com/1080/1920" class="absolute inset-0 object-cover w-full h-full" alt="" loading="eager" sizes="100vw"/>
     </picture>
     <div class="relative w-full max-w-screen-xl mx-auto min-h-custom">
-        <hero-overlay>
-          <h1>
+        <hero-overlay class="flex flex-col justify-center p-8 border-l border-r border-solid shadow-lg md:py-20 md:px-12 md:max-w-screen-sm gap-y-6 bg-white/60 backdrop-blur-sm border-white/40">
+          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl">
             {{ section.settings.h1 }}
           </h1>
           <p class="text-xl text-gray-700">{{ section.settings.p }}</p>
-            <hero-buttons>
+            <hero-buttons class="flex flex-col gap-3 text-xl sm:flex-row">
                 {%- if section.settings.btn1txt -%}
-                    <a href="{{ section.settings.btn1url }}" class="btn-primary">{{ section.settings.btn1txt }}</a>
+                    <a class="w-full px-8 rounded-md md:max-w-max btn-primary" href="{{ section.settings.btn1url }}">{{ section.settings.btn1txt }}</a>
                 {%- endif -%}
                 {%- if section.settings.btn2txt -%}
-                    <a href="{{ section.settings.btn2url }}" class="btn-secondary">{{ section.settings.btn2txt }}</a>
+                    <a class="w-full px-8 rounded-md md:max-w-max btn-secondary" href="{{ section.settings.btn2url }}">{{ section.settings.btn2txt }}</a>
                 {%- endif -%}
             </hero-buttons>
         </hero-overlay>
     </div>
 </hero-container>
+
+<!-- hero-section-comp.liquid END -->
 
 {% schema %}
 {
