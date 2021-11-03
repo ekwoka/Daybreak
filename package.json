@@ -33,15 +33,15 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.3.4",
     "@tailwindcss/typography": "^0.4.1",
-    "autoprefixer": "^10.3.7",
-    "cssnano": "^5.0.8",
-    "esbuild": "^0.13.6",
-    "lighthouse": "^8.5.1",
+    "autoprefixer": "^10.4.0",
+    "cssnano": "^5.0.9",
+    "esbuild": "^0.13.12",
+    "lighthouse": "^8.6.0",
     "npm-run-all": "^4.1.5",
-    "postcss": "^8.3.9",
+    "postcss": "^8.3.11",
     "postcss-cli": "^9.0.1",
-    "postcss-nesting": "^8.0.1",
+    "postcss-nesting": "^9.0.0",
     "purgecss": "^4.0.3",
-    "tailwindcss": "^2.2.17"
+    "tailwindcss": "^2.2.19"
   }
 }
