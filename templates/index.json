@@ -26,33 +26,17 @@
             "collection_title": ""
           }
         },
-        "6b5c7f1c-147b-4bd6-9b74-0a2b5c29211b": {
-          "type": "collection",
+        "d8ca9aa0-d46d-4bae-8eec-f2f6bccbc8bd": {
+          "type": "product",
           "settings": {
-            "collection": "",
-            "collection_title": ""
-          }
-        },
-        "d234783f-a879-4f51-8555-0eb91f3b0e78": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "collection_title": ""
-          }
-        },
-        "3af22f44-f5ee-495c-8ee9-f23868ff8fab": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "collection_title": ""
+            "id_product": "",
+            "product_title": ""
           }
         }
       },
       "block_order": [
         "708d466a-6b23-4b56-86f5-87327766a133",
-        "6b5c7f1c-147b-4bd6-9b74-0a2b5c29211b",
-        "d234783f-a879-4f51-8555-0eb91f3b0e78",
-        "3af22f44-f5ee-495c-8ee9-f23868ff8fab"
+        "d8ca9aa0-d46d-4bae-8eec-f2f6bccbc8bd"
       ],
       "settings": {
         "custom_class": "",
