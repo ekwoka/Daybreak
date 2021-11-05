@@ -63,91 +63,186 @@
     });
 </script>
 
-<product-grid class="max-w-screen-xl grid-cols-2 lg:grid-cols-3">
-    {% paginate collection.products by section.settings.ppp %}
-        {% for product in collection.products %}
-        {%- liquid
-        	if product.has_only_default_variant
-            	assign firstVariant = product
-                assign firstImage = firstVariant.featured_image
-            else
-            	assign firstVariant = product.first_available_variant
-                assign firstImage = firstVariant.image
-            endif
-            assign firstColor = 'none'
-            if product.options contains 'Color'
-                assign hasColor = true
-                capture obj
-                    echo '{'
-                    for color in product.options_by_name['Color'].values
-                        echo "'" | append: color | append: "':'"
-                        for variant in product.variants
-                            if variant.options contains color
-                                echo variant.image | img_url: '1x1' | replace: '_1x1.','_{width}x.'
-                                assign firstColor = color
-                                assign firstVariant = variant
-                                break
-                            endif
-                        endfor
-                        echo "'"
-                        unless forloop.last
-                            echo ','
-                        endunless
-                    endfor
-                    echo '}'
-                endcapture
-            else
-                assign hasColor = false
-                assign obj = "'none'"
-            endif
-        -%}
-            <product-card 
-                {% if hasColor -%}
-                x-data="colorSwatches({
-                    starting: '{{ firstColor }}',
-                    colors: {{ obj }}})"
-                {%- endif -%}>
-                <a href="{{ product.url }}" aria-label="{{ product.title }}" class="w-full mx-auto">
-                    <img class="w-full {{ section.settings.imgShape }}" src="{{ firstImage | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstImage -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
-                </a>
-
-                {% if section.settings.showColors -%}
-                <swatch-wrapper class="flex flex-row justify-center w-full gap-1 pt-2 no-js-hidden" aria-hidden="true">
-                    {%- for color in product.options_by_name['Color'].values -%}
-                    {%- liquid
-                            if color == 'white'
-                                assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-gray-400'"
-                            else
-                                assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-white'"
-                            endif
-                    -%}
-
-                    <button class="w-6 h-6 border-2 border-solid rounded-full shadow-md hover:border-cta-500" :class="{{ classes }}" style="background-color: var(--{{ color }}, {{color}})" aria-label="{{ color }}" @click.prevent="selected='{{ color }}'"></button>
-                    {%- endfor -%}
-                </swatch-wrapper>
-                {%- endif %}
-
-                <card-info>
-                    <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
-                        {{ product.title }}
-                    </a>
-                    {%- if section.settings.showReviews -%}
-                        <a href="{{ product.url }}#Reviews">
-                            {%- render 'review-stars', product: product -%}
+{%- case section.settings.gridType -%}
+    {%- when 'grid' -%}
+        <product-grid class="max-w-screen-xl grid-cols-2 lg:grid-cols-3">
+            {% paginate collection.products by section.settings.ppp %}
+                {% for product in collection.products %}
+                {%- liquid
+                    if product.has_only_default_variant
+                        assign firstVariant = product
+                        assign firstImage = firstVariant.featured_image
+                    else
+                        assign firstVariant = product.first_available_variant
+                        assign firstImage = firstVariant.image
+                    endif
+                    assign firstColor = 'none'
+                    if product.options contains 'Color'
+                        assign hasColor = true
+                        capture obj
+                            echo '{'
+                            for color in product.options_by_name['Color'].values
+                                echo "'" | append: color | append: "':'"
+                                for variant in product.variants
+                                    if variant.options contains color
+                                        echo variant.image | img_url: '1x1' | replace: '_1x1.','_{width}x.'
+                                        assign firstColor = color
+                                        assign firstVariant = variant
+                                        break
+                                    endif
+                                endfor
+                                echo "'"
+                                unless forloop.last
+                                    echo ','
+                                endunless
+                            endfor
+                            echo '}'
+                        endcapture
+                    else
+                        assign hasColor = false
+                        assign obj = "'none'"
+                    endif
+                -%}
+                    <product-card 
+                        {% if hasColor -%}
+                        x-data="colorSwatches({
+                            starting: '{{ firstColor }}',
+                            colors: {{ obj }}})"
+                        {%- endif -%}>
+                        <a href="{{ product.url }}" aria-label="{{ product.title }}" class="w-full mx-auto">
+                            <img class="w-full {{ section.settings.imgShape }}" src="{{ firstImage | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstImage -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
                         </a>
-                    {%- endif -%}
-                    <card-price>
-                        <new-price class="{%- if product.compare_at_price %} text-lg{%- endif -%}">{{ product.price | money }}</new-price>
-                        {%- if product.compare_at_price -%}
-                            <old-price>{{ product.compare_at_price | money }}</old-price>
-                        {%- endif -%}
-                    </card-price>
-                </card-info>
-
-            </product-card>
-        {% endfor %}
-    {% endpaginate %}
-</product-grid>
+                    
+                        {% if section.settings.showColors -%}
+                        <swatch-wrapper class="flex flex-row justify-center w-full gap-1 pt-2 no-js-hidden" aria-hidden="true">
+                            {%- for color in product.options_by_name['Color'].values -%}
+                            {%- liquid
+                                    if color == 'white'
+                                        assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-gray-400'"
+                                    else
+                                        assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-white'"
+                                    endif
+                            -%}
+                            
+                            <button class="w-6 h-6 border-2 border-solid rounded-full shadow-md hover:border-cta-500" :class="{{ classes }}" style="background-color: var(--{{ color }}, {{color}})" aria-label="{{ color }}" @click.prevent="selected='{{ color }}'"></button>
+                            {%- endfor -%}
+                        </swatch-wrapper>
+                        {%- endif %}
+                    
+                        <card-info>
+                            <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
+                                {{ product.title }}
+                            </a>
+                            {%- if section.settings.showReviews -%}
+                                <a href="{{ product.url }}#Reviews">
+                                    {%- render 'review-stars', product: product -%}
+                                </a>
+                            {%- endif -%}
+                            <card-price>
+                                <new-price class="{%- if product.compare_at_price %} text-lg{%- endif -%}">{{ product.price | money }}</new-price>
+                                {%- if product.compare_at_price -%}
+                                    <old-price>{{ product.compare_at_price | money }}</old-price>
+                                {%- endif -%}
+                            </card-price>
+                        </card-info>
+                    
+                    </product-card>
+                {% endfor %}
+            {% endpaginate %}
+        </product-grid>
+    {%- when 'list' -%}
+        <product-list class="flex flex-col w-full max-w-screen-lg mx-auto divide-y gap-y-4">
+            {% paginate collection.products by section.settings.ppp %}
+                {% for product in collection.products %}
+                {%- liquid
+                    if product.has_only_default_variant
+                        assign firstVariant = product
+                        assign firstImage = firstVariant.featured_image
+                    else
+                        assign firstVariant = product.first_available_variant
+                        assign firstImage = firstVariant.image
+                    endif
+                    assign firstColor = 'none'
+                    if product.options contains 'Color'
+                        assign hasColor = true
+                        capture obj
+                            echo '{'
+                            for color in product.options_by_name['Color'].values
+                                echo "'" | append: color | append: "':'"
+                                for variant in product.variants
+                                    if variant.options contains color
+                                        echo variant.image | img_url: '1x1' | replace: '_1x1.','_{width}x.'
+                                        assign firstColor = color
+                                        assign firstVariant = variant
+                                        break
+                                    endif
+                                endfor
+                                echo "'"
+                                unless forloop.last
+                                    echo ','
+                                endunless
+                            endfor
+                            echo '}'
+                        endcapture
+                    else
+                        assign hasColor = false
+                        assign obj = "'none'"
+                    endif
+                -%}
+                    <product-card class="flex flex-row w-full gap-x-4"
+                        {% if hasColor -%}
+                        x-data="colorSwatches({
+                            starting: '{{ firstColor }}',
+                            colors: {{ obj }}})"
+                        {%- endif -%}>
+                        <product-left class="flex flex-col flex-none w-1/3">
+                            <a href="{{ product.url }}" aria-label="{{ product.title }}" class="w-full mx-auto">
+                                <img class="w-full {{ section.settings.imgShape }}" src="{{ firstImage | img_url: '360x' }}" sizes="(max-width: 768px) 48vw, (min-width: 1280px) 410px, 32vw" srcset="{%- render 'responsive-srcset', image: firstImage -%}" {%- if hasColor %} x-rias="image" {%- endif %} alt="{{ firstVariant.image.alt }}" data-sizes="auto" {% if forloop.index > 3 %}loading="lazy"{%- else -%} loading="eager"{%- endif -%} width="{{ firstVariant.image.width }}" height="{{ firstVariant.image.height }}"/>
+                            </a>
+                        
+                            {% if section.settings.showColors -%}
+                            <swatch-wrapper class="flex flex-row justify-center w-full gap-1 pt-2 no-js-hidden" aria-hidden="true">
+                                {%- for color in product.options_by_name['Color'].values -%}
+                                {%- liquid
+                                        if color == 'white'
+                                            assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-gray-400'"
+                                        else
+                                            assign classes = "selected == '" | append: color | append: "' ? 'border-cta-500' : 'border-white'"
+                                        endif
+                                -%}
+                                
+                                <button class="w-6 h-6 border-2 border-solid rounded-full shadow-md hover:border-cta-500" :class="{{ classes }}" style="background-color: var(--{{ color }}, {{color}})" aria-label="{{ color }}" @click.prevent="selected='{{ color }}'"></button>
+                                {%- endfor -%}
+                            </swatch-wrapper>
+                            {%- endif %}
+                        </product-left>
+                    
+                        <card-info class="flex flex-col justify-center flex-auto gap-y-2">
+                            <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
+                                {{ product.title }}
+                            </a>
+                            {%- if section.settings.showReviews -%}
+                                <a href="{{ product.url }}#Reviews">
+                                    {%- render 'review-stars', product: product -%}
+                                </a>
+                            {%- endif -%}
+                            <card-price>
+                                <new-price class="{%- if product.compare_at_price %} text-lg{%- endif -%}">{{ product.price | money }}</new-price>
+                                {%- if product.compare_at_price -%}
+                                    <old-price>{{ product.compare_at_price | money }}</old-price>
+                                {%- endif -%}
+                            </card-price>
+                            <ul class="{%- if section.settings.showDisc -%} list-disc list-inside {%- endif -%}">
+                                {%- if section.settings.metafield1 != '' -%}<metafield-one class="list-item">{{ section.settings.metafield1 }}</metafield-one>{% endif %}
+                                {%- if section.settings.metafield2 != '' -%}<metafield-two class="list-item">{{ section.settings.metafield2 }}</metafield-two>{% endif %}
+                                {%- if section.settings.metafield3 != '' -%}<metafield-three class="list-item">{{ section.settings.metafield3 }}</metafield-three>{% endif %}
+                            </ul>
+                        </card-info>
+                    </product-card>
+                {% endfor %}
+            {% endpaginate %}
+        </product-list>
+{%- endcase -%}
 
 
 {%- case section.settings.pageType -%}
@@ -179,6 +274,22 @@
     "tag": "section",
     "class": "block",
     "settings": [
+    {
+        "type": "select",
+        "id": "gridType",
+        "label": "Collection Type",
+        "options": [
+            {
+                "value": "grid",
+                "label": "Grid"
+            },
+            {
+                "value": "list",
+                "label": "List"
+            }
+        ],
+        "default": "grid"
+    },
         {
             "type": "range",
             "id": "ppp",
@@ -273,6 +384,32 @@
                 }
             ],
             "default": "none"
+        },
+        {
+            "type": "header",
+            "content": "List Contents",
+            "info": "Set these boxes to custom product metafields to display additional list item data per product"
+        },
+        {
+            "type": "checkbox",
+            "id": "showDisc",
+            "label": "Show Bullets",
+            "default": true
+        },
+        {
+            "type": "text",
+            "id": "metafield1",
+            "label": "First Item"
+        },
+        {
+            "type": "text",
+            "id": "metafield2",
+            "label": "Second Item"
+        },
+        {
+            "type": "text",
+            "id": "metafield3",
+            "label": "Third Item"
         }
     ]
 }
