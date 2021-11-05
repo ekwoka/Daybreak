@@ -1,5 +1,5 @@
 export default function (Alpine) {  
-    console.log('Registering Storage');
+    DEBUG_ON && console.log('Registering Storage');
     window.__daybreaks = {}
     Alpine.persistedStore = function (name, value, storage = localStorage) {
         let stored = storage.getItem(`__daybreak_${name}`)
@@ -29,7 +29,7 @@ export default function (Alpine) {
         })
     };
 
-    console.log('Registering RIAS');
+    DEBUG_ON && console.log('Registering RIAS');
     Alpine.directive('rias', (el, { expression }, { evaluate, effect }) => {
         effect(() => {
         
@@ -51,7 +51,7 @@ export default function (Alpine) {
     });
 
     /* Alpine Stores */
-    console.log('Registering Stores');
+    DEBUG_ON && console.log('Registering Stores');
     Alpine.persistedStore('cart', {
         items: [],
         isOpen: false,
@@ -108,7 +108,7 @@ export default function (Alpine) {
     })
 
     /* Alpine Data */
-    console.log('Registering Alpine Data Objects');
+    DEBUG_ON && console.log('Registering Alpine Data Objects');
     Alpine.data('emailCapture',({
         provider,
         listID,
@@ -167,7 +167,7 @@ export default function (Alpine) {
         },
         init() {
             this.open = !this.subscribed;
-            console.log(`initializing email capture...subscribed: ${this.subscribed}, open: ${this.open}`);
+            DEBUG_ON && console.log(`Initializing Email Capture...Subscribed: ${this.subscribed}, Open: ${this.open}`);
         }
     }));
 

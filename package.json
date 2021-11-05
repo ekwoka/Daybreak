@@ -6,7 +6,7 @@
     "serve": "shopify switch --store=the-water-filters-store && shopify theme serve",
     "open": "open http://127.0.0.1:9292/ && open https://the-water-filters-store.myshopify.com/admin/themes/127803883695/editor",
     "reset:assets": "run-s build && run-p css:watch js:watch",
-    "build": "run-p build:* && npm run sizes:assets",
+    "build": "run-s build:* sizes:assets",
     "build:css": "NODE_ENV=production TAILWIND_MODE=build postcss build/tailwind.pre.css --o assets/tailwind.css --verbose",
     "build:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss build/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose",
     "watch:css": "NODE_ENV=development TAILWIND_MODE=watch postcss build/tailwind.pre.css --o assets/tailwind.css --verbose -w",

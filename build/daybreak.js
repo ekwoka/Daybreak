@@ -9,7 +9,7 @@ console.log(`
              `);
 
 /* Daybreak Functions */
-console.log("Registering Daybreak");
+DEBUG_ON && console.log("Registering Daybreak");
 
 export async function addToCart(id, q, items) {
   let response, item;
@@ -103,7 +103,7 @@ export const RIAS = {
     el.setAttribute("sizes", sizes);
   },
   updateSizes(el = document) {
-    console.log('updating sizes')
+    DEBUG_ON && console.log('Updating Auto Sizes')
     el
       .querySelectorAll('img[data-sizes="auto"')
       .forEach((el) => this.updateSize(el));
