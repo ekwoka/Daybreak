@@ -10,20 +10,40 @@
                 {%- when "collection" -%}
                     {%- assign collection = collections[block.settings.collection] -%}
                     <a href="{{ collection.url }}" class="relative flex items-center w-full h-24 px-4 py-2 text-gray-900 bg-gray-300 shadow-md rounded-xl md:relative md:flex md:flex-col md:items-center md:justify-start md:p-0 md:m-0 md:border-2 md:border-gray-800 md:border-solid md:rounded-sm md:h-auto">
-                        {%- if block.settings.collection_image -%}
-                            <img src="{{ block.settings.collection_image | img_url: '360x' }}" id="loop-{{ forloop.index }}" srcset="{%- render 'responsive-srcset', image: block.settings.collection_image -%}" class="absolute inset-y-0 right-0 block object-cover w-full h-full p-0 m-0 {%- if section.settings.overlay %} mix-blend-luminosity {%- endif %} rounded-xl md:block md:object-contain md:w-full md:h-full md:max-w-full md:p-0 md:m-0 md:static md:mix-blend-normal md:rounded-none" alt="{{ block.settings.collection_image.alt }}" loading="lazy" data-sizes="auto" sizes="5px" width="{{ block.settings.collection_image.width }}" height="{{ block.settings.collection_image.height }}">
-                        {%- endif -%}
+                        {%- liquid
+                            if block.settings.collection_image
+                                assign image = block.setting.collection_image
+                            else
+                                assign image = collection.featured_image
+                            endif
+                            if block.settings.collection_title != ''
+                                assign title = block.settings.collection_title
+                            else
+                                assign title = collection.title
+                            endif
+                        -%}
+                            <img src="{{ image | img_url: '360x' }}" id="loop-{{ forloop.index }}" srcset="{%- render 'responsive-srcset', image: image -%}" class="absolute inset-y-0 right-0 block object-cover w-full h-full p-0 m-0 {%- if section.settings.overlay %} mix-blend-luminosity {%- endif %} rounded-xl md:block md:w-full md:h-full md:max-w-full md:p-0 md:m-0 md:static md:mix-blend-normal md:rounded-none" alt="{{ image.alt }}" loading="lazy" data-sizes="auto" sizes="5px" width="{{ image.width }}" height="{{ image.height }}">
                         <div class="absolute inset-0 w-full h-full rounded-lg bg-gradient-to-r from-gray-300 via-gray-300/70 to-gray-300-10 md:hidden"> </div>
-                        <span class="relative z-[2] text-2xl font-semibold tracking-wide {{ section.settings.collection_product_title_text_transform }} duration-500 md:text-lg md:block md:w-full md:p-1 md:m-0 md:font-bold md:text-center md:text-gray-50 md:bg-gray-900 md:tracking-wider">{{ collection.title | default: 'No Collection Selected' }}</span>
+                        <span class="relative z-[2] text-2xl font-semibold tracking-wide {{ section.settings.collection_product_title_text_transform }} duration-500 md:text-lg md:block md:w-full md:p-1 md:m-0 md:font-bold md:text-center md:text-gray-50 md:bg-gray-900 md:tracking-wider">{{ title | default: 'No Collection Selected' }}</span>
                     </a>
                 {%- when "product" -%}
                     {%- assign product = block.settings.product -%}
                     <a href="{{ product.url }}" class="relative flex items-center w-full h-24 px-4 py-2 text-gray-900 bg-gray-300 shadow-md rounded-xl md:relative md:flex md:flex-col md:items-center md:justify-start md:p-0 md:m-0 md:border-2 md:border-gray-800 md:border-solid md:rounded-sm md:h-auto">
-                        {%- if block.settings.product_image -%}
-                            <img src="{{ block.settings.product_image | img_url: '360x' }}" id="loop-{{ forloop.index }}" srcset="{%- render 'responsive-srcset', image: block.settings.product_image -%}" class="absolute inset-y-0 right-0 block object-cover w-full h-full p-0 m-0 {%- if section.settings.overlay %} mix-blend-luminosity {%- endif %} rounded-xl md:block md:object-contain md:w-full md:h-full md:max-w-full md:p-0 md:m-0 md:static md:mix-blend-normal md:rounded-none" alt="{{ block.settings.product_image.alt }}" loading="lazy" data-sizes="auto" sizes="5px" width="{{ block.settings.product_image.width }}" height="{{ block.settings.product_image.height }}">
-                        {%- endif -%}
+                        {%- liquid
+                            if block.settings.product_image
+                                assign image = block.setting.product_image
+                            else
+                                assign image = product.featured_image
+                            endif
+                            if block.settings.product_title != ''
+                                assign title = block.settings.product_title
+                            else
+                                assign title = product.tile
+                            endif
+                        -%}
+                            <img src="{{ image | img_url: '360x' }}" id="loop-{{ forloop.index }}" srcset="{%- render 'responsive-srcset', image: image -%}" class="absolute inset-y-0 right-0 block object-cover w-full h-full p-0 m-0 {%- if section.settings.overlay %} mix-blend-luminosity {%- endif %} rounded-xl md:block md:w-full md:h-full md:max-w-full md:p-0 md:m-0 md:static md:mix-blend-normal md:rounded-none" alt="{{ image.alt }}" loading="lazy" data-sizes="auto" sizes="5px" width="{{ image.width }}" height="{{ image.height }}">
                         <div class="absolute inset-0 w-full h-full rounded-lg bg-gradient-to-r from-gray-300 via-gray-300/70 to-gray-300-10 md:hidden"> </div>
-                        <span class="relative z-[2] text-2xl font-semibold tracking-wide {{ section.settings.collection_product_title_text_transform }} duration-500 md:text-lg md:block md:w-full md:p-1 md:m-0 md:font-bold md:text-center md:text-gray-50 md:bg-gray-900 md:tracking-wider">{{ product.title | default: 'No Product Selected' }}</span>
+                        <span class="relative z-[2] text-2xl font-semibold tracking-wide {{ section.settings.collection_product_title_text_transform }} duration-500 md:text-lg md:block md:w-full md:p-1 md:m-0 md:font-bold md:text-center md:text-gray-50 md:bg-gray-900 md:tracking-wider">{{ title | default: 'No Product Selected' }}</span>
                     </a>
             {%- endcase -%}
         {%- endfor -%}
@@ -142,7 +162,7 @@
             ]
         }, {
             "type": "product",
-            "name": "Product (unsupported)",
+            "name": "Product",
             "settings": [
                 {
                     "label": "Product",

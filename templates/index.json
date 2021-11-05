@@ -23,20 +23,36 @@
           "type": "collection",
           "settings": {
             "collection": "filter-pitchers",
-            "collection_title": ""
+            "collection_title": "All Filter Pitchers"
           }
         },
         "d8ca9aa0-d46d-4bae-8eec-f2f6bccbc8bd": {
           "type": "product",
           "settings": {
-            "product": "10-cup-water-filter-pitcher",
+            "product": "5-stage-faucet-filter-two-pack",
+            "product_title": ""
+          }
+        },
+        "ff9f921e-2f59-4842-9b10-c3606ef94aae": {
+          "type": "product",
+          "settings": {
+            "product": "8-stage-alkaline-shower-filter",
+            "product_title": ""
+          }
+        },
+        "7108822a-34af-47df-bc30-49cf4a1f6123": {
+          "type": "product",
+          "settings": {
+            "product": "pitcher-replacement-filter1",
             "product_title": ""
           }
         }
       },
       "block_order": [
         "708d466a-6b23-4b56-86f5-87327766a133",
-        "d8ca9aa0-d46d-4bae-8eec-f2f6bccbc8bd"
+        "d8ca9aa0-d46d-4bae-8eec-f2f6bccbc8bd",
+        "ff9f921e-2f59-4842-9b10-c3606ef94aae",
+        "7108822a-34af-47df-bc30-49cf4a1f6123"
       ],
       "settings": {
         "custom_class": "",
