@@ -56,6 +56,8 @@ export async function addToCartFromForm(body,items) {
 
 export async function changeCart(line, quantity, items) {
   let response, cart;
+  line = line>items.length?items.findIndex((e) => e.variant_id == line)+1:line;
+  DEBUG_ON && console.log(line, quantity, items);
   let body = JSON.stringify({ line, quantity });
   try {
     response = await fetch(routes.cart_change_url, {
@@ -69,6 +71,7 @@ export async function changeCart(line, quantity, items) {
   }
   if(quantity==0) {
     items[line-1].removed = true
+    items[line-1].quantity = 0
     items.push(items.splice(line-1,1)[0])
     return items;
   }

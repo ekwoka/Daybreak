@@ -1,3 +1,7 @@
+import * as Daybreak from './daybreak';
+
+import Alpine from 'alpinejs/src';
+
 const AOVBOOSTER_ENABLED = true;
 
 const upsells = {
@@ -51,8 +55,8 @@ DEBUG_ON && console.log(addToCart);
 
 async function isInCart(pid) {
   return new Promise(async (resolve, reject) => {
-    let cart = await (await fetch('/cart.js')).json();
-    resolve(cart.items.some((item) => item.variant_id === pid));
+    let items = Alpine.store('cart').items || await Daybreak.fetchCart();
+    resolve(items.some((item) => item.variant_id === pid));
   });
 }
 
@@ -93,8 +97,8 @@ export default async function () {
   upsellNode.querySelectorAll('.close-bgs-app-order, .modal-bgs-app-order').forEach((el) => el.addEventListener('click', (e) => (upsellNode.querySelector('.modal-bgs-app-order').style.display = 'none')));
 
   upsellNode.querySelector('.bgs-checkmark').addEventListener('change', async ({ target }) => {
-    if (target.checked) return fetch(`/cart/add.js?quantity=1&id=${upsell.pid}`);
-    return fetch(`/cart/change.js?id=${upsell.pid}&quantity=0`);
+    if (target.checked) return Daybreak.addToCart(upsell.pid,1,Alpine.store('cart').items);
+    return Alpine.store('cart').items = await Daybreak.changeCart(upsell.pid,0,Alpine.store('cart').items);
   });
 
   [inCart] = await Promise.all([inCart]);
