@@ -1,9 +1,9 @@
 <!-- cart-drawer-comp.liquid START -->
 
 {%- liquid
-    assign thresholdBlocks = section.blocks | where: 'type','threshold'
-    assign itemsBlocks = section.blocks | where: 'type','items'
-    assign detailsBlocks = section.blocks | where: 'type','details'
+    assign thresholdBlocks = section.blocks | where: 'type', 'threshold'
+    assign itemsBlocks = section.blocks | where: 'type', 'items'
+    assign detailsBlocks = section.blocks | where: 'type', 'details'
 -%}
 
 <style>
@@ -74,7 +74,7 @@
             {%- endfor -%}
         </cart-container>
         <cart-footer class="sticky bottom-0 flex flex-col items-center w-full px-4 py-4 mx-auto bg-white gap-y-4 md:px-16">
-            {%- for block in detailsBlocks-%}
+            {%- for block in detailsBlocks -%}
                 <cart-details class="grid w-full grid-cols-4 mx-auto max-w-screen-xs md:w-3/4">
                     {%- if block.settings.showDiscount -%}
                         <expected-discount>Discount:</expected-discount><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
