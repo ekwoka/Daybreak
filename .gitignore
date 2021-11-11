@@ -12,3 +12,4 @@ node_modules/
 lighthouse.html
 package-lock.json
 config.yml
+*-lock*
