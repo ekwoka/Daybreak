@@ -1,6 +1,6 @@
 {
   "name": "Daybreak",
-  "version": "0.0.14",
+  "version": "0.1.0",
   "description": "Shopify theme built on top of the Dawn theme and extended with TailwindCSS and AlpineJS.",
   "scripts": {
     "serve": "shopify switch --store=the-water-filters-store && shopify theme serve",
