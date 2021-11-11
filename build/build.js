@@ -1,14 +1,14 @@
-import Alpine from './alpine'
-import * as Daybreak from './daybreak'
-import AOVBooster from './aovbooster'
-import Data from './alpinescript'
+import Alpine from 'alpinejs/src';
+import * as Daybreak from './daybreak';
+import AOVBooster from './aovbooster';
+import Trees from './alpine';
 
-document.readyState == 'loading' ? document.addEventListener('DOMContentLoaded', Daybreak.RIAS.start()): Daybreak.RIAS.start();
 
-window.Daybreak = Daybreak
-window.Alpine = Alpine
+window.Daybreak = Daybreak;
+window.Alpine = Alpine;
 
-Alpine.plugin(Data)
-Alpine.start() 
+Trees.forEach((tree) => Alpine.plugin(tree));
+Alpine.start();
+Daybreak.RIAS.start();
 
-AOVBooster()
+// AOVBooster();

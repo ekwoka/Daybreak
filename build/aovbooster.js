@@ -1,6 +1,6 @@
 import * as Daybreak from './daybreak';
 
-import Alpine from './alpine';
+import Alpine from 'alpinejs/src';
 
 const AOVBOOSTER_ENABLED = true;
 
