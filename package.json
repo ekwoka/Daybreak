@@ -21,7 +21,7 @@
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
-    "@ekwoka/persistedstore": "file:../../../persistedstore",
+    "@ekwoka/persistedstore": "^0.1.1",
     "@ekwoka/x-rias": "^0.2.2",
     "alpinejs": "^3.5.1"
   },
