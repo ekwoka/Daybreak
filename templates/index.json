@@ -84,12 +84,41 @@
       "settings": {
         "showReviews": false
       }
+    },
+    "1636970597a99ef30d": {
+      "type": "image-with-text",
+      "blocks": {
+        "1636970597ae83d290-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Our bodies will come into contact with water countless times each day — whether you're drinking water, doing laundry, or taking a shower, your water quality affects your body.<\/strong><\/p>"
+          }
+        },
+        "1636970597ae83d290-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "SHOP SHOWER FILTERS",
+            "button_link": "shopify:\/\/products\/8-stage-alkaline-shower-filter"
+          }
+        }
+      },
+      "block_order": [
+        "1636970597ae83d290-1",
+        "1636970597ae83d290-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/Shower_Filter_with_Showerhead_copy.jpg",
+        "height": "adapt",
+        "color_scheme": "background-1",
+        "layout": "image_first"
+      }
     }
   },
   "order": [
     "1629110654344cccde",
     "16300481333c195d52",
     "163670481247286b11",
-    "1631089052fb221e00"
+    "1631089052fb221e00",
+    "1636970597a99ef30d"
   ]
 }
