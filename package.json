@@ -7,22 +7,22 @@
     "open": "open http://127.0.0.1:9292/ && open https://the-water-filters-store.myshopify.com/admin/themes/127803883695/editor",
     "reset:assets": "run-s build && run-p css:watch js:watch",
     "build": "run-s build:* sizes:assets",
+    "build:js": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify --define:ALPINE_VERSION='\"Daybreak custom\"' --define:DEBUG_ON=false && esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
     "build:css": "NODE_ENV=production TAILWIND_MODE=build postcss build/tailwind.pre.css --o assets/tailwind.css --verbose",
     "build:critical": "NODE_ENV=critical TAILWIND_MODE=build postcss build/tailwind.critical.pre.css --o snippets/critical-css.liquid --verbose",
-    "watch:css": "NODE_ENV=development TAILWIND_MODE=watch postcss build/tailwind.pre.css --o assets/tailwind.css --verbose -w",
-    "build:js": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --minify --define:ALPINE_VERSION='\"Daybreak custom\"' --define:DEBUG_ON=false && esbuild ./build/pps.js --outfile=./assets/pps.min.js --platform=browser --target=es2017 --bundle --minify",
     "watch:js": "esbuild ./build/build.js --outfile=./assets/daybreak.min.js --platform=browser --target=es2017 --bundle --watch --define:ALPINE_VERSION='\"Daybreak custom\"' --define:DEBUG_ON=true",
+    "watch:css": "NODE_ENV=development TAILWIND_MODE=watch postcss build/tailwind.pre.css --o assets/tailwind.css --verbose -w",
     "sizes:assets": "ls -lh assets/daybreak.min.js assets/tailwind.css",
     "watch": "run-p serve watch:*",
     "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;",
     "postinstall": "npm run build",
-    "update": "ncu -u && rm -rf node_modules && pnpm i && git add . && git commit -m ':arrow_up:' && npm version patch"
+    "update": "ncu -u && rm -rf node_modules && npm i && git add . && git commit -m ':arrow_up:' && npm version patch"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
     "@ekwoka/persistedstore": "^0.1.1",
-    "@ekwoka/x-rias": "^0.2.2",
+    "@ekwoka/x-rias": "^0.2.3",
     "alpinejs": "^3.5.1"
   },
   "devDependencies": {

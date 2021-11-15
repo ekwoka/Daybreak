@@ -5,7 +5,7 @@ module.exports = {
   mode: 'jit',
   purge: {
     mode: "all",
-    content: ["./**/*.liquid"],
+    content: ["./**/*.liquid","./assets/daybreak.min.js"],
     options: {
       whitelist: [],
     },

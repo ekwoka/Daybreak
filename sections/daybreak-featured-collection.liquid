@@ -1,0 +1,139 @@
+<h2 class="w-3/4 mx-auto mb-4 text-xl font-bold tracking-wider text-center md:w-1/2 md:text-2xl">
+    {{ section.settings.title | escape | default: "Popular Products" }}
+</h2>
+
+<alpine-slider class="relative block w-full px-4 pb-16 md:pb-4" x-data="slider">
+    <slider-grid class="flex flex-row mx-auto overflow-x-scroll flex-nowrap snap-x-proximity md:overflow-x-auto hide-scrollbar gap-x-4 smooth-scroll md:grid md:grid-cols-4" @scroll.debounce.100ms="page = Math.round($el.scrollLeft/averageWidth)+1">
+      {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
+          <product-card class="w-[75vw] flex-none snap-start flex flex-col md:w-full items-center">
+            <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
+              <img src="{{ product.featured_image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: product.featured_image -%}" alt="{{ product.featured_image.alt }} " loading="lazy" data-sizes="auto" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}">
+              <span class="sr-only">{{ product.title }}</span>
+            </a>  
+            <card-info>
+              <a class="text-blue-800" href="{{ product.url }}" tabindex="-1">
+                  {{ product.title }}
+              </a>
+              {%- if section.settings.showReviews -%}
+                  <a href="{{ product.url }}#Reviews">
+                      {%- render 'review-stars', product: product -%}
+                  </a>
+              {%- endif -%}
+              <card-price>
+                  <new-price class="{%- if product.compare_at_price %} text-lg{%- endif -%}">{{ product.price | money }}</new-price>
+                  {%- if product.compare_at_price -%}
+                      <old-price>{{ product.compare_at_price | money }}</old-price>
+                  {%- endif -%}
+              </card-price>
+            </card-info>
+          </product-card>
+      {%- endfor -%}
+    </product-grid>
+    <slider-controls class="absolute flex flex-row items-center bottom-4 right-4 md:hidden" x-cloak>
+      {%- if section.settings.show_view_all and section.settings.collection.products_count > section.settings.products_to_show -%}
+          <a class="mr-4 text-sm text-blue-800" href="{{ section.settings.collection.url }}">
+              View All
+          </a>
+      {%- endif -%}
+      <span class="mr-4 text-sm" x-text="`${page} / ${items.length}`"></span>
+        <button class="box-border flex items-center justify-center w-10 h-10 mr-1 border fill-current" x-bind="previous">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </button>
+        <button class="box-border flex items-center justify-center w-10 h-10 border fill-current" x-bind="next">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+        </button>
+    </slider-controls>
+</alpine-slider>
+
+{% schema %}
+{
+  "name": "Product Slider",
+  "tag": "section",
+  "class": "w-full max-w-screen-xl mx-auto",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "default": "Popular Products",
+      "label": "t:sections.featured-collection.settings.title.label"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.featured-collection.settings.collection.label"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 12,
+      "step": 2,
+      "default": 4,
+      "label": "t:sections.featured-collection.settings.products_to_show.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "default": true,
+      "label": "t:sections.featured-collection.settings.show_view_all.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.swipe_on_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.featured-collection.settings.header.content"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.featured-collection.settings.image_ratio.options__3.label"
+        }
+      ],
+      "default": "adapt",
+      "label": "t:sections.featured-collection.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_secondary_image",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_secondary_image.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "add_image_padding",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.add_image_padding.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "default": false,
+      "label": "t:sections.featured-collection.settings.show_vendor.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.featured-collection.presets.name"
+    }
+  ]
+}
+{% endschema %}
