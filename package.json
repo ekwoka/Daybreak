@@ -16,7 +16,7 @@
     "watch": "run-p serve watch:*",
     "replace:rem": "for f in ./**/*.liquid; do echo $f; perl -pi -e 's/(\\d?\\.?\\d+)(rem)/($1\\/1.6).\"rem\"/eg' \"$f\"; done;",
     "postinstall": "npm run build",
-    "update": "ncu -u && rm -rf node_modules && npm i && git add . && git commit -m ':arrow_up:' && npm version patch"
+    "update": "ncu -u && rm -rf node_modules && pnpm i && git add . && git commit -m ':arrow_up:' && npm version patch"
   },
   "author": "Eric Kwoka",
   "license": "ISC",
@@ -32,7 +32,7 @@
     "autoprefixer": "^10.4.0",
     "cssnano": "^5.0.10",
     "esbuild": "^0.13.13",
-    "lighthouse": "^8.6.0",
+    "lighthouse": "^9.0.0",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.3.11",
     "postcss-cli": "^9.0.2",
