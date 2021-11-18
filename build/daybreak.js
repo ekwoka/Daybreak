@@ -98,7 +98,7 @@ export const currency = new Intl.NumberFormat([Shopify.locale + '-' + Shopify.co
 
 export const RIAS = {
   updateSize(el) {
-    if(el.getAttribute('x-rias')) return;
+    if(el.getAttribute('x-rias')) return
     let sizes = el.offsetWidth;
     let parent = el.parentNode;
     while (sizes < 100 && parent) {
@@ -107,10 +107,11 @@ export const RIAS = {
     }
     sizes += 'px';
     el.setAttribute('sizes', sizes);
+    observer.observe(el)
   },
   updateSizes(el = document) {
     DEBUG_ON && console.log('Updating Auto Sizes');
-    el.querySelectorAll('img[data-sizes="auto"').forEach((el) => this.updateSize(el));
+    el.querySelectorAll('img[data-sizes="auto"]').forEach(el => this.updateSize(el));
   },
   start() {
     this.updateSizes();
@@ -130,3 +131,20 @@ export const RIAS = {
     observer.observe(document.body, config);
   }
 };
+
+let observer = new ResizeObserver(debounceObserver(observerCB, 800));
+
+function debounceObserver(fn, delay) {
+  let timer;
+  return function(...args) {
+    if (timer)
+      clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn(...args);
+      timer = null;
+    }, delay);
+  };
+}
+function observerCB(entries) {
+  entries.forEach(({ target }) => RIAS.updateSize(target));
+}

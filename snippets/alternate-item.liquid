@@ -17,6 +17,6 @@
 </alternating-text>
 <alternating-image class="block flex-auto lg:row-start-1 lg:col-span-7 xl:col-span-8 {{ image_class }}">
   <div class="overflow-hidden bg-gray-100 rounded-lg aspect-w-5 aspect-h-2">
-    <img src="{{ block.settings.image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: block.settings.image -%}" alt="{{ block.settings.image.alt }}" class="object-cover object-center" />
+    <img src="{{ block.settings.image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: block.settings.image -%}" alt="{{ block.settings.image.alt }}" class="object-cover object-center" data-sizes="auto" width="{{ block.settings.image.width }}" height="{{ block.settings.image.height }}" />
   </div>
 </alternating-image>
