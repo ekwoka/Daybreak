@@ -79,38 +79,54 @@
         "show_vendor": false
       }
     },
-    "1631089052fb221e00": {
-      "type": "recently-viewed-comp",
-      "settings": {
-        "showReviews": false
-      }
-    },
-    "1636970597a99ef30d": {
-      "type": "image-with-text",
+    "163722378333813e88": {
+      "type": "alternating-copy",
       "blocks": {
-        "1636970597ae83d290-1": {
-          "type": "text",
+        "b7c3bd0f-f8ef-4c54-ad88-57b505d9608a": {
+          "type": "combo",
           "settings": {
-            "text": "<p><strong>Our bodies will come into contact with water countless times each day — whether you're drinking water, doing laundry, or taking a shower, your water quality affects your body.<\/strong><\/p>"
+            "heading": "Clean Showering",
+            "paragraph": "Our bodies will come into contact with water countless times each day — whether you're drinking water, doing laundry, or taking a shower, your water quality affects your body.",
+            "btn_label": "SHOP SHOWER FILTERS",
+            "btn_url": "shopify:\/\/products\/8-stage-alkaline-shower-filter",
+            "image": "shopify:\/\/shop_images\/Shower_Filter_with_Showerhead_copy.jpg"
           }
         },
-        "1636970597ae83d290-2": {
-          "type": "button",
+        "d67bca60-8911-4368-a0a3-deeaa089b069": {
+          "type": "combo",
           "settings": {
-            "button_label": "SHOP SHOWER FILTERS",
-            "button_link": "shopify:\/\/products\/8-stage-alkaline-shower-filter"
+            "heading": "Clean Drinking",
+            "paragraph": "All of our water filter pitchers Remove 99.6%-99.9% of all total dissolved solids (TDS) in your drinking water.\n\nAll of our filter pitchers include a FREE water testing meter!",
+            "btn_label": "SHOP FILTER PITCHERS",
+            "btn_url": "shopify:\/\/collections\/filter-pitchers",
+            "image": "shopify:\/\/shop_images\/mfwf-mobile-1.jpg"
+          }
+        },
+        "b3049cca-ef6e-402f-8c2a-6ebf8babdbed": {
+          "type": "combo",
+          "settings": {
+            "heading": "Clean Eating",
+            "paragraph": "Common toxins and pollutants in your home's water can impact more than just the way your water tastes. From your skin's moisture barrier, to your digestive system — better water means better health.",
+            "btn_label": "SHOP FAUCET FILTERS",
+            "btn_url": "shopify:\/\/products\/5-stage-faucet-filter-two-pack",
+            "image": "shopify:\/\/shop_images\/Faucet6_copy_9bdf00e9-87df-4ec2-9644-c48b245f62c1.png"
           }
         }
       },
       "block_order": [
-        "1636970597ae83d290-1",
-        "1636970597ae83d290-2"
+        "b7c3bd0f-f8ef-4c54-ad88-57b505d9608a",
+        "d67bca60-8911-4368-a0a3-deeaa089b069",
+        "b3049cca-ef6e-402f-8c2a-6ebf8babdbed"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/Shower_Filter_with_Showerhead_copy.jpg",
-        "height": "adapt",
-        "color_scheme": "background-1",
-        "layout": "image_first"
+        "heading": "Our Products Have Features",
+        "paragraph": "Here's let us show you some our amazing product features"
+      }
+    },
+    "1631089052fb221e00": {
+      "type": "recently-viewed-comp",
+      "settings": {
+        "showReviews": false
       }
     }
   },
@@ -118,7 +134,7 @@
     "1629110654344cccde",
     "16300481333c195d52",
     "163670481247286b11",
-    "1631089052fb221e00",
-    "1636970597a99ef30d"
+    "163722378333813e88",
+    "1631089052fb221e00"
   ]
 }
