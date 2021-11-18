@@ -25,8 +25,8 @@
     });
 </script>
 
-<recently-viewed class="max-w-screen-lg mx-auto"x-data="recentlyViewed" x-show="items.length>0" x-cloak>
-    <h2 class="w-3/4 mx-auto mb-4 text-xl tracking-wider text-center max-w-max md:w-1/2 md:text-2xl ">Recently Viewed</h3>
+<recently-viewed class="max-w-screen-lg mx-auto" x-data="recentlyViewed" x-show="items.length>0" x-cloak>
+    <h2 class="pb-16 mx-auto section-heading max-w-max">Recently Viewed</h3>
     <product-grid class="grid-cols-2 md:grid-cols-4">
         <template x-for="product in items">
             <product-card>

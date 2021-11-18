@@ -24,7 +24,7 @@ module.exports = {
         truegray: colors.trueGray,
         primary: colors.blue,
         secondary: colors.red,
-        cta: colors.green
+        cta: colors.blue
       },
       margin: {
       },

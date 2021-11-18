@@ -108,6 +108,10 @@
     @apply text-gray-800 from-gray-300 to-gray-200 hover:text-gray-900;
   }
 
+  .section-heading {
+    @apply text-3xl font-bold tracking-wide text-gray-900 sm:text-4xl text-center
+  }
+
   floating-label {
     @apply relative mt-4 shadow-md;
 
