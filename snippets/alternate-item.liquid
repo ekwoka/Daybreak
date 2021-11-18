@@ -1,0 +1,22 @@
+{%- liquid
+    if type == 0
+        assign text_class = 'lg:col-start-1'
+        assign image_class = 'lg:col-start-6 xl:col-start-5'
+    else
+        assign text_class = 'lg:col-start-8 xl:col-start-9'
+        assign image_class = 'lg:col-start-1'
+    endif
+-%}
+
+<alternating-text class="block mt-6 lg:mt-0 lg:row-start-1 lg:col-span-5 xl:col-span-4 {{ text_class }}">
+  <h3 class="text-lg font-medium text-gray-900">{{ block.settings.heading }}</h3>
+  <p class="mt-2 text-gray-700">{{ block.settings.paragraph }}</p>
+  <a href="{{ block.settings.btn_url }}">
+    <button class="block mx-auto mt-8 btn-primary max-w-max">{{ block.settings.btn_label }}</button>
+  </a>
+</alternating-text>
+<alternating-image class="block flex-auto lg:row-start-1 lg:col-span-7 xl:col-span-8 {{ image_class }}">
+  <div class="overflow-hidden bg-gray-100 rounded-lg aspect-w-5 aspect-h-2">
+    <img src="{{ block.settings.image | img_url: '360x' }}" srcset="{%- render 'responsive-srcset', image: block.settings.image -%}" alt="{{ block.settings.image.alt }}" class="object-cover object-center" />
+  </div>
+</alternating-image>

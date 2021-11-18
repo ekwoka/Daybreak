@@ -1,0 +1,83 @@
+<alternating-header class="block max-w-3xl mx-auto text-center">
+  {%- if section.settings.heading -%}
+  <h2 class="section-heading">{{ section.settings.heading | capitalize }}</h2>
+  {%- endif -%} {%- if section.settings.paragraph -%}
+  <p class="mt-4 text-lg text-gray-600">{{ section.settings.paragraph }}</p>
+  {%- endif -%}
+</alternating-header>
+
+<alternating-item class="block mt-16 space-y-16 ">
+    {%- liquid
+        for block in section.blocks
+            if block.type == 'combo'
+                echo '<div class="flex flex-col-reverse lg:grid lg:grid-cols-12 lg:gap-x-8 lg:items-center">'
+                assign loopType = forloop.index | modulo: 2
+                render 'alternate-item', block: block, type: loopType
+                echo '</div>'
+            endif
+        endfor
+    -%}
+</alternating-item>
+
+{% schema %}
+{
+  "name": "Alternating Copy",
+  "tag": "section",
+  "class": "w-full max-w-screen-xl mx-auto py-16 px-4",
+  "settings": [
+    {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+    },
+    {
+        "type": "textarea",
+        "id": "paragraph",
+        "label": "Sub Heading"
+    }
+  ],
+  "blocks": [
+      {
+          "type": "combo",
+          "name": "Image with Text",
+          "settings": [
+                {
+                    "type": "text",
+                    "id": "heading",
+                    "label": "Heading"
+                },
+                {
+                    "type": "textarea",
+                    "id": "paragraph",
+                    "label": "Text Content"
+                },
+                {
+                    "type": "text",
+                    "id": "btn_label",
+                    "label": "Button Label",
+                    "default": "View Now"
+                },
+                {
+                    "type": "url",
+                    "id": "btn_url",
+                    "label": "Button Target"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                }
+            ]
+      },
+      {
+          "type": "imageonly",
+          "name": "Images"
+      }
+    ],
+  "presets": [
+    {
+        "name": "Alternating copy"
+    }
+  ]
+}
+{% endschema %}
