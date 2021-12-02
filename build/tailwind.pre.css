@@ -118,7 +118,7 @@
     & input[type='text'],
     & input[type='email'],
     & input[type='search'] {
-      @apply w-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
+      @apply w-full h-full placeholder-transparent border-0 border-b-2 focus:outline-none focus:ring-0 focus:border-cta-600;
 
       &:placeholder-shown ~ label {
         @apply text-base text-gray-600 top-2;
