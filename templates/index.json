@@ -79,6 +79,29 @@
         "show_vendor": false
       }
     },
+    "1638480696427fa758": {
+      "type": "inline-newsletter-comp",
+      "settings": {
+        "cardStyle": "full",
+        "sticky": true,
+        "emailProvider": "klaviyo",
+        "listID": "QR4dTZ",
+        "captureHeader": "Join our Newsletter",
+        "captureHtml": "Get 10% off your order immediately, as well as future discounts and special offers!",
+        "captureButton": "Get My Coupon",
+        "showCoupon": true,
+        "couponCode": "GET10NOW",
+        "couponOffer": "10% Off",
+        "successH2": "Thank You!",
+        "successP": "Look forward to our amazing emails in your inbox!",
+        "errorH2": "Oh No!",
+        "errorP": "It looks like there was an error!",
+        "errorAgain": true,
+        "existedH2": "Wait a sec...",
+        "existedP": "You're already subscribed!",
+        "existedCoupon": true
+      }
+    },
     "163722378333813e88": {
       "type": "alternating-copy",
       "blocks": {
@@ -128,37 +151,14 @@
       "settings": {
         "showReviews": false
       }
-    },
-    "1638480696427fa758": {
-      "type": "inline-newsletter-comp",
-      "settings": {
-        "cardStyle": "full",
-        "sticky": true,
-        "emailProvider": "klaviyo",
-        "listID": "QR4dTZ",
-        "captureHeader": "Join our Newsletter",
-        "captureHtml": "Get 10% off your order immediately, as well as future discounts and special offers!",
-        "captureButton": "Get My Coupon",
-        "showCoupon": true,
-        "couponCode": "GET10NOW",
-        "couponOffer": "10% Off",
-        "successH2": "Thank You!",
-        "successP": "Look forward to our amazing emails in your inbox!",
-        "errorH2": "Oh No!",
-        "errorP": "It looks like there was an error!",
-        "errorAgain": true,
-        "existedH2": "Wait a sec...",
-        "existedP": "You're already subscribed!",
-        "existedCoupon": true
-      }
     }
   },
   "order": [
     "1629110654344cccde",
     "16300481333c195d52",
     "163670481247286b11",
+    "1638480696427fa758",
     "163722378333813e88",
-    "1631089052fb221e00",
-    "1638480696427fa758"
+    "1631089052fb221e00"
   ]
 }
