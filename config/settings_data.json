@@ -1,21 +1,21 @@
 {
   "current": {
-    "free_shipping_threshold": 4200,
+    "free_shipping_threshold": 10000,
     "reviewApp": "stamped",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
-          "announcement-bar-0": {
-            "type": "message",
+          "5876660f-ec01-4459-9402-5e59e2303348": {
+            "type": "shipping",
             "settings": {
-              "text": "Welcome to our store",
-              "link": ""
+              "default": "Free Shipping Available at $100",
+              "congrats": "Congratulations! You qualify for free shipping!"
             }
           }
         },
         "block_order": [
-          "announcement-bar-0"
+          "5876660f-ec01-4459-9402-5e59e2303348"
         ],
         "settings": {
           "showAnnouncement": true,
