@@ -55,8 +55,7 @@
             <p class="flex-auto py-4">{{ section.settings.captureHtml }}</p>
             <form class="flex flex-col w-full gap-1 md:flex-row">
                 <floating-label class="flex-auto w-full md:w-3/4">
-                    <input
-                       
+                    <input class="h-full"
                         x-model="email" type="email" name="email" id="email" placeholder="Enter Email Here"
                         aria-label="Enter Email" :disabled="sending"/>
                     <label for="email">Enter Email Here</label>
