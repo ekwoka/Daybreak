@@ -27,10 +27,7 @@
                         },
                         default: '{{ block.settings.default }}',
                         congrats: '{{ block.settings.congrats }}',
-                        threshold: {{ settings.free_shipping_threshold }},
-                        init() {
-                          DEBUG_ON && console.log('Free Shipping Initialized')
-                        }
+                        threshold: {{ settings.free_shipping_threshold }}
                       }))
                     })
                   </script>
