@@ -1,18 +1,18 @@
 let enabled = true; //set to false to prevent any survey from showing
 if (!enabled) return;
 let survey = {
-  qId: '1',
+  qId: '1', // recommended to increment when changing questions to help with separating responses
   type: 'text', // 'text' for free response, 'buttons' for multiple answer buttons
-  question: 'Do you want to answer this question?',
-  desc: 'This is some helper text',
-  textInputPlaceholder: 'Type whatever you want here!',
-  textInputSubmit: 'Submit',
-  options: ['Yes', 'No', 'Maybe', 'perchance'],
+  question: 'Do you want to answer this question?', // question to ask
+  desc: 'This is some helper text', // optional description
+  textInputPlaceholder: 'Type whatever you want here!', // placeholder when type is 'text'
+  textInputSubmit: 'Submit', // submit button text when type is 'text'
+  options: ['Yes', 'No', 'Maybe', 'perchance'], // buttons to show when question type is 'buttons'. Wrap each in quotes and separate with a comma
   ifttt: {
-    event: 'pps',
-    key: 'NOT_A_REAL_KEY'
+    event: 'pps', // name of event to trigger from IFTTT
+    key: 'NOT_A_REAL_KEY' // input your IFTTT Key
   },
-  thankYou: {
+  thankYou: { // content to show in box after survey is submitted
     title: 'Thank You!',
     message: 'Your feedback is appreciated'
   }
