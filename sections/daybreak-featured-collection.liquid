@@ -2,7 +2,7 @@
     {{ section.settings.title | escape | default: "Popular Products" }}
 </h2>
 
-<alpine-slider class="relative block w-full px-4 pb-16 md:pb-4" x-data="slider">
+<alpine-slider class="relative block w-full pb-16 pl-4 pr-0 overflow-hidden md:px-4 md:pb-4" x-data="slider">
     <slider-grid class="flex flex-row mx-auto overflow-x-scroll flex-nowrap snap-x-proximity md:overflow-x-auto hide-scrollbar gap-x-4 smooth-scroll md:grid md:grid-cols-4" @scroll.debounce.100ms="page = Math.round($el.scrollLeft/averageWidth)+1">
       {%- for product in section.settings.collection.products limit: section.settings.products_to_show -%}
           <product-card class="w-[75vw] flex-none snap-start flex flex-col md:w-full items-center">

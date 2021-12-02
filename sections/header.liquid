@@ -315,7 +315,7 @@
                width="{{ section.settings.logoimg.width }}"
                height="{{ section.settings.logoimg.height }}">
         {%- when 'svg' -%}
-          <div class="mx-auto logo-svg" style="max-width: {{ section.settings.logo_width }}px;">
+          <div class="mx-auto text-gray-800 logo-svg" style="max-width: {{ section.settings.logo_width }}px;">
             {{ section.settings.logosvg }}
           </div>
         {%- endcase -%}
