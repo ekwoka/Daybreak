@@ -1,21 +1,21 @@
 {
   "current": {
-    "free_shipping_threshold": 4200,
+    "free_shipping_threshold": 10000,
     "reviewApp": "stamped",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
         "blocks": {
-          "announcement-bar-0": {
-            "type": "message",
+          "5876660f-ec01-4459-9402-5e59e2303348": {
+            "type": "shipping",
             "settings": {
-              "text": "Welcome to our store",
-              "link": ""
+              "default": "Free Shipping Available at $100",
+              "congrats": "Congratulations! You qualify for free shipping!"
             }
           }
         },
         "block_order": [
-          "announcement-bar-0"
+          "5876660f-ec01-4459-9402-5e59e2303348"
         ],
         "settings": {
           "showAnnouncement": true,
@@ -73,13 +73,13 @@
           "0e93b045-32d9-49ea-a963-69c81aa1d88c": {
             "type": "newsletter",
             "settings": {
-              "h3": "Sign up for our emails",
-              "html": "<ul>\n<li>Hi<\/li>\n<li>This is a list<\/li>\n<\/ul>",
-              "listID": "test",
-              "captureButton": "Submit",
-              "showCoupon": false,
-              "couponCode": "get10now",
-              "couponOffer": "",
+              "h3": "Subscribe",
+              "html": "Sign up for our newsletter and get 10% off your oder immediately!",
+              "listID": "QR4dTZ",
+              "captureButton": "Sign Up",
+              "showCoupon": true,
+              "couponCode": "GET10NOW",
+              "couponOffer": "10% Off",
               "successh3": "Thank You!",
               "successP": "Look forward to our amazing emails in your inbox!",
               "errorh3": "Oh No!",

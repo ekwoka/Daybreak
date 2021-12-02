@@ -128,6 +128,29 @@
       "settings": {
         "showReviews": false
       }
+    },
+    "1638480696427fa758": {
+      "type": "inline-newsletter-comp",
+      "settings": {
+        "cardStyle": "full",
+        "sticky": true,
+        "emailProvider": "klaviyo",
+        "listID": "QR4dTZ",
+        "captureHeader": "Join our Newsletter",
+        "captureHtml": "",
+        "captureButton": "Get My Coupon",
+        "showCoupon": false,
+        "couponCode": "",
+        "couponOffer": "",
+        "successH2": "Thank You!",
+        "successP": "Look forward to our amazing emails in your inbox!",
+        "errorH2": "Oh No!",
+        "errorP": "It looks like there was an error!",
+        "errorAgain": true,
+        "existedH2": "Wait a sec...",
+        "existedP": "You're already subscribed!",
+        "existedCoupon": true
+      }
     }
   },
   "order": [
@@ -135,6 +158,7 @@
     "16300481333c195d52",
     "163670481247286b11",
     "163722378333813e88",
-    "1631089052fb221e00"
+    "1631089052fb221e00",
+    "1638480696427fa758"
   ]
 }
