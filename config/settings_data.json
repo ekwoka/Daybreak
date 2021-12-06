@@ -81,7 +81,7 @@
             "type": "newsletter",
             "settings": {
               "h3": "Subscribe",
-              "html": "Sign up for our newsletter and get 10% off your oder immediately!",
+              "html": "Sign up for our newsletter and get 10% off your order immediately!",
               "listID": "QR4dTZ",
               "captureButton": "Sign Up",
               "showCoupon": true,
