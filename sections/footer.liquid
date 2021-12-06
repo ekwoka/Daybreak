@@ -21,14 +21,14 @@
       {%- if section.blocks.size > 0 -%}
         {%- liquid
           if section.blocks.size == 9
-            assign footer_grid_class = 'grid--3-col-tablet'
+            assign footer_grid_class = 'md:grid-cols-3'
           elsif section.blocks.size > 6
-            assign footer_grid_class = 'grid--4col-desktop'
+            assign footer_grid_class = 'lg:grid-cols-3'
           elsif section.blocks.size > 4
-            assign footer_grid_class = 'grid--3-col-tablet'
+            assign footer_grid_class = 'md:grid-cols-2'
           endif
         -%}
-        <div class="footer__blocks-wrapper dawn-grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}">
+        <div class="footer__blocks-wrapper flex flex-col gap-y-4 md:grid md:grid-cols-4 {{ footer_grid_class }}">
           {%- for block in section.blocks -%}
             {%- if block.type == 'link_list' and block.settings.heading != blank -%}
               <div class="accordion" {{ block.shopify_attributes }}>
@@ -49,7 +49,7 @@
               </div>
             {%- endif -%}
 
-            <div class="footer-block grid__item{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %}" {{ block.shopify_attributes }}>
+            <div class="{% if block.type == 'link_list' and block.settings.heading != blank %} footer-block--menu small-hide{% endif %} {%- if block.type == 'newsletter' %} col-span-2 {%- endif -%}" {{ block.shopify_attributes }}>
               {%- if block.settings.heading != blank -%}
                 <h2 class="footer-block__heading">{{- block.settings.heading | escape -}}</h2>
               {%- endif -%}
@@ -89,7 +89,7 @@
                     {%- endif -%}
                   </div>
                 {%- when 'newsletter' -%}
-                  {%- render 'simple-capture', block:block -%}
+                  {%- render 'simple-capture', block: block -%}
               {%- endcase -%}
             </div>
           {%- endfor -%}
