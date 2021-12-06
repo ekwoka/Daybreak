@@ -63,11 +63,18 @@
       "footer": {
         "type": "footer",
         "blocks": {
-          "footer-0": {
+          "5f3507b7-e722-435b-8298-2f7cac481848": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Products",
+              "menu": "main"
+            }
+          },
+          "8342202a-8f48-497a-b8b8-84cbf6066f47": {
             "type": "link_list",
             "settings": {
               "heading": "Quick links",
-              "menu": "footer"
+              "menu": "helpful-links"
             }
           },
           "0e93b045-32d9-49ea-a963-69c81aa1d88c": {
@@ -92,7 +99,8 @@
           }
         },
         "block_order": [
-          "footer-0",
+          "5f3507b7-e722-435b-8298-2f7cac481848",
+          "8342202a-8f48-497a-b8b8-84cbf6066f47",
           "0e93b045-32d9-49ea-a963-69c81aa1d88c"
         ],
         "settings": {
