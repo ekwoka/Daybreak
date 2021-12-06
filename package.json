@@ -21,6 +21,7 @@
   "author": "Eric Kwoka",
   "license": "ISC",
   "dependencies": {
+    "@alpinejs/trap": "^3.7.0",
     "@ekwoka/persistedstore": "^0.1.1",
     "@ekwoka/x-rias": "^0.2.3",
     "alpinejs": "^3.7.0"

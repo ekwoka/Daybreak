@@ -425,7 +425,7 @@
         </a>
       {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open($el)">
+      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open()">
         {%- liquid
           if cart == empty
             render 'icon-cart-empty'
