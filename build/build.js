@@ -8,6 +8,7 @@ window.Daybreak = Daybreak;
 window.Alpine = Alpine;
 
 Trees.forEach((tree) => Alpine.plugin(tree));
+AOVBooster()
 Alpine.start();
 Daybreak.RIAS.start();
 

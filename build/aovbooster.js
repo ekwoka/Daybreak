@@ -30,18 +30,22 @@ const DOM = new DOMParser();
 function upsellDisplay(upsell) {
   let upsellNode = DOM.parseFromString(
     [
-      `<booster-wrapper style='border:3px dashed #FE3223;padding:9px;'   id='bgs-aov-app' class='bgs-row-app'>`,
-      `<div class='bgs-col-1'>`,
-      `<input type='checkbox' class='bgs-checkmark'  id='bgs-checkmark' value='${upsell.pid}'/>`,
+      `<booster-wrapper id='bgs-aov-app' class='flex p-2 tracking-wide leading-6 text-black border-2 border-red-600 border-dashed focus:shadow-none list-outside gap-2 items-center mb-2'>`,
+      `<input type='checkbox' class='inline-block flex-shrink-0 p-0 my-0 mr-1 ml-0 !w-4 h-6 text-blue-600 align-middle bg-white rounded-none border border-gray-600 border-solid cursor-default select-none box-border focus:border-transparent focus:shadow-none hover:border-transparent text-xl' id='bgs-checkmark' value='${upsell.pid}'/>`,
+      `<div class='leading-6 focus:shadow-none'>`,
+      `<label for='bgs-checkmark' id='priority_order_sms'>${upsell.text}</label> <a href='#view' class='text-black underline cursor-pointer focus:shadow-none'>${upsell.viewtext}</a>`,
       `</div>`,
-      `<div class='bgs-col-2' style='color:#000000;'>`,
-      `<label for='bgs-checkmark' id='priority_order_sms'>${upsell.text}</label> <a href='#view' style='color:#000000;' class='modal-bgs-link'>${upsell.viewtext}</a>`,
-      `</div>`,
-      `<booster-modal class='modal-bgs-app-order'><div class='modal-content-bgs-app-order'><span class='close-bgs-app-order'>&times;</span><img src='${upsell.img}' class='bgs-popup-modal-image' /></div></booster-modal>`,
+      `<booster-modal class='hidden overflow-auto fixed top-0 left-0 pt-12 w-full h-full leading-6 bg-gray-500 focus:shadow-none z-50'><div
+      class="relative p-5 m-auto w-11/12 text-black bg-white border border-gray-600 border-solid box-border focus:shadow-none max-w-2xl"
+    ><span
+    class="float-right absolute text-4xl font-bold text-red-700 focus:shadow-none focus:text-black focus:no-underline hover:text-black hover:no-underline py-4 px-8 top-0 right-0"
+    >&times;</span><img src='${upsell.img}' class="block w-full max-w-full h-auto align-middle focus:shadow-none"/></div></booster-modal>`,
       `</booster-wrapper>`
     ].join(''),
     'text/html'
   ).body.firstChild;
+
+
 
   return upsellNode;
 }
@@ -60,10 +64,6 @@ async function isInCart(pid) {
   });
 }
 
-function loadCSS() {
-  document.head.appendChild(DOM.parseFromString('<link rel="stylesheet" href="https://revenuebump.com/PriorityOrderApp/frontview/bgspriroityappcss?shop=the-water-filters-store.myshopify.com" />', 'text/html').head.firstChild);
-}
-
 export default async function () {
   DEBUG_ON && console.time('AOV_BOOSTER')
   if (!AOVBOOSTER_ENABLED) return;
@@ -79,24 +79,23 @@ export default async function () {
   DEBUG_ON && console.log(upsell);
   if (!upsell) return;
 
-  loadCSS();
   let inCart = isInCart(upsell.pid);
 
   let upsellNode = upsellDisplay(upsell);
 
   DEBUG_ON && console.log(upsellNode);
 
-  if (!upsell.img) upsellNode.querySelector('.modal-bgs-link').style.display = 'none';
+  if (!upsell.img) upsellNode.querySelector('a').style.display = 'none';
 
-  if (!upsell.viewtext) upsellNode.querySelector('.modal-bgs-link').style.display = 'none';
+  if (!upsell.viewtext) upsellNode.querySelector('a').style.display = 'none';
 
-  upsellNode.querySelector('.modal-bgs-link').addEventListener('click', (e) => {
+  upsellNode.querySelector('a').addEventListener('click', (e) => {
     e.preventDefault();
-    upsellNode.querySelector('.modal-bgs-app-order').style.display = 'block';
+    upsellNode.querySelector('booster-modal').style.display = 'block';
   });
-  upsellNode.querySelectorAll('.close-bgs-app-order, .modal-bgs-app-order').forEach((el) => el.addEventListener('click', (e) => (upsellNode.querySelector('.modal-bgs-app-order').style.display = 'none')));
+  upsellNode.querySelectorAll('booster-modal > span, booster-modal').forEach((el) => el.addEventListener('click', (e) => (upsellNode.querySelector('booster-modal').style.display = 'none')));
 
-  upsellNode.querySelector('.bgs-checkmark').addEventListener('change', async ({ target }) => {
+  upsellNode.querySelector('#bgs-checkmark').addEventListener('change', async ({ target }) => {
     if (target.checked) return Daybreak.addToCart(upsell.pid,1,Alpine.store('cart').items);
     return Alpine.store('cart').items = await Daybreak.changeCart(upsell.pid,0,Alpine.store('cart').items);
   });
