@@ -11,6 +11,7 @@
         },
         "a7c271ee-7337-48ac-928a-8e26974516d0": {
           "type": "reviews",
+          "disabled": true,
           "settings": {
             "showTop": true
           }
