@@ -2,6 +2,7 @@
   "current": {
     "free_shipping_threshold": 10000,
     "reviewApp": "stamped",
+    "favicon": "shopify:\/\/shop_images\/favicon.png",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
