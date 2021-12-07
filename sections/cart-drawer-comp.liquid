@@ -43,7 +43,7 @@
         </button>
         {%- for block in thresholdBlocks -%}
             {%- if block.settings.showTop -%}
-                <shipping-threshold class="max-w-full py-2 px-4 flex flex-col items-center gap-y-2 border-t border-b border-solid border-cta-600 {{ block.settings.style }}" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40 border-opacity-60':'border-opacity-0'">
+                <shipping-threshold class="max-w-full py-2 px-4 flex flex-col items-center gap-y-2 border-t border-solid border-cta-600 {{ block.settings.style }}" x-data="shippingThreshold" x-show="threshold" style="display: none;" :class="cartValue>=threshold?'bg-cta-600/40 border-opacity-60':'border-opacity-0'">
                     <threshold-message class="block text-center" x-html="cartValue>=threshold?`{{ block.settings.afterMessage }}`:`{{ block.settings.beforeMessage }}`"></threshold-message>
                     <progress :max="threshold" :value="cartValue" x-text="`${remaining} left`" :class="cartValue>=threshold?'complete':'incomplete'"></progress>
                 </shipping-threshold>
