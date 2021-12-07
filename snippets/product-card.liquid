@@ -86,7 +86,9 @@
             {{ product_card_product.title | escape }}
           </span>
         {%- endif -%}
+        {%- comment -%}
         {%- render 'review-stars', product: product_card_product -%}
+        {%- endcomment -%}
         <span class="caption-large light">{{ block.settings.description | escape }}</span>
         {% render 'price', product: product_card_product, price_class: '' %}
       </div>

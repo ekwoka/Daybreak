@@ -47,7 +47,7 @@
 
 <div x-data="toasts">
     <template x-for="(toast,i) in $store.toast.items" :key="i">
-        <toast-item class="fixed inset-x-0 z-[110] w-5/6 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md  pointer-events-none" :class="toast.show ? 'top-32 opacity-100' : '-top-4 opacity-0'" x-init="timeout(i)">
+        <toast-item class="fixed inset-x-0 z-[5] w-5/6 max-w-screen-sm flex mx-auto overflow-hidden transition-all duration-700 ease-in-out bg-white rounded-lg shadow-md  pointer-events-none" :class="toast.show ? 'top-32 opacity-100' : '-top-4 opacity-0'" x-init="timeout(i)">
             <toast-icon class="flex items-center justify-center flex-none w-12" :class="colors[toast.type][0]">
                 <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" x-html="icons[toast.type]">
                 </svg>
