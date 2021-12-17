@@ -428,7 +428,7 @@
       {%- endif -%}
 
       <a href="{{ routes.cart_url }}" class="flex-col header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open()">
-        <div class="-mt-2 -mb-3">
+        <div class="relative -mt-2 -mb-3">
           {%- liquid
             if cart == empty
               render 'icon-cart-empty'
@@ -436,7 +436,7 @@
               render 'icon-cart'
               endif
               -%}
-              <div class="transition-opacity cart-count-bubble" :class="{ 'animate-bubble-ping': pulse }" x-show="$store.cart.quantity > 0" x-init="$watch('$store.cart.quantity',()=>{pulse=true;setTimeout(()=>{pulse=false},4000)})" {%- if cart == empty %} style="display:none;"{%- endif -%}>
+              <div class="transition-opacity cart-count-bubble top-1 right-1" :class="{ 'animate-bubble-ping': pulse }" x-show="$store.cart.quantity > 0" x-init="$watch('$store.cart.quantity',()=>{pulse=true;setTimeout(()=>{pulse=false},4000)})" {%- if cart == empty %} style="display:none;"{%- endif -%}>
                 {%- if cart.item_count < 100 -%}
                 <span aria-hidden="true" x-text="$store.cart.quantity">{{ cart.item_count }}</span>
               {%- endif -%}
