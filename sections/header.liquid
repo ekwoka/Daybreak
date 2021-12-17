@@ -97,11 +97,12 @@
     {%- if section.settings.menu != blank -%}
       <header-drawer data-breakpoint="tablet">
         <details class="menu-drawer-container">
-          <summary class="header__icon header__icon--menu header__icon--summary link link--text focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
+          <summary class="inline-flex flex-col items-center justify-center header__icon header__icon--menu header__icon--summary link link--text focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
             <span>
               {% render 'icon-hamburger' %}
               {% render 'icon-close' %}
             </span>
+            <span>Menu</span>
           </summary>
           <div id="menu-drawer" class="menu-drawer motion-reduce" tabindex="-1">
             <div class="menu-drawer__inner-container">
@@ -379,12 +380,13 @@
     <div class="header__icons">
       <details-modal class="header__search">
         <details>
-          <summary class="header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
+          <summary class="inline-flex flex-col items-center justify-center header__icon header__icon--search header__icon--summary link link--text focus-inset modal__toggle" aria-haspopup="dialog" aria-label="{{ 'general.search.search' | t }}">
             <span>
               <svg class="modal__toggle-open icon icon-search" aria-hidden="true" focusable="false" role="presentation">
                 <use href="#icon-search">
               </svg>
             </span>
+            <span>Search</span>
           </summary>
           <div class="search-modal modal__content" role="dialog" aria-modal="true" aria-label="{{ 'general.search.search' | t }}">
             <div class="search-modal__content" tabindex="-1">
@@ -425,20 +427,23 @@
         </a>
       {%- endif -%}
 
-      <a href="{{ routes.cart_url }}" class="header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open()">
-        {%- liquid
-          if cart == empty
-            render 'icon-cart-empty'
-          else
-            render 'icon-cart'
-            endif
-            -%}
-            <div class="transition-opacity cart-count-bubble" :class="{ 'animate-bubble-ping': pulse }" x-show="$store.cart.quantity > 0" x-init="$watch('$store.cart.quantity',()=>{pulse=true;setTimeout(()=>{pulse=false},4000)})" {%- if cart == empty %} style="display:none;"{%- endif -%}>
-              {%- if cart.item_count < 100 -%}
-              <span aria-hidden="true" x-text="$store.cart.quantity">{{ cart.item_count }}</span>
-            {%- endif -%}
-            <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
-          </div>
+      <a href="{{ routes.cart_url }}" class="flex-col header__icon header__icon--cart link link--text focus-inset" id="cart-icon-bubble" x-data="{ pulse: false }" @click.prevent="$store.cart.open()">
+        <div class="-mt-2 -mb-3">
+          {%- liquid
+            if cart == empty
+              render 'icon-cart-empty'
+            else
+              render 'icon-cart'
+              endif
+              -%}
+              <div class="transition-opacity cart-count-bubble" :class="{ 'animate-bubble-ping': pulse }" x-show="$store.cart.quantity > 0" x-init="$watch('$store.cart.quantity',()=>{pulse=true;setTimeout(()=>{pulse=false},4000)})" {%- if cart == empty %} style="display:none;"{%- endif -%}>
+                {%- if cart.item_count < 100 -%}
+                <span aria-hidden="true" x-text="$store.cart.quantity">{{ cart.item_count }}</span>
+              {%- endif -%}
+              <span class="visually-hidden">{{ 'sections.header.cart_count' | t: count: cart.item_count }}</span>
+            </div>
+        </div>
+          <span>Cart</span>
       </a>
     </div>
   </header>
