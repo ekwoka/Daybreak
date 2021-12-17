@@ -19,11 +19,11 @@
 }
 
 bump-title {
-    @apply w-full p-4 bg-truegray-700 text-truegray-200
+    @apply w-full p-4 bg-neutral-700 text-neutral-200
 }
 
 bump-title h2 {
-    @apply block mx-auto text-2xl max-w-max text-truegray-100
+    @apply block mx-auto text-2xl max-w-max text-neutral-100
 }
 
 bump-title p {
@@ -31,7 +31,7 @@ bump-title p {
 }
 
 bump-offer {
-    @apply min-h-[max-content] flex flex-col transition-all duration-300 ease-out border-truegray-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-truegray-200
+    @apply min-h-[max-content] flex flex-col transition-all duration-300 ease-out border-neutral-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-neutral-200
 }
 
 bump-item {
@@ -43,7 +43,7 @@ bump-item img {
 }
 
 .order-bump-section button.extend-tab {
-    @apply block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-truegray-500 hover:text-gray-200
+    @apply block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-neutral-500 hover:text-gray-200
 }
 
 /* daybreak-grid-comp.liquid */

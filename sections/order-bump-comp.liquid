@@ -69,11 +69,11 @@ document.addEventListener('alpine:init', () => {
     endif
 -%}
 
-    <bump-title class="w-full p-4 bg-truegray-700 text-truegray-200">
-        <h2 class="block mx-auto text-2xl max-w-max text-truegray-100">{{ section.settings.title }}</h2>
+    <bump-title class="w-full p-4 bg-neutral-700 text-neutral-200">
+        <h2 class="block mx-auto text-2xl max-w-max text-neutral-100">{{ section.settings.title }}</h2>
         <p class="block mx-auto text-lg text-center max-w-max">{{ section.settings.desc }}</p>
     </bump-title>
-    <bump-offer class="min-h-[max-content] flex flex-col transition-all duration-300 ease-out border-truegray-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-truegray-200" id="customAddon-Wrapper">
+    <bump-offer class="min-h-[max-content] flex flex-col transition-all duration-300 ease-out border-neutral-700 border-solid border-2 divide-y divide-solid divide-x-0 divide-neutral-200" id="customAddon-Wrapper">
 
         {%- if section.settings.bumpProduct -%}
             {%- assign bumpProd = section.settings.bumpProduct -%}
@@ -179,7 +179,7 @@ document.addEventListener('alpine:init', () => {
         {%- endif -%}
     </bump-offer>
     {%- if bumpsShown > section.settings.toLimit -%}
-        <button class="block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-truegray-500 hover:text-gray-200" onclick="this.classList.add('!hidden');this.closest('aside').classList.add('expanded')">Show More</button>
+        <button class="block px-4 py-2 mx-auto text-center text-gray-200 transition-colors bg-gray-600 shadow max-w-max rounded-b-xl lg:hidden hover:bg-neutral-500 hover:text-gray-200" onclick="this.classList.add('!hidden');this.closest('aside').classList.add('expanded')">Show More</button>
     {%- endif -%}
 
 <!-- custom-addon-app.liquid end -->

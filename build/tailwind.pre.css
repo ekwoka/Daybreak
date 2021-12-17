@@ -97,7 +97,7 @@
 
   .btn-primary,
   .btn-secondary {
-    @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t disabled:pointer-events-none disabled:from-truegray-600 disabled:to-truegray-500 disabled:text-gray-50 hover:shadow-inner hover:bg-gradient-to-b;
+    @apply px-4 py-2 shadow-md min-w-max bg-gradient-to-t disabled:pointer-events-none disabled:from-neutral-600 disabled:to-neutral-500 disabled:text-gray-50 hover:shadow-inner hover:bg-gradient-to-b;
   }
 
   .btn-primary {
