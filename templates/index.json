@@ -1,5 +1,84 @@
 {
   "sections": {
+    "16412560528a743b65": {
+      "type": "hero-section-comp",
+      "settings": {
+        "h1": "Rugby Nut",
+        "p": "<ul>\n<li>Family Business<\/li>\n<li>UK Producted<\/li>\n<li>Fast Delivery<\/li>\n<\/ul>",
+        "btn1txt": "Latest Designs",
+        "btn1url": "shopify:\/\/collections\/latest-designs",
+        "btn2txt": "Most Popular",
+        "btn2url": "shopify:\/\/collections\/best-sellers",
+        "mobile": "shopify:\/\/shop_images\/mike_rn_2021_mobile_banner_copy.png",
+        "desktop": "shopify:\/\/shop_images\/mike_RN_2021_banner_copy_50ea06c2-c3cc-410b-a41d-921a7b2d7814.png",
+        "aspect": "dynamic",
+        "mobileRatio": 60,
+        "deskRatio": 40
+      }
+    },
+    "1641256080cd5bb38b": {
+      "type": "collection-highlight-comp",
+      "blocks": {
+        "16412560803265e231-0": {
+          "type": "collection",
+          "settings": {
+            "collection": "best-selling",
+            "collection_title": ""
+          }
+        },
+        "16412560803265e231-1": {
+          "type": "collection",
+          "settings": {
+            "collection": "womens-rugby",
+            "collection_title": ""
+          }
+        },
+        "16412560803265e231-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "latest-designs",
+            "collection_title": ""
+          }
+        },
+        "2665ce77-b982-42fb-b15b-6ff8ea908d28": {
+          "type": "collection",
+          "settings": {
+            "collection": "british-lions",
+            "collection_title": "Lions"
+          }
+        }
+      },
+      "block_order": [
+        "16412560803265e231-0",
+        "16412560803265e231-1",
+        "16412560803265e231-2",
+        "2665ce77-b982-42fb-b15b-6ff8ea908d28"
+      ],
+      "settings": {
+        "custom_class": "",
+        "border_color_collection_list": "#444",
+        "text_bg_color_collection_list": "#444",
+        "text_color_collection_list": "#fff",
+        "title": "Featured Collections",
+        "top_margin_featured": 125,
+        "text_transform_title": "",
+        "collection_product_title_text_transform": "uppercase"
+      }
+    },
+    "164125611939490a07": {
+      "type": "daybreak-featured-collection",
+      "settings": {
+        "title": "Popular Products",
+        "collection": "best-sellers",
+        "products_to_show": 4,
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "add_image_padding": false,
+        "show_vendor": false
+      }
+    },
     "1631089052fb221e00": {
       "type": "recently-viewed-comp",
       "settings": {
@@ -8,6 +87,9 @@
     }
   },
   "order": [
+    "16412560528a743b65",
+    "1641256080cd5bb38b",
+    "164125611939490a07",
     "1631089052fb221e00"
   ]
 }
