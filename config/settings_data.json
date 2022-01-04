@@ -24,6 +24,31 @@
       },
       "header": {
         "type": "header",
+        "blocks": {
+          "a4210034-0bea-4fe3-8a85-25a4dc507aab": {
+            "type": "newsletter",
+            "settings": {
+              "h3": "Sign up for our emails",
+              "html": "",
+              "listID": "",
+              "captureButton": "Submit",
+              "showCoupon": false,
+              "couponCode": "",
+              "couponOffer": "",
+              "successh3": "Thank You!",
+              "successP": "Look forward to our amazing emails in your inbox!",
+              "errorh3": "Oh No!",
+              "errorP": "It looks like there was an error!",
+              "errorAgain": true,
+              "existedh3": "Wait a sec...",
+              "existedP": "You're already subscribed!",
+              "existedCoupon": true
+            }
+          }
+        },
+        "block_order": [
+          "a4210034-0bea-4fe3-8a85-25a4dc507aab"
+        ],
         "settings": {
           "logoType": "img",
           "logoimg": "shopify:\/\/shop_images\/Rugby_Nut_ball_logo_400_wide.png",
