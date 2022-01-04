@@ -1,5 +1,6 @@
 {
   "current": {
+    "free_shipping_threshold": 4900,
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
