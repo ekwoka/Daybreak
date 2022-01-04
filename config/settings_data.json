@@ -56,7 +56,7 @@
               "showDiscount": false,
               "showShipping": true,
               "estimatedShipping": "395",
-              "showTotal": true,
+              "showTotal": false,
               "showDisclaimer": true
             }
           },
