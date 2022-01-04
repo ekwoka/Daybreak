@@ -86,7 +86,7 @@
                         Subtotal:
                     </sub-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
                     {%- if block.settings.showShipping -%}
-                        <estimated-shipping>Estimated Shipping:</estimated-shipping><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
+                        <estimated-shipping>Estimated Shipping:</estimated-shipping><new-price x-text="Daybreak.currency.format({{ block.settings.estimatedShipping }}/100)"></new-price>
                     {%- endif -%}
                     {%- if block.settings.showTotal -%}
                         <cart-total>Total:</cart-total><new-price x-text="Daybreak.currency.format($store.cart.value/100)"></new-price>
@@ -246,6 +246,12 @@
                     "id": "showShipping",
                     "label": "Show Estimated Shipping",
                     "default": false
+                },
+                {
+                   "type": "text",
+                   "id": "estimatedShipping",
+                   "label": "Estimated Shipping Cost",
+                   "info": "Write $4.95 as 495"
                 },
                 {
                     "type": "checkbox",
