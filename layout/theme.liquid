@@ -31,32 +31,6 @@
     {%- render 'defer-css', css: 'tailwind.css', preload: true -%}
 
     {%- liquid
-      capture content_for_header_filtered
-        echo content_for_header | replace_first: 'asyncLoad','ignoreThis' | replace: 'asyncLoad','()=>{}'
-      endcapture
-      echo content_for_header_filtered
-    -%}
-
-    <script>
-      (function(){
-        let urls = [
-          "https:\/\/static.klaviyo.com\/onsite\/js\/klaviyo.js?company_id=XmRJdA\u0026shop=the-water-filters-store.myshopify.com",
-          "https:\/\/cdn1.stamped.io\/files\/widget.min.js?shop=the-water-filters-store.myshopify.com",
-          "https:\/\/cdn.shopify.com\/s\/files\/1\/0561\/2427\/6911\/t\/5\/assets\/postscript-sdk.js?v=1624054491\u0026shopId=25523\u0026shop=the-water-filters-store.myshopify.com",
-          "https:\/\/static.rechargecdn.com\/assets\/js\/widget.min.js?shop=the-water-filters-store.myshopify.com",
-          "https:\/\/zipify-ocu.s3.amazonaws.com\/oneclickupsell\/production\/deploy\/script_tags\/zipify-oneclickupsell-vendor.js?shop=the-water-filters-store.myshopify.com"
-        ];;
-        let scripts = urls.map(url => {
-          let script = document.createElement('script');
-          script.src = url;
-          script.type = 'text/javascript';
-          return script
-        });
-        window.addEventListener('load', () => document.head.append(...scripts));
-      }())
-    </script>
-
-    {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
       assign body_font_italic = settings.type_body_font | font_modify: 'style', 'italic'
       assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
