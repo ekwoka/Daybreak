@@ -55,6 +55,7 @@
             "settings": {
               "showDiscount": false,
               "showShipping": true,
+              "estimatedShipping": "395",
               "showTotal": true,
               "showDisclaimer": true
             }
