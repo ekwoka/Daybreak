@@ -1,6 +1,7 @@
 {
   "current": {
     "free_shipping_threshold": 4900,
+    "reviewApp": "stamped",
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",

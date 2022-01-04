@@ -16,7 +16,7 @@
         "imgShape": "",
         "showVender": false,
         "showColors": false,
-        "showReviews": false,
+        "showReviews": true,
         "filterType": "none",
         "showDisc": true,
         "metafield1": "",
