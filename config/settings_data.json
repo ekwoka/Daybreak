@@ -9,7 +9,7 @@
           "8ebdff7d-d891-41ce-8169-46255121d5fa": {
             "type": "shipping",
             "settings": {
-              "default": "Free Shipping Available",
+              "default": "Free Shipping Available at £49",
               "congrats": "Congratulations! You qualify for free shipping!"
             }
           }
