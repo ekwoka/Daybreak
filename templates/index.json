@@ -69,21 +69,14 @@
       "type": "daybreak-featured-collection",
       "settings": {
         "title": "Popular Products",
-        "collection": "",
+        "collection": "best-sellers",
         "products_to_show": 4,
         "show_view_all": true,
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "image_ratio": "adapt",
         "show_secondary_image": false,
         "add_image_padding": false,
         "show_vendor": false
-      }
-    },
-    "164125605626e7169b": {
-      "type": "alternating-copy",
-      "settings": {
-        "heading": "",
-        "paragraph": ""
       }
     },
     "1631089052fb221e00": {
@@ -97,7 +90,6 @@
     "16412560528a743b65",
     "1641256080cd5bb38b",
     "164125611939490a07",
-    "164125605626e7169b",
     "1631089052fb221e00"
   ]
 }

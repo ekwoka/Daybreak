@@ -34,6 +34,53 @@
       },
       "cart-drawer-comp": {
         "type": "cart-drawer-comp",
+        "blocks": {
+          "183f4ca3-2f1d-4336-b139-18115270bc04": {
+            "type": "threshold",
+            "settings": {
+              "showTop": true,
+              "style": "glass",
+              "beforeMessage": "You are ${remaining} away from <strong>FREE SHIPPING<\/strong>",
+              "afterMessage": "Congratulations! You qualify for <strong>FREE SHIPPING<\/strong>"
+            }
+          },
+          "19fb5a5f-206d-4045-968e-e77e6769f45d": {
+            "type": "items",
+            "settings": {
+            }
+          },
+          "5fd19097-3c71-4a40-8683-adb1bc48024a": {
+            "type": "details",
+            "settings": {
+              "showDiscount": false,
+              "showShipping": true,
+              "showTotal": true,
+              "showDisclaimer": true
+            }
+          },
+          "36fb6bef-9bb1-48b4-88ff-1ecca231b49e": {
+            "type": "payments",
+            "settings": {
+              "paymentsMessage": "Available at Checkout",
+              "showDefault": true,
+              "custom": ""
+            }
+          },
+          "f999181e-95f0-450a-a2ce-921c1ed73bdd": {
+            "type": "continue",
+            "settings": {
+              "target": "dynamic",
+              "bestCollection": ""
+            }
+          }
+        },
+        "block_order": [
+          "183f4ca3-2f1d-4336-b139-18115270bc04",
+          "19fb5a5f-206d-4045-968e-e77e6769f45d",
+          "5fd19097-3c71-4a40-8683-adb1bc48024a",
+          "36fb6bef-9bb1-48b4-88ff-1ecca231b49e",
+          "f999181e-95f0-450a-a2ce-921c1ed73bdd"
+        ],
         "settings": {
           "emptyMessage": "Your cart is empty"
         }
