@@ -22,29 +22,37 @@
         "16412560803265e231-0": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "best-selling",
             "collection_title": ""
           }
         },
         "16412560803265e231-1": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "womens-rugby",
             "collection_title": ""
           }
         },
         "16412560803265e231-2": {
           "type": "collection",
           "settings": {
-            "collection": "",
+            "collection": "latest-designs",
             "collection_title": ""
+          }
+        },
+        "2665ce77-b982-42fb-b15b-6ff8ea908d28": {
+          "type": "collection",
+          "settings": {
+            "collection": "british-lions",
+            "collection_title": "Lions"
           }
         }
       },
       "block_order": [
         "16412560803265e231-0",
         "16412560803265e231-1",
-        "16412560803265e231-2"
+        "16412560803265e231-2",
+        "2665ce77-b982-42fb-b15b-6ff8ea908d28"
       ],
       "settings": {
         "custom_class": "",
