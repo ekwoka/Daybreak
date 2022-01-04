@@ -1,5 +1,6 @@
 {
   "current": {
+    "free_shipping_threshold": 4900,
     "sections": {
       "announcement-bar": {
         "type": "announcement-bar",
@@ -54,7 +55,8 @@
             "settings": {
               "showDiscount": false,
               "showShipping": true,
-              "showTotal": true,
+              "estimatedShipping": "395",
+              "showTotal": false,
               "showDisclaimer": true
             }
           },
