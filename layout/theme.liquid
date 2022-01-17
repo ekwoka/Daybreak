@@ -129,7 +129,10 @@
     {%- endunless -%}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
-  </head>
+  
+                  {% include 'bss-product-labels-configs' %}
+                    </head>
+             
 
   <body>
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
@@ -171,5 +174,5 @@
     <script src="{{ 'slider.js' | asset_url }}" defer="defer"></script>
     <script src="{{ 'variants.js' | asset_url }}" defer="defer"></script>
     
-  </body>
+  {% if content_for_header contains 'product_label' %}{% include 'bss-product-label-js' %}{% include 'bss-label-style-css' %}{% endif %}</body>
 </html>

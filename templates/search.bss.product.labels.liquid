@@ -1,0 +1,48 @@
+{% layout none %}
+
+                            {% paginate search.results by 1000 %}
+                            [
+                                {% for item in search.results %}
+                                {
+                                    "id":{{ item.id | json }},
+                                    "tags": {{ item.tags | json }},
+                                    "handle":{{ item.handle | json }},
+                                    "available":{{ item.available | json }},
+                                    "inventory":{{ item.first_available_variant.inventory_quantity | json }},
+                                    "compare_at_price_max":{{ item.compare_at_price_max | json }},
+                                    "compare_at_price_min":{{ item.compare_at_price_min | json }},
+                                    "price":{{ item.price | json }},
+                                    "price_max":{{ item.price_max | json }},
+                                    "price_min":{{ item.price_min | json }},
+                                    "publish_at":"{{ item.published_at }}",
+                                    "inventory_management":{{ item.first_available_variant.inventory_management | json }},
+                                    "inventory_policy":{{ item.first_available_variant.inventory_policy | json }},
+                                    "inventory_quantity": [
+                                            {% for varian in item.variants %}
+                                                {{ varian.inventory_quantity }}{% unless forloop.last %},{% endunless %}
+                                            {% endfor %}
+                                    ],
+                                    "variants": [
+                                        {% for variant in item.variants %}{  
+                                            "id":{{ variant.id | json }},
+                                            "available":{{ variant.available | json }},   
+                                            "image":{{ variant.image | json }},
+                                            "price":{{ variant.price | json }},
+                                            "inventory_management":{{ variant.inventory_management | json }},
+                                            "inventory_policy":{{ variant.inventory_policy | json }},
+                                            "compare_at_price":{{ variant.compare_at_price | json }},
+                                            "quantity":{{ variant.inventory_quantity | json }}}
+                                            {% unless forloop.last %},
+                                            {% endunless %}
+                                        {% endfor %}
+                                    ],
+                                    "collections": [
+                                        {% for collection in item.collections %}
+                                            {{ collection.id }}{% unless forloop.last %},{% endunless %}
+                                        {% endfor %}
+                                    ],
+                                    "format_money": {{shop.money_format | json}}
+                                }{% unless forloop.last %},{% endunless %}
+                                {% endfor %}
+                            ]
+                            {% endpaginate %}
