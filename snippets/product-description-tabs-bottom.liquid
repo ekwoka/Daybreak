@@ -1,0 +1,6 @@
+{% comment %} DO NOT EDIT THIS SNIPPET - it's generated automatically and may be overwritten at any time {% endcomment %}
+{% if product-description-tabs-bottom %}{% assign desc = product-description-tabs-bottom %}{% else %}{% assign desc = product.description %}{% endif %}
+{% capture td %}{% render "product-description-tabs" with desc %}{% endcapture %}
+{% assign td_pure_text = td | split: '<div class="easytabs-container' | first | prepend: ' ' %}
+{% if td_pure_text == ' ' %}{% assign td_bottom = td %}{% else %}{% assign td_pure_text = td_pure_text | remove_first: ' ' %}{% assign td_bottom = td | replace: td_pure_text, '' %}{% endif %}
+{{ td_bottom }}

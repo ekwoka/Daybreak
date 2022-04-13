@@ -1,0 +1,5 @@
+{% comment %} DO NOT EDIT THIS SNIPPET - it's generated automatically and may be overwritten at any time {% endcomment %}
+{% if product-description-tabs-top %}{% assign desc = product-description-tabs-top %}{% else %}{% assign desc = product.description %}{% endif %}
+{% capture td %}{% render "product-description-tabs" with desc %}{% endcapture %}
+{% assign td_pure_text = td | split: '<div class="easytabs-container' | first %}
+{{ td_pure_text }}
