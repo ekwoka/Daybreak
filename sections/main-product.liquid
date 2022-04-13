@@ -112,7 +112,7 @@
           {%- when 'description' -%}
             {%- if product.description != blank -%}
               <div class="prose product__description">
-                {{ product.description }}
+                {% render 'product-description-tabs', product: product %}
               </div>
             {%- endif -%}
           {%- when 'collapsible_tab' -%}
